@@ -147,7 +147,8 @@ const first = (obj, re) => { const v = findAll(obj, re)[0]; return Array.isArray
 async function dataTourisme() {
   if (!DT_KEY) { log('DATAtourisme: pas de clé DATATOURISME_KEY, source ignorée.'); return []; }
   const out = [];
-  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr`;
+  let noDate = 0;
+  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers`;
   for (let page = 0; page < 30 && url; page++) {
     const res = await fetch(url, { headers: { 'X-API-Key': DT_KEY, accept: 'application/json' } });
     if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 500)}`); break; }
@@ -158,7 +159,7 @@ async function dataTourisme() {
     for (const it of items) {
       const starts = findAll(it, /^(schema:)?startDate$/).flat().map(String);
       const ends = findAll(it, /^(schema:)?endDate$/).flat().map(String);
-      if (!starts.length) continue;
+      if (!starts.length) { noDate++; continue; }
       const pairs = starts.map((s, i) => ({ b: new Date(s.length === 10 ? `${s}T12:00:00Z` : s), e: new Date((ends[i] || s).length === 10 ? `${ends[i] || s}T12:00:00Z` : (ends[i] || s)) }))
         .filter(t => !isNaN(t.b) && isoDay(t.e) >= today && isoDay(t.b) <= horizon).sort((x, y) => x.b - y.b);
       if (!pairs.length) continue;
@@ -179,7 +180,7 @@ async function dataTourisme() {
     }
     url = body.meta?.next || body.next || null;
   }
-  log(`DATAtourisme: ${out.length} événements à moins de ${RADIUS_KM} km`);
+  log(`DATAtourisme: ${out.length} événements à moins de ${RADIUS_KM} km (${noDate} fiches sans date)`);
   return out;
 }
 
