@@ -7,7 +7,8 @@ Site statique, sans dépendance ni étape de build.
 ## Fichiers
 
 - `public/index.html` : l'application (design et logique).
-- `public/data.js` : les données (communes, sources, événements, marchés, cinémas, films). **C'est le seul fichier à modifier pour mettre à jour les sorties.** Pensez à changer `UPDATED` en haut du fichier.
+- `public/data.js` : la partie manuelle (communes, sources, événements, marchés, cinémas, films). Pensez à changer `UPDATED` en haut du fichier.
+- `public/auto.js` : la collecte automatique de la nuit. Ne pas modifier à la main.
 - `public/manifest.webmanifest`, `public/icon*.png`, `public/icon.svg` : pour installer l'appli sur l'écran d'accueil du téléphone.
 - `render.yaml` : configuration Render.
 
@@ -33,13 +34,8 @@ python3 -m http.server 8000 -d public
 ```
 puis ouvrir http://localhost:8000. La géolocalisation fonctionne sur `localhost` et en HTTPS.
 
-## Version automatique gratuite (`/auto/`)
+## Collecte automatique gratuite
 
-`https://par-ici.onrender.com/auto/` montre la même appli, remplie automatiquement chaque nuit par `scripts/auto-update.mjs` à partir de sources gratuites :
+Chaque nuit, la tâche GitHub « Collecte automatique des sorties » lance `scripts/auto-update.mjs`, qui interroge OpenAgenda et DATAtourisme (clés gratuites dans les secrets `OPENAGENDA_KEY` et `DATATOURISME_KEY`) et écrit `public/auto.js`. La page fusionne ce fichier avec `public/data.js`, la partie manuelle (cinéma, Clisson, Gétigné, Gorges…). Le compte rendu de la dernière collecte est dans `scripts/last-run.log`.
 
-- **OpenAgenda** (agenda Terres de Montaigu, etc.) : clé publique gratuite, dans votre compte OpenAgenda → Paramètres → Clé d'API.
-- **DATAtourisme** (base nationale des offices de tourisme) : clé gratuite via le formulaire « Utiliser les données » sur datatourisme.fr.
-
-Ajoutez les clés dans GitHub : dépôt → Settings → Secrets and variables → Actions → New repository secret, avec les noms `OPENAGENDA_KEY` et `DATATOURISME_KEY`. Lancez ensuite la tâche une première fois : onglet Actions → « Mise à jour automatique (version gratuite) » → Run workflow.
-
-Le cinéma n'a pas de source gratuite : la version automatique n'affiche pas de films.
+Pour relancer la collecte à la main : onglet Actions → « Collecte automatique des sorties » → Run workflow.

@@ -219,7 +219,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 </header>
 
 <div class="wrap">
-  <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg><span><b>Données réelles</b> relevées le 19 octobre 2026 dans les agendas des communes, des salles et des cinémas autour de Cugand. Certains horaires restent à confirmer : chaque fiche donne sa source.</span></p>
+  <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg><span><b>Données réelles.</b> Chaque nuit, l'appli collecte les agendas OpenAgenda et DATAtourisme autour de Cugand. Le cinéma et les sorties de Clisson, Gétigné et Gorges sont ajoutés à la main. Chaque fiche donne sa source : vérifiez l'horaire avant de partir.</span></p>
 
   <div class="layout">
     <aside class="filters" aria-label="Filtres">
@@ -269,6 +269,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="data.js"></script>
+<script src="auto.js"></script>
 <script>
 (() => {
   const I = {
@@ -293,6 +294,24 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   ];
   const catName = k => CATS.find(c => c.k === k).n;
 
+  // Merge the nightly automatic collection (auto.js) into the hand-made data (data.js).
+  // A collected event that matches a hand-made one (same day, similar title, same place) is dropped.
+  if (typeof AUTO !== 'undefined') {
+    for (const [k, c] of Object.entries(AUTO.C)) if (!C[k]) C[k] = c;
+    for (const [k, s] of Object.entries(AUTO.SRC)) SRC['a' + k] = s;
+    const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3));
+    const near = (a, b) => Math.hypot(C[a].lat - C[b].lat, C[a].lon - C[b].lon) < 0.03;
+    const same = (m, e) => {
+      if (m.d !== e.d || !near(m.c, e.c)) return false;
+      const A = words(m.t), B = words(e.t);
+      let n = 0;
+      for (const w of A) if (B.has(w)) n++;
+      return n / Math.max(1, Math.min(A.size, B.size)) >= 0.6;
+    };
+    const manual = EV.slice();
+    for (const e of AUTO.EV) if (!manual.some(m => same(m, e))) EV.push({ ...e, s: 'a' + e.s });
+  }
+
   // Dates
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const DAY = 864e5;
@@ -304,7 +323,9 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     week: [0, dow === 0 ? 0 : 7 - dow],
     month: [0, 30]
   };
-  EV.forEach((e, i) => { e.id = 'e' + i; e.from = offOf(e.d); e.until = e.to ? offOf(e.to) : e.from; });
+  // Ids come from the content, so favourites survive the nightly refresh.
+  const hash = str => { let h = 0; for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) | 0; return (h >>> 0).toString(36); };
+  EV.forEach(e => { e.id = 'e' + hash(e.t + e.d + e.c); e.from = offOf(e.d); e.until = e.to ? offOf(e.to) : e.from; });
   for (let off = 0; off <= 30; off++) {
     const wd = (dow + off) % 7;
     MARKETS.filter(m => m.wd === wd).forEach(m => {
@@ -575,7 +596,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const o = e.target.closest('[data-open]'); if (o) return openEvent(o.dataset.open);
     const m = e.target.closest('[data-film]'); if (m) return openFilm(m.dataset.film);
   });
-  const upd = new Date(UPDATED + 'T00:00');
+  const upd = new Date((typeof AUTO !== 'undefined' && AUTO.updated > UPDATED ? AUTO.updated : UPDATED) + 'T00:00');
   $('#updated span').textContent = 'Mis à jour le ' + upd.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
   $('#locate').addEventListener('click', openLocation);
   // The update itself is done by Claude: copy the request, then the link opens the conversation.

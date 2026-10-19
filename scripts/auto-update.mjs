@@ -1,4 +1,4 @@
-// Builds the free automatic version of Par Ici in public/auto/.
+// Nightly collection for Par Ici: writes public/auto.js, merged by the page with the hand-made data.js.
 // Sources: OpenAgenda (OPENAGENDA_KEY) and DATAtourisme (DATATOURISME_KEY), both free.
 // Run: node scripts/auto-update.mjs   (Node 18+, no dependencies)
 import fs from 'node:fs';
@@ -228,37 +228,13 @@ function build(events, base) {
       place: e.place || e.city, desc: e.desc || 'Voir la fiche de l\'événement.', s
     });
   }
-  const js = `// Version automatique de Par Ici, générée par scripts/auto-update.mjs. Ne pas modifier à la main.
-const UPDATED = ${JSON.stringify(today)};
-const C = ${JSON.stringify(C, null, 1)};
-const SRC = ${JSON.stringify(SRC, null, 1)};
-const EV = ${JSON.stringify(EV, null, 1)};
-const MARKETS = ${JSON.stringify(base.MARKETS.map(m => ({ ...m, s: 'mk' })), null, 1)};
-SRC.mk = ['Marchés hebdomadaires (version manuelle)', 'https://par-ici.onrender.com/'];
-const CINEMAS = {};
-const FILMS = [];
+  // Only communes the hand-made data.js does not already know.
+  const newC = Object.fromEntries(Object.entries(C).filter(([k]) => !base.C[k]));
+  const js = `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
+// Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
+const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV })};
 `;
-  return { js, count: EV.length };
-}
-
-// The automatic page reuses the hand-made design; only paths and texts differ.
-function buildPage() {
-  let html = fs.readFileSync(path.join(ROOT, 'public/index.html'), 'utf8');
-  const swaps = [
-    [/href="manifest\.webmanifest"/, 'href="../manifest.webmanifest"'],
-    [/href="icon\.svg"/, 'href="../icon.svg"'],
-    [/href="icon-192\.png"/, 'href="../icon-192.png"'],
-    [/<title>Par Ici Sorties<\/title>/, '<title>Par Ici Auto</title>'],
-    [/<span><b>Données réelles<\/b>[\s\S]*?<\/span><\/p>/, '<span><b>Version automatique.</b> Événements collectés chaque nuit dans OpenAgenda et DATAtourisme (sources gratuites), sans relecture. <a href="../" style="color:var(--accent);font-weight:800">Voir la version manuelle</a></span></p>'],
-    [/<a class="pill soft" id="updated"[^>]*>/, '<a class="pill soft" id="updated" href="../">'],
-    [/<b>· Mettre à jour<\/b>/, '<b>· Version manuelle</b>'],
-    [/\$\('#updated'\)\.addEventListener\('click', \(\) => \{[\s\S]*?\n  \}\);/, '']
-  ];
-  for (const [re, rep] of swaps) {
-    if (!re.test(html)) throw new Error('Repère introuvable dans index.html : ' + re);
-    html = html.replace(re, rep);
-  }
-  return html;
+  return { js, EV };
 }
 
 // DATAtourisme has shipped dates shifted by one day. Pair its events with OpenAgenda ones
@@ -303,13 +279,10 @@ const events = [...oaEvents, ...dtOnly].filter(e => {
   const span = (e.timings[e.timings.length - 1].e - e.timings[0].b) / 864e5;
   return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
 });
-const { js, count } = build(events, base);
-const dir = path.join(ROOT, 'public/auto');
-fs.mkdirSync(dir, { recursive: true });
-fs.writeFileSync(path.join(dir, 'data.js'), js);
-fs.writeFileSync(path.join(dir, 'index.html'), buildPage());
-log(`Terminé : ${count} événements écrits dans public/auto/data.js (${today} → ${horizon}).`);
+const { js, EV } = build(events, base);
+fs.writeFileSync(path.join(ROOT, 'public/auto.js'), js);
+log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} → ${horizon}).`);
 const byCat = {};
-for (const m of js.matchAll(/"cat": "(\w+)"/g)) byCat[m[1]] = (byCat[m[1]] || 0) + 1;
+for (const e of EV) byCat[e.cat] = (byCat[e.cat] || 0) + 1;
 log('Par catégorie :', JSON.stringify(byCat));
 fs.writeFileSync(path.join(ROOT, 'scripts/last-run.log'), LOG.join('\n') + '\n');
