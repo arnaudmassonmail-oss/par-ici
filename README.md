@@ -32,3 +32,14 @@ Ouvrez l'adresse du site, puis :
 python3 -m http.server 8000 -d public
 ```
 puis ouvrir http://localhost:8000. La géolocalisation fonctionne sur `localhost` et en HTTPS.
+
+## Version automatique gratuite (`/auto/`)
+
+`https://par-ici.onrender.com/auto/` montre la même appli, remplie automatiquement chaque nuit par `scripts/auto-update.mjs` à partir de sources gratuites :
+
+- **OpenAgenda** (agenda Terres de Montaigu, etc.) : clé publique gratuite, dans votre compte OpenAgenda → Paramètres → Clé d'API.
+- **DATAtourisme** (base nationale des offices de tourisme) : clé gratuite via le formulaire « Utiliser les données » sur datatourisme.fr.
+
+Ajoutez les clés dans GitHub : dépôt → Settings → Secrets and variables → Actions → New repository secret, avec les noms `OPENAGENDA_KEY` et `DATATOURISME_KEY`. Lancez ensuite la tâche une première fois : onglet Actions → « Mise à jour automatique (version gratuite) » → Run workflow.
+
+Le cinéma n'a pas de source gratuite : la version automatique n'affiche pas de films.

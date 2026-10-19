@@ -1,0 +1,31 @@
+name: Mise à jour automatique (version gratuite)
+
+on:
+  schedule:
+    - cron: '17 3 * * *'   # chaque nuit vers 5h17 (heure de Paris en été)
+  workflow_dispatch:        # bouton « Run workflow » dans l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collecter les événements
+        env:
+          OPENAGENDA_KEY: ${{ secrets.OPENAGENDA_KEY }}
+          DATATOURISME_KEY: ${{ secrets.DATATOURISME_KEY }}
+        run: node scripts/auto-update.mjs
+      - name: Publier si quelque chose a changé
+        run: |
+          git config user.name "par-ici-bot"
+          git config user.email "par-ici-bot@users.noreply.github.com"
+          git add public/auto
+          git diff --cached --quiet && echo "Aucun changement." && exit 0
+          git commit -m "Mise à jour automatique du $(date +%F)"
+          git push
