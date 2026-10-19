@@ -158,6 +158,8 @@ button.badge-ic { border: 0; padding: 0; cursor: pointer; }
 .src a { color: var(--accent); font-weight: 800; }
 .time { font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 10px; border: 1.5px solid color-mix(in srgb, var(--c) 45%, transparent); color: var(--ink); font-variant-numeric: tabular-nums; background: transparent; }
 
+.more { margin-top: 10px; width: 100%; border: 2px dashed var(--line); background: transparent; border-radius: var(--radius); padding: 12px; font-weight: 800; color: var(--accent); }
+.more:hover { background: var(--surface-2); }
 .empty { background: var(--surface); border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px 20px; text-align: center; color: var(--muted); font-weight: 700; }
 .empty strong { display: block; font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; }
 
@@ -299,14 +301,15 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   if (typeof AUTO !== 'undefined') {
     for (const [k, c] of Object.entries(AUTO.C)) if (!C[k]) C[k] = c;
     for (const [k, s] of Object.entries(AUTO.SRC)) SRC['a' + k] = s;
-    const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3));
-    const near = (a, b) => Math.hypot(C[a].lat - C[b].lat, C[a].lon - C[b].lon) < 0.03;
+    const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !/^(les|des|aux|une|pour|avec|festival|edition|concert|spectacle|theatre)$/.test(w)));
+    // Communes déléguées (La Guyonnière in Montaigu-Vendée) sit a few km from the main town.
+    const near = (a, b) => Math.hypot(C[a].lat - C[b].lat, C[a].lon - C[b].lon) < 0.1;
     const same = (m, e) => {
       if (m.d !== e.d || !near(m.c, e.c)) return false;
       const A = words(m.t), B = words(e.t);
       let n = 0;
       for (const w of A) if (B.has(w)) n++;
-      return n / Math.max(1, Math.min(A.size, B.size)) >= 0.6;
+      return n > 0 && n / Math.min(A.size, B.size) >= 0.5;
     };
     const manual = EV.slice();
     for (const e of AUTO.EV) if (!manual.some(m => same(m, e))) EV.push({ ...e, s: 'a' + e.s });
@@ -372,7 +375,12 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const x = Math.cos(rad(S.pos.lat)) * Math.sin(rad(lat)) - Math.sin(rad(S.pos.lat)) * Math.cos(rad(lat)) * Math.cos(rad(lon - S.pos.lon));
     return Math.atan2(y, x) * 180 / Math.PI;
   }
-  const kmOf = cid => distKm(C[cid].lat, C[cid].lon);
+  // Distances per commune, cached until the position changes.
+  let kmCache = {}, kmFor = null;
+  const kmOf = cid => {
+    if (kmFor !== S.pos) { kmCache = {}; kmFor = S.pos; }
+    return kmCache[cid] ??= distKm(C[cid].lat, C[cid].lon);
+  };
   const nearest = (lat, lon) => {
     let best = null, bd = Infinity;
     for (const c of Object.values(C)) { const d = 6371 * Math.hypot(rad(c.lat - lat), rad(c.lon - lon) * Math.cos(rad(lat))); if (d < bd) { bd = d; best = c; } }
@@ -450,14 +458,23 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const blocks = [];
     if (films.length) blocks.push(`<section class="section"><h3>Au cinéma <small>${films.length} film${films.length > 1 ? 's' : ''} près de chez vous</small></h3><div class="list two">${films.map(filmCard).join('')}</div></section>`);
     const [a, b] = ranges[S.period];
-    const ongoing = events.filter(e => e.until > e.from);
-    if (ongoing.length) blocks.push(`<section class="section"><h3>À voir pendant toute la période</h3><div class="list two">${ongoing.map(eventCard).join('')}</div></section>`);
+    const ongoing = events.filter(e => e.until > e.from).sort((x, y) => kmOf(x.c) - kmOf(y.c));
+    if (ongoing.length) blocks.push(`<section class="section"><h3>À voir pendant toute la période</h3>${cards(ongoing, 'ongoing')}</section>`);
     const single = events.filter(e => e.until === e.from).sort((x, y) => x.from - y.from || kmOf(x.c) - kmOf(y.c));
     for (let d = a; d <= b; d++) {
       const day = single.filter(e => e.from === d);
-      if (day.length) blocks.push(`<section class="section"><h3>${fmtDay(d)} <small>${day.length} sortie${day.length > 1 ? 's' : ''}</small></h3><div class="list two">${day.map(eventCard).join('')}</div></section>`);
+      if (day.length) blocks.push(`<section class="section"><h3>${fmtDay(d)} <small>${day.length} sortie${day.length > 1 ? 's' : ''}</small></h3>${cards(day, 'd' + d)}</section>`);
     }
     return blocks.join('') || emptyState();
+  }
+  // Long sections show the closest outings first; the rest on demand keeps the page fast.
+  const PER_SECTION = 12;
+  const expanded = new Set();
+  function cards(list, key) {
+    const shown = expanded.has(key) ? list : list.slice(0, PER_SECTION);
+    const rest = list.length - shown.length;
+    return `<div class="list two">${shown.map(eventCard).join('')}</div>` +
+      (rest ? `<button type="button" class="more" data-more="${key}">Voir les ${rest} autre${rest > 1 ? 's' : ''}, plus loin</button>` : '');
   }
   function emptyState(title = 'Rien pour ces filtres', text = 'Essayez une distance plus grande, une autre période, ou cochez d\'autres catégories.') {
     return `<div class="empty"><strong>${title}</strong>${text}</div>`;
@@ -593,6 +610,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   $('#kids').addEventListener('change', e => { S.kids = e.target.checked; render(); });
   $('#out').addEventListener('click', e => {
     const f = e.target.closest('[data-fav]'); if (f) return toggleFav(f.dataset.fav);
+    const more = e.target.closest('[data-more]'); if (more) { expanded.add(more.dataset.more); return render(); }
     const o = e.target.closest('[data-open]'); if (o) return openEvent(o.dataset.open);
     const m = e.target.closest('[data-film]'); if (m) return openFilm(m.dataset.film);
   });
