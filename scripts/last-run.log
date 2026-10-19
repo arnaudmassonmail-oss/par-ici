@@ -1,17 +1,17 @@
 DATAtourisme page 1: HTTP 200
 DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"7€ visite de l'ancienne ferme + goûter inclus"},"priceCurrency":"EUR","maxPrice":[9]}]}],"isLocatedAt":[{"geo":{"latitude":47.3350366,"longitude":-1.698015},"address":[{"hasAddressCity":{"insee":"44217","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"44","label":{"@fr":"Loire-Atlantique"}},"label":{"@fr":"Vigneux-de-Bretagne"}},"streetAddress":["Ecomusée Rural du Pays Nantais","81, Rue Anne de Bretagne"],"postalCode":"44360","addressLocality":"Vigneux-de-Bretagne"}],"geoPoint":{"lon":-1.698015,"lat":47.3350366}}],"hasDescription":[{"description":{"@fr":"Réservation obligatoire"},"shortDescription":{"@fr":"Un atelier bois avec le sabotier"}}],"label":{"@fr":"ATELIER DÉCORATION OBJETS BOIS"},"type":["EntertainmentAndEvent","SportsEvent","Event","PointOfInterest","Game"],"uri":"https://data.datatourisme.fr/49/49cb1ca3-ba67-341e-9931-4f260e9e1dcb","takesPlaceAt":[{"endDate":"2026-10-19","startTime":"14:00","endTime":"16:00","startDate":"2026-10-19"}],"uuid":"00540c8c-735c-3db6-8f4b-93591c2d2a78"}
 DATAtourisme page 2: HTTP 200
-OpenAgenda: 63 agendas candidats
 DATAtourisme page 3: HTTP 200
 DATAtourisme page 4: HTTP 200
-  Terres de Montaigu: 50 événements lus, 49 à moins de 50 km
 DATAtourisme page 5: HTTP 200
+OpenAgenda: 63 agendas candidats
 DATAtourisme page 6: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
+  Terres de Montaigu: 50 événements lus, 49 à moins de 50 km
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
 DATAtourisme page 10: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 11: HTTP 200
 DATAtourisme: 608 événements à moins de 50 km (0 fiches sans date)
   Quinzaine de la transmission: 21 événements lus, 2 à moins de 50 km
@@ -32,6 +32,8 @@ DATAtourisme: 608 événements à moins de 50 km (0 fiches sans date)
   La Compagnie de la Hulotte: 11 événements lus, 1 à moins de 50 km
   Agenda du Patrimoine: 2 événements lus, 2 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 3 événements lus, 0 à moins de 50 km
-DATAtourisme: écart de dates mesuré sur les événements communs → {"0":1,"1":1,"7":1,"17":1,"26":1,"-2":1}
-Terminé : 1804 événements écrits dans public/auto/data.js (2026-10-19 → 2026-11-19).
-Par catégorie : {"expo":239,"marche":182,"sport":284,"concert":227,"cinema":53,"famille":482,"spectacle":337}
+DATAtourisme: écart de dates mesuré sur les événements communs → {"1":8}
+DATAtourisme: dates corrigées de 1 jour(s)
+Doublons DATAtourisme retirés : 8
+Terminé : 1797 événements écrits dans public/auto/data.js (2026-10-19 → 2026-11-19).
+Par catégorie : {"expo":238,"marche":180,"sport":284,"concert":225,"cinema":53,"famille":482,"spectacle":335}
