@@ -261,16 +261,23 @@ function buildPage() {
   return html;
 }
 
-// DATAtourisme has shipped dates shifted by one day. Measure the shift on events that
-// OpenAgenda also lists (same title), and correct DATAtourisme dates when most agree.
+// DATAtourisme has shipped dates shifted by one day. Pair its events with OpenAgenda ones
+// (similar title words, same place), measure the gap, and correct when most pairs agree.
+const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !/^(les|des|une|pour|avec|dans|sur|par|festival|concert|spectacle)$/.test(w)));
+function similar(a, b) {
+  const A = words(a.title), B = words(b.title);
+  if (!A.size || !B.size) return false;
+  let common = 0;
+  for (const w of A) if (B.has(w)) common++;
+  const near = 6371 * Math.hypot(rad(a.lat - b.lat), rad(a.lon - b.lon) * Math.cos(rad(a.lat))) < 3;
+  return near && common / Math.min(A.size, B.size) >= 0.6;
+}
+const dayGap = (a, b) => Math.round((new Date(isoDay(a.timings[0].b)) - new Date(isoDay(b.timings[0].b))) / 864e5);
 function fixDataTourismeShift(oa, dt) {
-  const oaDays = new Map(oa.map(e => [slug(e.title).slice(0, 30), isoDay(e.timings[0].b)]));
   const diffs = {};
   for (const e of dt) {
-    const d = oaDays.get(slug(e.title).slice(0, 30));
-    if (!d) continue;
-    const diff = Math.round((new Date(d) - new Date(isoDay(e.timings[0].b))) / 864e5);
-    diffs[diff] = (diffs[diff] || 0) + 1;
+    const m = oa.find(o => Math.abs(dayGap(o, e)) <= 2 && similar(o, e));
+    if (m) diffs[dayGap(m, e)] = (diffs[dayGap(m, e)] || 0) + 1;
   }
   log('DATAtourisme: écart de dates mesuré sur les événements communs →', JSON.stringify(diffs));
   const [shift, n] = Object.entries(diffs).sort((a, b) => b[1] - a[1])[0] || ['0', 0];
@@ -289,7 +296,10 @@ const oaEvents = oaRes.status === 'fulfilled' ? oaRes.value : [];
 const dtEvents = dtRes.status === 'fulfilled' ? dtRes.value : [];
 fixDataTourismeShift(oaEvents, dtEvents);
 // OpenAgenda first, so its version wins the deduplication.
-const events = [...oaEvents, ...dtEvents].filter(e => {
+// A DATAtourisme event OpenAgenda already lists on the same day is a duplicate.
+const dtOnly = dtEvents.filter(e => !oaEvents.some(o => dayGap(o, e) === 0 && similar(o, e)));
+log(`Doublons DATAtourisme retirés : ${dtEvents.length - dtOnly.length}`);
+const events = [...oaEvents, ...dtOnly].filter(e => {
   const span = (e.timings[e.timings.length - 1].e - e.timings[0].b) / 864e5;
   return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
 });
