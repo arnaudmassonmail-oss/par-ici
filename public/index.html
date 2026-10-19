@@ -77,6 +77,9 @@ header .wrap { padding-block: 20px 22px; position: relative; z-index: 1; display
 .pill.dark { background: var(--sun-ink); color: var(--sun); }
 .pill.soft { background: color-mix(in srgb, #fff 55%, transparent); color: var(--sun-ink); }
 .pill svg { width: 16px; height: 16px; flex: none; }
+a.pill { text-decoration: none; cursor: pointer; }
+a.pill:hover { background: color-mix(in srgb, #fff 80%, transparent); }
+.pill b { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
 
 .notice { margin: 16px auto 0; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
 .notice b { color: var(--ink); }
@@ -206,10 +209,10 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
         <span id="locName">Cugand</span>
       </button>
-      <span class="pill soft" id="updated">
+      <a class="pill soft" id="updated" href="https://claude.ai/code/session_01EcVZPgTXZjzsUvP3KH8hjj" target="_blank" rel="noopener" title="Copie la demande et ouvre la discussion Claude">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg>
-        <span>Mis à jour le 19 oct.</span>
-      </span>
+        <span>Mis à jour le 19 oct.</span><b>· Mettre à jour</b>
+      </a>
     </div>
   </div>
 </header>
@@ -574,6 +577,14 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   const upd = new Date(UPDATED + 'T00:00');
   $('#updated span').textContent = 'Mis à jour le ' + upd.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
   $('#locate').addEventListener('click', openLocation);
+  // The update itself is done by Claude: copy the request, then the link opens the conversation.
+  const UPDATE_REQUEST = 'mets à jour les événements de par-ici';
+  $('#updated').addEventListener('click', () => {
+    const done = () => toast('Demande copiée. Collez-la dans la discussion Claude qui s\'ouvre, puis envoyez.');
+    try {
+      navigator.clipboard.writeText(UPDATE_REQUEST).then(done, () => toast('Écrivez dans la discussion Claude : « ' + UPDATE_REQUEST + ' »'));
+    } catch { toast('Écrivez dans la discussion Claude : « ' + UPDATE_REQUEST + ' »'); }
+  });
 
   render();
   if (S.pos.gps || !store.get('pos2', null)) locate(false);
