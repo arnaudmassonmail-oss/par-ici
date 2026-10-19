@@ -6,16 +6,16 @@ Site statique, sans dépendance ni étape de build.
 
 ## Fichiers
 
-- `index.html` : l'application (design et logique).
-- `data.js` : les données (communes, sources, événements, marchés, cinémas, films). **C'est le seul fichier à modifier pour mettre à jour les sorties.** Pensez à changer `UPDATED` en haut du fichier.
-- `manifest.webmanifest`, `icon*.png`, `icon.svg` : pour installer l'appli sur l'écran d'accueil du téléphone.
+- `public/index.html` : l'application (design et logique).
+- `public/data.js` : les données (communes, sources, événements, marchés, cinémas, films). **C'est le seul fichier à modifier pour mettre à jour les sorties.** Pensez à changer `UPDATED` en haut du fichier.
+- `public/manifest.webmanifest`, `public/icon*.png`, `public/icon.svg` : pour installer l'appli sur l'écran d'accueil du téléphone.
 - `render.yaml` : configuration Render.
 
 ## Mise en ligne sur Render
 
 1. Sur [dashboard.render.com](https://dashboard.render.com), cliquez **New → Static Site**.
 2. Choisissez ce dépôt GitHub.
-3. Laissez **Build Command** vide et mettez **Publish Directory** à `.`
+3. **Build Command** : `echo ok` · **Publish Directory** : `public`
 4. Cliquez **Create Static Site**. L'adresse ressemble à `https://par-ici.onrender.com`.
 
 Chaque `git push` sur `main` redéploie automatiquement le site.
@@ -29,6 +29,6 @@ Ouvrez l'adresse du site, puis :
 ## Tester en local
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 -d public
 ```
 puis ouvrir http://localhost:8000. La géolocalisation fonctionne sur `localhost` et en HTTPS.

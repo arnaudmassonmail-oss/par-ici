@@ -2,7 +2,7 @@ services:
   - type: web
     name: par-ici
     runtime: static
-    staticPublishPath: .
+    staticPublishPath: ./public
     buildCommand: ""
     headers:
       - path: /data.js
