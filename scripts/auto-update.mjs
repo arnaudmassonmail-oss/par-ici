@@ -73,9 +73,13 @@ function loadBase() {
 
 // ---------- normalised event ----------
 // { title, desc, start: Date, end: Date, dates: ['YYYY-MM-DD'...], place, city, lat, lon, price, kids, url, source, words }
+// DATAtourisme types, used only when the title and description say nothing.
+const DT_TYPES = [['cinema', /ScreeningEvent/], ['concert', /Concert/], ['expo', /Exhibition|Visit/], ['marche', /Market|SaleEvent|Fair/], ['spectacle', /TheaterEvent|ShowEvent|Dance/], ['sport', /SportsCompetition|SportsEvent/]];
 function toEvent(ev) {
   const text = `${ev.title} ${ev.words || ''} ${ev.desc}`;
-  return { ...ev, cat: categorize(ev.title, `${ev.words || ''} ${ev.desc}`), kids: ev.kids ?? KIDS_RE.test(text) };
+  let cat = categorize(ev.title, `${ev.words || ''} ${ev.desc}`);
+  if (cat === 'famille' && ev.types) cat = (DT_TYPES.find(([, re]) => re.test(ev.types)) || ['famille'])[0];
+  return { ...ev, cat, kids: ev.kids ?? KIDS_RE.test(text) };
 }
 
 // ---------- OpenAgenda ----------
@@ -163,17 +167,17 @@ async function dataTourisme() {
       const pairs = starts.map((s, i) => ({ b: new Date(s.length === 10 ? `${s}T12:00:00Z` : s), e: new Date((ends[i] || s).length === 10 ? `${ends[i] || s}T12:00:00Z` : (ends[i] || s)) }))
         .filter(t => !isNaN(t.b) && isoDay(t.e) >= today && isoDay(t.b) <= horizon).sort((x, y) => x.b - y.b);
       if (!pairs.length) continue;
-      const startTime = first(it, /^(schema:)?startTime$/);
+      const startTime = first(it, /^(schema:)?startTime$/), endTime = first(it, /^(schema:)?endTime$/);
       const lat = Number(first(it, /^(schema:)?latitude$/)), lon = Number(first(it, /^(schema:)?longitude$/));
       if (!lat || !lon || distKm(lat, lon) > RADIUS_KM) continue;
       const types = [].concat(it['@type'] || it.type || []).join(' ');
       out.push(toEvent({
         title: strip(fr(it.label || it['rdfs:label'] || it.name)),
         desc: cut(strip(fr(first(it, /^(dc:|rdfs:)?(shortDescription|description|comment)$/))), 260),
-        timings: pairs, timeText: startTime ? String(startTime).slice(0, 5).replace(':', 'h') : '',
+        timings: pairs, timeText: startTime ? String(startTime).slice(0, 5).replace(':', 'h') + (endTime ? ' – ' + String(endTime).slice(0, 5).replace(':', 'h') : '') : '',
         place: strip(fr(first(it, /^(schema:)?(name|legalName)$/) || '')).slice(0, 80),
         city: strip(fr(first(it, /^(schema:)?addressLocality$/) || '')), lat, lon,
-        price: '', words: types.replace(/schema:|urn:resource:/g, ' '),
+        price: strip(fr(first(it, /^additionalInformation$/) || '')), types,
         url: String(it.uri || it['@id'] || 'https://www.datatourisme.fr/'),
         source: 'DATAtourisme'
       }));
