@@ -32,5 +32,6 @@ DATAtourisme: 608 événements à moins de 50 km (0 fiches sans date)
   La Compagnie de la Hulotte: 11 événements lus, 1 à moins de 50 km
   Agenda du Patrimoine: 2 événements lus, 2 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 3 événements lus, 0 à moins de 50 km
-Terminé : 1930 événements écrits dans public/auto/data.js (2026-10-19 → 2026-11-19).
-Par catégorie : {"marche":198,"expo":265,"sport":298,"famille":552,"concert":227,"cinema":53,"spectacle":337}
+DATAtourisme: écart de dates mesuré sur les événements communs → {"0":1,"1":1,"7":1,"17":1,"26":1,"-2":1}
+Terminé : 1804 événements écrits dans public/auto/data.js (2026-10-19 → 2026-11-19).
+Par catégorie : {"expo":239,"marche":182,"sport":284,"concert":227,"cinema":53,"famille":482,"spectacle":337}
