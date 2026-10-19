@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Par Ici Sorties</title>
+<meta name="description" content="Les sorties autour de chez vous : concerts, expos, marchés, sport, spectacles, cinéma et sorties en famille.">
+<meta name="theme-color" content="#FFC83D">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Par Ici">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: app-like column; filters panel left on wide screens, stacked on phones. Sunny header band, list of day groups. */
+:root {
+  --bg: #F2F5FF;
+  --surface: #FFFFFF;
+  --surface-2: #E8EDFC;
+  --ink: #1D2140;
+  --muted: #5D6386;
+  --line: #D9DFF3;
+  --sun: #FFC83D;
+  --sun-ink: #3A2A00;
+  --accent: #5B3FD9;
+  --c-cinema: #E5404F;
+  --c-concert: #7A4BE0;
+  --c-expo: #12949F;
+  --c-marche: #E8870E;
+  --c-sport: #26A057;
+  --c-spectacle: #D9468F;
+  --c-famille: #2E7FD8;
+  --tint: 14%;
+  --font-display: "Fredoka", "Nunito", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12152B; --surface: #1C2042; --surface-2: #262B55; --ink: #EEF0FF; --muted: #A6ABD3; --line: #31376A;
+    --sun: #FFC83D; --sun-ink: #2B1F00; --accent: #A894FF;
+    --c-cinema: #FF6B78; --c-concert: #A584FF; --c-expo: #3CC6CF; --c-marche: #FFA63D; --c-sport: #4FD083; --c-spectacle: #FF7DB8; --c-famille: #62A8FF;
+    --tint: 22%; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12152B; --surface: #1C2042; --surface-2: #262B55; --ink: #EEF0FF; --muted: #A6ABD3; --line: #31376A;
+  --sun: #FFC83D; --sun-ink: #2B1F00; --accent: #A894FF;
+  --c-cinema: #FF6B78; --c-concert: #A584FF; --c-expo: #3CC6CF; --c-marche: #FFA63D; --c-sport: #4FD083; --c-spectacle: #FF7DB8; --c-famille: #62A8FF;
+  --tint: 22%; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 10px; }
+
+.band { background: var(--sun); color: var(--sun-ink); position: relative; overflow: hidden; }
+.band::after { content: ""; position: absolute; right: -60px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: color-mix(in srgb, #fff 30%, transparent); }
+.band::before { content: ""; position: absolute; right: 140px; bottom: -70px; width: 140px; height: 140px; border-radius: 50%; background: color-mix(in srgb, #FF8A3D 35%, transparent); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header .wrap { padding-block: 20px 22px; position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo { width: 46px; height: 46px; border-radius: 14px; background: var(--sun-ink); display: grid; place-items: center; transform: rotate(-6deg); }
+.brand h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; margin: 0; line-height: 1; letter-spacing: -0.01em; }
+.brand p { margin: 3px 0 0; font-weight: 700; font-size: 14px; opacity: .8; }
+.loc { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; font-weight: 800; font-size: 14px; border: 0; }
+.pill.dark { background: var(--sun-ink); color: var(--sun); }
+.pill.soft { background: color-mix(in srgb, #fff 55%, transparent); color: var(--sun-ink); }
+.pill svg { width: 16px; height: 16px; flex: none; }
+
+.notice { margin: 16px auto 0; font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: flex-start; }
+.notice b { color: var(--ink); }
+
+.layout { display: grid; grid-template-columns: 1fr; gap: 20px; padding-block: 18px 48px; }
+@media (min-width: 880px) { .layout { grid-template-columns: 310px minmax(0, 1fr); align-items: start; } .filters { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+
+.filters { background: var(--surface); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 20px; border: 1px solid var(--line); }
+.fgroup h2 { font-family: var(--font-display); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface-2); border-radius: 14px; padding: 4px; gap: 4px; }
+.seg button { border: 0; background: transparent; border-radius: 10px; padding: 9px 6px; font-weight: 800; font-size: 14px; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
+.dist button[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: none; }
+:root[data-theme="dark"] .dist button[aria-pressed="true"] { color: #12152B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .dist button[aria-pressed="true"] { color: #12152B; } }
+
+.cats { display: flex; flex-wrap: wrap; gap: 8px; }
+.cat { --c: var(--accent); display: inline-flex; align-items: center; gap: 7px; border: 2px solid color-mix(in srgb, var(--c) 40%, transparent); background: transparent; border-radius: 999px; padding: 6px 12px 6px 7px; font-weight: 800; font-size: 14px; color: var(--ink); transition: background .15s, border-color .15s; }
+.cat .ic { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--c) var(--tint), transparent); color: var(--c); }
+.cat .ic svg { width: 15px; height: 15px; }
+.cat .n { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cat[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
+.cat[aria-pressed="true"] .ic { background: rgb(255 255 255 / .25); color: #fff; }
+.cat[aria-pressed="true"] .n { color: rgb(255 255 255 / .85); }
+.links { display: flex; gap: 14px; margin-top: 10px; font-size: 13px; }
+.links button { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 800; }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 700; }
+.switch { position: relative; width: 48px; height: 28px; flex: none; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); transition: background .15s; pointer-events: none; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); box-shadow: 0 1px 3px rgb(0 0 0 / .25); transition: transform .15s; }
+.switch input:checked + span { background: var(--c-famille); border-color: var(--c-famille); }
+.switch input:checked + span::after { transform: translateX(20px); }
+.switch input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.main { min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+.topbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.summary { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin: 0; text-wrap: balance; }
+.summary em { font-style: normal; color: var(--accent); }
+.views { width: min(100%, 380px); }
+
+.section h3 { font-family: var(--font-display); font-weight: 600; font-size: 18px; margin: 0 0 10px; display: flex; align-items: baseline; gap: 10px; }
+.section h3 small { font-family: var(--font-body); font-size: 13px; color: var(--muted); font-weight: 700; }
+.list { display: grid; gap: 10px; }
+@media (min-width: 1100px) { .list.two { grid-template-columns: 1fr 1fr; } }
+
+.card { --c: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 12px; align-items: start; text-align: left; width: 100%; transition: transform .12s, box-shadow .12s; }
+button.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mix(in srgb, var(--c) 18%, transparent); }
+.badge-ic { width: 54px; height: 54px; border-radius: 16px; background: color-mix(in srgb, var(--c) var(--tint), transparent); color: var(--c); display: grid; place-items: center; }
+.badge-ic svg { width: 26px; height: 26px; }
+.card .body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.kicker { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--c); }
+.card h4 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.2; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 12px; color: var(--muted); font-size: 13px; font-weight: 700; }
+.meta span { display: inline-flex; align-items: center; gap: 4px; }
+.meta svg { width: 13px; height: 13px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tag { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: var(--surface-2); color: var(--ink); }
+.tag.free { background: color-mix(in srgb, var(--c-sport) var(--tint), transparent); color: var(--c-sport); }
+.tag.kids { background: color-mix(in srgb, var(--c-famille) var(--tint), transparent); color: var(--c-famille); }
+.fav { border: 0; background: transparent; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+.fav svg { width: 22px; height: 22px; }
+.fav[aria-pressed="true"] { color: var(--c-cinema); }
+.fav[aria-pressed="true"] svg path { fill: currentColor; }
+.fav:hover { background: var(--surface-2); }
+
+.film { --c: var(--c-cinema); }
+.film .shows { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.show { display: grid; grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.show .where { font-size: 13px; font-weight: 800; }
+.show .where small { color: var(--muted); font-weight: 700; }
+.times { display: flex; flex-wrap: wrap; gap: 6px; }
+.time.link { color: var(--c); text-decoration: none; border-style: dashed; }
+.time.link:hover { background: color-mix(in srgb, var(--c) var(--tint), transparent); }
+.src a { color: var(--accent); font-weight: 800; }
+.time { font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 10px; border: 1.5px solid color-mix(in srgb, var(--c) 45%, transparent); color: var(--ink); font-variant-numeric: tabular-nums; background: transparent; }
+
+.empty { background: var(--surface); border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px 20px; text-align: center; color: var(--muted); font-weight: 700; }
+.empty strong { display: block; font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; }
+
+.radar-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 16px; }
+@media (min-width: 720px) { .radar-card { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; } }
+.radar-card svg { width: 100%; max-width: 460px; height: auto; display: block; margin: 0 auto; }
+.towns { display: grid; gap: 6px; font-size: 14px; }
+.town { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 6px 4px; border-bottom: 1px solid var(--line); font-weight: 700; }
+.town .km, .town .cnt { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+.town .cnt { color: var(--accent); font-weight: 800; }
+.town.out { opacity: .45; }
+
+dialog { border: 0; border-radius: 24px; padding: 0; width: min(520px, calc(100vw - 32px)); background: var(--surface); color: var(--ink); box-shadow: 0 20px 60px rgb(0 0 0 / .3); }
+dialog::backdrop { background: rgb(20 22 50 / .45); }
+.sheet-head { --c: var(--accent); padding: 22px 22px 16px; background: color-mix(in srgb, var(--c) var(--tint), var(--surface)); display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 14px; align-items: center; }
+.sheet-head h3 { margin: 2px 0 0; font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.15; text-wrap: balance; }
+.sheet-body { padding: 18px 22px 22px; display: grid; gap: 12px; }
+.sheet-body p { margin: 0; }
+.rows { display: grid; gap: 8px; font-weight: 700; }
+.rows div { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; align-items: start; }
+.rows svg { width: 18px; height: 18px; color: var(--muted); margin-top: 2px; }
+.src { font-size: 12px; color: var(--muted); }
+.sheet-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { border: 0; border-radius: 14px; padding: 11px 16px; font-weight: 800; }
+.btn.primary { background: var(--accent); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #12152B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #12152B; } }
+.btn.ghost { background: var(--surface-2); }
+
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translate(-50%, 20px); opacity: 0; background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 14px; font-weight: 700; font-size: 14px; width: max-content; max-width: calc(100vw - 32px); transition: opacity .2s, transform .2s; pointer-events: none; z-index: 20; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<header class="band">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFC83D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4" fill="#FFC83D"/></svg>
+      </div>
+      <div>
+        <h1>Par Ici</h1>
+        <p>Les sorties autour de chez vous</p>
+      </div>
+    </div>
+    <div class="loc">
+      <button class="pill dark" id="locate" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <span id="locName">Cugand</span>
+      </button>
+      <span class="pill soft" id="updated">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg>
+        <span>Mis à jour le 19 oct.</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg><span><b>Données réelles</b> relevées le 19 octobre 2026 dans les agendas des communes, des salles et des cinémas autour de Cugand. Certains horaires restent à confirmer : chaque fiche donne sa source.</span></p>
+
+  <div class="layout">
+    <aside class="filters" aria-label="Filtres">
+      <div class="fgroup">
+        <h2>Quand ?</h2>
+        <div class="seg" id="period" role="group" aria-label="Période">
+          <button type="button" data-v="weekend">Ce week-end</button>
+          <button type="button" data-v="week">Cette semaine</button>
+          <button type="button" data-v="month">Le mois</button>
+        </div>
+      </div>
+      <div class="fgroup">
+        <h2>Jusqu'à quelle distance ?</h2>
+        <div class="seg dist" id="dist" role="group" aria-label="Distance">
+          <button type="button" data-v="5">5 km</button>
+          <button type="button" data-v="10">10 km</button>
+          <button type="button" data-v="20">20 km</button>
+          <button type="button" data-v="50">50 km</button>
+        </div>
+      </div>
+      <div class="fgroup">
+        <h2>Quoi ?</h2>
+        <div class="cats" id="cats"></div>
+        <div class="links"><button type="button" id="allCats">Tout cocher</button><button type="button" id="noCats">Tout décocher</button></div>
+      </div>
+      <label class="toggle" for="kids">
+        <span>Adapté aux enfants seulement</span>
+        <span class="switch"><input type="checkbox" id="kids"><span></span></span>
+      </label>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <p class="summary" id="summary"></p>
+        <div class="seg views" id="view" role="group" aria-label="Affichage">
+          <button type="button" data-v="list">Liste</button>
+          <button type="button" data-v="map">Autour de moi</button>
+          <button type="button" data-v="fav">Favoris</button>
+        </div>
+      </div>
+      <div id="out" class="main"></div>
+    </main>
+  </div>
+</div>
+
+<dialog id="sheet" aria-labelledby="sheetTitle"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script>
+(() => {
+  const I = {
+    cinema: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9.5h4M3 14.5h4M17 9.5h4M17 14.5h4"/></svg>',
+    concert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>',
+    expo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>',
+    marche: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18l-2 10H5L3 10z"/><path d="M8 10l3-6M16 10l-3-6"/></svg>',
+    sport: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18M3.5 9h17M3.5 15h17"/></svg>',
+    spectacle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6a8 8 0 0 1-16 0V4z"/><path d="M8.5 9h.01M15.5 9h.01M9 13.5c1.7 1.4 4.3 1.4 6 0"/></svg>',
+    famille: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3.3 0-5.5 2.5-5.5 5.5S9 15 12 15s5.5-3.5 5.5-6.5S15.3 3 12 3z"/><path d="M12 15l-1 2h2l-1-2M12 17c0 2-2 2-2 4"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.2"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    euro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6.5A7 7 0 1 0 18 17.5M4 10h10M4 14h10"/></svg>',
+    cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/></svg>',
+    gps: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>'
+  };
+  const CATS = [
+    { k: 'cinema', n: 'Cinéma' }, { k: 'concert', n: 'Concerts' }, { k: 'expo', n: 'Expos' },
+    { k: 'marche', n: 'Marchés' }, { k: 'sport', n: 'Sport' }, { k: 'spectacle', n: 'Spectacles' },
+    { k: 'famille', n: 'Sorties en famille' }
+  ];
+  const catName = k => CATS.find(c => c.k === k).n;
+
+  // Dates
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const DAY = 864e5;
+  const offOf = iso => { const [y, m, d] = iso.split('-').map(Number); return Math.round((new Date(y, m - 1, d) - today) / DAY); };
+  const dow = today.getDay();
+  const satOff = dow === 0 ? -1 : 6 - dow;
+  const ranges = {
+    weekend: dow === 0 ? [0, 0] : [satOff, satOff + 1],
+    week: [0, dow === 0 ? 0 : 7 - dow],
+    month: [0, 30]
+  };
+  EV.forEach((e, i) => { e.id = 'e' + i; e.from = offOf(e.d); e.until = e.to ? offOf(e.to) : e.from; });
+  for (let off = 0; off <= 30; off++) {
+    const wd = (dow + off) % 7;
+    MARKETS.filter(m => m.wd === wd).forEach(m => {
+      const dt = new Date(today.getTime() + off * DAY);
+      EV.push({ ...m, cat: 'marche', p: 'Entrée libre', kids: true, id: 'm' + m.c + m.wd + '-' + dt.toISOString().slice(0, 10), from: off, until: off });
+    });
+  }
+  FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, offOf(v)])); });
+  const dateOf = off => new Date(today.getTime() + off * DAY);
+  const fmtDay = off => {
+    if (off === 0) return 'Aujourd\'hui';
+    if (off === 1) return 'Demain';
+    const s = dateOf(off).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+  const fmtShort = off => dateOf(off).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+
+  // State
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('parici.' + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('parici.' + k, JSON.stringify(v)); } catch {} }
+  };
+  const HOME = { name: 'Cugand', lat: C.cugand.lat, lon: C.cugand.lon, gps: false };
+  const S = {
+    period: store.get('period', 'weekend'),
+    dist: store.get('dist', 20),
+    cats: new Set(store.get('cats', CATS.map(c => c.k))),
+    kids: store.get('kids', false),
+    view: 'list',
+    favs: new Set(store.get('favs', [])),
+    pos: store.get('pos2', HOME)
+  };
+  const save = () => { store.set('period', S.period); store.set('dist', S.dist); store.set('cats', [...S.cats]); store.set('kids', S.kids); store.set('favs', [...S.favs]); store.set('pos2', S.pos); };
+
+  // Geography
+  const rad = x => x * Math.PI / 180;
+  function distKm(lat, lon) {
+    const dLat = rad(lat - S.pos.lat), dLon = rad(lon - S.pos.lon);
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(S.pos.lat)) * Math.cos(rad(lat)) * Math.sin(dLon / 2) ** 2;
+    return 6371 * 2 * Math.asin(Math.sqrt(a));
+  }
+  function bearing(lat, lon) {
+    const y = Math.sin(rad(lon - S.pos.lon)) * Math.cos(rad(lat));
+    const x = Math.cos(rad(S.pos.lat)) * Math.sin(rad(lat)) - Math.sin(rad(S.pos.lat)) * Math.cos(rad(lat)) * Math.cos(rad(lon - S.pos.lon));
+    return Math.atan2(y, x) * 180 / Math.PI;
+  }
+  const kmOf = cid => distKm(C[cid].lat, C[cid].lon);
+  const nearest = (lat, lon) => {
+    let best = null, bd = Infinity;
+    for (const c of Object.values(C)) { const d = 6371 * Math.hypot(rad(c.lat - lat), rad(c.lon - lon) * Math.cos(rad(lat))); if (d < bd) { bd = d; best = c; } }
+    return bd < 8 ? best.n : 'Ma position';
+  };
+
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const km = n => (n < 1 ? '< 1' : n.toLocaleString('fr-FR', { maximumFractionDigits: n < 10 ? 1 : 0 })) + ' km';
+
+  // Filtering
+  const inPeriod = e => { const [a, b] = ranges[S.period]; return e.from <= b && e.until >= a; };
+  const baseEvents = () => EV.filter(e => inPeriod(e) && kmOf(e.c) <= S.dist && (!S.kids || e.kids));
+  const filmShows = f => Object.keys(f.s).filter(cid => kmOf(CINEMAS[cid].c) <= S.dist && f.from[cid] <= ranges[S.period][1])
+    .sort((x, y) => kmOf(CINEMAS[x].c) - kmOf(CINEMAS[y].c));
+  const baseFilms = () => FILMS.filter(f => (!S.kids || f.kids) && filmShows(f).length);
+  const counts = () => {
+    const n = Object.fromEntries(CATS.map(c => [c.k, 0]));
+    baseEvents().forEach(e => n[e.cat]++);
+    n.cinema = baseFilms().length;
+    return n;
+  };
+
+  // Rendering pieces
+  const isFree = p => /^(Gratuit|Entrée libre)/.test(p);
+  function eventCard(e) {
+    const commune = C[e.c];
+    const multi = e.until > e.from;
+    const when = multi ? `Jusqu'au ${fmtShort(e.until)}` : e.h;
+    return `<div class="card" style="--c:var(--c-${e.cat})">
+      <button type="button" class="badge-ic" data-open="${e.id}" aria-label="Voir ${esc(e.t)}">${I[e.cat]}</button>
+      <button type="button" class="body" data-open="${e.id}" style="border:0;background:none;padding:0;text-align:left">
+        <span class="kicker">${catName(e.cat)}</span>
+        <h4>${esc(e.t)}</h4>
+        <span class="meta"><span>${I.pin}${esc(commune.n)} · ${km(kmOf(e.c))}</span><span>${I.clock}${esc(when)}</span></span>
+        <span class="tags">${isFree(e.p) ? `<span class="tag free">${esc(e.p)}</span>` : `<span class="tag">${esc(e.p)}</span>`}${e.kids ? '<span class="tag kids">Enfants bienvenus</span>' : ''}</span>
+      </button>
+      ${favBtn(e.id, e.t)}
+    </div>`;
+  }
+  function favBtn(id, t) {
+    const on = S.favs.has(id);
+    return `<button type="button" class="fav" data-fav="${id}" aria-pressed="${on}" aria-label="${on ? 'Retirer des favoris' : 'Ajouter aux favoris'} : ${esc(t)}">${I.heart}</button>`;
+  }
+  function showRows(f) {
+    return filmShows(f).map(cid => {
+      const cin = CINEMAS[cid], com = C[cin.c], from = f.from[cid];
+      return `<div class="show"><div class="where">${esc(cin.n)} <small>· ${esc(com.n)} · ${km(kmOf(cin.c))}</small></div><div class="times"><span class="time">${from > 0 ? 'Dès le ' + fmtShort(from) : 'À l\'affiche'}</span><a class="time link" href="${cin.url}" target="_blank" rel="noopener">Voir les séances</a></div></div>`;
+    }).join('');
+  }
+  function filmCard(f) {
+    return `<div class="card film">
+      <button type="button" class="badge-ic" data-film="${f.id}" aria-label="Voir ${esc(f.t)}">${I.cinema}</button>
+      <div class="body">
+        <span class="kicker">${esc(f.g)}${f.dur ? ' · ' + f.dur : ''}</span>
+        <h4>${esc(f.t)}</h4>
+        ${f.age ? `<span class="meta"><span>${esc(f.age)}</span></span>` : ''}
+        <div class="shows">${showRows(f)}</div>
+      </div>
+      ${favBtn('f-' + f.id, f.t)}
+    </div>`;
+  }
+
+  function renderFilters() {
+    document.querySelectorAll('#period button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.period));
+    document.querySelectorAll('#dist button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.v === S.dist));
+    document.querySelectorAll('#view button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === S.view));
+    $('#kids').checked = S.kids;
+    $('#locName').textContent = S.pos.name;
+    const n = counts();
+    $('#cats').innerHTML = CATS.map(c => `<button type="button" class="cat" style="--c:var(--c-${c.k})" data-cat="${c.k}" aria-pressed="${S.cats.has(c.k)}"><span class="ic">${I[c.k]}</span>${c.n}<span class="n">${n[c.k]}</span></button>`).join('');
+  }
+
+  function renderList(events, films) {
+    const blocks = [];
+    if (films.length) blocks.push(`<section class="section"><h3>Au cinéma <small>${films.length} film${films.length > 1 ? 's' : ''} près de chez vous</small></h3><div class="list two">${films.map(filmCard).join('')}</div></section>`);
+    const [a, b] = ranges[S.period];
+    const ongoing = events.filter(e => e.until > e.from);
+    if (ongoing.length) blocks.push(`<section class="section"><h3>À voir pendant toute la période</h3><div class="list two">${ongoing.map(eventCard).join('')}</div></section>`);
+    const single = events.filter(e => e.until === e.from).sort((x, y) => x.from - y.from || kmOf(x.c) - kmOf(y.c));
+    for (let d = a; d <= b; d++) {
+      const day = single.filter(e => e.from === d);
+      if (day.length) blocks.push(`<section class="section"><h3>${fmtDay(d)} <small>${day.length} sortie${day.length > 1 ? 's' : ''}</small></h3><div class="list two">${day.map(eventCard).join('')}</div></section>`);
+    }
+    return blocks.join('') || emptyState();
+  }
+  function emptyState(title = 'Rien pour ces filtres', text = 'Essayez une distance plus grande, une autre période, ou cochez d\'autres catégories.') {
+    return `<div class="empty"><strong>${title}</strong>${text}</div>`;
+  }
+
+  function renderMap(events, films) {
+    const R = 150, cx = 170, cy = 170;
+    const r = k => Math.sqrt(Math.min(k, 50) / 50) * R;
+    const per = {};
+    events.forEach(e => { per[e.c] = (per[e.c] || 0) + 1; });
+    films.forEach(f => filmShows(f).forEach(cid => { const c = CINEMAS[cid].c; per[c] = (per[c] || 0) + 1; }));
+    const rings = [5, 10, 20, 50].map(k => `<circle cx="${cx}" cy="${cy}" r="${r(k)}" fill="${k === S.dist ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'none'}" stroke="${k === S.dist ? 'var(--accent)' : 'var(--line)'}" stroke-width="${k === S.dist ? 2.5 : 1.5}" ${k === S.dist ? '' : 'stroke-dasharray="4 5"'}/>
+      <text x="${cx}" y="${cy - r(k) + 13}" text-anchor="middle" font-size="11" font-weight="800" fill="${k === S.dist ? 'var(--accent)' : 'var(--muted)'}">${k} km</text>`).join('');
+    const shown = Object.entries(C).filter(([id]) => per[id] || EV.some(e => e.c === id) || Object.values(CINEMAS).some(c => c.c === id));
+    const dots = shown.map(([id, c]) => {
+      const d = kmOf(id);
+      if (d > 50) return '';
+      const a = (bearing(c.lat, c.lon) - 90) * Math.PI / 180, x = cx + Math.cos(a) * r(d), y = cy + Math.sin(a) * r(d);
+      const n = per[id] || 0, inside = d <= S.dist;
+      const size = n ? 6 + Math.min(n, 6) * 1.6 : 4;
+      const label = inside && n ? `<text x="${x}" y="${y - size - 4}" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--ink)">${esc(c.n.replace(/-sur-Sèvre|-Vendée|-Genusson|-du-Doré/, ''))}</text>` : '';
+      return `<circle cx="${x}" cy="${y}" r="${size}" fill="${inside && n ? 'var(--c-marche)' : 'var(--line)'}" stroke="var(--surface)" stroke-width="2"/>${inside && n ? `<text x="${x}" y="${y + 3.5}" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">${n}</text>` : ''}${label}`;
+    }).join('');
+    const me = `<circle cx="${cx}" cy="${cy}" r="11" fill="var(--sun)" stroke="var(--sun-ink)" stroke-width="2.5"/><circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--sun-ink)"/>`;
+    const towns = shown.sort((x, y) => kmOf(x[0]) - kmOf(y[0])).map(([id, c]) => {
+      const n = per[id] || 0, d = kmOf(id);
+      return `<div class="town ${d <= S.dist ? '' : 'out'}"><span>${esc(c.n)}</span><span class="km">${km(d)}</span><span class="cnt">${n ? n + ' sortie' + (n > 1 ? 's' : '') : '–'}</span></div>`;
+    }).join('');
+    return `<div class="radar-card">
+      <svg viewBox="0 0 340 340" role="img" aria-label="Communes autour de vous, par distance">${rings}${dots}${me}</svg>
+      <div><h3 style="font-family:var(--font-display);font-weight:600;margin:0 0 8px">Communes couvertes</h3><div class="towns">${towns}</div></div>
+    </div>`;
+  }
+
+  function renderFavs() {
+    const evs = EV.filter(e => S.favs.has(e.id) && e.until >= 0).sort((x, y) => x.from - y.from);
+    const fls = FILMS.filter(f => S.favs.has('f-' + f.id));
+    if (!evs.length && !fls.length) return emptyState('Pas encore de favoris', 'Touchez le cœur d\'une sortie pour la retrouver ici.');
+    return `<div class="list two">${fls.map(filmCard).join('')}${evs.map(eventCard).join('')}</div>`;
+  }
+
+  function render() {
+    renderFilters();
+    const events = baseEvents().filter(e => S.cats.has(e.cat));
+    const films = S.cats.has('cinema') ? baseFilms() : [];
+    const total = events.length + films.length;
+    const label = { weekend: 'ce week-end', week: 'cette semaine', month: 'ce mois-ci' }[S.period];
+    $('#summary').innerHTML = S.view === 'fav'
+      ? `Vos <em>favoris</em>`
+      : `<em>${total}</em> sortie${total > 1 ? 's' : ''} ${label}, à moins de ${S.dist} km`;
+    $('#out').innerHTML = S.view === 'map' ? renderMap(events, films) : S.view === 'fav' ? renderFavs() : renderList(events, films);
+    save();
+  }
+
+  // Detail sheet
+  const sheet = $('#sheet');
+  const srcLine = k => `<p class="src">Source : <a href="${SRC[k][1]}" target="_blank" rel="noopener">${esc(SRC[k][0])}</a>. Vérifiez l'horaire auprès de l'organisateur avant de partir.</p>`;
+  function openEvent(id) {
+    const e = EV.find(x => x.id === id), c = C[e.c];
+    const when = e.until > e.from ? `Du ${fmtShort(e.from)} au ${fmtShort(e.until)}` : fmtDay(e.from);
+    sheet.innerHTML = `<div class="sheet-head" style="--c:var(--c-${e.cat})"><div class="badge-ic">${I[e.cat]}</div><div><span class="kicker">${catName(e.cat)}</span><h3 id="sheetTitle">${esc(e.t)}</h3></div></div>
+      <div class="sheet-body">
+        <p>${esc(e.desc)}</p>
+        <div class="rows">
+          <div>${I.cal}<span>${esc(when)} · ${esc(e.h)}</span></div>
+          <div>${I.pin}<span>${esc(e.place)}, ${esc(c.n)} · à ${km(kmOf(e.c))}</span></div>
+          <div>${I.euro}<span>${esc(e.p)}${e.kids ? ' · enfants bienvenus' : ''}</span></div>
+        </div>
+        ${srcLine(e.s)}
+        <div class="sheet-actions"><button type="button" class="btn primary" data-fav-sheet="${e.id}">${S.favs.has(e.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button><button type="button" class="btn ghost" data-close>Fermer</button></div>
+      </div>`;
+    sheet.showModal();
+  }
+  function openFilm(id) {
+    const f = FILMS.find(x => x.id === id);
+    sheet.innerHTML = `<div class="sheet-head" style="--c:var(--c-cinema)"><div class="badge-ic">${I.cinema}</div><div><span class="kicker">${esc(f.g)}${f.dur ? ' · ' + f.dur : ''}</span><h3 id="sheetTitle">${esc(f.t)}</h3></div></div>
+      <div class="sheet-body film">
+        <p>${esc(f.desc)}</p>
+        <div class="shows">${showRows(f)}</div>
+        <p class="src">Source : programmes des cinémas sur AlloCiné, relevés le 19 octobre.</p>
+        <div class="sheet-actions"><button type="button" class="btn primary" data-fav-sheet="f-${f.id}">${S.favs.has('f-' + f.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button><button type="button" class="btn ghost" data-close>Fermer</button></div>
+      </div>`;
+    sheet.showModal();
+  }
+  function openLocation() {
+    const list = ['cugand', 'bernardiere', 'clisson', 'getigne', 'gorges', 'boussay', 'treize', 'pallet', 'montaigu', 'cholet', 'herbiers', 'nantes'];
+    sheet.innerHTML = `<div class="sheet-head"><div class="badge-ic">${I.gps}</div><div><span class="kicker">Ma position</span><h3 id="sheetTitle">D'où partez-vous ?</h3></div></div>
+      <div class="sheet-body">
+        <button type="button" class="btn primary" data-gps>${I.gps.replace('<svg', '<svg width="18" height="18" style="vertical-align:-3px;margin-right:6px"')}Me géolocaliser</button>
+        <p class="src">Ou choisissez une commune :</p>
+        <div class="cats">${list.map(id => `<button type="button" class="cat" data-place="${id}" aria-pressed="${S.pos.name === C[id].n}" style="padding:8px 14px">${esc(C[id].n)}</button>`).join('')}</div>
+        <div class="sheet-actions"><button type="button" class="btn ghost" data-close>Fermer</button></div>
+      </div>`;
+    sheet.showModal();
+  }
+  function locate(manual) {
+    const fail = () => { if (manual) toast('Localisation impossible ici. Autorisez la position dans votre navigateur, ou choisissez votre commune.'); };
+    if (!navigator.geolocation) return fail();
+    try {
+      navigator.geolocation.getCurrentPosition(p => {
+        const { latitude: lat, longitude: lon } = p.coords;
+        S.pos = { name: nearest(lat, lon), lat, lon, gps: true };
+        sheet.open && sheet.close();
+        toast('Position trouvée : ' + S.pos.name);
+        render();
+      }, fail, { timeout: 8000, maximumAge: 600000 });
+    } catch { fail(); }
+  }
+  sheet.addEventListener('click', ev => {
+    if (ev.target === sheet || ev.target.closest('[data-close]')) return sheet.close();
+    const b = ev.target.closest('[data-fav-sheet]');
+    if (b) { toggleFav(b.dataset.favSheet); sheet.close(); return; }
+    if (ev.target.closest('[data-gps]')) return locate(true);
+    const pl = ev.target.closest('[data-place]');
+    if (pl) { const c = C[pl.dataset.place]; S.pos = { name: c.n, lat: c.lat, lon: c.lon, gps: false }; sheet.close(); render(); }
+  });
+
+  function toggleFav(id) {
+    if (S.favs.has(id)) { S.favs.delete(id); toast('Retiré des favoris'); } else { S.favs.add(id); toast('Ajouté aux favoris'); }
+    render();
+  }
+
+  let tt;
+  function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 3800); }
+
+  // Events
+  $('#period').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { S.period = b.dataset.v; render(); } });
+  $('#dist').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { S.dist = +b.dataset.v; render(); } });
+  $('#view').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { S.view = b.dataset.v; render(); } });
+  $('#cats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (!b) return; const k = b.dataset.cat; S.cats.has(k) ? S.cats.delete(k) : S.cats.add(k); render(); });
+  $('#allCats').addEventListener('click', () => { S.cats = new Set(CATS.map(c => c.k)); render(); });
+  $('#noCats').addEventListener('click', () => { S.cats = new Set(); render(); });
+  $('#kids').addEventListener('change', e => { S.kids = e.target.checked; render(); });
+  $('#out').addEventListener('click', e => {
+    const f = e.target.closest('[data-fav]'); if (f) return toggleFav(f.dataset.fav);
+    const o = e.target.closest('[data-open]'); if (o) return openEvent(o.dataset.open);
+    const m = e.target.closest('[data-film]'); if (m) return openFilm(m.dataset.film);
+  });
+  const upd = new Date(UPDATED + 'T00:00');
+  $('#updated span').textContent = 'Mis à jour le ' + upd.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' });
+  $('#locate').addEventListener('click', openLocation);
+
+  render();
+  if (S.pos.gps || !store.get('pos2', null)) locate(false);
+})();
+</script>
+</body>
+</html>

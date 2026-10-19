@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: par-ici
+    runtime: static
+    staticPublishPath: .
+    buildCommand: ""
+    headers:
+      - path: /data.js
+        name: Cache-Control
+        value: no-cache
