@@ -17,7 +17,11 @@ const DT_KEY = process.env.DATATOURISME_KEY || '';
 const OA_SEARCHES = (process.env.OPENAGENDA_SEARCHES || 'Terres de Montaigu,Clisson,Vignoble de Nantes,Cholet,Les Herbiers,Vendée,Loire-Atlantique,Nantes').split(',').map(s => s.trim()).filter(Boolean);
 const OA_PINNED = (process.env.OPENAGENDA_AGENDAS || '').split(',').map(s => s.trim()).filter(Boolean);
 
-const log = (...a) => console.log(...a);
+// Everything logged also goes to scripts/last-run.log, committed so the run can be read back.
+const LOG = [];
+const log = (...a) => { console.log(...a); LOG.push(a.map(x => (typeof x === 'string' ? x : JSON.stringify(x))).join(' ')); };
+// Agendas aimed at professionals, not outings.
+const SKIP_AGENDA = /formation|orientation|chambre d.agriculture|pr[ée]vention|emploi|agri.mouv|entreprise/i;
 
 // ---------- helpers ----------
 const rad = x => x * Math.PI / 180;
@@ -43,16 +47,21 @@ const horizon = isoDay(new Date(now.getTime() + DAYS * 864e5));
 // Category from words in the title, keywords and description. Order matters.
 const CAT_RULES = [
   ['cinema', /\b(cin[ée]ma|cin[ée]-|film|projection|court[s]?-m[ée]trage)/i],
-  ['sport', /\b(course|trail|match|randonn[ée]e|rando\b|marche nordique|tournoi|cross|cyclo|v[ée]lo|foot|basket|hand|rugby|tennis|natation|sport)/i],
+  ['expo', /\b(expo\b|exposition|vernissage|mus[ée]e)/i],
+  ['sport', /\b(course|trail|match|randonn[ée]e|rando\b|marche nordique|tournoi|cross\b|cyclo|v[ée]lo|football|foot\b|basket|handball|rugby|tennis|natation|sport)/i],
   ['marche', /\b(march[ée]|brocante|vide[- ]grenier|bourse|braderie|foire|salon|vide[- ]dressing|vide[- ]biblioth)/i],
   ['concert', /\b(concert|musique|musical|chorale|chant|jazz|rock|orchestre|fanfare|dj|r[ée]cital|festival)/i],
-  ['expo', /\b(expo|exposition|mus[ée]e|visite|patrimoine|galerie|vernissage)/i],
+  ['expo', /\b(visite|patrimoine|galerie)/i],
   ['spectacle', /\b(th[ée][âa]tre|spectacle|conte|danse|cirque|humour|one[- ]man|marionnette|lecture|impro|cabaret|op[ée]ra)/i],
   ['famille', /./]
 ];
 const KIDS_RE = /\b(enfant|famille|familial|jeune public|d[èe]s \d+ ans|ados?\b|b[ée]b[ée]|kids?|parent)/i;
 const FREE_RE = /\b(gratuit|entr[ée]e libre|libre et gratuit|acc[èe]s libre)/i;
-const categorize = text => CAT_RULES.find(([, re]) => re.test(text))[0];
+// The title decides first; keywords and description only when the title says nothing.
+const categorize = (title, rest) => {
+  const hit = CAT_RULES.slice(0, -1).find(([, re]) => re.test(title));
+  return hit ? hit[0] : CAT_RULES.find(([, re]) => re.test(rest))[0];
+};
 
 // ---------- base data from the hand-made version ----------
 function loadBase() {
@@ -66,7 +75,7 @@ function loadBase() {
 // { title, desc, start: Date, end: Date, dates: ['YYYY-MM-DD'...], place, city, lat, lon, price, kids, url, source, words }
 function toEvent(ev) {
   const text = `${ev.title} ${ev.words || ''} ${ev.desc}`;
-  return { ...ev, cat: categorize(text), kids: ev.kids ?? KIDS_RE.test(text) };
+  return { ...ev, cat: categorize(ev.title, `${ev.words || ''} ${ev.desc}`), kids: ev.kids ?? KIDS_RE.test(text) };
 }
 
 // ---------- OpenAgenda ----------
@@ -81,7 +90,7 @@ async function openAgenda() {
   for (const q of OA_SEARCHES) {
     try {
       const r = await oaGet(`https://api.openagenda.com/v2/agendas?search=${encodeURIComponent(q)}&size=10`);
-      for (const a of r.agendas || []) if (!agendas.has(String(a.uid))) agendas.set(String(a.uid), { uid: String(a.uid), title: a.title, slug: a.slug });
+      for (const a of r.agendas || []) if (!agendas.has(String(a.uid)) && !SKIP_AGENDA.test(a.title || '')) agendas.set(String(a.uid), { uid: String(a.uid), title: a.title, slug: a.slug });
     } catch (e) { log('  recherche', q, '→', e.message); }
   }
   log(`OpenAgenda: ${agendas.size} agendas candidats`);
@@ -141,10 +150,11 @@ async function dataTourisme() {
   let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr`;
   for (let page = 0; page < 30 && url; page++) {
     const res = await fetch(url, { headers: { 'X-API-Key': DT_KEY, accept: 'application/json' } });
-    if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 300)}`); break; }
+    if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 500)}`); break; }
+    log(`DATAtourisme page ${page + 1}: HTTP ${res.status}`);
     const body = await res.json();
     const items = body.objects || body.results || body.data || body['@graph'] || (Array.isArray(body) ? body : []);
-    if (page === 0) log('DATAtourisme: exemple d\'objet →', JSON.stringify(items[0] || body).slice(0, 1200));
+    if (page === 0) log('DATAtourisme: clés de la réponse →', Object.keys(body).join(', '), '| exemple →', JSON.stringify(items[0] || body).slice(0, 2500));
     for (const it of items) {
       const starts = findAll(it, /^(schema:)?startDate$/).flat().map(String);
       const ends = findAll(it, /^(schema:)?endDate$/).flat().map(String);
@@ -187,7 +197,8 @@ function build(events, base) {
   const seen = new Set();
   const EV = [], SRC = {};
   // A few separate dates become one card per date; many dates (an expo open daily) become one ranged card.
-  const occurrences = events.flatMap(e => (e.timings.length <= 6
+  const consecutive = t => t.length > 2 && t.every((x, i) => !i || (new Date(isoDay(x.b)) - new Date(isoDay(t[i - 1].b))) / 864e5 <= 1);
+  const occurrences = events.flatMap(e => (e.timings.length <= 6 && !consecutive(e.timings)
     ? e.timings.map(t => ({ ...e, timings: [t], ranged: false }))
     : [{ ...e, ranged: true }]));
   for (const e of occurrences.sort((a, b) => a.timings[0].b - b.timings[0].b)) {
@@ -254,3 +265,4 @@ log(`Terminé : ${count} événements écrits dans public/auto/data.js (${today}
 const byCat = {};
 for (const m of js.matchAll(/"cat": "(\w+)"/g)) byCat[m[1]] = (byCat[m[1]] || 0) + 1;
 log('Par catégorie :', JSON.stringify(byCat));
+fs.writeFileSync(path.join(ROOT, 'scripts/last-run.log'), LOG.join('\n') + '\n');
