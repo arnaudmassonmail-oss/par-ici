@@ -22,6 +22,10 @@ const LOG = [];
 const log = (...a) => { console.log(...a); LOG.push(a.map(x => (typeof x === 'string' ? x : JSON.stringify(x))).join(' ')); };
 // Agendas aimed at professionals, not outings.
 const SKIP_AGENDA = /formation|orientation|chambre d.agriculture|pr[ée]vention|emploi|agri.mouv|entreprise/i;
+// Titles that are not outings.
+const SKIP_TITLE = /c.est quoi ton entreprise|job ?dating|recrutement|conseil municipal|r[ée]union publique|assembl[ée]e g[ée]n[ée]rale|formation professionnelle/i;
+// Ongoing listings (a market "from 2018 to 2030") are not dated outings.
+const MAX_SPAN_DAYS = 90;
 
 // ---------- helpers ----------
 const rad = x => x * Math.PI / 180;
@@ -206,7 +210,7 @@ function build(events, base) {
   const occurrences = events.flatMap(e => (e.timings.length <= 6 && !consecutive(e.timings)
     ? e.timings.map(t => ({ ...e, timings: [t], ranged: false }))
     : [{ ...e, ranged: true }]));
-  for (const e of occurrences.sort((a, b) => a.timings[0].b - b.timings[0].b)) {
+  for (const e of occurrences.sort((a, b) => isoDay(a.timings[0].b).localeCompare(isoDay(b.timings[0].b)))) {
     const id = slug(e.title).slice(0, 40) + isoDay(e.timings[0].b);
     if (!e.title || seen.has(id)) continue;
     seen.add(id);
@@ -257,10 +261,38 @@ function buildPage() {
   return html;
 }
 
+// DATAtourisme has shipped dates shifted by one day. Measure the shift on events that
+// OpenAgenda also lists (same title), and correct DATAtourisme dates when most agree.
+function fixDataTourismeShift(oa, dt) {
+  const oaDays = new Map(oa.map(e => [slug(e.title).slice(0, 30), isoDay(e.timings[0].b)]));
+  const diffs = {};
+  for (const e of dt) {
+    const d = oaDays.get(slug(e.title).slice(0, 30));
+    if (!d) continue;
+    const diff = Math.round((new Date(d) - new Date(isoDay(e.timings[0].b))) / 864e5);
+    diffs[diff] = (diffs[diff] || 0) + 1;
+  }
+  log('DATAtourisme: écart de dates mesuré sur les événements communs →', JSON.stringify(diffs));
+  const [shift, n] = Object.entries(diffs).sort((a, b) => b[1] - a[1])[0] || ['0', 0];
+  const total = Object.values(diffs).reduce((a, b) => a + b, 0);
+  if (+shift !== 0 && n >= 3 && n / total >= 0.6) {
+    log(`DATAtourisme: dates corrigées de ${shift} jour(s)`);
+    const ms = +shift * 864e5;
+    for (const e of dt) e.timings = e.timings.map(t => ({ b: new Date(+t.b + ms), e: new Date(+t.e + ms) }));
+  }
+}
+
 const base = loadBase();
-const results = (await Promise.allSettled([openAgenda(), dataTourisme()]));
-results.filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
-const events = results.flatMap(r => (r.status === 'fulfilled' ? r.value : []));
+const [oaRes, dtRes] = await Promise.allSettled([openAgenda(), dataTourisme()]);
+[oaRes, dtRes].filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
+const oaEvents = oaRes.status === 'fulfilled' ? oaRes.value : [];
+const dtEvents = dtRes.status === 'fulfilled' ? dtRes.value : [];
+fixDataTourismeShift(oaEvents, dtEvents);
+// OpenAgenda first, so its version wins the deduplication.
+const events = [...oaEvents, ...dtEvents].filter(e => {
+  const span = (e.timings[e.timings.length - 1].e - e.timings[0].b) / 864e5;
+  return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
+});
 const { js, count } = build(events, base);
 const dir = path.join(ROOT, 'public/auto');
 fs.mkdirSync(dir, { recursive: true });
