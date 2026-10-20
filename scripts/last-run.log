@@ -4,12 +4,12 @@ DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCove
 DATAtourisme page 2: HTTP 200
 OpenAgenda: 61 agendas candidats
 DATAtourisme page 3: HTTP 200
+DATAtourisme page 4: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
-DATAtourisme page 4: HTTP 200
 DATAtourisme page 5: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 36 événements lus, 0 à moins de 50 km
 DATAtourisme page 6: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 36 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
