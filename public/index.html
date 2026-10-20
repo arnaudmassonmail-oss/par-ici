@@ -410,7 +410,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 
   // Rendering pieces
   const isFree = p => /^(Gratuit|Entrée libre)/.test(p);
-  const imgUrl = u => u.replace(/^~/, 'https://cdn.openagenda.com/main/');
+  const imgUrl = u => u.replace(/^~/, 'https://img.openagenda.com/main/');
   function eventCard(e) {
     const commune = C[e.c];
     const multi = e.until > e.from;

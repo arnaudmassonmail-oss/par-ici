@@ -10,7 +10,7 @@ const HOME = { lat: 47.0603, lon: -1.2525 }; // Cugand
 const RADIUS_KM = 50;
 const DAYS = 31;
 const TZ = 'Europe/Paris';
-const OA_CDN = 'https://cdn.openagenda.com/main/';
+const OA_CDN = 'https://img.openagenda.com/main/';
 
 const OA_KEY = process.env.OPENAGENDA_KEY || '';
 const DT_KEY = process.env.DATATOURISME_KEY || '';
@@ -100,7 +100,7 @@ function oaImage(e) {
   if (!im) return {};
   if (!oaImageLogged) { oaImageLogged = true; log('OpenAgenda: exemple d\'image →', JSON.stringify({ image: im, imageCredits: e.imageCredits }).slice(0, 600)); }
   if (typeof im === 'string') return { img: im, imgL: im };
-  const base = im.base || 'https://cdn.openagenda.com/main/';
+  const base = im.base || OA_CDN;
   const full = im.filename ? base + im.filename : '';
   const thumb = (im.variants || []).find(v => /thumb/i.test(v.type || ''))?.filename;
   return { img: thumb ? base + thumb : full, imgL: full, credit: strip(fr(e.imageCredits)) };
@@ -168,9 +168,11 @@ function findAll(obj, keyRe, acc = [], depth = 0) {
 }
 const first = (obj, re) => { const v = findAll(obj, re)[0]; return Array.isArray(v) ? v[0] : v; };
 // DATAtourisme image: the first picture URL found under hasMainRepresentation.
+let dtImageLogged = false;
 function dtImage(it) {
-  const rep = it.hasMainRepresentation;
+  const rep = it.hasMainRepresentation || it.hasRepresentation;
   if (!rep) return {};
+  if (!dtImageLogged) { dtImageLogged = true; log('DATAtourisme: exemple d\'image →', JSON.stringify(rep).slice(0, 800)); }
   const url = findAll(rep, /locator$/i).flat().map(String).find(u => /^https?:\/\/.+\.(jpe?g|png|webp)(\?|$)/i.test(u))
     || findAll(rep, /locator$/i).flat().map(String).find(u => /^https?:\/\//.test(u));
   if (!url) return {};
@@ -180,7 +182,7 @@ async function dataTourisme() {
   if (!DT_KEY) { log('DATAtourisme: pas de clé DATATOURISME_KEY, source ignorée.'); return []; }
   const out = [];
   let noDate = 0;
-  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers,hasMainRepresentation`;
+  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers,hasMainRepresentation,hasRepresentation`;
   for (let page = 0; page < 30 && url; page++) {
     const res = await fetch(url, { headers: { 'X-API-Key': DT_KEY, accept: 'application/json' } });
     if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 500)}`); break; }
