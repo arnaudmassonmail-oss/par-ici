@@ -166,7 +166,8 @@ const FILMS = [
 
 // Official posters for events whose source gives no photo. `page` is the organiser's or venue's
 // own page for the event; the nightly collection reads the preview image that page declares.
-// With `find`, `page` is a listing (a town agenda) and the image is the one shown just before that title.
+// With `find`, `page` is a listing (a town agenda) and the image is the one shown next to that title.
+// With `img`, the image address was copied by hand from a site the collection cannot open (Vendée Tourisme).
 const POSTERS = [
   { t: 'Kanine Parjure', d: '2026-10-24', c: 'montaigu', page: 'https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/', credit: 'Affiche : Le Zinor' },
   { t: 'Hors des sentiers battus', d: '2026-10-07', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Hors des sentiers battus', credit: 'Image : mairie de Gétigné' },
