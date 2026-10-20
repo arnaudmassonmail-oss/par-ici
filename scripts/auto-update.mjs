@@ -182,7 +182,7 @@ async function dataTourisme() {
   if (!DT_KEY) { log('DATAtourisme: pas de clé DATATOURISME_KEY, source ignorée.'); return []; }
   const out = [];
   let noDate = 0;
-  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers,hasMainRepresentation,hasRepresentation`;
+  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers,hasMainRepresentation,hasRepresentation,identifier`;
   for (let page = 0; page < 30 && url; page++) {
     const res = await fetch(url, { headers: { 'X-API-Key': DT_KEY, accept: 'application/json' } });
     if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 500)}`); break; }
@@ -208,7 +208,7 @@ async function dataTourisme() {
         place: strip(fr(first(it, /^(schema:)?(name|legalName)$/) || '')).slice(0, 80),
         city: strip(fr(first(it, /^(schema:)?addressLocality$/) || '')), lat, lon,
         price: strip(fr(first(it, /^additionalInformation$/) || '')), types,
-        ...dtImage(it),
+        ...dtImage(it), dtId: String(first(it, /^(dc:)?identifier$/) || ''),
         url: String(it.uri || it['@id'] || 'https://www.datatourisme.fr/'),
         source: 'DATAtourisme'
       }));
@@ -411,6 +411,32 @@ const dtEvents = dtRes.status === 'fulfilled' ? dtRes.value : [];
 fixDataTourismeShift(oaEvents, dtEvents);
 // OpenAgenda first, so its version wins the deduplication.
 // A DATAtourisme event OpenAgenda already lists on the same day is a duplicate.
+// Vendée Tourisme publishes the pictures DATAtourisme leaves out. Its event pages end with the same
+// record code (FMAPDL085…): open the page and keep its preview image if the page is about that event.
+async function vendeeTourismeImages(list) {
+  const todo = list.filter(e => !e.img && /^FMAPDL085/i.test(e.dtId || ''));
+  let found = 0;
+  for (let i = 0; i < todo.length; i += 6) {
+    await Promise.all(todo.slice(i, i + 6).map(async e => {
+      const slugify = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const url = `https://www.vendee-tourisme.com/agenda-des-sorties-et-evenements-en-vendee/${slugify(e.title)}/${slugify(e.city || 'vendee')}/${e.dtId.toLowerCase()}`;
+      try {
+        const r = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } });
+        if (!r.ok) return;
+        const html = await r.text();
+        const pageTitle = (html.match(/<meta[^>]+property=["']og:title["'][^>]*content=["']([^"']+)["']/i) || html.match(/<title>([^<]+)<\/title>/i) || [])[1] || '';
+        const A = words(e.title), B = words(pageTitle);
+        let n = 0;
+        for (const w of A) if (B.has(w)) n++;
+        const img = A.size && n / A.size >= 0.6 && previewImage(html);
+        if (img && !SKIP_IMG.test(img)) { e.img = e.imgL = new URL(img.replace(/&amp;/g, '&'), url).href; e.credit = 'Vendée Tourisme'; found++; }
+      } catch {}
+    }));
+  }
+  log(`Images Vendée Tourisme : ${found} sur ${todo.length} sorties vendéennes sans photo`);
+}
+await vendeeTourismeImages(dtEvents);
+
 const dtOnly = dtEvents.filter(e => !oaEvents.some(o => dayGap(o, e) === 0 && similar(o, e)));
 log(`Doublons DATAtourisme retirés : ${dtEvents.length - dtOnly.length}`);
 const events = [...oaEvents, ...dtOnly].filter(e => {
