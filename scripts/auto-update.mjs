@@ -10,6 +10,7 @@ const HOME = { lat: 47.0603, lon: -1.2525 }; // Cugand
 const RADIUS_KM = 50;
 const DAYS = 31;
 const TZ = 'Europe/Paris';
+const OA_CDN = 'https://cdn.openagenda.com/main/';
 
 const OA_KEY = process.env.OPENAGENDA_KEY || '';
 const DT_KEY = process.env.DATATOURISME_KEY || '';
@@ -92,6 +93,19 @@ async function oaGet(url) {
   if (!res.ok) throw new Error(`OpenAgenda ${res.status} ${url.replace(OA_KEY, '***')}: ${(await res.text()).slice(0, 200)}`);
   return res.json();
 }
+// OpenAgenda image: { base, filename, variants: [{ filename, type }] } or a plain URL.
+let oaImageLogged = false;
+function oaImage(e) {
+  const im = e.image;
+  if (!im) return {};
+  if (!oaImageLogged) { oaImageLogged = true; log('OpenAgenda: exemple d\'image →', JSON.stringify({ image: im, imageCredits: e.imageCredits }).slice(0, 600)); }
+  if (typeof im === 'string') return { img: im, imgL: im };
+  const base = im.base || 'https://cdn.openagenda.com/main/';
+  const full = im.filename ? base + im.filename : '';
+  const thumb = (im.variants || []).find(v => /thumb/i.test(v.type || ''))?.filename;
+  return { img: thumb ? base + thumb : full, imgL: full, credit: strip(fr(e.imageCredits)) };
+}
+
 async function openAgenda() {
   if (!OA_KEY) { log('OpenAgenda: pas de clé OPENAGENDA_KEY, source ignorée.'); return []; }
   const agendas = new Map(OA_PINNED.map(uid => [uid, { uid, title: uid, slug: '' }]));
@@ -128,6 +142,7 @@ async function openAgenda() {
           timings, place: loc.name || '', city: loc.city || '', lat: loc.latitude, lon: loc.longitude,
           price: strip(fr(e.conditions)), words: kw,
           kids: (typeof age.min === 'number' && age.min <= 12) || undefined,
+          ...oaImage(e),
           url: `https://openagenda.com/${a.slug || 'agendas/' + a.uid}/events/${e.slug || e.uid}`,
           source: `OpenAgenda · ${strip(fr(a.title))}`
         }));
@@ -152,11 +167,20 @@ function findAll(obj, keyRe, acc = [], depth = 0) {
   return acc;
 }
 const first = (obj, re) => { const v = findAll(obj, re)[0]; return Array.isArray(v) ? v[0] : v; };
+// DATAtourisme image: the first picture URL found under hasMainRepresentation.
+function dtImage(it) {
+  const rep = it.hasMainRepresentation;
+  if (!rep) return {};
+  const url = findAll(rep, /locator$/i).flat().map(String).find(u => /^https?:\/\/.+\.(jpe?g|png|webp)(\?|$)/i.test(u))
+    || findAll(rep, /locator$/i).flat().map(String).find(u => /^https?:\/\//.test(u));
+  if (!url) return {};
+  return { img: url, imgL: url, credit: strip(fr(first(rep, /credits?$/i) || '')) };
+}
 async function dataTourisme() {
   if (!DT_KEY) { log('DATAtourisme: pas de clé DATATOURISME_KEY, source ignorée.'); return []; }
   const out = [];
   let noDate = 0;
-  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers`;
+  let url = `https://api.datatourisme.fr/v1/entertainmentAndEvent?geo_distance=${HOME.lat},${HOME.lon},${RADIUS_KM}km&page_size=100&lang=fr&fields=uuid,uri,label,type,isLocatedAt,takesPlaceAt,hasDescription,offers,hasMainRepresentation`;
   for (let page = 0; page < 30 && url; page++) {
     const res = await fetch(url, { headers: { 'X-API-Key': DT_KEY, accept: 'application/json' } });
     if (!res.ok) { log(`DATAtourisme ${res.status}: ${(await res.text()).slice(0, 500)}`); break; }
@@ -182,6 +206,7 @@ async function dataTourisme() {
         place: strip(fr(first(it, /^(schema:)?(name|legalName)$/) || '')).slice(0, 80),
         city: strip(fr(first(it, /^(schema:)?addressLocality$/) || '')), lat, lon,
         price: strip(fr(first(it, /^additionalInformation$/) || '')), types,
+        ...dtImage(it),
         url: String(it.uri || it['@id'] || 'https://www.datatourisme.fr/'),
         source: 'DATAtourisme'
       }));
@@ -225,7 +250,11 @@ function build(events, base) {
     EV.push({
       cat: e.cat, t: cut(e.title, 90), c: keyFor(e.city, e.lat, e.lon), d, ...(to !== d ? { to } : {}),
       h, p: free ? 'Gratuit' : (e.price ? cut(e.price, 40) : 'Voir la fiche'), ...(e.kids ? { kids: true } : {}),
-      place: e.place || e.city, desc: e.desc || 'Voir la fiche de l\'événement.', s
+      place: e.place || e.city, desc: e.desc || 'Voir la fiche de l\'événement.', s,
+      // OpenAgenda images share one CDN prefix; '~' keeps auto.js small, the page expands it.
+      ...(e.img ? { img: e.img.replace(OA_CDN, '~') } : {}),
+      ...(e.imgL && e.imgL !== e.img ? { imgL: e.imgL.replace(OA_CDN, '~') } : {}),
+      ...(e.credit ? { credit: cut(e.credit, 80) } : {})
     });
   }
   // Only communes the hand-made data.js does not already know.
@@ -285,4 +314,5 @@ log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} 
 const byCat = {};
 for (const e of EV) byCat[e.cat] = (byCat[e.cat] || 0) + 1;
 log('Par catégorie :', JSON.stringify(byCat));
+log(`Avec photo : ${EV.filter(e => e.img).length} sur ${EV.length}`);
 fs.writeFileSync(path.join(ROOT, 'scripts/last-run.log'), LOG.join('\n') + '\n');
