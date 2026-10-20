@@ -19,10 +19,10 @@ DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
   Quinzaine de la transmission: 23 événements lus, 2 à moins de 50 km
   Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
   Île de Nantes: 95 événements lus, 95 à moins de 50 km
-  Nantes Nord: 34 événements lus, 34 à moins de 50 km
-  Nantes Sud: 32 événements lus, 32 à moins de 50 km
+  Nantes Nord: 33 événements lus, 33 à moins de 50 km
+  Nantes Sud: 35 événements lus, 35 à moins de 50 km
   Nantes Erdre: 44 événements lus, 44 à moins de 50 km
-  Nantes Métropole: 807 événements lus, 804 à moins de 50 km
+  Nantes Métropole: 818 événements lus, 815 à moins de 50 km
   Sports à Nantes: 2 événements lus, 1 à moins de 50 km
   Musée d'arts de Nantes: 23 événements lus, 23 à moins de 50 km
   Bibliothèque municipale de Nantes: 73 événements lus, 73 à moins de 50 km
@@ -31,12 +31,14 @@ DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
   Saison Culturelle des Herbiers: 2 événements lus, 2 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 2 événements lus, 2 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
+  Département de la Vendée: 35 événements lus, 35 à moins de 50 km
   La Compagnie de la Hulotte: 11 événements lus, 1 à moins de 50 km
   Agenda du Patrimoine: 2 événements lus, 2 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 3 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"1":8}
 DATAtourisme: dates corrigées de 1 jour(s)
 Doublons DATAtourisme retirés : 8
-Terminé : 1820 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
-Par catégorie : {"expo":237,"marche":184,"sport":276,"concert":238,"famille":490,"spectacle":343,"cinema":52}
-Avec photo : 1097 sur 1820
+Affiche Kanine Parjure → aucune image déclarée par https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 200)
+Terminé : 1833 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
+Par catégorie : {"expo":240,"marche":184,"sport":276,"concert":240,"famille":497,"spectacle":344,"cinema":52}
+Avec photo : 1110 sur 1833
