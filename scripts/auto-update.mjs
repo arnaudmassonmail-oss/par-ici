@@ -72,7 +72,7 @@ const categorize = (title, rest) => {
 function loadBase() {
   const code = fs.readFileSync(path.join(ROOT, 'public/data.js'), 'utf8');
   const ctx = {};
-  vm.runInNewContext(code + '\n;Object.assign(this, { C, MARKETS });', ctx);
+  vm.runInNewContext(code + '\n;Object.assign(this, { C, MARKETS, EV });', ctx);
   return ctx;
 }
 
@@ -220,7 +220,7 @@ async function dataTourisme() {
 }
 
 // ---------- build data.js ----------
-function build(events, base) {
+function build(events, base, PHOTOS) {
   const C = { ...base.C };
   const keyFor = (city, lat, lon) => {
     const k = slug(city || 'lieu');
@@ -263,7 +263,7 @@ function build(events, base) {
   const newC = Object.fromEntries(Object.entries(C).filter(([k]) => !base.C[k]));
   const js = `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
 // Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
-const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV })};
+const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, PHOTOS })};
 `;
   return { js, EV };
 }
@@ -296,6 +296,42 @@ function fixDataTourismeShift(oa, dt) {
   }
 }
 
+// ---------- Place photos (Wikipedia / Wikimedia Commons, free licences) ----------
+// One photo per commune, plus places named with `wiki:` in data.js (e.g. 'Château de Clisson').
+// The article is accepted only if Wikipedia places it within 5 km of the expected spot.
+const WIKI_THUMB = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';
+async function wikiPhoto(titles, lat, lon) {
+  const u = new URL('https://fr.wikipedia.org/w/api.php');
+  Object.entries({ action: 'query', format: 'json', redirects: '1', prop: 'pageimages|coordinates', piprop: 'thumbnail|name', pithumbsize: '480', titles: titles.join('|') })
+    .forEach(([k, v]) => u.searchParams.set(k, v));
+  const res = await fetch(u, { headers: { 'user-agent': 'ParIciSorties/1.0 (https://par-ici.onrender.com)' } });
+  if (!res.ok) throw new Error('Wikipedia ' + res.status);
+  const pages = Object.values((await res.json()).query?.pages || {});
+  const ok = pages.find(pg => pg.thumbnail && pg.pageimage && (!pg.coordinates || distKmFrom(lat, lon, pg.coordinates[0].lat, pg.coordinates[0].lon) < 5));
+  return ok ? [ok.thumbnail.source.replace(WIKI_THUMB, '^'), ok.pageimage, ok.title] : null;
+}
+function distKmFrom(lat1, lon1, lat2, lon2) {
+  return 6371 * Math.hypot(rad(lat2 - lat1), rad(lon2 - lon1) * Math.cos(rad(lat1)));
+}
+async function placePhotos(base, events) {
+  const PHOTOS = {};
+  const communes = new Map(Object.entries(base.C));
+  for (const e of events) if (e.city) communes.set(slug(e.city), { n: e.city, lat: e.lat, lon: e.lon });
+  const depts = ['', ' (Vendée)', ' (Loire-Atlantique)', ' (Maine-et-Loire)', ' (Deux-Sèvres)'];
+  let found = 0, tried = 0;
+  for (const [k, c] of communes) {
+    if (distKm(c.lat, c.lon) > RADIUS_KM + 5) continue;
+    tried++;
+    try { const p = await wikiPhoto(depts.map(d => c.n + d), c.lat, c.lon); if (p) { PHOTOS[k] = p; found++; } } catch (err) { log('  photo', c.n, '→', err.message); }
+  }
+  for (const e of base.EV.filter(e => e.wiki)) {
+    const c = base.C[e.c];
+    try { const p = await wikiPhoto([e.wiki], c.lat, c.lon); if (p) PHOTOS['w:' + e.wiki] = p; else log('  pas de photo pour', e.wiki); } catch (err) { log('  photo', e.wiki, '→', err.message); }
+  }
+  log(`Photos de lieux (Wikipédia) : ${found} communes sur ${tried}, ${Object.keys(PHOTOS).filter(k => k.startsWith('w:')).length} lieux nommés`);
+  return PHOTOS;
+}
+
 const base = loadBase();
 const [oaRes, dtRes] = await Promise.allSettled([openAgenda(), dataTourisme()]);
 [oaRes, dtRes].filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
@@ -310,7 +346,8 @@ const events = [...oaEvents, ...dtOnly].filter(e => {
   const span = (e.timings[e.timings.length - 1].e - e.timings[0].b) / 864e5;
   return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
 });
-const { js, EV } = build(events, base);
+const PHOTOS = await placePhotos(base, events);
+const { js, EV } = build(events, base, PHOTOS);
 fs.writeFileSync(path.join(ROOT, 'public/auto.js'), js);
 log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} → ${horizon}).`);
 const byCat = {};

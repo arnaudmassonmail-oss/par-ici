@@ -133,6 +133,7 @@ button.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mi
 .badge-ic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sheet-img { display: block; width: 100%; max-height: 260px; object-fit: cover; background: var(--surface-2); }
 .credit { font-size: 11px; color: var(--muted); }
+.credit a { color: inherit; }
 .badge-ic svg { width: 26px; height: 26px; }
 button.badge-ic { border: 0; padding: 0; cursor: pointer; }
 .card .body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
@@ -411,12 +412,23 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   // Rendering pieces
   const isFree = p => /^(Gratuit|Entrée libre)/.test(p);
   const imgUrl = u => u.replace(/^~/, 'https://img.openagenda.com/main/');
+  const wikiUrl = u => u.replace(/^\^/, 'https://upload.wikimedia.org/wikipedia/commons/thumb/');
+  const PHOTOS = (typeof AUTO !== 'undefined' && AUTO.PHOTOS) || {};
+  // The event's own photo first; otherwise a free photo of the named place, then of the commune.
+  function photoOf(e) {
+    if (e.img) return { thumb: imgUrl(e.img), big: imgUrl(e.imgL || e.img), credit: 'Photo : ' + esc(e.credit || 'fournie par la source de l\'événement') };
+    const place = e.wiki && PHOTOS['w:' + e.wiki];
+    const p = place || PHOTOS[e.c];
+    if (!p) return null;
+    const file = `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p[1])}`;
+    return { thumb: wikiUrl(p[0]), big: wikiUrl(p[0]), credit: `Photo du lieu (${esc(place ? p[2] : C[e.c].n)}) : <a href="${file}" target="_blank" rel="noopener">Wikimedia Commons</a>` };
+  }
   function eventCard(e) {
     const commune = C[e.c];
     const multi = e.until > e.from;
     const when = multi ? `Jusqu'au ${fmtShort(e.until)}` : e.h;
     return `<div class="card" style="--c:var(--c-${e.cat})">
-      <button type="button" class="badge-ic" data-open="${e.id}" aria-label="Voir ${esc(e.t)}">${I[e.cat]}${e.img ? `<img src="${esc(imgUrl(e.img))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</button>
+      <button type="button" class="badge-ic" data-open="${e.id}" aria-label="Voir ${esc(e.t)}">${I[e.cat]}${(ph => ph ? `<img src="${esc(ph.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '')(photoOf(e))}</button>
       <button type="button" class="body" data-open="${e.id}" style="border:0;background:none;padding:0;text-align:left">
         <span class="kicker">${catName(e.cat)}</span>
         <h4>${esc(e.t)}</h4>
@@ -540,8 +552,8 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   function openEvent(id) {
     const e = EV.find(x => x.id === id), c = C[e.c];
     const when = e.until > e.from ? `Du ${fmtShort(e.from)} au ${fmtShort(e.until)}` : fmtDay(e.from);
-    const photo = e.imgL || e.img;
-    sheet.innerHTML = `${photo ? `<img class="sheet-img" src="${esc(imgUrl(photo))}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div class="sheet-head" style="--c:var(--c-${e.cat})"><div class="badge-ic">${I[e.cat]}</div><div><span class="kicker">${catName(e.cat)}</span><h3 id="sheetTitle">${esc(e.t)}</h3></div></div>
+    const photo = photoOf(e);
+    sheet.innerHTML = `${photo ? `<img class="sheet-img" src="${esc(photo.big)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div class="sheet-head" style="--c:var(--c-${e.cat})"><div class="badge-ic">${I[e.cat]}</div><div><span class="kicker">${catName(e.cat)}</span><h3 id="sheetTitle">${esc(e.t)}</h3></div></div>
       <div class="sheet-body">
         <p>${esc(e.desc)}</p>
         <div class="rows">
@@ -549,7 +561,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
           <div>${I.pin}<span>${esc(e.place)}, ${esc(c.n)} · à ${km(kmOf(e.c))}</span></div>
           <div>${I.euro}<span>${esc(e.p)}${e.kids ? ' · enfants bienvenus' : ''}</span></div>
         </div>
-        ${photo ? `<p class="credit">Photo : ${esc(e.credit || 'fournie par la source de l\'événement')}</p>` : ''}
+        ${photo ? `<p class="credit">${photo.credit}</p>` : ''}
         ${srcLine(e.s)}
         <div class="sheet-actions"><button type="button" class="btn primary" data-fav-sheet="${e.id}">${S.favs.has(e.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button><button type="button" class="btn ghost" data-close>Fermer</button></div>
       </div>`;
