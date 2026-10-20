@@ -432,7 +432,7 @@ async function vendeeTourismeImages(list) {
         for (const w of A) if (B.has(w)) n++;
         const img = A.size && n / A.size >= 0.6 && previewImage(html);
         if (img && !SKIP_IMG.test(img)) { e.img = e.imgL = new URL(img.replace(/&amp;/g, '&'), url).href; e.credit = 'Vendée Tourisme'; found++; }
-      } catch {}
+      } catch (err) { if (tries++ < 3) log('  Vendée Tourisme erreur', url, '→', err.message, err.cause?.code || ''); }
     }));
   }
   log(`Images Vendée Tourisme : ${found} sur ${todo.length} sorties vendéennes sans photo`);
