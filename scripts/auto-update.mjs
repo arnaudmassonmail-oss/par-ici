@@ -364,7 +364,8 @@ async function sourceImages(base) {
     let n = 0;
     for (const w of A) if (B.has(w)) n++;
     const img = (A.size && n / A.size >= 0.6 && previewImage(html)) || imageNear(html, e.t);
-    if (img && !SKIP_IMG.test(img)) { out[e.t + '|' + e.d] = new URL(img.replace(/&amp;/g, '&'), url).href; found++; }
+    // JDS puts generic stock pictures on its listings; "ad-…" files are advertisements.
+    if (img && !SKIP_IMG.test(img) && !/(^|\/)ad[-_]|advert|publicite/i.test(img) && !/(^|\.)jds\.fr$/.test(new URL(url).hostname)) { out[e.t + '|' + e.d] = new URL(img.replace(/&amp;/g, '&'), url).href; found++; }
   }
   log(`Images des sources manuelles : ${found} sur ${base.EV.length} sorties (${pages.size} pages lues)`);
   return out;
