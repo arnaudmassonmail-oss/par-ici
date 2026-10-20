@@ -320,16 +320,24 @@ function previewImage(html) {
     || html.match(/<img[^>]+src=["']([^"']+)["'][^>]*class=["'][^"']*wp-post-image/i);
   return m && m[1];
 }
-// On a listing page (a town agenda), the event's image is the last picture before its title.
+// On a listing page (a town agenda), the event's image is the picture closest to its title.
+// The title can appear several times in a card (link text, heading), before or after the image.
 function imageNear(html, title) {
+  const clean = html.replace(/&#0?39;|&rsquo;|&#8217;|’/g, "'").replace(/&amp;/g, '&');
   const norm = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-  const text = norm(html.replace(/&#0?39;|&rsquo;|&#8217;|’/g, "'").replace(/&amp;/g, '&'));
-  const at = text.indexOf(norm(title).replace(/’/g, "'"));
-  if (at < 0) return null;
-  const before = html.slice(Math.max(0, at - 6000), at);
-  const pics = [...before.matchAll(/(?:data-src|src)=["']([^"']+\.(?:jpe?g|png|webp)(?:\?[^"']*)?)["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
-    .map(m => m[1] || m[2]).filter(u => !/logo|icon|sprite|picto/i.test(u));
-  return pics.length ? pics[pics.length - 1] : null;
+  const text = norm(clean), want = norm(title.replace(/’/g, "'"));
+  const hits = [];
+  for (let i = text.indexOf(want); i >= 0; i = text.indexOf(want, i + 1)) hits.push(i);
+  if (!hits.length) return null;
+  const pics = [...clean.matchAll(/(?:data-src|src)=["']([^"']+\.(?:jpe?g|png|webp)(?:\?[^"']*)?)["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
+    .map(m => ({ url: m[1] || m[2], at: m.index }))
+    .filter(p => !/logo|icon|sprite|picto|header/i.test(p.url));
+  let best = null, bestGap = 2500;
+  for (const p of pics) for (const h of hits) {
+    const gap = Math.abs(p.at - h);
+    if (gap < bestGap) { best = p.url; bestGap = gap; }
+  }
+  return best;
 }
 
 const base = loadBase();
