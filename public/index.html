@@ -133,7 +133,6 @@ button.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mi
 .badge-ic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sheet-img { display: block; width: 100%; max-height: 260px; object-fit: cover; background: var(--surface-2); }
 .credit { font-size: 11px; color: var(--muted); }
-.credit a { color: inherit; }
 .badge-ic svg { width: 26px; height: 26px; }
 button.badge-ic { border: 0; padding: 0; cursor: pointer; }
 .card .body { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
@@ -317,7 +316,12 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
       return n > 0 && n / Math.min(A.size, B.size) >= 0.5;
     };
     const manual = EV.slice();
-    for (const e of AUTO.EV) if (!manual.some(m => same(m, e))) EV.push({ ...e, s: 'a' + e.s });
+    for (const e of AUTO.EV) {
+      const m = manual.find(m => same(m, e));
+      if (!m) { EV.push({ ...e, s: 'a' + e.s }); continue; }
+      // The hand-made card wins, but keeps the photo the source published for this event.
+      if (!m.img && e.img) Object.assign(m, { img: e.img, imgL: e.imgL, credit: e.credit });
+    }
   }
 
   // Dates
@@ -412,16 +416,10 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   // Rendering pieces
   const isFree = p => /^(Gratuit|Entrée libre)/.test(p);
   const imgUrl = u => u.replace(/^~/, 'https://img.openagenda.com/main/');
-  const wikiUrl = u => u.replace(/^\^/, 'https://upload.wikimedia.org/wikipedia/commons/thumb/');
-  const PHOTOS = (typeof AUTO !== 'undefined' && AUTO.PHOTOS) || {};
-  // The event's own photo first; otherwise a free photo of the named place, then of the commune.
+  // Only the event's own photo, from its source. A place photo could suggest the wrong event.
   function photoOf(e) {
-    if (e.img) return { thumb: imgUrl(e.img), big: imgUrl(e.imgL || e.img), credit: 'Photo : ' + esc(e.credit || 'fournie par la source de l\'événement') };
-    const place = e.wiki && PHOTOS['w:' + e.wiki];
-    const p = place || PHOTOS[e.c];
-    if (!p) return null;
-    const file = `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p[1])}`;
-    return { thumb: wikiUrl(p[0]), big: wikiUrl(p[0]), credit: `Photo du lieu (${esc(place ? p[2] : C[e.c].n)}) : <a href="${file}" target="_blank" rel="noopener">Wikimedia Commons</a>` };
+    if (!e.img) return null;
+    return { thumb: imgUrl(e.img), big: imgUrl(e.imgL || e.img), credit: 'Photo : ' + esc(e.credit || 'fournie par la source de l\'événement') };
   }
   function eventCard(e) {
     const commune = C[e.c];
