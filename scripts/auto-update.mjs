@@ -72,7 +72,7 @@ const categorize = (title, rest) => {
 function loadBase() {
   const code = fs.readFileSync(path.join(ROOT, 'public/data.js'), 'utf8');
   const ctx = {};
-  vm.runInNewContext(code + '\n;Object.assign(this, { C, MARKETS, POSTERS: typeof POSTERS === "undefined" ? [] : POSTERS });', ctx);
+  vm.runInNewContext(code + '\n;Object.assign(this, { C, SRC, EV, MARKETS, POSTERS: typeof POSTERS === "undefined" ? [] : POSTERS });', ctx);
   return ctx;
 }
 
@@ -220,7 +220,7 @@ async function dataTourisme() {
 }
 
 // ---------- build data.js ----------
-function build(events, base, posters) {
+function build(events, base, posters, srcImages) {
   const C = { ...base.C };
   const keyFor = (city, lat, lon) => {
     const k = slug(city || 'lieu');
@@ -263,7 +263,7 @@ function build(events, base, posters) {
   const newC = Object.fromEntries(Object.entries(C).filter(([k]) => !base.C[k]));
   const js = `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
 // Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
-const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, POSTERS: posters })};
+const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, POSTERS: posters, SRCIMG: srcImages })};
 `;
   return { js, EV };
 }
@@ -340,6 +340,36 @@ function imageNear(html, title) {
   return best;
 }
 
+// The image each hand-made event's source page shows for it. On a listing (a town agenda) it is
+// the picture next to the event's title; on a page about the event, the page's preview image.
+const SKIP_IMG = /logo|icon|favicon|sprite|picto|placeholder|default|header|banner|avatar/i;
+async function sourceImages(base) {
+  const pages = new Map();
+  const out = {};
+  let found = 0;
+  for (const e of base.EV) {
+    const src = base.SRC[e.s];
+    if (!src) continue;
+    const url = src[1];
+    if (!pages.has(url)) {
+      pages.set(url, fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } })
+        .then(r => (r.ok ? r.text() : '')).catch(() => ''));
+    }
+    const html = await pages.get(url);
+    if (!html) continue;
+    // A page about this very event (its title shares most words with the event's): its preview image.
+    // Otherwise a listing: the picture next to the event's title.
+    const pageTitle = (html.match(/<meta[^>]+property=["']og:title["'][^>]*content=["']([^"']+)["']/i) || html.match(/<title>([^<]+)<\/title>/i) || [])[1] || '';
+    const A = words(e.t), B = words(pageTitle);
+    let n = 0;
+    for (const w of A) if (B.has(w)) n++;
+    const img = (A.size && n / A.size >= 0.6 && previewImage(html)) || imageNear(html, e.t);
+    if (img && !SKIP_IMG.test(img)) { out[e.t + '|' + e.d] = new URL(img.replace(/&amp;/g, '&'), url).href; found++; }
+  }
+  log(`Images des sources manuelles : ${found} sur ${base.EV.length} sorties (${pages.size} pages lues)`);
+  return out;
+}
+
 const base = loadBase();
 const [oaRes, dtRes] = await Promise.allSettled([openAgenda(), dataTourisme()]);
 [oaRes, dtRes].filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
@@ -355,7 +385,8 @@ const events = [...oaEvents, ...dtOnly].filter(e => {
   return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
 });
 const posters = await resolvePosters(base.POSTERS);
-const { js, EV } = build(events, base, posters);
+const srcImages = await sourceImages(base);
+const { js, EV } = build(events, base, posters, srcImages);
 fs.writeFileSync(path.join(ROOT, 'public/auto.js'), js);
 log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} → ${horizon}).`);
 const byCat = {};
