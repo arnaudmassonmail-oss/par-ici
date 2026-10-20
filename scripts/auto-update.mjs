@@ -415,6 +415,7 @@ fixDataTourismeShift(oaEvents, dtEvents);
 // record code (FMAPDL085…): open the page and keep its preview image if the page is about that event.
 async function vendeeTourismeImages(list) {
   const todo = list.filter(e => !e.img && /^FMAPDL085/i.test(e.dtId || ''));
+  let tries = 0;
   let found = 0;
   for (let i = 0; i < todo.length; i += 6) {
     await Promise.all(todo.slice(i, i + 6).map(async e => {
@@ -422,8 +423,9 @@ async function vendeeTourismeImages(list) {
       const url = `https://www.vendee-tourisme.com/agenda-des-sorties-et-evenements-en-vendee/${slugify(e.title)}/${slugify(e.city || 'vendee')}/${e.dtId.toLowerCase()}`;
       try {
         const r = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } });
+        const html = r.ok ? await r.text() : '';
+        if (tries++ < 3) log('  Vendée Tourisme', r.status, r.url, '| og:title:', (html.match(/og:title["'][^>]*content=["']([^"']+)/i) || [])[1] || '—', '| og:image:', (html.match(/og:image["'][^>]*content=["']([^"']+)/i) || [])[1] || '—');
         if (!r.ok) return;
-        const html = await r.text();
         const pageTitle = (html.match(/<meta[^>]+property=["']og:title["'][^>]*content=["']([^"']+)["']/i) || html.match(/<title>([^<]+)<\/title>/i) || [])[1] || '';
         const A = words(e.title), B = words(pageTitle);
         let n = 0;
