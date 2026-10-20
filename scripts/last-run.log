@@ -1,15 +1,15 @@
 DATAtourisme page 1: HTTP 200
 DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"7€ visite de l'ancienne ferme + goûter inclus"},"priceCurrency":"EUR","maxPrice":[9]}]}],"identifier":"FMAPDL044V50C3CM","isLocatedAt":[{"geo":{"latitude":47.3350366,"longitude":-1.698015},"address":[{"hasAddressCity":{"insee":"44217","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"44","label":{"@fr":"Loire-Atlantique"}},"label":{"@fr":"Vigneux-de-Bretagne"}},"streetAddress":["Ecomusée Rural du Pays Nantais","81, Rue Anne de Bretagne"],"postalCode":"44360","addressLocality":"Vigneux-de-Bretagne"}],"geoPoint":{"lon":-1.698015,"lat":47.3350366}}],"hasDescription":[{"description":{"@fr":"Réservation obligatoire"},"shortDescription":{"@fr":"Un atelier bois avec le sabotier"}}],"label":{"@fr":"ATELIER DÉCORATION OBJETS BOIS"},"type":["EntertainmentAndEvent","SportsEvent","Event","PointOfInterest","Game"],"uri":"https://data.datatourisme.fr/49/49cb1ca3-ba67-341e-9931-4f260e9e1dcb","takesPlaceAt":[{"endDate":"2026-10-19","startTime":"14:00","endTime":"16:00","startDate":"2026-10-19"}],"uuid":"00540c8c-735c-3db6-8f4b-93591c2d2a78"}
 DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCoveredBy":"By-NC-ND 4.0","title":{"@fr":"playmobil château"}}],"hasRelatedResource":[{"locator":["https://cdt24.media.tourinsoft.eu/upload/Playmobil-au-chateau.jpg"]}]}]
-DATAtourisme page 2: HTTP 200
 OpenAgenda: 61 agendas candidats
+DATAtourisme page 2: HTTP 200
 DATAtourisme page 3: HTTP 200
-DATAtourisme page 4: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
+DATAtourisme page 4: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 36 événements lus, 0 à moins de 50 km
 DATAtourisme page 5: HTTP 200
 DATAtourisme page 6: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 36 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
@@ -36,6 +36,9 @@ DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
   Conservatoire botanique national Sud-Atlantique: 3 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"1":9}
 DATAtourisme: dates corrigées de 1 jour(s)
+  Vendée Tourisme erreur https://www.vendee-tourisme.com/agenda-des-sorties-et-evenements-en-vendee/marche-de-noel-le-champs-du-bonheur/treize-septiers/fmapdl085v52aasx → fetch failed UND_ERR_CONNECT_TIMEOUT
+  Vendée Tourisme erreur https://www.vendee-tourisme.com/agenda-des-sorties-et-evenements-en-vendee/musique-broken-back/pouzauges/fmapdl085v528dun → fetch failed UND_ERR_CONNECT_TIMEOUT
+  Vendée Tourisme erreur https://www.vendee-tourisme.com/agenda-des-sorties-et-evenements-en-vendee/ouverture-musee-du-cheval-et-d-amazone/la-boissiere-de-montaigu/fmapdl085v524z28 → fetch failed UND_ERR_CONNECT_TIMEOUT
 Images Vendée Tourisme : 0 sur 93 sorties vendéennes sans photo
 Doublons DATAtourisme retirés : 9
 Affiche Kanine Parjure → https://zinor.fr/wp-content/uploads/2026/08/parjure_amarok_v2.jpg
