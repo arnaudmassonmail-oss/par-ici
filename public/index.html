@@ -336,8 +336,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     // Official posters (data.js POSTERS, image resolved each night) for events the source left without photo.
     if (typeof POSTERS !== 'undefined' && AUTO.POSTERS) {
       for (const p of POSTERS) {
-        // `img`: an image address copied by hand from the official page; otherwise resolved each night from `page`.
-        const url = p.img || AUTO.POSTERS[p.page + (p.find ? '#' + p.find : '')];
+        const url = AUTO.POSTERS[p.page + (p.find ? '#' + p.find : '')];
         if (url) EV.filter(e => !e.img && same(p, e)).forEach(e => Object.assign(e, { img: url, imgL: url, credit: p.credit }));
       }
     }
