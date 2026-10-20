@@ -303,8 +303,12 @@ async function resolvePosters(list) {
     try {
       const res = await fetch(p.page, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } });
       const html = await res.text();
+      // Preview image first, then structured data, then the WordPress featured image of the page.
       const m = html.match(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*content=["']([^"']+)["']/i)
-        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i);
+        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i)
+        || html.match(/"image"\s*:\s*(?:\{[^}]*"url"\s*:\s*)?"(https?:[^"]+\.(?:jpe?g|png|webp))"/i)
+        || html.match(/<img[^>]+class=["'][^"']*wp-post-image[^"']*["'][^>]*src=["']([^"']+)["']/i)
+        || html.match(/<img[^>]+src=["']([^"']+)["'][^>]*class=["'][^"']*wp-post-image/i);
       if (m) { out[p.page] = new URL(m[1].replace(/&amp;/g, '&'), p.page).href; log('Affiche', p.t, '→', out[p.page]); }
       else log('Affiche', p.t, '→ aucune image déclarée par', p.page, `(HTTP ${res.status})`);
     } catch (e) { log('Affiche', p.t, '→', e.message); }
