@@ -2,15 +2,15 @@ DATAtourisme page 1: HTTP 200
 DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"7€ visite de l'ancienne ferme + goûter inclus"},"priceCurrency":"EUR","maxPrice":[9]}]}],"isLocatedAt":[{"geo":{"latitude":47.3350366,"longitude":-1.698015},"address":[{"hasAddressCity":{"insee":"44217","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"44","label":{"@fr":"Loire-Atlantique"}},"label":{"@fr":"Vigneux-de-Bretagne"}},"streetAddress":["Ecomusée Rural du Pays Nantais","81, Rue Anne de Bretagne"],"postalCode":"44360","addressLocality":"Vigneux-de-Bretagne"}],"geoPoint":{"lon":-1.698015,"lat":47.3350366}}],"hasDescription":[{"description":{"@fr":"Réservation obligatoire"},"shortDescription":{"@fr":"Un atelier bois avec le sabotier"}}],"label":{"@fr":"ATELIER DÉCORATION OBJETS BOIS"},"type":["EntertainmentAndEvent","SportsEvent","Event","PointOfInterest","Game"],"uri":"https://data.datatourisme.fr/49/49cb1ca3-ba67-341e-9931-4f260e9e1dcb","takesPlaceAt":[{"endDate":"2026-10-19","startTime":"14:00","endTime":"16:00","startDate":"2026-10-19"}],"uuid":"00540c8c-735c-3db6-8f4b-93591c2d2a78"}
 DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCoveredBy":"By-NC-ND 4.0","title":{"@fr":"playmobil château"}}],"hasRelatedResource":[{"locator":["https://cdt24.media.tourinsoft.eu/upload/Playmobil-au-chateau.jpg"]}]}]
 DATAtourisme page 2: HTTP 200
-OpenAgenda: 62 agendas candidats
 DATAtourisme page 3: HTTP 200
+OpenAgenda: 62 agendas candidats
 DATAtourisme page 4: HTTP 200
+DATAtourisme page 5: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 51 événements lus, 50 à moins de 50 km
-DATAtourisme page 5: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 6: HTTP 200
 DATAtourisme page 7: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
 DATAtourisme page 10: HTTP 200
@@ -37,6 +37,10 @@ DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
 DATAtourisme: écart de dates mesuré sur les événements communs → {"1":8}
 DATAtourisme: dates corrigées de 1 jour(s)
 Doublons DATAtourisme retirés : 8
+  pas de photo pour Zoo de la Boissière-du-Doré
+  pas de photo pour Les Nefs (Nantes)
+  pas de photo pour Les Nefs (Nantes)
+Photos de lieux (Wikipédia) : 113 communes sur 119, 6 lieux nommés
 Terminé : 1818 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
 Par catégorie : {"expo":237,"marche":184,"sport":276,"concert":237,"famille":490,"spectacle":343,"cinema":51}
 Avec photo : 1095 sur 1818
