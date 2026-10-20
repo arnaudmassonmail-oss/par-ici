@@ -22,7 +22,8 @@ const C = {
   mortagne: { n: 'Mortagne-sur-Sèvre', lat: 46.9917, lon: -0.9494 },
   boissiere: { n: 'La Boissière-du-Doré', lat: 47.2369, lon: -1.2156 },
   nantes: { n: 'Nantes', lat: 47.2184, lon: -1.5536 },
-  saintherblain: { n: 'Saint-Herblain', lat: 47.2122, lon: -1.6497 }
+  saintherblain: { n: 'Saint-Herblain', lat: 47.2122, lon: -1.6497 },
+  vallet: { n: 'Vallet', lat: 47.1617, lon: -1.2660 }
 };
 
 const SRC = {
@@ -52,7 +53,9 @@ const SRC = {
   boussayChamp: ['Infos Média Nantes, Boussay', 'https://infos-media-nantes.fr/boussay-exposition-champignons-24-25-octobre-2026/'],
   garenne: ['Domaine de la Garenne Lemot', 'https://www.domaine-garenne-lemot.fr/44/l-agenda/agenda-du-domaine-de-la-garenne-lemot/lem_5209'],
   zenith: ['Zénith Nantes Métropole', 'https://www.zenith-nantesmetropole.com/program'],
-  choletBasket: ['Billetterie Cholet Basket', 'https://www.biletwise.com/fr/cholet-basket-tickets']
+  choletBasket: ['Billetterie Cholet Basket', 'https://www.biletwise.com/fr/cholet-basket-tickets'],
+  jardinVerre: ['Jardin de Verre, Cholet', 'https://www.cholet.fr/agenda/agenda_cat_12_8_10_jardin+verre.html'],
+  valletMkt: ['Alentoor, Vallet', 'https://www.alentoor.fr/vallet/agenda']
 };
 
 // Real events collected on 19 October 2026. d = date, to = last day of a multi-day event.
@@ -107,7 +110,9 @@ const EV = [
   { cat: 'spectacle', t: 'La FIV du samedi soir', c: 'cholet', d: '2026-11-06', to: '2026-11-07', h: 'En soirée', p: '21 €', place: 'Balcon Café Théâtre', desc: 'Comédie.', s: 'cholet' },
   { cat: 'spectacle', t: 'ADN', c: 'cholet', d: '2026-11-12', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Théâtre.', s: 'stlouis' },
   { cat: 'spectacle', t: 'La Noce d\'Alphonse', c: 'cholet', d: '2026-11-17', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Théâtre.', s: 'stlouis' },
-  { cat: 'spectacle', t: 'Rond Rond', c: 'cholet', d: '2026-11-18', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Spectacle de la saison du Théâtre Saint-Louis.', s: 'stlouis' },
+  { cat: 'spectacle', t: 'Rond-Rond', c: 'cholet', d: '2026-11-18', h: '10h00 et 16h30', p: 'Voir la billetterie', kids: true, place: 'Théâtre Saint-Louis, salle Gene Kelly', desc: 'Spectacle tout-petits de la compagnie Piment, Langue d\'Oiseau, pour les 1-5 ans.', s: 'stlouis' },
+  { cat: 'spectacle', t: 'Mesdemoiselles', c: 'cholet', d: '2026-11-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Jardin de Verre', desc: 'Spectacle de la saison du Jardin de Verre.', s: 'jardinVerre' },
+  { cat: 'concert', t: 'Plateau partagé : Coline Linder', c: 'cholet', d: '2026-11-19', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Jardin de Verre', desc: 'Soirée plateau partagé avec Coline Linder.', s: 'jardinVerre' },
   { cat: 'concert', t: 'Daoud', c: 'herbiers', d: '2026-11-05', h: '20h30', p: 'Voir la billetterie', place: 'Saison culturelle des Herbiers', desc: 'Concert de la saison culturelle.', s: 'herbiers' },
   { cat: 'famille', t: 'Fête de la fressure', c: 'herbiers', d: '2026-11-07', h: 'Horaire à confirmer', p: 'À confirmer', place: 'Salle Ferchault', desc: 'Fête traditionnelle autour de la fressure, plat vendéen de saison.', s: 'alentoorH' },
   { cat: 'concert', t: 'Thanda Choir', c: 'herbiers', d: '2026-11-10', h: '20h30', p: 'Complet', place: 'Saison culturelle des Herbiers', desc: 'Concert de chœur. Annoncé complet.', s: 'herbiers' },
@@ -133,6 +138,7 @@ const EV = [
 
 // Weekly markets, expanded into dated occurrences below. wd: 0 = Sunday … 6 = Saturday.
 const MARKETS = [
+  { t: 'Marché du dimanche', c: 'vallet', wd: 0, h: 'Le matin', place: 'Place Charles de Gaulle', desc: 'Grand marché du dimanche matin, près de 80 commerçants.', s: 'valletMkt' },
   { t: 'Marché alimentaire sous les Halles', c: 'clisson', wd: 2, h: '8h30 – 13h00', place: 'Halles de Clisson', desc: 'Marché alimentaire hebdomadaire sous les halles médiévales.', s: 'clissonMkt' },
   { t: 'Grand marché du vendredi', c: 'clisson', wd: 5, h: 'Le matin', place: 'Centre historique de Clisson', desc: 'Alimentation, vêtements, outillage et jardinage. Les stands vont jusqu\'à la place Lemot et au parking du château.', s: 'clissonMkt' },
   { t: 'Marché du samedi', c: 'montaigu', wd: 6, h: 'Le matin', place: 'Place de l\'Hôtel de Ville', desc: 'Marché hebdomadaire de Montaigu.', s: 'montaiguMkt' }
