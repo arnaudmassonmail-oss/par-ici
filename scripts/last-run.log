@@ -1,32 +1,33 @@
 DATAtourisme page 1: HTTP 200
 DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"7€ visite de l'ancienne ferme + goûter inclus"},"priceCurrency":"EUR","maxPrice":[9]}]}],"isLocatedAt":[{"geo":{"latitude":47.3350366,"longitude":-1.698015},"address":[{"hasAddressCity":{"insee":"44217","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"44","label":{"@fr":"Loire-Atlantique"}},"label":{"@fr":"Vigneux-de-Bretagne"}},"streetAddress":["Ecomusée Rural du Pays Nantais","81, Rue Anne de Bretagne"],"postalCode":"44360","addressLocality":"Vigneux-de-Bretagne"}],"geoPoint":{"lon":-1.698015,"lat":47.3350366}}],"hasDescription":[{"description":{"@fr":"Réservation obligatoire"},"shortDescription":{"@fr":"Un atelier bois avec le sabotier"}}],"label":{"@fr":"ATELIER DÉCORATION OBJETS BOIS"},"type":["EntertainmentAndEvent","SportsEvent","Event","PointOfInterest","Game"],"uri":"https://data.datatourisme.fr/49/49cb1ca3-ba67-341e-9931-4f260e9e1dcb","takesPlaceAt":[{"endDate":"2026-10-19","startTime":"14:00","endTime":"16:00","startDate":"2026-10-19"}],"uuid":"00540c8c-735c-3db6-8f4b-93591c2d2a78"}
 DATAtourisme page 2: HTTP 200
-OpenAgenda: 63 agendas candidats
+OpenAgenda: 62 agendas candidats
 DATAtourisme page 3: HTTP 200
-  Terres de Montaigu: 50 événements lus, 49 à moins de 50 km
 DATAtourisme page 4: HTTP 200
+OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
+  Terres de Montaigu: 51 événements lus, 50 à moins de 50 km
 DATAtourisme page 5: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 6: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
 DATAtourisme page 10: HTTP 200
 DATAtourisme page 11: HTTP 200
-DATAtourisme: 608 événements à moins de 50 km (0 fiches sans date)
-  Quinzaine de la transmission: 21 événements lus, 2 à moins de 50 km
-  Conservatoire de Nantes: 13 événements lus, 13 à moins de 50 km
-  Île de Nantes: 92 événements lus, 92 à moins de 50 km
-  Nantes Nord: 33 événements lus, 33 à moins de 50 km
-  Nantes Sud: 30 événements lus, 30 à moins de 50 km
+DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
+  Quinzaine de la transmission: 23 événements lus, 2 à moins de 50 km
+  Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
+  Île de Nantes: 95 événements lus, 95 à moins de 50 km
+  Nantes Nord: 34 événements lus, 34 à moins de 50 km
+  Nantes Sud: 32 événements lus, 32 à moins de 50 km
   Nantes Erdre: 44 événements lus, 44 à moins de 50 km
-  Nantes Métropole: 782 événements lus, 780 à moins de 50 km
+  Nantes Métropole: 804 événements lus, 802 à moins de 50 km
   Sports à Nantes: 2 événements lus, 1 à moins de 50 km
   Musée d'arts de Nantes: 23 événements lus, 23 à moins de 50 km
-  Bibliothèque municipale de Nantes: 70 événements lus, 70 à moins de 50 km
-  Nantes Centre-ville: 43 événements lus, 43 à moins de 50 km
+  Bibliothèque municipale de Nantes: 73 événements lus, 73 à moins de 50 km
+  Nantes Centre-ville: 45 événements lus, 45 à moins de 50 km
   Jour de Fête: 3 événements lus, 1 à moins de 50 km
-  Saison Culturelle des Herbiers: 1 événements lus, 1 à moins de 50 km
+  Saison Culturelle des Herbiers: 2 événements lus, 2 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 2 événements lus, 2 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
   La Compagnie de la Hulotte: 11 événements lus, 1 à moins de 50 km
@@ -35,5 +36,6 @@ DATAtourisme: 608 événements à moins de 50 km (0 fiches sans date)
 DATAtourisme: écart de dates mesuré sur les événements communs → {"1":8}
 DATAtourisme: dates corrigées de 1 jour(s)
 Doublons DATAtourisme retirés : 8
-Terminé : 1797 événements écrits dans public/auto.js (2026-10-19 → 2026-11-19).
-Par catégorie : {"expo":238,"marche":180,"sport":284,"concert":225,"cinema":53,"famille":482,"spectacle":335}
+Terminé : 1818 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
+Par catégorie : {"expo":237,"marche":184,"sport":276,"concert":237,"famille":490,"spectacle":343,"cinema":51}
+Avec photo : 1095 sur 1818
