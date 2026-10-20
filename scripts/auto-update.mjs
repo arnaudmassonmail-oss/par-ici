@@ -329,9 +329,10 @@ function imageNear(html, title) {
   const hits = [];
   for (let i = text.indexOf(want); i >= 0; i = text.indexOf(want, i + 1)) hits.push(i);
   if (!hits.length) return null;
-  const pics = [...clean.matchAll(/(?:data-src|src)=["']([^"']+\.(?:jpe?g|png|webp)(?:\?[^"']*)?)["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
+  // Lazy-loading sites put a "loading" picture in src and the real one in data-src / data-original.
+  const pics = [...clean.matchAll(/(?:data-src|data-original|data-lazy-src|data-lazy|src)=["']([^"'\s]+\.(?:jpe?g|png|webp)(?:\?[^"'\s]*)?)[^"']*["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
     .map(m => ({ url: m[1] || m[2], at: m.index }))
-    .filter(p => !/logo|icon|sprite|picto|header/i.test(p.url));
+    .filter(p => !/logo|icon|sprite|picto|header|chargement|loading|lazy|blank|spacer|pixel|transparent/i.test(p.url));
   let best = null, bestGap = 2500;
   for (const p of pics) for (const h of hits) {
     const gap = Math.abs(p.at - h);
