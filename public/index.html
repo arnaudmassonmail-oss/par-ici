@@ -335,7 +335,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     // Official posters (data.js POSTERS, image resolved each night) for events the source left without photo.
     if (typeof POSTERS !== 'undefined' && AUTO.POSTERS) {
       for (const p of POSTERS) {
-        const url = AUTO.POSTERS[p.page];
+        const url = AUTO.POSTERS[p.page + (p.find ? '#' + p.find : '')];
         if (url) EV.filter(e => !e.img && same(p, e)).forEach(e => Object.assign(e, { img: url, imgL: url, credit: p.credit }));
       }
     }
@@ -358,12 +358,13 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   for (let off = 0; off <= 30; off++) {
     const wd = (dow + off) % 7;
     MARKETS.filter(m => m.wd === wd).forEach(m => {
-      const dt = new Date(today.getTime() + off * DAY);
+      const dt = dateOf(off);
       EV.push({ ...m, cat: 'marche', p: 'Entrée libre', kids: true, id: 'm' + m.c + m.wd + '-' + dt.toISOString().slice(0, 10), from: off, until: off });
     });
   }
   FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, offOf(v)])); });
-  const dateOf = off => new Date(today.getTime() + off * DAY);
+  // Calendar days, not 24-hour steps: a 24-hour step lands on the previous day after the autumn clock change.
+  const dateOf = off => { const x = new Date(today); x.setDate(x.getDate() + off); return x; };
   const fmtDay = off => {
     if (off === 0) return 'Aujourd\'hui';
     if (off === 1) return 'Demain';

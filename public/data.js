@@ -163,6 +163,13 @@ const FILMS = [
 
 // Official posters for events whose source gives no photo. `page` is the organiser's or venue's
 // own page for the event; the nightly collection reads the preview image that page declares.
+// With `find`, `page` is a listing (a town agenda) and the image is the one shown just before that title.
 const POSTERS = [
-  { t: 'Kanine Parjure', d: '2026-10-24', c: 'montaigu', page: 'https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/', credit: 'Affiche : Le Zinor' }
+  { t: 'Kanine Parjure', d: '2026-10-24', c: 'montaigu', page: 'https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/', credit: 'Affiche : Le Zinor' },
+  { t: 'Hors des sentiers battus', d: '2026-10-07', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Hors des sentiers battus', credit: 'Image : mairie de Gétigné' },
+  { t: 'À la découverte de carnets de voyage', d: '2026-10-02', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'À la découverte de carnets de voyage', credit: 'Image : mairie de Gétigné' },
+  { t: 'Prix des Bébés Lecteurs', d: '2026-10-03', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Prix des Bébés Lecteurs', credit: 'Image : mairie de Gétigné' },
+  { t: 'Un chapeau de paille d\'Italie', d: '2026-10-16', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Un chapeau de paille d\'Italie', credit: 'Image : mairie de Gétigné' },
+  { t: 'Atelier cyanotype enfants', d: '2026-10-21', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Atelier cyanotype enfants', credit: 'Image : mairie de Gétigné' },
+  { t: 'Soirée jeux de société', d: '2026-11-06', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Soirée jeux de société', credit: 'Image : mairie de Gétigné' }
 ];

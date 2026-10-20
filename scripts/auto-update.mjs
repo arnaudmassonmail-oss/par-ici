@@ -300,20 +300,36 @@ function fixDataTourismeShift(oa, dt) {
 async function resolvePosters(list) {
   const out = {};
   for (const p of list) {
+    const key = p.page + (p.find ? '#' + p.find : '');
     try {
       const res = await fetch(p.page, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } });
       const html = await res.text();
-      // Preview image first, then structured data, then the WordPress featured image of the page.
-      const m = html.match(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*content=["']([^"']+)["']/i)
-        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i)
-        || html.match(/"image"\s*:\s*(?:\{[^}]*"url"\s*:\s*)?"(https?:[^"]+\.(?:jpe?g|png|webp))"/i)
-        || html.match(/<img[^>]+class=["'][^"']*wp-post-image[^"']*["'][^>]*src=["']([^"']+)["']/i)
-        || html.match(/<img[^>]+src=["']([^"']+)["'][^>]*class=["'][^"']*wp-post-image/i);
-      if (m) { out[p.page] = new URL(m[1].replace(/&amp;/g, '&'), p.page).href; log('Affiche', p.t, '→', out[p.page]); }
-      else log('Affiche', p.t, '→ aucune image déclarée par', p.page, `(HTTP ${res.status})`);
+      const url = p.find ? imageNear(html, p.find) : previewImage(html);
+      if (url) { out[key] = new URL(url.replace(/&amp;/g, '&'), p.page).href; log('Affiche', p.t, '→', out[key]); }
+      else log('Affiche', p.t, '→ aucune image trouvée sur', p.page, `(HTTP ${res.status})`);
     } catch (e) { log('Affiche', p.t, '→', e.message); }
   }
   return out;
+}
+// The page's own preview image: og:image, then structured data, then the WordPress featured image.
+function previewImage(html) {
+  const m = html.match(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*content=["']([^"']+)["']/i)
+    || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i)
+    || html.match(/"image"\s*:\s*(?:\{[^}]*"url"\s*:\s*)?"(https?:[^"]+\.(?:jpe?g|png|webp))"/i)
+    || html.match(/<img[^>]+class=["'][^"']*wp-post-image[^"']*["'][^>]*src=["']([^"']+)["']/i)
+    || html.match(/<img[^>]+src=["']([^"']+)["'][^>]*class=["'][^"']*wp-post-image/i);
+  return m && m[1];
+}
+// On a listing page (a town agenda), the event's image is the last picture before its title.
+function imageNear(html, title) {
+  const norm = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const text = norm(html.replace(/&#0?39;|&rsquo;|&#8217;|’/g, "'").replace(/&amp;/g, '&'));
+  const at = text.indexOf(norm(title).replace(/’/g, "'"));
+  if (at < 0) return null;
+  const before = html.slice(Math.max(0, at - 6000), at);
+  const pics = [...before.matchAll(/(?:data-src|src)=["']([^"']+\.(?:jpe?g|png|webp)(?:\?[^"']*)?)["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
+    .map(m => m[1] || m[2]).filter(u => !/logo|icon|sprite|picto/i.test(u));
+  return pics.length ? pics[pics.length - 1] : null;
 }
 
 const base = loadBase();
