@@ -345,6 +345,8 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const DAY = 864e5;
   const offOf = iso => { const [y, m, d] = iso.split('-').map(Number); return Math.round((new Date(y, m - 1, d) - today) / DAY); };
+  // Calendar days, not 24-hour steps: a 24-hour step lands on the previous day after the autumn clock change.
+  const dateOf = off => { const x = new Date(today); x.setDate(x.getDate() + off); return x; };
   const dow = today.getDay();
   const satOff = dow === 0 ? -1 : 6 - dow;
   const ranges = {
@@ -363,8 +365,6 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     });
   }
   FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, offOf(v)])); });
-  // Calendar days, not 24-hour steps: a 24-hour step lands on the previous day after the autumn clock change.
-  const dateOf = off => { const x = new Date(today); x.setDate(x.getDate() + off); return x; };
   const fmtDay = off => {
     if (off === 0) return 'Aujourd\'hui';
     if (off === 1) return 'Demain';
