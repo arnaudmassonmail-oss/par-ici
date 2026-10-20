@@ -72,7 +72,7 @@ const categorize = (title, rest) => {
 function loadBase() {
   const code = fs.readFileSync(path.join(ROOT, 'public/data.js'), 'utf8');
   const ctx = {};
-  vm.runInNewContext(code + '\n;Object.assign(this, { C, SRC, EV, MARKETS, POSTERS: typeof POSTERS === "undefined" ? [] : POSTERS });', ctx);
+  vm.runInNewContext(code + '\n;Object.assign(this, { C, SRC, EV, MARKETS, CINEMAS, FILMS, POSTERS: typeof POSTERS === "undefined" ? [] : POSTERS });', ctx);
   return ctx;
 }
 
@@ -220,7 +220,7 @@ async function dataTourisme() {
 }
 
 // ---------- build data.js ----------
-function build(events, base, posters, srcImages) {
+function build(events, base, posters, srcImages, filmImages) {
   const C = { ...base.C };
   const keyFor = (city, lat, lon) => {
     const k = slug(city || 'lieu');
@@ -263,7 +263,7 @@ function build(events, base, posters, srcImages) {
   const newC = Object.fromEntries(Object.entries(C).filter(([k]) => !base.C[k]));
   const js = `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
 // Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
-const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, POSTERS: posters, SRCIMG: srcImages })};
+const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, POSTERS: posters, SRCIMG: srcImages, FILMIMG: filmImages })};
 `;
   return { js, EV };
 }
@@ -371,6 +371,24 @@ async function sourceImages(base) {
   return out;
 }
 
+// Film posters, as shown next to each title on the cinema's own pages.
+async function filmPosters(base) {
+  const out = {};
+  for (const [cid, cin] of Object.entries(base.CINEMAS || {})) {
+    for (const url of cin.pages || []) {
+      let html = '';
+      try { const r = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } }); html = r.ok ? await r.text() : ''; } catch {}
+      if (!html) { log('Cinéma', cin.n, '→ page illisible', url); continue; }
+      for (const f of base.FILMS.filter(f => f.s[cid] && !out[f.id])) {
+        const img = imageNear(html, f.t);
+        if (img && !SKIP_IMG.test(img)) out[f.id] = [new URL(img.replace(/&amp;/g, '&'), url).href, cin.n];
+      }
+    }
+  }
+  log(`Affiches de films : ${Object.keys(out).length} sur ${base.FILMS.length}`, JSON.stringify(Object.fromEntries(Object.entries(out).map(([k, v]) => [k, v[0].split('/').pop()]))));
+  return out;
+}
+
 const base = loadBase();
 const [oaRes, dtRes] = await Promise.allSettled([openAgenda(), dataTourisme()]);
 [oaRes, dtRes].filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
@@ -387,7 +405,8 @@ const events = [...oaEvents, ...dtOnly].filter(e => {
 });
 const posters = await resolvePosters(base.POSTERS);
 const srcImages = await sourceImages(base);
-const { js, EV } = build(events, base, posters, srcImages);
+const filmImages = await filmPosters(base);
+const { js, EV } = build(events, base, posters, srcImages, filmImages);
 fs.writeFileSync(path.join(ROOT, 'public/auto.js'), js);
 log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} → ${horizon}).`);
 const byCat = {};

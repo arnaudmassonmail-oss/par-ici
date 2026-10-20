@@ -139,8 +139,11 @@ const MARKETS = [
 ];
 
 const CINEMAS = {
-  connetable: { n: 'Le Connétable', c: 'clisson', url: 'https://www.allocine.fr/seance/salle_gen_csalle=P0377.html' },
-  montaigu: { n: 'Cinéma Montaigu-Vendée', c: 'montaigu', url: 'https://www.allocine.fr/seance/salle_gen_csalle=W8560.html' }
+  // url: the cinema's own programme page; pages: where the nightly collection looks for film posters.
+  connetable: { n: 'Le Connétable', c: 'clisson', url: 'https://cinema-leconnetable.fr/FR/42/les-films-le-connetable-clisson.html',
+    pages: ['https://cinema-leconnetable.fr/FR/42/les-films-le-connetable-clisson.html', 'https://cinema-leconnetable.fr/FR/12/prochainement-cinema-le-connetable.html', 'https://cinema-leconnetable.fr/'] },
+  montaigu: { n: 'Cinéma Montaigu-Vendée', c: 'montaigu', url: 'https://www.ticketingcine.com/cine/P6AJ45EB.html',
+    pages: ['https://www.ticketingcine.com/cine/P6AJ45EB.html'] }
 };
 // Films announced by each cinema. from = first screening announced there.
 const FILMS = [
