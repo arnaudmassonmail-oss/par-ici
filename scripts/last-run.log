@@ -4,12 +4,12 @@ DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCove
 DATAtourisme page 2: HTTP 200
 OpenAgenda: 61 agendas candidats
 DATAtourisme page 3: HTTP 200
-DATAtourisme page 4: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
+DATAtourisme page 4: HTTP 200
 DATAtourisme page 5: HTTP 200
-DATAtourisme page 6: HTTP 200
   Communauté de Communes des Terres du Val de Loire: 36 événements lus, 0 à moins de 50 km
+DATAtourisme page 6: HTTP 200
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
@@ -38,12 +38,12 @@ DATAtourisme: écart de dates mesuré sur les événements communs → {"1":9}
 DATAtourisme: dates corrigées de 1 jour(s)
 Doublons DATAtourisme retirés : 9
 Affiche Kanine Parjure → https://zinor.fr/wp-content/uploads/2026/08/parjure_amarok_v2.jpg
-Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
-Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/header_feux_getigne_2021_credit_sophie_meyer_25.jpg
-Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
-Affiche Un chapeau de paille d'Italie → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
-Affiche Atelier cyanotype enfants → https://www.getigne.fr/media/2000-*-9999/fichier-11agenda.png
-Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-cyanotype-agenda.png
+Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
+Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
+Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
+Affiche Un chapeau de paille d'Italie → https://www.getigne.fr/media/2000-*-9999/fichier-11agenda.png
+Affiche Atelier cyanotype enfants → https://www.getigne.fr/media/2000-*-9999/bib-cyanotype-agenda.png
+Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
 Terminé : 1835 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
 Par catégorie : {"expo":240,"marche":185,"sport":276,"concert":235,"famille":501,"spectacle":345,"cinema":53}
 Avec photo : 1113 sur 1835
