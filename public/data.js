@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-10-19';
+const UPDATED = '2026-10-20';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -59,6 +59,9 @@ const EV = [
   { cat: 'spectacle', t: 'Lecture musicale : La Forêt millénaire', c: 'bernardiere', d: '2026-11-06', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque de La Bernardière', desc: 'La compagnie Waï Waï met en musique le manga de Jirō Taniguchi.', s: 'tm' },
   // Gétigné, Gorges, Clisson
   { cat: 'famille', t: 'Atelier de fabrication de cartes', c: 'getigne', d: '2026-10-16', to: '2026-10-25', h: 'Voir l\'agenda de la commune', p: 'À confirmer', kids: true, place: 'Gétigné', desc: 'Atelier créatif de fabrication de cartes pendant la première semaine des vacances.', s: 'getigne' },
+  { cat: 'famille', t: 'Atelier cyanotype enfants', c: 'getigne', d: '2026-10-21', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque de Gétigné', desc: 'Atelier de la bibliothèque pour les 6-11 ans : impressions de plantes au cyanotype, la photo révélée au soleil.', s: 'getigne' },
+  { cat: 'famille', t: 'Soirée jeux de société', c: 'getigne', d: '2026-11-06', h: 'En soirée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque de Gétigné', desc: 'Animation de la bibliothèque : venez profiter d\'une soirée jeux.', s: 'getigne' },
+  { cat: 'spectacle', t: 'Petits rendez-vous contes', c: 'getigne', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque de Gétigné', desc: 'Lectures de contes pour les enfants à la bibliothèque.', s: 'getigne' },
   { cat: 'famille', t: 'Soirée pyjama à la médiathèque', c: 'gorges', d: '2026-10-27', h: 'En soirée', p: 'Gratuit', kids: true, place: 'Médiathèque de Gorges', desc: 'Histoires du soir pour les enfants, en pyjama et doudou sous le bras.', s: 'gorges' },
   { cat: 'expo', t: 'Château de Clisson : visite pour les familles', c: 'clisson', d: '2026-10-17', to: '2026-10-31', h: '16h00, sauf le mardi', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée de la forteresse pensée pour les enfants pendant les vacances de la Toussaint. Réservation au 02 40 54 02 22.', s: 'chateau' },
   { cat: 'expo', t: 'Château de Clisson : Au cœur de la forteresse', c: 'clisson', d: '2026-11-07', to: '2026-11-29', h: 'Sam. et dim. 14h30 et 16h00', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée d\'une heure de la forteresse médiévale. Château ouvert du mercredi au dimanche, 14h – 17h30.', s: 'chateau' },
