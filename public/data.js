@@ -131,3 +131,9 @@ const FILMS = [
   { id: 'minotaure', t: 'Minotaure', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' },
   { id: 'fantome', t: 'Le Fantôme de l\'Opéra', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' }
 ];
+
+// Official posters for events whose source gives no photo. `page` is the organiser's or venue's
+// own page for the event; the nightly collection reads the preview image that page declares.
+const POSTERS = [
+  { t: 'Kanine Parjure', d: '2026-10-24', c: 'montaigu', page: 'https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/', credit: 'Affiche : Le Zinor' }
+];

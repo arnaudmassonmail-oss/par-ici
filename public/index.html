@@ -131,6 +131,16 @@ button.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mi
 .badge-ic { width: 64px; height: 64px; border-radius: 16px; background: color-mix(in srgb, var(--c) var(--tint), transparent); color: var(--c); display: grid; place-items: center; position: relative; overflow: hidden; }
 /* The event photo covers the category icon; if it fails to load it is removed and the icon shows. */
 .badge-ic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Neutral illustration when an event has no photo: the category colour and icon, varied per event, never photo-like. */
+.illu { --x: 30%; --y: 30%; --a: 135deg; background:
+  radial-gradient(circle at var(--x) var(--y), color-mix(in srgb, #fff 32%, transparent) 0 16%, transparent 17%),
+  radial-gradient(circle at calc(100% - var(--y)) calc(100% - var(--x)), color-mix(in srgb, #fff 20%, transparent) 0 24%, transparent 25%),
+  linear-gradient(var(--a), color-mix(in srgb, var(--c) 78%, #fff), var(--c) 55%, color-mix(in srgb, var(--c) 70%, #000)); color: #fff; }
+.badge-ic.illu svg { width: 30px; height: 30px; filter: drop-shadow(0 1px 2px rgb(0 0 0 / .25)); }
+.sheet-illu { position: relative; height: 150px; overflow: hidden; display: grid; place-items: center; }
+.sheet-illu > svg { width: 64px; height: 64px; filter: drop-shadow(0 2px 6px rgb(0 0 0 / .25)); }
+.sheet-illu i { position: absolute; width: 26px; height: 26px; opacity: .3; }
+.sheet-illu i svg { width: 100%; height: 100%; }
 .sheet-img { display: block; width: 100%; max-height: 260px; object-fit: cover; background: var(--surface-2); }
 .credit { font-size: 11px; color: var(--muted); }
 .badge-ic svg { width: 26px; height: 26px; }
@@ -302,25 +312,32 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 
   // Merge the nightly automatic collection (auto.js) into the hand-made data (data.js).
   // A collected event that matches a hand-made one (same day, similar title, same place) is dropped.
+  const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !/^(les|des|aux|une|pour|avec|festival|edition|concert|concerts|spectacle|theatre)$/.test(w)));
+  // Communes déléguées (La Guyonnière in Montaigu-Vendée) sit a few km from the main town.
+  const near = (a, b) => C[a] && C[b] && Math.hypot(C[a].lat - C[b].lat, C[a].lon - C[b].lon) < 0.1;
+  const same = (m, e) => {
+    if (m.d !== e.d || !near(m.c, e.c)) return false;
+    const A = words(m.t), B = words(e.t);
+    let n = 0;
+    for (const w of A) if (B.has(w)) n++;
+    return n > 0 && n / Math.min(A.size, B.size) >= 0.5;
+  };
   if (typeof AUTO !== 'undefined') {
     for (const [k, c] of Object.entries(AUTO.C)) if (!C[k]) C[k] = c;
     for (const [k, s] of Object.entries(AUTO.SRC)) SRC['a' + k] = s;
-    const words = t => new Set(t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !/^(les|des|aux|une|pour|avec|festival|edition|concert|spectacle|theatre)$/.test(w)));
-    // Communes déléguées (La Guyonnière in Montaigu-Vendée) sit a few km from the main town.
-    const near = (a, b) => Math.hypot(C[a].lat - C[b].lat, C[a].lon - C[b].lon) < 0.1;
-    const same = (m, e) => {
-      if (m.d !== e.d || !near(m.c, e.c)) return false;
-      const A = words(m.t), B = words(e.t);
-      let n = 0;
-      for (const w of A) if (B.has(w)) n++;
-      return n > 0 && n / Math.min(A.size, B.size) >= 0.5;
-    };
     const manual = EV.slice();
     for (const e of AUTO.EV) {
       const m = manual.find(m => same(m, e));
       if (!m) { EV.push({ ...e, s: 'a' + e.s }); continue; }
       // The hand-made card wins, but keeps the photo the source published for this event.
       if (!m.img && e.img) Object.assign(m, { img: e.img, imgL: e.imgL, credit: e.credit });
+    }
+    // Official posters (data.js POSTERS, image resolved each night) for events the source left without photo.
+    if (typeof POSTERS !== 'undefined' && AUTO.POSTERS) {
+      for (const p of POSTERS) {
+        const url = AUTO.POSTERS[p.page];
+        if (url) EV.filter(e => !e.img && same(p, e)).forEach(e => Object.assign(e, { img: url, imgL: url, credit: p.credit }));
+      }
     }
   }
 
@@ -421,12 +438,19 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     if (!e.img) return null;
     return { thumb: imgUrl(e.img), big: imgUrl(e.imgL || e.img), credit: 'Photo : ' + esc(e.credit || 'fournie par la source de l\'événement') };
   }
+  // Per-event variation of the illustration, stable from one visit to the next.
+  function illuVars(e) {
+    let h = 0;
+    for (const ch of e.id) h = (h * 33 + ch.charCodeAt(0)) >>> 0;
+    return { x: 18 + h % 50, y: 15 + (h >> 6) % 45, a: 100 + (h >> 12) % 120, h };
+  }
+  const illuStyle = e => { const v = illuVars(e); return `--x:${v.x}%;--y:${v.y}%;--a:${v.a}deg`; };
   function eventCard(e) {
     const commune = C[e.c];
     const multi = e.until > e.from;
     const when = multi ? `Jusqu'au ${fmtShort(e.until)}` : e.h;
     return `<div class="card" style="--c:var(--c-${e.cat})">
-      <button type="button" class="badge-ic" data-open="${e.id}" aria-label="Voir ${esc(e.t)}">${I[e.cat]}${(ph => ph ? `<img src="${esc(ph.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '')(photoOf(e))}</button>
+      <button type="button" class="badge-ic${e.img ? '' : ' illu'}" ${e.img ? '' : `style="${illuStyle(e)}"`} data-open="${e.id}" aria-label="Voir ${esc(e.t)}">${I[e.cat]}${(ph => ph ? `<img src="${esc(ph.thumb)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '')(photoOf(e))}</button>
       <button type="button" class="body" data-open="${e.id}" style="border:0;background:none;padding:0;text-align:left">
         <span class="kicker">${catName(e.cat)}</span>
         <h4>${esc(e.t)}</h4>
@@ -448,7 +472,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   }
   function filmCard(f) {
     return `<div class="card film">
-      <button type="button" class="badge-ic" data-film="${f.id}" aria-label="Voir ${esc(f.t)}">${I.cinema}</button>
+      <button type="button" class="badge-ic illu" style="${illuStyle(f)}" data-film="${f.id}" aria-label="Voir ${esc(f.t)}">${I.cinema}</button>
       <div class="body">
         <span class="kicker">${esc(f.g)}${f.dur ? ' · ' + f.dur : ''}</span>
         <h4>${esc(f.t)}</h4>
@@ -551,7 +575,12 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const e = EV.find(x => x.id === id), c = C[e.c];
     const when = e.until > e.from ? `Du ${fmtShort(e.from)} au ${fmtShort(e.until)}` : fmtDay(e.from);
     const photo = photoOf(e);
-    sheet.innerHTML = `${photo ? `<img class="sheet-img" src="${esc(photo.big)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div class="sheet-head" style="--c:var(--c-${e.cat})"><div class="badge-ic">${I[e.cat]}</div><div><span class="kicker">${catName(e.cat)}</span><h3 id="sheetTitle">${esc(e.t)}</h3></div></div>
+    const v = illuVars(e);
+    const scatter = Array.from({ length: 7 }, (_, i) => {
+      const k = (v.h >> (i * 3)) + i * 97;
+      return `<i style="left:${(i * 14 + k % 9) % 96}%;top:${(k * 7) % 80}%;transform:rotate(${(k * 37) % 60 - 30}deg)">${I[e.cat]}</i>`;
+    }).join('');
+    sheet.innerHTML = `${photo ? `<img class="sheet-img" src="${esc(photo.big)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : `<div class="sheet-illu illu" style="--c:var(--c-${e.cat});${illuStyle(e)}" aria-hidden="true">${scatter}${I[e.cat]}</div>`}<div class="sheet-head" style="--c:var(--c-${e.cat})"><div class="badge-ic">${I[e.cat]}</div><div><span class="kicker">${catName(e.cat)}</span><h3 id="sheetTitle">${esc(e.t)}</h3></div></div>
       <div class="sheet-body">
         <p>${esc(e.desc)}</p>
         <div class="rows">

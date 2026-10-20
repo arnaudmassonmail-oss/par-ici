@@ -72,7 +72,7 @@ const categorize = (title, rest) => {
 function loadBase() {
   const code = fs.readFileSync(path.join(ROOT, 'public/data.js'), 'utf8');
   const ctx = {};
-  vm.runInNewContext(code + '\n;Object.assign(this, { C, MARKETS });', ctx);
+  vm.runInNewContext(code + '\n;Object.assign(this, { C, MARKETS, POSTERS: typeof POSTERS === "undefined" ? [] : POSTERS });', ctx);
   return ctx;
 }
 
@@ -220,7 +220,7 @@ async function dataTourisme() {
 }
 
 // ---------- build data.js ----------
-function build(events, base) {
+function build(events, base, posters) {
   const C = { ...base.C };
   const keyFor = (city, lat, lon) => {
     const k = slug(city || 'lieu');
@@ -263,7 +263,7 @@ function build(events, base) {
   const newC = Object.fromEntries(Object.entries(C).filter(([k]) => !base.C[k]));
   const js = `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
 // Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
-const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV })};
+const AUTO = ${JSON.stringify({ updated: today, C: newC, SRC, EV, POSTERS: posters })};
 `;
   return { js, EV };
 }
@@ -296,6 +296,22 @@ function fixDataTourismeShift(oa, dt) {
   }
 }
 
+// Official posters: the preview image (og:image) declared by the event's official page.
+async function resolvePosters(list) {
+  const out = {};
+  for (const p of list) {
+    try {
+      const res = await fetch(p.page, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)' } });
+      const html = await res.text();
+      const m = html.match(/<meta[^>]+(?:property|name)=["'](?:og:image|twitter:image)["'][^>]*content=["']([^"']+)["']/i)
+        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["'](?:og:image|twitter:image)["']/i);
+      if (m) { out[p.page] = new URL(m[1].replace(/&amp;/g, '&'), p.page).href; log('Affiche', p.t, '→', out[p.page]); }
+      else log('Affiche', p.t, '→ aucune image déclarée par', p.page, `(HTTP ${res.status})`);
+    } catch (e) { log('Affiche', p.t, '→', e.message); }
+  }
+  return out;
+}
+
 const base = loadBase();
 const [oaRes, dtRes] = await Promise.allSettled([openAgenda(), dataTourisme()]);
 [oaRes, dtRes].filter(r => r.status === 'rejected').forEach(r => log('Erreur :', r.reason?.message || r.reason));
@@ -310,7 +326,8 @@ const events = [...oaEvents, ...dtOnly].filter(e => {
   const span = (e.timings[e.timings.length - 1].e - e.timings[0].b) / 864e5;
   return !SKIP_TITLE.test(e.title) && span <= MAX_SPAN_DAYS;
 });
-const { js, EV } = build(events, base);
+const posters = await resolvePosters(base.POSTERS);
+const { js, EV } = build(events, base, posters);
 fs.writeFileSync(path.join(ROOT, 'public/auto.js'), js);
 log(`Terminé : ${EV.length} événements écrits dans public/auto.js (${today} → ${horizon}).`);
 const byCat = {};
