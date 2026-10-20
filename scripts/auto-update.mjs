@@ -322,12 +322,13 @@ function previewImage(html) {
 }
 // On a listing page (a town agenda), the event's image is the picture closest to its title.
 // The title can appear several times in a card (link text, heading), before or after the image.
-function imageNear(html, title) {
+// `accept(textAfterTitle)` can reject some occurrences (e.g. a search result from another year).
+function imageNear(html, title, accept = () => true) {
   const clean = html.replace(/&#0?39;|&rsquo;|&#8217;|’/g, "'").replace(/&amp;/g, '&');
   const norm = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const text = norm(clean), want = norm(title.replace(/’/g, "'"));
   const hits = [];
-  for (let i = text.indexOf(want); i >= 0; i = text.indexOf(want, i + 1)) hits.push(i);
+  for (let i = text.indexOf(want); i >= 0; i = text.indexOf(want, i + 1)) if (accept(text.slice(i, i + 1500))) hits.push(i);
   if (!hits.length) return null;
   // Lazy-loading sites put a "loading" picture in src and the real one in data-src / data-original.
   const pics = [...clean.matchAll(/(?:data-src|data-original|data-lazy-src|data-lazy|src)=["']([^"'\s]+\.(?:jpe?g|png|webp)(?:\?[^"'\s]*)?)[^"']*["']|url\(["']?([^"')]+\.(?:jpe?g|png|webp))/gi)]
@@ -385,6 +386,18 @@ async function filmPosters(base) {
         if (img && !SKIP_IMG.test(img)) out[f.id] = [new URL(img.replace(/&amp;/g, '&'), url).href, cin.n];
       }
     }
+  }
+  // Films the cinemas' pages do not show: AlloCiné search results, keeping only a result from this year.
+  const year = today.slice(0, 4);
+  for (const f of base.FILMS.filter(f => !out[f.id])) {
+    const url = `https://www.allocine.fr/rechercher/movie/?q=${encodeURIComponent(f.t)}`;
+    try {
+      const r = await fetch(url, { headers: { 'user-agent': 'Mozilla/5.0 (ParIciSorties; +https://par-ici.onrender.com)', 'accept-language': 'fr-FR' } });
+      const html = r.ok ? await r.text() : '';
+      const img = html && imageNear(html, f.t, after => after.includes(year));
+      if (img && !SKIP_IMG.test(img)) out[f.id] = [new URL(img, url).href, 'AlloCiné'];
+      else log('Affiche de film introuvable :', f.t, `(AlloCiné HTTP ${r.status})`);
+    } catch (e) { log('Affiche de film', f.t, '→', e.message); }
   }
   log(`Affiches de films : ${Object.keys(out).length} sur ${base.FILMS.length}`, JSON.stringify(Object.fromEntries(Object.entries(out).map(([k, v]) => [k, v[0].split('/').pop()]))));
   return out;
