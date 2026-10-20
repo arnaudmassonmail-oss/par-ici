@@ -8,21 +8,21 @@ DATAtourisme page 4: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"f5490bf31c2a4901a363544f41f25daf.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"f5490bf31c2a4901a363544f41f25daf.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"f5490bf31c2a4901a363544f41f25daf.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 51 événements lus, 50 à moins de 50 km
 DATAtourisme page 5: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 6: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 34 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
 DATAtourisme page 10: HTTP 200
-  Quinzaine de la transmission: 23 événements lus, 2 à moins de 50 km
 DATAtourisme page 11: HTTP 200
 DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
+  Quinzaine de la transmission: 23 événements lus, 2 à moins de 50 km
   Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
   Île de Nantes: 95 événements lus, 95 à moins de 50 km
   Nantes Nord: 34 événements lus, 34 à moins de 50 km
   Nantes Sud: 32 événements lus, 32 à moins de 50 km
   Nantes Erdre: 44 événements lus, 44 à moins de 50 km
-  Nantes Métropole: 806 événements lus, 804 à moins de 50 km
+  Nantes Métropole: 807 événements lus, 804 à moins de 50 km
   Sports à Nantes: 2 événements lus, 1 à moins de 50 km
   Musée d'arts de Nantes: 23 événements lus, 23 à moins de 50 km
   Bibliothèque municipale de Nantes: 73 événements lus, 73 à moins de 50 km
@@ -37,10 +37,6 @@ DATAtourisme: 613 événements à moins de 50 km (0 fiches sans date)
 DATAtourisme: écart de dates mesuré sur les événements communs → {"1":8}
 DATAtourisme: dates corrigées de 1 jour(s)
 Doublons DATAtourisme retirés : 8
-  pas de photo pour Zoo de la Boissière-du-Doré
-  pas de photo pour Les Nefs (Nantes)
-  pas de photo pour Les Nefs (Nantes)
-Photos de lieux (Wikipédia) : 113 communes sur 119, 6 lieux nommés
 Terminé : 1820 événements écrits dans public/auto.js (2026-10-20 → 2026-11-20).
 Par catégorie : {"expo":237,"marche":184,"sport":276,"concert":238,"famille":490,"spectacle":343,"cinema":52}
 Avec photo : 1097 sur 1820
