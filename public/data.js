@@ -21,7 +21,8 @@ const C = {
   landes: { n: 'Les Landes-Genusson', lat: 46.9658, lon: -1.1203 },
   mortagne: { n: 'Mortagne-sur-Sèvre', lat: 46.9917, lon: -0.9494 },
   boissiere: { n: 'La Boissière-du-Doré', lat: 47.2369, lon: -1.2156 },
-  nantes: { n: 'Nantes', lat: 47.2184, lon: -1.5536 }
+  nantes: { n: 'Nantes', lat: 47.2184, lon: -1.5536 },
+  saintherblain: { n: 'Saint-Herblain', lat: 47.2122, lon: -1.6497 }
 };
 
 const SRC = {
@@ -46,7 +47,12 @@ const SRC = {
   bcn: ['Big City Nantes', 'https://www.bigcitynantes.fr/actu/que-faire-a-nantes-pendant-les-vacances-de-la-toussaint-2026-le-top-des-activites-pour-les-familles/'],
   fcn: ['Billetterie FC Nantes', 'https://billetterie.fcnantes.com/fr/prochains-matchs/calendrier'],
   cdb: ['Château des ducs de Bretagne', 'https://www.chateaunantes.fr/evenements/special-halloween/'],
-  imn: ['Infos Média Nantes', 'https://infos-media-nantes.fr/halloween-2026-nantes-sorties-eclipsium-naudieres-nefs-savenay/']
+  imn: ['Infos Média Nantes', 'https://infos-media-nantes.fr/halloween-2026-nantes-sorties-eclipsium-naudieres-nefs-savenay/'],
+  gorgesMed: ['Ville de Gorges, médiathèque Au fil des mots', 'https://www.gorges44.fr/sport-culture-loisirs/culture'],
+  boussayChamp: ['Infos Média Nantes, Boussay', 'https://infos-media-nantes.fr/boussay-exposition-champignons-24-25-octobre-2026/'],
+  garenne: ['Domaine de la Garenne Lemot', 'https://www.domaine-garenne-lemot.fr/44/l-agenda/agenda-du-domaine-de-la-garenne-lemot/lem_5209'],
+  zenith: ['Zénith Nantes Métropole', 'https://www.zenith-nantesmetropole.com/program'],
+  choletBasket: ['Billetterie Cholet Basket', 'https://www.biletwise.com/fr/cholet-basket-tickets']
 };
 
 // Real events collected on 19 October 2026. d = date, to = last day of a multi-day event.
@@ -66,6 +72,21 @@ const EV = [
   { cat: 'famille', t: 'Atelier cyanotype enfants', c: 'getigne', d: '2026-10-21', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Atelier de la bibliothèque pour les 6-11 ans : impressions de plantes au cyanotype, la photo révélée au soleil.', s: 'getigne' },
   { cat: 'famille', t: 'Soirée jeux de société', c: 'getigne', d: '2026-11-06', h: 'En soirée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Animation de la bibliothèque : venez profiter d\'une soirée jeux.', s: 'getigne' },
   { cat: 'spectacle', t: 'Petits rendez-vous contes', c: 'getigne', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Lectures de contes pour les enfants à la bibliothèque.', s: 'getigne' },
+  { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-10-17', to: '2026-11-01', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot. Reprise du 7 au 29 novembre.', s: 'garenne' },
+  { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-11-07', to: '2026-11-29', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot.', s: 'garenne' },
+  { cat: 'expo', t: 'Le rêve italien de François Frédéric Lemot', c: 'getigne', d: '2026-10-20', to: '2026-12-31', h: 'Aux heures d\'ouverture du domaine', p: 'À confirmer', place: 'Maison du Jardinier, Domaine de la Garenne Lemot', desc: 'Exposition permanente de la Maison du Jardinier, ouverte de février à décembre. Le parc est en accès libre et gratuit.', s: 'garenne' },
+  { cat: 'famille', t: 'Atelier scrapbooking', c: 'gorges', d: '2026-10-28', h: 'Horaire à confirmer', p: 'Complet', place: 'Médiathèque Au fil des mots', desc: 'Atelier créatif de la médiathèque. Annoncé complet.', s: 'gorgesMed' },
+  { cat: 'famille', t: 'Atelier Bookface', c: 'gorges', d: '2026-10-29', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Se prendre en photo en prolongeant une couverture de livre : un atelier photo ludique.', s: 'gorgesMed' },
+  { cat: 'spectacle', t: 'Raconte-moi une histoire', c: 'gorges', d: '2026-11-04', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Lecture d\'histoires pour les enfants.', s: 'gorgesMed' },
+  { cat: 'concert', t: 'Soirée celtique et bal folk (Celtomania)', c: 'gorges', d: '2026-11-10', h: 'En soirée, horaire à confirmer', p: 'Voir la billetterie', place: 'Gorges', desc: 'Soirée cabaret irlandais et bal folk dans le cadre du festival Celtomania.', s: 'gorges' },
+  { cat: 'spectacle', t: 'Histoires pour petites oreilles', c: 'gorges', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Histoires et comptines pour les moins de 3 ans.', s: 'gorgesMed' },
+  { cat: 'spectacle', t: 'Scène ouverte slam et poésie', c: 'gorges', d: '2026-11-20', h: 'En soirée, horaire à confirmer', p: 'À confirmer', place: 'Médiathèque Au fil des mots', desc: 'Soirée scène ouverte : venez dire vos textes ou simplement écouter.', s: 'gorgesMed' },
+  { cat: 'expo', t: 'Exposition de champignons', c: 'boussay', d: '2026-10-24', to: '2026-10-25', h: 'Sam. 14h – 19h, dim. 10h – 13h et 14h – 18h', p: 'Gratuit', kids: true, place: 'Centre régional d\'accueil, 9 rue du Val-de-Sèvre', desc: 'Exposition de champignons de la région par la section de Boussay de l\'Association mycologique de l\'Ouest.', s: 'boussayChamp' },
+  { cat: 'sport', t: 'Basket : Cholet contre Spartak Subotica', c: 'cholet', d: '2026-10-28', h: '20h00', p: 'Voir la billetterie', kids: true, place: 'La Meilleraie', desc: 'Basketball Champions League.', s: 'choletBasket' },
+  { cat: 'concert', t: 'Florent Pagny : La Suite du Retour', c: 'saintherblain', d: '2026-11-06', h: '20h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de la tournée 65 Tour. Une date est aussi annoncée le 5 novembre selon certaines billetteries.', s: 'zenith' },
+  { cat: 'concert', t: 'Patrick Bruel', c: 'saintherblain', d: '2026-11-07', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
+  { cat: 'concert', t: 'Christophe Maé', c: 'saintherblain', d: '2026-11-08', h: '18h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
+  { cat: 'concert', t: 'Ben Mazué', c: 'saintherblain', d: '2026-11-12', h: '20h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Tournée des Zénith 2026.', s: 'zenith' },
   { cat: 'famille', t: 'Soirée pyjama à la médiathèque', c: 'gorges', d: '2026-10-27', h: 'En soirée', p: 'Gratuit', kids: true, place: 'Médiathèque de Gorges', desc: 'Histoires du soir pour les enfants, en pyjama et doudou sous le bras.', s: 'gorges' },
   { cat: 'expo', t: 'Château de Clisson : visite pour les familles', c: 'clisson', d: '2026-10-17', to: '2026-10-31', h: '16h00, sauf le mardi', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée de la forteresse pensée pour les enfants pendant les vacances de la Toussaint. Réservation au 02 40 54 02 22.', s: 'chateau' },
   { cat: 'expo', t: 'Château de Clisson : Au cœur de la forteresse', c: 'clisson', d: '2026-11-07', to: '2026-11-29', h: 'Sam. et dim. 14h30 et 16h00', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée d\'une heure de la forteresse médiévale. Château ouvert du mercredi au dimanche, 14h – 17h30.', s: 'chateau' },
@@ -129,9 +150,13 @@ const FILMS = [
   { id: 'miserables', t: 'Les Misérables', g: 'Drame', s: { connetable: '2026-10-18', montaigu: '2026-10-14' }, desc: 'Nouvelle adaptation du roman de Victor Hugo, réalisée par Fred Cavayé.' },
   { id: 'karma', t: 'Karma', g: 'Thriller', s: { connetable: '2026-10-21' }, desc: 'Thriller de Guillaume Canet avec Marion Cotillard, dans le nord de l\'Espagne.' },
   { id: 'englouti', t: 'Englouti', g: 'Thriller', s: { montaigu: '2026-10-14' }, desc: 'Thriller américain sorti le 14 octobre.' },
+  { id: 'ducobu', t: 'Ducobu et le fantôme de Saint-Potache', g: 'Comédie', age: 'En famille', kids: true, s: { montaigu: '2026-10-19' }, desc: 'Nouvelle aventure du cancre préféré des enfants, à l\'affiche pour les vacances.' },
+  { id: 'residentevil', t: 'Resident Evil', g: 'Horreur', s: { montaigu: '2026-10-19' }, desc: 'À l\'affiche au cinéma de Montaigu-Vendée.' },
+  { id: 'congoboy', t: 'Congo Boy', g: 'Film', s: { connetable: '2026-10-27' }, desc: 'Annoncé au Connétable à partir du 27 octobre.' },
+  { id: 'moulin', t: 'Moulin', g: 'Drame historique', dur: '2h10', s: { connetable: '2026-10-28' }, desc: 'László Nemes raconte l\'arrestation de Jean Moulin en 1943 et son interrogatoire par Klaus Barbie. Avec Gilles Lellouche et Lars Eidinger. En compétition à Cannes 2026.' },
   { id: 'nivue', t: 'Ni vue, ni connue', g: 'Film', s: { connetable: '2026-10-18' }, desc: 'À l\'affiche au Connétable.' },
   { id: 'salut', t: 'Notre salut', g: 'Film', s: { connetable: '2026-10-23' }, desc: 'Annoncé au Connétable à partir du 23 octobre.' },
-  { id: 'garance', t: 'Garance', g: 'Film', s: { connetable: '2026-10-25' }, desc: 'Annoncé au Connétable à partir du 25 octobre.' },
+  { id: 'garance', t: 'Garance', g: 'Film', s: { connetable: '2026-10-25', montaigu: '2026-10-19' }, desc: 'Annoncé au Connétable à partir du 25 octobre, déjà à l\'affiche à Montaigu-Vendée.' },
   { id: 'minotaure', t: 'Minotaure', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' },
   { id: 'fantome', t: 'Le Fantôme de l\'Opéra', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' }
 ];
