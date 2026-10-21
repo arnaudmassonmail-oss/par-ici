@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-10-20';
+const UPDATED = '2026-10-21';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -23,7 +23,8 @@ const C = {
   boissiere: { n: 'La Boissière-du-Doré', lat: 47.2369, lon: -1.2156 },
   nantes: { n: 'Nantes', lat: 47.2184, lon: -1.5536 },
   saintherblain: { n: 'Saint-Herblain', lat: 47.2122, lon: -1.6497 },
-  vallet: { n: 'Vallet', lat: 47.1617, lon: -1.2660 }
+  vallet: { n: 'Vallet', lat: 47.1617, lon: -1.2660 },
+  monnieres: { n: 'Monnières', lat: 47.1131, lon: -1.3478 }
 };
 
 const SRC = {
@@ -55,13 +56,13 @@ const SRC = {
   zenith: ['Zénith Nantes Métropole', 'https://www.zenith-nantesmetropole.com/program'],
   choletBasket: ['Billetterie Cholet Basket', 'https://www.biletwise.com/fr/cholet-basket-tickets'],
   jardinVerre: ['Jardin de Verre, Cholet', 'https://www.cholet.fr/agenda/agenda_cat_12_8_10_jardin+verre.html'],
-  valletMkt: ['Alentoor, Vallet', 'https://www.alentoor.fr/vallet/agenda']
+  valletMkt: ['Alentoor, Vallet', 'https://www.alentoor.fr/vallet/agenda'],
+  bravoh: ['Bravoh!, saison culturelle de Clisson Sèvre et Maine', 'https://bravoh.fr/2026/06/02/par-ici-la-saison-26-27/']
 };
 
 // Real events collected on 19 October 2026. d = date, to = last day of a multi-day event.
 const EV = [
   // Cugand-la-Bernardière
-  { cat: 'famille', t: 'Atelier polar numérique', c: 'cugand', d: '2026-10-20', h: 'Horaire à confirmer', p: 'Gratuit', kids: true, place: 'Médiathèque de Cugand', desc: 'Découverte d\'applications ludiques et de jeux vidéo autour de l\'univers du polar.', s: 'tm' },
   { cat: 'marche', t: 'Vide Bibliothèques #5', c: 'cugand', d: '2026-10-25', h: '9h00 – 17h00', p: 'Entrée libre', kids: true, place: 'Espace culturel du Doué', desc: 'Grand déstockage de livres organisé par les bénévoles de la médiathèque de Cugand.', s: 'cub' },
   { cat: 'famille', t: 'Soirée frisson : lectures et dessins', c: 'cugand', d: '2026-10-30', h: 'Horaire à confirmer', p: 'Gratuit', kids: true, place: 'Médiathèque de Cugand', desc: 'Lectures qui font frissonner pour les 3-8 ans et dessins pour les 8-11 ans, juste avant Halloween.', s: 'tm' },
   { cat: 'famille', t: 'Soirée des 14-17 ans', c: 'cugand', d: '2026-10-30', h: 'En soirée', p: 'À confirmer', place: 'Espace culturel du Doué', desc: 'Soirée réservée aux ados, organisée par La Bringuerie de Cugand-la-Bernardière.', s: 'cub' },
@@ -90,6 +91,10 @@ const EV = [
   { cat: 'concert', t: 'Patrick Bruel', c: 'saintherblain', d: '2026-11-07', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
   { cat: 'concert', t: 'Christophe Maé', c: 'saintherblain', d: '2026-11-08', h: '18h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
   { cat: 'concert', t: 'Ben Mazué', c: 'saintherblain', d: '2026-11-12', h: '20h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Tournée des Zénith 2026.', s: 'zenith' },
+  { cat: 'spectacle', t: 'Je-ne-sais-quoi', c: 'clisson', d: '2026-11-05', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Danse : nouvelle création du chorégraphe Laurent Cèbe, pour trois danseurs. Saison Bravoh!.', s: 'bravoh' },
+  { cat: 'concert', t: 'Multitude', c: 'monnieres', d: '2026-11-14', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Monnières', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!, aussi le 15 novembre à Boussay.', s: 'bravoh' },
+  { cat: 'concert', t: 'Multitude', c: 'boussay', d: '2026-11-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Boussay', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!.', s: 'bravoh' },
+  { cat: 'spectacle', t: 'Titre définitif (titre provisoire)', c: 'clisson', d: '2026-11-20', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Concert de mentalisme de la compagnie Raoul Lambert. Saison Bravoh!.', s: 'bravoh' },
   { cat: 'famille', t: 'Soirée pyjama à la médiathèque', c: 'gorges', d: '2026-10-27', h: 'En soirée', p: 'Gratuit', kids: true, place: 'Médiathèque de Gorges', desc: 'Histoires du soir pour les enfants, en pyjama et doudou sous le bras.', s: 'gorges' },
   { cat: 'expo', t: 'Château de Clisson : visite pour les familles', c: 'clisson', d: '2026-10-17', to: '2026-10-31', h: '16h00, sauf le mardi', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée de la forteresse pensée pour les enfants pendant les vacances de la Toussaint. Réservation au 02 40 54 02 22.', s: 'chateau' },
   { cat: 'expo', t: 'Château de Clisson : Au cœur de la forteresse', c: 'clisson', d: '2026-11-07', to: '2026-11-29', h: 'Sam. et dim. 14h30 et 16h00', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée d\'une heure de la forteresse médiévale. Château ouvert du mercredi au dimanche, 14h – 17h30.', s: 'chateau' },
@@ -159,8 +164,10 @@ const FILMS = [
   { id: 'miserables', t: 'Les Misérables', g: 'Drame', s: { connetable: '2026-10-18', montaigu: '2026-10-14' }, desc: 'Nouvelle adaptation du roman de Victor Hugo, réalisée par Fred Cavayé.' },
   { id: 'karma', t: 'Karma', g: 'Thriller', s: { connetable: '2026-10-21' }, desc: 'Thriller de Guillaume Canet avec Marion Cotillard, dans le nord de l\'Espagne.' },
   { id: 'englouti', t: 'Englouti', g: 'Thriller', s: { montaigu: '2026-10-14' }, desc: 'Thriller américain sorti le 14 octobre.' },
-  { id: 'ducobu', t: 'Ducobu et le fantôme de Saint-Potache', g: 'Comédie', age: 'En famille', kids: true, s: { montaigu: '2026-10-19' }, desc: 'Nouvelle aventure du cancre préféré des enfants, à l\'affiche pour les vacances.' },
+  { id: 'ducobu', t: 'Ducobu et le fantôme de Saint-Potache', g: 'Comédie', age: 'En famille', kids: true, s: { montaigu: '2026-10-19', connetable: '2026-10-21' }, desc: 'Nouvelle aventure du cancre préféré des enfants, à l\'affiche pour les vacances.' },
   { id: 'residentevil', t: 'Resident Evil', g: 'Horreur', s: { montaigu: '2026-10-19' }, desc: 'À l\'affiche au cinéma de Montaigu-Vendée.' },
+  { id: 'beauxjours', t: 'Les Beaux Jours', g: 'Film', s: { connetable: '2026-10-21' }, desc: 'À l\'affiche au Connétable.' },
+  { id: 'femme', t: 'Une femme aujourd\'hui', g: 'Drame', s: { connetable: '2026-10-28' }, desc: 'Le nouveau film de Robert Guédiguian, annoncé au Connétable à partir du 28 octobre.' },
   { id: 'congoboy', t: 'Congo Boy', g: 'Film', s: { connetable: '2026-10-27' }, desc: 'Annoncé au Connétable à partir du 27 octobre.' },
   { id: 'moulin', t: 'Moulin', g: 'Drame historique', dur: '2h10', s: { connetable: '2026-10-28' }, desc: 'László Nemes raconte l\'arrestation de Jean Moulin en 1943 et son interrogatoire par Klaus Barbie. Avec Gilles Lellouche et Lars Eidinger. En compétition à Cannes 2026.' },
   { id: 'nivue', t: 'Ni vue, ni connue', g: 'Film', s: { connetable: '2026-10-18' }, desc: 'À l\'affiche au Connétable.' },
