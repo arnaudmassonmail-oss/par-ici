@@ -1,52 +1,50 @@
 DATAtourisme page 1: HTTP 200
-DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"7€ visite de l'ancienne ferme + goûter inclus"},"priceCurrency":"EUR","maxPrice":[9]}]}],"isLocatedAt":[{"geo":{"latitude":47.3350366,"longitude":-1.698015},"address":[{"hasAddressCity":{"insee":"44217","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"44","label":{"@fr":"Loire-Atlantique"}},"label":{"@fr":"Vigneux-de-Bretagne"}},"streetAddress":["Ecomusée Rural du Pays Nantais","81, Rue Anne de Bretagne"],"postalCode":"44360","addressLocality":"Vigneux-de-Bretagne"}],"geoPoint":{"lon":-1.698015,"lat":47.3350366}}],"hasDescription":[{"description":{"@fr":"Réservation obligatoire"},"shortDescription":{"@fr":"Un atelier bois avec le sabotier"}}],"label":{"@fr":"ATELIER DÉCORATION OBJETS BOIS"},"type":["EntertainmentAndEvent","SportsEvent","Event","PointOfInterest","Game"],"uri":"https://data.datatourisme.fr/49/49cb1ca3-ba67-341e-9931-4f260e9e1dcb","takesPlaceAt":[{"endDate":"2026-10-19","startTime":"14:00","endTime":"16:00","startDate":"2026-10-19"}],"uuid":"00540c8c-735c-3db6-8f4b-93591c2d2a78"}
+DATAtourisme: clés de la réponse → objects, meta | exemple → {"offers":[{"priceSpecification":[{"additionalInformation":{"@fr":"Plein tarif"},"priceCurrency":"EUR","minPrice":[6],"maxPrice":[9.8]},{"priceCurrency":"EUR","minPrice":[10],"maxPrice":[22]}]}],"isLocatedAt":[{"geo":{"latitude":47.05323,"longitude":-0.87771},"address":[{"hasAddressCity":{"insee":"49099","isPartOfDepartment":{"isPartOfRegion":{"isPartOfCountry":{"label":{"@fr":"France"}},"insee":"52","label":{"@fr":"Pays de la Loire"}},"insee":"49","label":{"@fr":"Maine-et-Loire"}},"label":{"@fr":"Cholet"}},"streetAddress":["Glisséo","Avenue Anatole Manceau"],"postalCode":"49300","addressLocality":"Cholet"}],"geoPoint":{"lon":-0.87771,"lat":47.05323}}],"hasDescription":[{"description":{"@fr":"Animations et soirée déguisée à la patinoire Glisséo"}}],"label":{"@fr":"Halloween"},"type":["EntertainmentAndEvent","SportsEvent","PointOfInterest","Event","Game"],"uri":"https://data.datatourisme.fr/49/ff634e38-914c-3156-8515-a9a0f989a177","takesPlaceAt":[{"endDate":"2026-10-31","startTime":"14:30","startDate":"2026-10-31"}],"uuid":"00fcec98-e978-3fdd-8c25-3b7c8db00fe9"}
 DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCoveredBy":"By-NC-ND 4.0","title":{"@fr":"playmobil château"}}],"hasRelatedResource":[{"locator":["https://cdt24.media.tourinsoft.eu/upload/Playmobil-au-chateau.jpg"]}]}]
 DATAtourisme page 2: HTTP 200
 OpenAgenda: 60 agendas candidats
 DATAtourisme page 3: HTTP 200
 DATAtourisme page 4: HTTP 200
 OpenAgenda: exemple d'image → {"image":{"filename":"cc587e0844644c8c8328c115934ffdf4.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"cc587e0844644c8c8328c115934ffdf4.full.image.jpg","size":{"width":1240,"height":1754},"type":"full"},{"filename":"cc587e0844644c8c8328c115934ffdf4.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
-  Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
+  Terres de Montaigu: 51 événements lus, 50 à moins de 50 km
 DATAtourisme page 5: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 32 événements lus, 0 à moins de 50 km
+  Communauté de Communes des Terres du Val de Loire: 33 événements lus, 0 à moins de 50 km
 DATAtourisme page 6: HTTP 200
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
 DATAtourisme page 10: HTTP 200
 DATAtourisme page 11: HTTP 200
-DATAtourisme: 585 événements à moins de 50 km (0 fiches sans date)
-  Quinzaine de la transmission: 29 événements lus, 2 à moins de 50 km
+DATAtourisme: 592 événements à moins de 50 km (0 fiches sans date)
+  Quinzaine de la transmission: 28 événements lus, 2 à moins de 50 km
   Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
-  Île de Nantes: 94 événements lus, 94 à moins de 50 km
-  Nantes Nord: 32 événements lus, 32 à moins de 50 km
-  Nantes Sud: 38 événements lus, 38 à moins de 50 km
-  Nantes Erdre: 47 événements lus, 47 à moins de 50 km
-  Nantes Métropole: 852 événements lus, 849 à moins de 50 km
+  Île de Nantes: 93 événements lus, 93 à moins de 50 km
+  Nantes Nord: 30 événements lus, 30 à moins de 50 km
+  Nantes Sud: 39 événements lus, 39 à moins de 50 km
+  Nantes Erdre: 45 événements lus, 45 à moins de 50 km
+  Nantes Métropole: 851 événements lus, 848 à moins de 50 km
   Sports à Nantes: 3 événements lus, 2 à moins de 50 km
-  Musée d'arts de Nantes: 23 événements lus, 23 à moins de 50 km
-  Bibliothèque municipale de Nantes: 74 événements lus, 74 à moins de 50 km
-  Nantes Centre-ville: 47 événements lus, 47 à moins de 50 km
+  Musée d'arts de Nantes: 25 événements lus, 25 à moins de 50 km
+  Bibliothèque municipale de Nantes: 68 événements lus, 68 à moins de 50 km
+  Nantes Centre-ville: 45 événements lus, 45 à moins de 50 km
   Jour de Fête: 3 événements lus, 1 à moins de 50 km
   Saison Culturelle des Herbiers: 2 événements lus, 2 à moins de 50 km
-  Journées nationales de l’architecture 2026 : Pays de la Loire: 2 événements lus, 2 à moins de 50 km
+  Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
-  Département de la Vendée: 35 événements lus, 35 à moins de 50 km
   La Compagnie de la Hulotte: 10 événements lus, 1 à moins de 50 km
-  Agenda du Patrimoine: 3 événements lus, 2 à moins de 50 km
-  Conservatoire botanique national Sud-Atlantique: 3 événements lus, 0 à moins de 50 km
-DATAtourisme: écart de dates mesuré sur les événements communs → {"1":9}
-DATAtourisme: dates corrigées de 1 jour(s)
+  Agenda du Patrimoine: 3 événements lus, 1 à moins de 50 km
+  Conservatoire botanique national Sud-Atlantique: 2 événements lus, 0 à moins de 50 km
+DATAtourisme: écart de dates mesuré sur les événements communs → {"0":9}
 Doublons DATAtourisme retirés : 9
-Affiche Kanine Parjure → https://zinor.fr/wp-content/uploads/2026/08/parjure_amarok_v2.jpg
+Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 500)
 Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
 Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
 Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
 Affiche Un chapeau de paille d'Italie → https://www.getigne.fr/media/2000-*-9999/fichier-11agenda.png
-Affiche Atelier cyanotype enfants → https://www.getigne.fr/media/2000-*-9999/bib-cyanotype-agenda.png
+Affiche Atelier cyanotype enfants → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
-Images des sources manuelles : 28 sur 69 sorties (25 pages lues)
-Affiches de films : 15 sur 15 {"shaun":"1AKHDUG6.jpg","karma":"EKMGQLKO.jpg","congoboy":"32MTFPIA.jpg","salut":"I0GBTXO4.jpg","garance":"URDHDQFH.jpg","moulin":"YUNFORSL.jpg","minotaure":"E5JYYJ48.jpg","fantome":"L3FOCG6X.jpg","mochy":"2e292d36aa0d7fc0efb2e1d08578357d.jpg","marius":"de07c88f2baa5a2d8f890dc5d7b39326.jpg","miserables":"5a4186d62d534f2da65c2e9e8e822a34.jpg","englouti":"3173f450f63ac497176b4d6c8fd08ea0.jpg","ducobu":"54167f9b523fff67b07b2e80f5f9dd71.jpg","residentevil":"1d653b3f832f0f7ca7016e650207798f.jpg","nivue":"04d24a4f7815a30efe7dd1202384832f.jpg"}
-Terminé : 1841 événements écrits dans public/auto.js (2026-10-21 → 2026-11-21).
-Par catégorie : {"expo":232,"marche":183,"sport":258,"concert":251,"famille":510,"spectacle":356,"cinema":51}
-Avec photo : 1149 sur 1841
+Images des sources manuelles : 26 sur 72 sorties (26 pages lues)
+Affiches de films : 17 sur 17 {"shaun":"1AKHDUG6.jpg","karma":"EKMGQLKO.jpg","ducobu":"B12HFQFH.jpg","congoboy":"32MTFPIA.jpg","salut":"I0GBTXO4.jpg","garance":"URDHDQFH.jpg","femme":"TT1WF6XR.jpg","moulin":"YUNFORSL.jpg","minotaure":"E5JYYJ48.jpg","fantome":"L3FOCG6X.jpg","mochy":"2e292d36aa0d7fc0efb2e1d08578357d.jpg","marius":"de07c88f2baa5a2d8f890dc5d7b39326.jpg","miserables":"5a4186d62d534f2da65c2e9e8e822a34.jpg","englouti":"3173f450f63ac497176b4d6c8fd08ea0.jpg","residentevil":"1d653b3f832f0f7ca7016e650207798f.jpg","beauxjours":"d87d5b0413c51241fe752d22867f1691.jpg","nivue":"04d24a4f7815a30efe7dd1202384832f.jpg"}
+Terminé : 1845 événements écrits dans public/auto.js (2026-10-22 → 2026-11-22).
+Par catégorie : {"expo":231,"marche":185,"sport":258,"concert":250,"famille":498,"spectacle":371,"cinema":52}
+Avec photo : 1147 sur 1845
