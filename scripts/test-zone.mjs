@@ -7,6 +7,12 @@ import { collectAround, toCards, searchTermsAround } from '../lib/collect.mjs';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const PLACES = [['Lyon', 45.758, 4.835], ['Rennes', 48.111, -1.68], ['Gap', 44.559, 6.079], ['Clisson', 47.087, -1.282]];
 const out = [];
+// What the geography service answers from here (it sometimes refuses servers).
+for (let i = 0; i < 3; i++) {
+  const t = Date.now();
+  const r = await fetch('https://geo.api.gouv.fr/communes?lat=47.087&lon=-1.282&fields=nom,epci,departement&format=json').catch(e => ({ status: 'erreur ' + e.message + ' ' + (e.cause?.code || '') }));
+  out.push(`geo.api.gouv.fr essai ${i + 1} : ${r.status} en ${Date.now() - t} ms ${r.text ? (await r.text()).slice(0, 120) : ''}`);
+}
 for (const [name, lat, lon] of PLACES) {
   const t0 = Date.now();
   const { searches } = await searchTermsAround(lat, lon);
