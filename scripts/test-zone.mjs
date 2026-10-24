@@ -10,7 +10,7 @@ const out = [];
 // What the geography service answers from here (it sometimes refuses servers).
 for (let i = 0; i < 3; i++) {
   const t = Date.now();
-  const r = await fetch('https://data.geopf.fr/geocodage/reverse?lon=-1.282&lat=47.087&index=address&type=municipality&limit=1').catch(e => ({ status: 'erreur ' + e.message + ' ' + (e.cause?.code || '') }));
+  const r = await fetch('https://data.geopf.fr/geocodage/reverse?lon=-1.282&lat=47.087&index=address&limit=1').catch(e => ({ status: 'erreur ' + e.message + ' ' + (e.cause?.code || '') }));
   out.push(`data.geopf.fr essai ${i + 1} : ${r.status} en ${Date.now() - t} ms ${r.text ? (await r.text()).slice(0, 120) : ''}`);
 }
 for (const [name, lat, lon] of PLACES) {
