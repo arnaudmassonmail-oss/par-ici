@@ -173,6 +173,8 @@ button.badge-ic { border: 0; padding: 0; cursor: pointer; }
 .src a { color: var(--accent); font-weight: 800; }
 .time { font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 10px; border: 1.5px solid color-mix(in srgb, var(--c) 45%, transparent); color: var(--ink); font-variant-numeric: tabular-nums; background: transparent; }
 
+.search { width: 100%; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 700; }
+.search:focus { border-color: var(--accent); outline: none; }
 .more { margin-top: 10px; width: 100%; border: 2px dashed var(--line); background: transparent; border-radius: var(--radius); padding: 12px; font-weight: 800; color: var(--accent); }
 .more:hover { background: var(--surface-2); }
 .empty { background: var(--surface); border: 2px dashed var(--line); border-radius: var(--radius); padding: 28px 20px; text-align: center; color: var(--muted); font-weight: 700; }
@@ -236,7 +238,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 </header>
 
 <div class="wrap">
-  <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg><span><b>Données réelles.</b> Chaque nuit, l'appli collecte les agendas OpenAgenda et DATAtourisme autour de Cugand. Le cinéma et les sorties de Clisson, Gétigné et Gorges sont ajoutés à la main. Chaque fiche donne sa source : vérifiez l'horaire avant de partir.</span></p>
+  <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M12 11v5"/></svg><span><b>Données réelles.</b> Les sorties viennent des agendas OpenAgenda et des offices de tourisme (DATAtourisme) autour de votre position, partout en France. Autour de Cugand, le cinéma et quelques communes sont aussi ajoutés à la main. Chaque fiche donne sa source : vérifiez l'horaire avant de partir.</span></p>
 
   <div class="layout">
     <aside class="filters" aria-label="Filtres">
@@ -323,28 +325,46 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     for (const w of A) if (B.has(w)) n++;
     return n > 0 && n / Math.min(A.size, B.size) >= 0.5;
   };
-  if (typeof AUTO !== 'undefined') {
-    for (const [k, c] of Object.entries(AUTO.C)) if (!C[k]) C[k] = c;
-    for (const [k, s] of Object.entries(AUTO.SRC)) SRC['a' + k] = s;
-    const manual = EV.slice();
-    for (const e of AUTO.EV) {
-      const m = manual.find(m => same(m, e));
-      if (!m) { EV.push({ ...e, s: 'a' + e.s }); continue; }
-      // The hand-made card wins, but keeps the photo the source published for this event.
-      if (!m.img && e.img) Object.assign(m, { img: e.img, imgL: e.imgL, credit: e.credit });
-    }
-    // Official posters (data.js POSTERS, image resolved each night) for events the source left without photo.
-    if (typeof POSTERS !== 'undefined' && AUTO.POSTERS) {
-      for (const p of POSTERS) {
-        const url = AUTO.POSTERS[p.page + (p.find ? '#' + p.find : '')];
-        if (url) EV.filter(e => !e.img && same(p, e)).forEach(e => Object.assign(e, { img: url, imgL: url, credit: p.credit }));
+  // Hand-made events as written in data.js; each merge starts again from a fresh copy.
+  const MANUAL = EV.map(e => ({ ...e }));
+  const AUTO_COL = typeof AUTO !== 'undefined' ? AUTO : null;
+  // Merge collections (the nightly auto.js and the server's answer for the current position) into the hand-made data.
+  // A collected event that repeats one already kept (same day, similar title, same place) is dropped.
+  function applyCollections(cols) {
+    EV.length = 0;
+    MANUAL.forEach(e => EV.push({ ...e }));
+    const byDay = {};
+    EV.forEach(e => (byDay[e.d] ||= []).push(e));
+    cols.filter(Boolean).forEach((col, n) => {
+      // Communes are keyed by name; a server collection adds the position so two towns with the same name never mix.
+      const ckey = k => (col === AUTO_COL ? k : `${k}@${col.C[k].lat.toFixed(2)},${col.C[k].lon.toFixed(2)}`);
+      for (const k of Object.keys(col.C)) if (!C[ckey(k)]) C[ckey(k)] = col.C[k];
+      for (const [k, src] of Object.entries(col.SRC)) SRC[`c${n}${k}`] = src;
+      for (const e of col.EV) {
+        const ev = { ...e, c: col.C[e.c] ? ckey(e.c) : e.c, s: `c${n}${e.s}` };
+        if (!C[ev.c]) continue;
+        const m = (byDay[ev.d] || []).find(m => same(m, ev));
+        // The card already kept wins, but takes the photo the source published for this event.
+        if (m) { if (!m.img && ev.img) Object.assign(m, { img: ev.img, imgL: ev.imgL, credit: ev.credit }); continue; }
+        EV.push(ev);
+        (byDay[ev.d] ||= []).push(ev);
+      }
+    });
+    if (AUTO_COL) {
+      // Official posters (data.js POSTERS, image resolved each night) for events the source left without photo.
+      if (typeof POSTERS !== 'undefined' && AUTO_COL.POSTERS) {
+        for (const p of POSTERS) {
+          const url = AUTO_COL.POSTERS[p.page + (p.find ? '#' + p.find : '')];
+          if (url) EV.filter(e => !e.img && same(p, e)).forEach(e => Object.assign(e, { img: url, imgL: url, credit: p.credit }));
+        }
+      }
+      // Otherwise the image the hand-made event's own source page shows for it (read each night).
+      if (AUTO_COL.SRCIMG) for (const e of EV) {
+        const url = !e.img && AUTO_COL.SRCIMG[e.t + '|' + e.d];
+        if (url) Object.assign(e, { img: url, imgL: url, credit: 'Image : ' + SRC[e.s][0] });
       }
     }
-    // Otherwise the image the hand-made event's own source page shows for it (read each night).
-    if (AUTO.SRCIMG) for (const e of EV) {
-      const url = !e.img && AUTO.SRCIMG[e.t + '|' + e.d];
-      if (url) Object.assign(e, { img: url, imgL: url, credit: 'Image : ' + SRC[e.s][0] });
-    }
+    prepareDates();
   }
 
   // Dates
@@ -362,14 +382,17 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   };
   // Ids come from the content, so favourites survive the nightly refresh.
   const hash = str => { let h = 0; for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) | 0; return (h >>> 0).toString(36); };
-  EV.forEach(e => { e.id = 'e' + hash(e.t + e.d + e.c); e.from = offOf(e.d); e.until = e.to ? offOf(e.to) : e.from; });
-  for (let off = 0; off <= 30; off++) {
-    const wd = (dow + off) % 7;
-    MARKETS.filter(m => m.wd === wd).forEach(m => {
-      const dt = dateOf(off);
-      EV.push({ ...m, cat: 'marche', p: 'Entrée libre', kids: true, id: 'm' + m.c + m.wd + '-' + dt.toISOString().slice(0, 10), from: off, until: off });
-    });
+  function prepareDates() {
+    EV.forEach(e => { e.id = 'e' + hash(e.t + e.d + C[e.c].n); e.from = offOf(e.d); e.until = e.to ? offOf(e.to) : e.from; });
+    for (let off = 0; off <= 30; off++) {
+      const wd = (dow + off) % 7;
+      MARKETS.filter(m => m.wd === wd).forEach(m => {
+        const dt = dateOf(off);
+        EV.push({ ...m, cat: 'marche', p: 'Entrée libre', kids: true, id: 'm' + m.c + m.wd + '-' + dt.toISOString().slice(0, 10), from: off, until: off });
+      });
+    }
   }
+  applyCollections([AUTO_COL]);
   FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, offOf(v)])); });
   const fmtDay = off => {
     if (off === 0) return 'Aujourd\'hui';
@@ -419,6 +442,44 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     for (const c of Object.values(C)) { const d = 6371 * Math.hypot(rad(c.lat - lat), rad(c.lon - lon) * Math.cos(rad(lat))); if (d < bd) { bd = d; best = c; } }
     return bd < 8 ? best.n : 'Ma position';
   };
+
+  // Outings around the chosen position come from the server (/api/events). Without it (a static copy of the
+  // site, or the agendas down) the page keeps the nightly collection around Cugand.
+  let loadedFor = '', loading = false;
+  async function loadAround() {
+    const pos = S.pos, cell = pos.lat.toFixed(1) + ',' + pos.lon.toFixed(1);
+    if (loadedFor === cell) return;
+    loading = true;
+    render();
+    try {
+      const r = await fetch(`/api/events?lat=${pos.lat.toFixed(3)}&lon=${pos.lon.toFixed(3)}`);
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'HTTP ' + r.status);
+      const col = await r.json();
+      if (S.pos !== pos) return;
+      applyCollections([AUTO_COL, col]);
+    } catch (err) {
+      if (S.pos !== pos) return;
+      applyCollections([AUTO_COL]);
+      if (distKm(HOME.lat, HOME.lon) > 60) toast('Impossible de charger les sorties autour de ' + pos.name + '. Réessayez dans un moment.');
+    } finally {
+      if (S.pos === pos) { loadedFor = cell; loading = false; render(); }
+    }
+  }
+  function moveTo(pos) {
+    S.pos = pos;
+    loadedFor = '';
+    render();
+    loadAround();
+  }
+  // Commune names and positions anywhere in France (Base adresse / geo.api.gouv.fr, free, no key).
+  const GEO = 'https://geo.api.gouv.fr/communes';
+  async function communeAt(lat, lon) {
+    try {
+      const r = await fetch(`${GEO}?lat=${lat}&lon=${lon}&fields=nom&format=json`);
+      const [c] = r.ok ? await r.json() : [];
+      return c ? c.nom : null;
+    } catch { return null; }
+  }
 
   const $ = s => document.querySelector(s);
   const esc = s => String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
@@ -572,6 +633,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const label = { weekend: 'ce week-end', week: 'cette semaine', month: 'ce mois-ci' }[S.period];
     $('#summary').innerHTML = S.view === 'fav'
       ? `Vos <em>favoris</em>`
+      : loading && !total ? `Recherche des sorties autour de <em>${esc(S.pos.name)}</em>…`
       : `<em>${total}</em> sortie${total > 1 ? 's' : ''} ${label}, à moins de ${S.dist} km`;
     $('#out').innerHTML = S.view === 'map' ? renderMap(events, films) : S.view === 'fav' ? renderFavs() : renderList(events, films);
     save();
@@ -616,26 +678,49 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     sheet.showModal();
   }
   function openLocation() {
-    const list = ['cugand', 'bernardiere', 'clisson', 'getigne', 'gorges', 'boussay', 'treize', 'pallet', 'montaigu', 'cholet', 'herbiers', 'nantes'];
     sheet.innerHTML = `<div class="sheet-head"><div class="badge-ic">${I.gps}</div><div><span class="kicker">Ma position</span><h3 id="sheetTitle">D'où partez-vous ?</h3></div></div>
       <div class="sheet-body">
         <button type="button" class="btn primary" data-gps>${I.gps.replace('<svg', '<svg width="18" height="18" style="vertical-align:-3px;margin-right:6px"')}Me géolocaliser</button>
-        <p class="src">Ou choisissez une commune :</p>
-        <div class="cats">${list.map(id => `<button type="button" class="cat" data-place="${id}" aria-pressed="${S.pos.name === C[id].n}" style="padding:8px 14px">${esc(C[id].n)}</button>`).join('')}</div>
+        <label class="src" for="placeQ">Ou cherchez une commune ou un code postal, partout en France :</label>
+        <input id="placeQ" class="search" type="search" placeholder="Ex. Clisson ou 44190" autocomplete="off" enterkeyhint="search">
+        <div id="placeRes" class="cats"></div>
         <div class="sheet-actions"><button type="button" class="btn ghost" data-close>Fermer</button></div>
       </div>`;
     sheet.showModal();
   }
+  let searchTimer, searchSeq = 0;
+  sheet.addEventListener('input', ev => {
+    if (ev.target.id !== 'placeQ') return;
+    const q = ev.target.value.trim();
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(async () => {
+      const box = $('#placeRes');
+      if (!box) return;
+      if (q.length < 2) { box.innerHTML = ''; return; }
+      const seq = ++searchSeq;
+      const by = /^\d{5}$/.test(q) ? `codePostal=${q}` : `nom=${encodeURIComponent(q)}&boost=population&limit=8`;
+      try {
+        const r = await fetch(`${GEO}?${by}&fields=nom,centre,codesPostaux,codeDepartement&format=json`);
+        const list = r.ok ? await r.json() : [];
+        if (seq !== searchSeq) return;
+        box.innerHTML = list.filter(c => c.centre).map(c => {
+          const [lon, lat] = c.centre.coordinates;
+          return `<button type="button" class="cat" data-geo="${lat},${lon}" data-name="${esc(c.nom)}" style="padding:8px 14px">${esc(c.nom)} <span class="n">${esc(c.codeDepartement || '')}</span></button>`;
+        }).join('') || '<p class="src">Aucune commune trouvée.</p>';
+      } catch { box.innerHTML = '<p class="src">Recherche impossible pour le moment.</p>'; }
+    }, 250);
+  });
   function locate(manual) {
     const fail = () => { if (manual) toast('Localisation impossible ici. Autorisez la position dans votre navigateur, ou choisissez votre commune.'); };
     if (!navigator.geolocation) return fail();
     try {
       navigator.geolocation.getCurrentPosition(p => {
         const { latitude: lat, longitude: lon } = p.coords;
-        S.pos = { name: nearest(lat, lon), lat, lon, gps: true };
         sheet.open && sheet.close();
-        toast('Position trouvée : ' + S.pos.name);
-        render();
+        communeAt(lat, lon).then(name => {
+          moveTo({ name: name || nearest(lat, lon), lat, lon, gps: true });
+          toast('Position trouvée : ' + S.pos.name);
+        });
       }, fail, { timeout: 8000, maximumAge: 600000 });
     } catch { fail(); }
   }
@@ -644,8 +729,8 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const b = ev.target.closest('[data-fav-sheet]');
     if (b) { toggleFav(b.dataset.favSheet); sheet.close(); return; }
     if (ev.target.closest('[data-gps]')) return locate(true);
-    const pl = ev.target.closest('[data-place]');
-    if (pl) { const c = C[pl.dataset.place]; S.pos = { name: c.n, lat: c.lat, lon: c.lon, gps: false }; sheet.close(); render(); }
+    const g = ev.target.closest('[data-geo]');
+    if (g) { const [lat, lon] = g.dataset.geo.split(',').map(Number); sheet.close(); moveTo({ name: g.dataset.name, lat, lon, gps: false }); }
   });
 
   function toggleFav(id) {
@@ -684,6 +769,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
 
   render();
   if (S.pos.gps || !store.get('pos2', null)) locate(false);
+  loadAround();
 })();
 </script>
 </body>

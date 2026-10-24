@@ -1,0 +1,30 @@
+name: Test de la collecte ailleurs en France
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collecter autour de quelques villes
+        env:
+          OPENAGENDA_KEY: ${{ secrets.OPENAGENDA_KEY }}
+          DATATOURISME_KEY: ${{ secrets.DATATOURISME_KEY }}
+        run: node scripts/test-zone.mjs
+      - name: Publier le compte rendu
+        run: |
+          git config user.name "par-ici-bot"
+          git config user.email "par-ici-bot@users.noreply.github.com"
+          git add scripts/test-zone.log
+          git diff --cached --quiet && exit 0
+          git commit -m "Test de la collecte ailleurs en France"
+          git pull --rebase -q origin main
+          git push
