@@ -5,7 +5,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { collectAround, toCards, window } from '../lib/collect.mjs';
+import { collectAround, toCards, window, searchTermsAround } from '../lib/collect.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -20,16 +20,6 @@ const TTL_MS = 6 * 3600e3;
 const cache = new Map();
 const cellOf = (lat, lon) => `${lat.toFixed(1)},${lon.toFixed(1)}`;
 
-// Which commune, intercommunality and département the point is in: their names find the local OpenAgenda agendas.
-async function placeOf(lat, lon) {
-  try {
-    const r = await fetch(`https://geo.api.gouv.fr/communes?lat=${lat}&lon=${lon}&fields=nom,epci,departement,region&format=json`);
-    const [c] = r.ok ? await r.json() : [];
-    if (c) return { commune: c.nom, epci: c.epci?.nom, departement: c.departement?.nom, region: c.region?.nom };
-  } catch {}
-  return {};
-}
-
 async function eventsAround(lat, lon) {
   const key = cellOf(lat, lon);
   const hit = cache.get(key);
@@ -37,14 +27,13 @@ async function eventsAround(lat, lon) {
   const [clat, clon] = key.split(',').map(Number);
   const pending = (async () => {
     const t0 = Date.now();
-    const place = await placeOf(clat, clon);
-    const searches = [place.commune, place.epci, place.departement].filter(Boolean);
+    const { commune, searches } = await searchTermsAround(clat, clon);
     const events = await collectAround({
       lat: clat, lon: clon, radiusKm: RADIUS_KM, days: DAYS, oaKey: OA_KEY, dtKey: DT_KEY,
-      oa: { searches, maxAgendas: 25, maxPages: 5 }, dt: { maxPages: 15 }
+      oa: { searches, maxAgendas: 40, maxPages: 5 }, dt: { maxPages: 15 }
     });
-    const data = { updated: window(DAYS).today, place: place.commune || '', ...toCards(events) };
-    console.log(`${key} (${place.commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s`);
+    const data = { updated: window(DAYS).today, place: commune, ...toCards(events) };
+    console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s`);
     cache.set(key, { at: Date.now(), data });
     return data;
   })();
