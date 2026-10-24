@@ -1,23 +1,60 @@
-geo.api.gouv.fr essai 1 : erreur fetch failed ECONNREFUSED en 548 ms 
-geo.api.gouv.fr essai 2 : erreur fetch failed ECONNREFUSED en 289 ms 
-geo.api.gouv.fr essai 3 : erreur fetch failed ECONNREFUSED en 336 ms 
-## Lyon — 168 sorties, 5 avec photo, 7 s ; recherches OpenAgenda : 
-  OpenAgenda: 0 agendas candidats
+data.geopf.fr essai 1 : 200 en 1277 ms {"type":"FeatureCollection","features":[]}
+data.geopf.fr essai 2 : 200 en 139 ms {"type":"FeatureCollection","features":[]}
+data.geopf.fr essai 3 : 200 en 139 ms {"type":"FeatureCollection","features":[]}
+## Lyon — 246 sorties, 84 avec photo, 15 s ; recherches de départ : Lyon | Rhône
   DATAtourisme: 590 événements à moins de 50 km (0 fiches sans date, 8 pages)
-  Doublons DATAtourisme retirés : 0
+  OpenAgenda: recherches → Lyon | Rhône | Décines-Charpieu | Lyon 5e Arrondissement | Lyon 3e Arrondissement | Saint-Étienne | Lyon 8e Arrondissement | Lyon 2e Ar
+  OpenAgenda: 40 agendas candidats
+    French Tech Saint-Etienne Lyon: 1 événements lus, 1 à moins de 50 km
+    Médiation Numérique Loire: 18 événements lus, 7 à moins de 50 km
+    Villeurbanne - Agenda culturel: 39 événements lus, 39 à moins de 50 km
+    Saison Cabaret: 80 événements lus, 5 à moins de 50 km
+    Agenda de l'Europe en Auvergne-Rhône-Alpes: 4 événements lus, 1 à moins de 50 km
+    Chambres d'agriculture Auvergne-Rhône-Alpes: 9 événements lus, 2 à moins de 50 km
+    Bicentenaire de la Photographie - 2026-2027: 300 événements lus, 5 à moins de 50 km
+    Anissa Karat: 3 événements lus, 3 à moins de 50 km
+    Dahu téméraire: 3 événements lus, 3 à moins de 50 km
+    Laissez-vous conter: 9 événements lus, 3 à moins de 50 km
+    Contes autour du Monde: 9 événements lus, 3 à moins de 50 km
+  Doublons DATAtourisme retirés : 1
   exemples : 2026-09-02 Exposition "La céramique qui enchante votre quotidien" - Obstinnée · 2026-09-19 Biennale d'Art Contemporain de Lyon · 2026-09-19 Exposition annuelle « Quasi » · 2026-10-01 Exposition "Thoissey dans l'objectif" · 2026-10-02 Marché de Fonsala
-## Rennes — 497 sorties, 0 avec photo, 5 s ; recherches OpenAgenda : 
-  OpenAgenda: 0 agendas candidats
+## Rennes — 615 sorties, 118 avec photo, 9 s ; recherches de départ : 
   DATAtourisme: 465 événements à moins de 50 km (0 fiches sans date, 8 pages)
+  OpenAgenda: recherches → Dinan | Tréhorenteuc | Paimpont | Fougères | Vitré | Montfort-sur-Meu | Lanvallay | Broons
+  OpenAgenda: 40 agendas candidats
+    3 Regards Léo Lagrange: 11 événements lus, 11 à moins de 50 km
+    Collège doctoral de Bretagne: 6 événements lus, 2 à moins de 50 km
+    CMI Rennes: 6 événements lus, 5 à moins de 50 km
+    Service Culturel - Université de Rennes: 9 événements lus, 9 à moins de 50 km
+    OSERen - Observatoire des sciences de l'environnement de Rennes: 8 événements lus, 7 à moins de 50 km
+    Université de Rennes: 70 événements lus, 55 à moins de 50 km
+    IRIS-E: 1 événements lus, 1 à moins de 50 km
+    Faculté des sciences - Université de Rennes: 1 événements lus, 1 à moins de 50 km
+    Ecobio - Ecosystèmes, Biodiversité, Evolution: 4 événements lus, 4 à moins de 50 km
+    Fête de la Bretagne 2026: 1 événements lus, 1 à moins de 50 km
+    Bretagne en Scène: 6 événements lus, 6 à moins de 50 km
+    Le Grand Logis: 3 événements lus, 3 à moins de 50 km
+    Théâtre National de Bretagne: 14 événements lus, 14 à moins de 50 km
   Doublons DATAtourisme retirés : 0
   exemples : 2026-09-14 Promenons-nous dans les Vallons · 2026-09-18 Exposition "Peindre la beauté humaine" - Gwladys Dauly · 2026-09-19 Exposition : Entre corbeau et loup, du mythe aux contes · 2026-09-29 Apaiser sa charge mentale - atelier sophrologie · 2026-10-01 Collecte Octobre Rose
-## Gap — 15 sorties, 0 avec photo, 2 s ; recherches OpenAgenda : 
-  OpenAgenda: 0 agendas candidats
+## Gap — 15 sorties, 0 avec photo, 6 s ; recherches de départ : 
   DATAtourisme: 52 événements à moins de 50 km (0 fiches sans date, 1 pages)
+  OpenAgenda: recherches → Châtillon-en-Diois | Monestier-du-Percy | Luc-en-Diois | Mens | Lus-la-Croix-Haute | Orpierre | Gap | Saint-Geniez
+  OpenAgenda: 40 agendas candidats
   Doublons DATAtourisme retirés : 0
   exemples : 2026-10-24 Spectacle musical - Paris-Varsovie · 2026-10-24 24ème Marché aux Fruits Anciens · 2026-10-24 Vente de livres d'occasion - bibliothèque municipale Yvonne Oddon · 2026-10-25 Cabaret d'automne - Flashback - Les Mirabelles Kitchen · 2026-10-25 Spectacle - Frou Frou Rétropédalage historique pour en découdre avec la robe
-## Clisson — 741 sorties, 22 avec photo, 5 s ; recherches OpenAgenda : 
-  OpenAgenda: 0 agendas candidats
+## Clisson — 794 sorties, 87 avec photo, 9 s ; recherches de départ : 
   DATAtourisme: 588 événements à moins de 50 km (0 fiches sans date, 11 pages)
-  Doublons DATAtourisme retirés : 0
+  OpenAgenda: recherches → Cholet | Ancenis-Saint-Géréon | Mauges-sur-Loire | Sainte-Pazanne | Montrevault-sur-Èvre | Beaupréau-en-Mauges | Chemillé-en-Anjou | Lo
+  OpenAgenda: 40 agendas candidats
+    Jour de Fête: 2 événements lus, 1 à moins de 50 km
+    Ville de Mauges-sur-Loire: 1 événements lus, 1 à moins de 50 km
+    Sainte-Luce-sur-Loire: 4 événements lus, 4 à moins de 50 km
+    Scènes de Pays: 6 événements lus, 6 à moins de 50 km
+    Ville de Saint-Herblain: 16 événements lus, 16 à moins de 50 km
+    Agenda de la Région des Pays de la Loire: 29 événements lus, 14 à moins de 50 km
+    Agenda du GRAINE Pays de la Loire: 20 événements lus, 12 à moins de 50 km
+    Maison de l'architecture des Pays de la Loire: 1 événements lus, 1 à moins de 50 km
+    Quinzaine de la transmission: 32 événements lus, 2 à moins de 50 km
+  Doublons DATAtourisme retirés : 11
   exemples : 2026-09-02 EXPOSITION FANTASY · 2026-09-19 Exposition "Opaque" - LE MAT · 2026-09-25 La Joséphine au Poiré-sur-Vie · 2026-10-01 Exposition photo - Ancenis Défile · 2026-10-01 Exposition Frédéric Gautier - Atelier de l'Abat-Carre
