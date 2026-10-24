@@ -4,48 +4,47 @@ DATAtourisme: exemple d'image → [{"hasAnnotation":[{"credits":["Bdef"],"isCove
 DATAtourisme page 2: HTTP 200
 OpenAgenda: 61 agendas candidats
 DATAtourisme page 3: HTTP 200
-DATAtourisme page 4: HTTP 200
-OpenAgenda: exemple d'image → {"image":{"filename":"c621f3fc3fb7448484b715c9554a0975.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"c621f3fc3fb7448484b715c9554a0975.full.image.jpg","size":{"width":1240,"height":1754},"type":"full"},{"filename":"c621f3fc3fb7448484b715c9554a0975.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
+OpenAgenda: exemple d'image → {"image":{"filename":"4f6de7c5573d4b52a062d8d938c24bb4.base.image.jpg","size":{"width":700,"height":990},"variants":[{"filename":"4f6de7c5573d4b52a062d8d938c24bb4.full.image.jpg","size":{"width":1414,"height":2000},"type":"full"},{"filename":"4f6de7c5573d4b52a062d8d938c24bb4.thumb.image.jpg","size":{"width":200,"height":200},"type":"thumbnail"}],"base":"https://img.openagenda.com/main/"},"imageCredits":null}
   Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
+DATAtourisme page 4: HTTP 200
+  Communauté de Communes des Terres du Val de Loire: 29 événements lus, 0 à moins de 50 km
 DATAtourisme page 5: HTTP 200
 DATAtourisme page 6: HTTP 200
-  Communauté de Communes des Terres du Val de Loire: 31 événements lus, 0 à moins de 50 km
 DATAtourisme page 7: HTTP 200
 DATAtourisme page 8: HTTP 200
 DATAtourisme page 9: HTTP 200
+  Quinzaine de la transmission: 32 événements lus, 2 à moins de 50 km
 DATAtourisme page 10: HTTP 200
-DATAtourisme: 572 événements à moins de 50 km (0 fiches sans date)
-  Quinzaine de la transmission: 29 événements lus, 2 à moins de 50 km
+DATAtourisme: 570 événements à moins de 50 km (0 fiches sans date)
   Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
-  Île de Nantes: 89 événements lus, 89 à moins de 50 km
-  Nantes Nord: 30 événements lus, 30 à moins de 50 km
-  Nantes Sud: 40 événements lus, 40 à moins de 50 km
-  Nantes Erdre: 40 événements lus, 40 à moins de 50 km
-  Nantes Métropole: 832 événements lus, 830 à moins de 50 km
+  Île de Nantes: 98 événements lus, 98 à moins de 50 km
+  Nantes Nord: 28 événements lus, 28 à moins de 50 km
+  Nantes Sud: 42 événements lus, 42 à moins de 50 km
+  Nantes Erdre: 39 événements lus, 39 à moins de 50 km
+  Nantes Métropole: 825 événements lus, 823 à moins de 50 km
   Sports à Nantes: 2 événements lus, 1 à moins de 50 km
   Musée d'arts de Nantes: 25 événements lus, 25 à moins de 50 km
-  Bibliothèque municipale de Nantes: 67 événements lus, 67 à moins de 50 km
-  Nantes Centre-ville: 44 événements lus, 44 à moins de 50 km
-  Jour de Fête: 3 événements lus, 1 à moins de 50 km
+  Bibliothèque municipale de Nantes: 64 événements lus, 64 à moins de 50 km
+  Jour de Fête: 2 événements lus, 1 à moins de 50 km
   Saison Culturelle des Herbiers: 2 événements lus, 2 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
-  Département de la Vendée: 36 événements lus, 36 à moins de 50 km
-  La Compagnie de la Hulotte: 10 événements lus, 2 à moins de 50 km
   Agenda du Patrimoine: 3 événements lus, 1 à moins de 50 km
+  RNCAP: 128 événements lus, 6 à moins de 50 km
+  Agence C'est à Dire: 38 événements lus, 3 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 2 événements lus, 0 à moins de 50 km
   Musée de la Loire - Cosne-Cours-sur-Loire: 4 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"0":9}
 Doublons DATAtourisme retirés : 9
-Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 500)
+Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 404)
 Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
 Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
 Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
 Affiche Un chapeau de paille d'Italie → https://www.getigne.fr/media/2000-*-9999/fichier-11agenda.png
 Affiche Atelier cyanotype enfants → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
-Images des sources manuelles : 26 sur 72 sorties (26 pages lues)
+Images des sources manuelles : 18 sur 72 sorties (26 pages lues)
 Affiches de films : 17 sur 17 {"shaun":"1AKHDUG6.jpg","karma":"EKMGQLKO.jpg","ducobu":"B12HFQFH.jpg","congoboy":"32MTFPIA.jpg","salut":"I0GBTXO4.jpg","garance":"URDHDQFH.jpg","femme":"TT1WF6XR.jpg","moulin":"YUNFORSL.jpg","minotaure":"E5JYYJ48.jpg","fantome":"L3FOCG6X.jpg","mochy":"2e292d36aa0d7fc0efb2e1d08578357d.jpg","marius":"de07c88f2baa5a2d8f890dc5d7b39326.jpg","miserables":"5a4186d62d534f2da65c2e9e8e822a34.jpg","englouti":"3173f450f63ac497176b4d6c8fd08ea0.jpg","residentevil":"1d653b3f832f0f7ca7016e650207798f.jpg","beauxjours":"d87d5b0413c51241fe752d22867f1691.jpg","nivue":"04d24a4f7815a30efe7dd1202384832f.jpg"}
-Terminé : 1814 événements écrits dans public/auto.js (2026-10-23 → 2026-11-23).
-Par catégorie : {"expo":236,"marche":180,"sport":254,"concert":242,"famille":483,"spectacle":369,"cinema":50}
-Avec photo : 1132 sur 1814
+Terminé : 1826 événements écrits dans public/auto.js (2026-10-24 → 2026-11-24).
+Par catégorie : {"expo":249,"marche":184,"sport":259,"concert":244,"famille":481,"spectacle":360,"cinema":49}
+Avec photo : 1137 sur 1826
