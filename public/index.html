@@ -471,13 +471,13 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     render();
     loadAround();
   }
-  // Commune names and positions anywhere in France (Base adresse / geo.api.gouv.fr, free, no key).
-  const GEO = 'https://geo.api.gouv.fr/communes';
+  // Commune names and positions anywhere in France: the IGN Géoplateforme geocoder (free, no key).
+  const GEO = 'https://data.geopf.fr/geocodage';
   async function communeAt(lat, lon) {
     try {
-      const r = await fetch(`${GEO}?lat=${lat}&lon=${lon}&fields=nom&format=json`);
-      const [c] = r.ok ? await r.json() : [];
-      return c ? c.nom : null;
+      const r = await fetch(`${GEO}/reverse?lon=${lon}&lat=${lat}&index=address&limit=1`);
+      const f = r.ok ? (await r.json()).features?.[0] : null;
+      return f ? f.properties.city || f.properties.name : null;
     } catch { return null; }
   }
 
@@ -698,14 +698,14 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
       if (!box) return;
       if (q.length < 2) { box.innerHTML = ''; return; }
       const seq = ++searchSeq;
-      const by = /^\d{5}$/.test(q) ? `codePostal=${q}` : `nom=${encodeURIComponent(q)}&boost=population&limit=8`;
       try {
-        const r = await fetch(`${GEO}?${by}&fields=nom,centre,codesPostaux,codeDepartement&format=json`);
-        const list = r.ok ? await r.json() : [];
+        // A name or a postcode: both work with the municipality search.
+        const r = await fetch(`${GEO}/search?q=${encodeURIComponent(q)}&index=address&type=municipality&limit=8`);
+        const list = r.ok ? (await r.json()).features || [] : [];
         if (seq !== searchSeq) return;
-        box.innerHTML = list.filter(c => c.centre).map(c => {
-          const [lon, lat] = c.centre.coordinates;
-          return `<button type="button" class="cat" data-geo="${lat},${lon}" data-name="${esc(c.nom)}" style="padding:8px 14px">${esc(c.nom)} <span class="n">${esc(c.codeDepartement || '')}</span></button>`;
+        box.innerHTML = list.map(f => {
+          const [lon, lat] = f.geometry.coordinates, pr = f.properties, name = pr.city || pr.name;
+          return `<button type="button" class="cat" data-geo="${lat},${lon}" data-name="${esc(name)}" style="padding:8px 14px">${esc(name)} <span class="n">${esc(pr.postcode || '')}</span></button>`;
         }).join('') || '<p class="src">Aucune commune trouvée.</p>';
       } catch { box.innerHTML = '<p class="src">Recherche impossible pour le moment.</p>'; }
     }, 250);

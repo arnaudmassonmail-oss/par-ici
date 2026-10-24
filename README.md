@@ -4,22 +4,28 @@ Application web familiale qui rassemble les sorties autour de chez soi : concert
 
 Site statique, sans dépendance ni étape de build.
 
+## Fonctionnement
+
+- **Partout en France** : `server/index.mjs` sert l'appli et répond à `/api/events?lat=…&lon=…`. Il interroge DATAtourisme puis OpenAgenda (agendas cherchés avec la commune, le département et les communes où DATAtourisme trouve des sorties) dans un rayon de 50 km, et garde la réponse 6 h par zone d'environ 10 km. La collecte elle-même est dans `lib/collect.mjs`.
+- **Autour de Cugand**, en plus : `public/data.js` (partie manuelle : cinéma, Clisson, Gétigné…) et `public/auto.js` (collecte de nuit et images des sorties manuelles), mis à jour par la tâche GitHub « Collecte automatique des sorties ».
+- La page fusionne tout et masque les doublons. Sans serveur (copie statique), elle garde `auto.js`.
+- Recherche de commune ou de code postal et nom de la commune après géolocalisation : Géoplateforme IGN (`data.geopf.fr`, gratuit, sans clé).
+
 ## Fichiers
 
-- `public/index.html` : l'application (design et logique).
-- `public/data.js` : la partie manuelle (communes, sources, événements, marchés, cinémas, films). Pensez à changer `UPDATED` en haut du fichier.
-- `public/auto.js` : la collecte automatique de la nuit. Ne pas modifier à la main.
-- `public/manifest.webmanifest`, `public/icon*.png`, `public/icon.svg` : pour installer l'appli sur l'écran d'accueil du téléphone.
+- `public/index.html` : l'application.
+- `public/data.js` : partie manuelle. `public/auto.js` : collecte de nuit, ne pas modifier à la main.
+- `lib/collect.mjs` : collecte OpenAgenda + DATAtourisme autour d'un point.
+- `server/index.mjs` : serveur (appli + `/api/events`).
+- `scripts/auto-update.mjs` : collecte de nuit (Cugand). `scripts/test-zone.mjs` : test de la collecte à Lyon, Rennes, Gap et Clisson (tâche GitHub « Test de la collecte ailleurs en France », compte rendu dans `scripts/test-zone.log`).
 - `render.yaml` : configuration Render.
 
-## Mise en ligne sur Render
+## Mise en ligne sur Render (service web)
 
-1. Sur [dashboard.render.com](https://dashboard.render.com), cliquez **New → Static Site**.
-2. Choisissez ce dépôt GitHub.
-3. **Build Command** : `echo ok` · **Publish Directory** : `public`
-4. Cliquez **Create Static Site**. L'adresse ressemble à `https://par-ici.onrender.com`.
-
-Chaque `git push` sur `main` redéploie automatiquement le site.
+1. Sur [dashboard.render.com](https://dashboard.render.com) : **New → Web Service**, dépôt `par-ici`.
+2. **Runtime** : Node · **Build Command** : `echo ok` · **Start Command** : `node server/index.mjs` · **Instance Type** : Free.
+3. **Environment** : ajouter `OPENAGENDA_KEY` et `DATATOURISME_KEY` (les mêmes clés que dans les secrets GitHub).
+4. **Create Web Service**. Sur l'offre gratuite, le serveur s'endort après 15 min sans visite : la première ouverture suivante prend 30 à 60 s.
 
 ## Installer sur le téléphone
 

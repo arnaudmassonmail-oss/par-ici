@@ -1,0 +1,10 @@
+{
+  "name": "par-ici",
+  "private": true,
+  "description": "Les sorties autour de chez vous, partout en France",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server/index.mjs",
+    "collect": "node scripts/auto-update.mjs"
+  }
+}

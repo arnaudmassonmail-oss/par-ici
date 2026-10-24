@@ -5,6 +5,9 @@ Application web statique (aucun build) publiée sur Render depuis `public/`. Cha
 Les sorties viennent de deux fichiers, fusionnés par la page :
 - `public/auto.js` : collecte automatique de la nuit (OpenAgenda + DATAtourisme), écrite par `scripts/auto-update.mjs` via la tâche GitHub `.github/workflows/auto-update.yml`. Ne jamais le modifier à la main.
 - `public/data.js` : partie manuelle, mise à jour par Claude à la demande. Un événement de `auto.js` qui reprend un événement manuel (même jour, titre proche, même commune) est masqué.
+- Partout en France : `server/index.mjs` (service web Render) répond à `/api/events?lat&lon` avec la collecte de `lib/collect.mjs` autour de la position ; la page la fusionne aussi. La partie manuelle et `auto.js` ne concernent que la région de Cugand.
+- Services externes : DATAtourisme et OpenAgenda (clés en variables d'environnement), Géoplateforme IGN `data.geopf.fr` pour la géographie. geo.api.gouv.fr refuse les serveurs : ne pas en dépendre.
+- Avant de changer `lib/collect.mjs`, lance la tâche GitHub « Test de la collecte ailleurs en France » et lis `scripts/test-zone.log`.
 
 ## « mets à jour les événements de par-ici »
 
