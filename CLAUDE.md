@@ -1,6 +1,6 @@
 # Par Ici Sorties
 
-Application web statique (aucun build) publiée sur Render depuis `public/`. Chaque push sur `main` redéploie le site.
+Application web sans build ni dépendance : `server/index.mjs` (Node) sert `public/` et l'API, publiée sur Render comme service web. Chaque push sur `main` redéploie le site.
 
 Les sorties viennent de deux fichiers, fusionnés par la page :
 - `public/auto.js` : collecte automatique de la nuit (OpenAgenda + DATAtourisme), écrite par `scripts/auto-update.mjs` via la tâche GitHub `.github/workflows/auto-update.yml`. Ne jamais le modifier à la main.
