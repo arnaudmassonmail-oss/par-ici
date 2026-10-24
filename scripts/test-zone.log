@@ -1,7 +1,7 @@
-data.geopf.fr essai 1 : 200 en 1277 ms {"type":"FeatureCollection","features":[]}
-data.geopf.fr essai 2 : 200 en 139 ms {"type":"FeatureCollection","features":[]}
-data.geopf.fr essai 3 : 200 en 139 ms {"type":"FeatureCollection","features":[]}
-## Lyon — 246 sorties, 84 avec photo, 15 s ; recherches de départ : Lyon | Rhône
+data.geopf.fr essai 1 : 200 en 839 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 2 : 200 en 285 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 3 : 200 en 111 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+## Lyon — 246 sorties, 84 avec photo, 13 s ; recherches de départ : Lyon | Rhône
   DATAtourisme: 590 événements à moins de 50 km (0 fiches sans date, 8 pages)
   OpenAgenda: recherches → Lyon | Rhône | Décines-Charpieu | Lyon 5e Arrondissement | Lyon 3e Arrondissement | Saint-Étienne | Lyon 8e Arrondissement | Lyon 2e Ar
   OpenAgenda: 40 agendas candidats
@@ -18,43 +18,44 @@ data.geopf.fr essai 3 : 200 en 139 ms {"type":"FeatureCollection","features":[]}
     Contes autour du Monde: 9 événements lus, 3 à moins de 50 km
   Doublons DATAtourisme retirés : 1
   exemples : 2026-09-02 Exposition "La céramique qui enchante votre quotidien" - Obstinnée · 2026-09-19 Biennale d'Art Contemporain de Lyon · 2026-09-19 Exposition annuelle « Quasi » · 2026-10-01 Exposition "Thoissey dans l'objectif" · 2026-10-02 Marché de Fonsala
-## Rennes — 615 sorties, 118 avec photo, 9 s ; recherches de départ : 
+## Rennes — 1044 sorties, 540 avec photo, 12 s ; recherches de départ : Rennes | Ille-et-Vilaine
   DATAtourisme: 465 événements à moins de 50 km (0 fiches sans date, 8 pages)
-  OpenAgenda: recherches → Dinan | Tréhorenteuc | Paimpont | Fougères | Vitré | Montfort-sur-Meu | Lanvallay | Broons
+  OpenAgenda: recherches → Rennes | Ille-et-Vilaine | Dinan | Tréhorenteuc | Paimpont | Fougères | Vitré | Montfort-sur-Meu | Lanvallay | Broons
   OpenAgenda: 40 agendas candidats
-    3 Regards Léo Lagrange: 11 événements lus, 11 à moins de 50 km
-    Collège doctoral de Bretagne: 6 événements lus, 2 à moins de 50 km
-    CMI Rennes: 6 événements lus, 5 à moins de 50 km
-    Service Culturel - Université de Rennes: 9 événements lus, 9 à moins de 50 km
-    OSERen - Observatoire des sciences de l'environnement de Rennes: 8 événements lus, 7 à moins de 50 km
+    Rennes Maurepas: 2 événements lus, 2 à moins de 50 km
+    Rennes Quartiers Nord-Est: 18 événements lus, 18 à moins de 50 km
+    Rennes La Bellangerais: 20 événements lus, 20 à moins de 50 km
+    Bibliothèques de Rennes: 94 événements lus, 94 à moins de 50 km
     Université de Rennes: 70 événements lus, 55 à moins de 50 km
-    IRIS-E: 1 événements lus, 1 à moins de 50 km
+    Rennes Métropole: 300 événements lus, 300 à moins de 50 km
+    Rennes quartiers Ouest: 24 événements lus, 24 à moins de 50 km
+    3 Regards Léo Lagrange: 11 événements lus, 11 à moins de 50 km
+    Service Culturel - Université de Rennes: 9 événements lus, 9 à moins de 50 km
+    CMI Rennes: 6 événements lus, 5 à moins de 50 km
     Faculté des sciences - Université de Rennes: 1 événements lus, 1 à moins de 50 km
+    IRIS-E: 1 événements lus, 1 à moins de 50 km
     Ecobio - Ecosystèmes, Biodiversité, Evolution: 4 événements lus, 4 à moins de 50 km
-    Fête de la Bretagne 2026: 1 événements lus, 1 à moins de 50 km
-    Bretagne en Scène: 6 événements lus, 6 à moins de 50 km
-    Le Grand Logis: 3 événements lus, 3 à moins de 50 km
-    Théâtre National de Bretagne: 14 événements lus, 14 à moins de 50 km
+    Collège doctoral de Bretagne: 6 événements lus, 2 à moins de 50 km
+    OSERen - Observatoire des sciences de l'environnement de Rennes: 8 événements lus, 7 à moins de 50 km
   Doublons DATAtourisme retirés : 0
   exemples : 2026-09-14 Promenons-nous dans les Vallons · 2026-09-18 Exposition "Peindre la beauté humaine" - Gwladys Dauly · 2026-09-19 Exposition : Entre corbeau et loup, du mythe aux contes · 2026-09-29 Apaiser sa charge mentale - atelier sophrologie · 2026-10-01 Collecte Octobre Rose
-## Gap — 15 sorties, 0 avec photo, 6 s ; recherches de départ : 
+## Gap — 25 sorties, 10 avec photo, 6 s ; recherches de départ : Gap | Hautes-Alpes
   DATAtourisme: 52 événements à moins de 50 km (0 fiches sans date, 1 pages)
-  OpenAgenda: recherches → Châtillon-en-Diois | Monestier-du-Percy | Luc-en-Diois | Mens | Lus-la-Croix-Haute | Orpierre | Gap | Saint-Geniez
+  OpenAgenda: recherches → Gap | Hautes-Alpes | Châtillon-en-Diois | Monestier-du-Percy | Luc-en-Diois | Mens | Lus-la-Croix-Haute | Orpierre | Saint-Geniez | La 
   OpenAgenda: 40 agendas candidats
+    Compagnie Conte: 6 événements lus, 6 à moins de 50 km
+    RNCAP: 128 événements lus, 6 à moins de 50 km
   Doublons DATAtourisme retirés : 0
   exemples : 2026-10-24 Spectacle musical - Paris-Varsovie · 2026-10-24 24ème Marché aux Fruits Anciens · 2026-10-24 Vente de livres d'occasion - bibliothèque municipale Yvonne Oddon · 2026-10-25 Cabaret d'automne - Flashback - Les Mirabelles Kitchen · 2026-10-25 Spectacle - Frou Frou Rétropédalage historique pour en découdre avec la robe
-## Clisson — 794 sorties, 87 avec photo, 9 s ; recherches de départ : 
+## Clisson — 771 sorties, 60 avec photo, 7 s ; recherches de départ : Clisson | Loire-Atlantique
   DATAtourisme: 588 événements à moins de 50 km (0 fiches sans date, 11 pages)
-  OpenAgenda: recherches → Cholet | Ancenis-Saint-Géréon | Mauges-sur-Loire | Sainte-Pazanne | Montrevault-sur-Èvre | Beaupréau-en-Mauges | Chemillé-en-Anjou | Lo
+  OpenAgenda: recherches → Clisson | Loire-Atlantique | Cholet | Ancenis-Saint-Géréon | Mauges-sur-Loire | Sainte-Pazanne | Montrevault-sur-Èvre | Beaupréau-en-Ma
   OpenAgenda: 40 agendas candidats
+    Quinzaine de la transmission: 32 événements lus, 2 à moins de 50 km
     Jour de Fête: 2 événements lus, 1 à moins de 50 km
     Ville de Mauges-sur-Loire: 1 événements lus, 1 à moins de 50 km
     Sainte-Luce-sur-Loire: 4 événements lus, 4 à moins de 50 km
-    Scènes de Pays: 6 événements lus, 6 à moins de 50 km
-    Ville de Saint-Herblain: 16 événements lus, 16 à moins de 50 km
-    Agenda de la Région des Pays de la Loire: 29 événements lus, 14 à moins de 50 km
     Agenda du GRAINE Pays de la Loire: 20 événements lus, 12 à moins de 50 km
-    Maison de l'architecture des Pays de la Loire: 1 événements lus, 1 à moins de 50 km
-    Quinzaine de la transmission: 32 événements lus, 2 à moins de 50 km
-  Doublons DATAtourisme retirés : 11
+    Agenda de la Région des Pays de la Loire: 29 événements lus, 14 à moins de 50 km
+  Doublons DATAtourisme retirés : 7
   exemples : 2026-09-02 EXPOSITION FANTASY · 2026-09-19 Exposition "Opaque" - LE MAT · 2026-09-25 La Joséphine au Poiré-sur-Vie · 2026-10-01 Exposition photo - Ancenis Défile · 2026-10-01 Exposition Frédéric Gautier - Atelier de l'Abat-Carre
