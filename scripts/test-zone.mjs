@@ -13,7 +13,7 @@ for (const [name, lat, lon] of PLACES) {
   const lines = [];
   const events = await collectAround({
     lat, lon, radiusKm: 50, days: 31, oaKey: process.env.OPENAGENDA_KEY, dtKey: process.env.DATATOURISME_KEY,
-    log: (...a) => lines.push(a.join(' ')), oa: { searches, maxAgendas: 40, maxPages: 5 }, dt: { maxPages: 15 }
+    log: (...a) => lines.push(a.join(' ')), oa: { searches, maxAgendas: 40, maxPages: 3 }, dt: { maxPages: 15 }
   });
   const { EV } = toCards(events);
   out.push(`## ${name} — ${EV.length} sorties, ${EV.filter(e => e.img).length} avec photo, ${Math.round((Date.now() - t0) / 1000)} s ; recherches OpenAgenda : ${searches.join(' | ')}`);

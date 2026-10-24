@@ -30,7 +30,7 @@ async function eventsAround(lat, lon) {
     const { commune, searches } = await searchTermsAround(clat, clon);
     const events = await collectAround({
       lat: clat, lon: clon, radiusKm: RADIUS_KM, days: DAYS, oaKey: OA_KEY, dtKey: DT_KEY,
-      oa: { searches, maxAgendas: 40, maxPages: 5 }, dt: { maxPages: 15 }
+      oa: { searches, maxAgendas: 40, maxPages: 3 }, dt: { maxPages: 15 }
     });
     const data = { updated: window(DAYS).today, place: commune, ...toCards(events) };
     console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s`);
