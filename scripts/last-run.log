@@ -1,28 +1,27 @@
 DATAtourisme: 570 événements à moins de 50 km (0 fiches sans date, 10 pages)
 OpenAgenda: 61 agendas candidats
-  Terres de Montaigu: 52 événements lus, 51 à moins de 50 km
   Communauté de Communes des Terres du Val de Loire: 29 événements lus, 0 à moins de 50 km
-  Quinzaine de la transmission: 32 événements lus, 2 à moins de 50 km
-  Sports à Nantes: 2 événements lus, 1 à moins de 50 km
-  Nantes Nord: 28 événements lus, 28 à moins de 50 km
-  Conservatoire de Nantes: 15 événements lus, 15 à moins de 50 km
-  Nantes Sud: 42 événements lus, 42 à moins de 50 km
+  Terres de Montaigu: 46 événements lus, 45 à moins de 50 km
+  Quinzaine de la transmission: 35 événements lus, 2 à moins de 50 km
+  Conservatoire de Nantes: 16 événements lus, 16 à moins de 50 km
+  Nantes Nord: 26 événements lus, 26 à moins de 50 km
+  Nantes Sud: 43 événements lus, 43 à moins de 50 km
   Nantes Erdre: 39 événements lus, 39 à moins de 50 km
-  Île de Nantes: 98 événements lus, 98 à moins de 50 km
-  Nantes Métropole: 825 événements lus, 823 à moins de 50 km
+  Île de Nantes: 94 événements lus, 94 à moins de 50 km
+  Nantes Métropole: 820 événements lus, 818 à moins de 50 km
   Jour de Fête: 2 événements lus, 1 à moins de 50 km
-  Musée d'arts de Nantes: 25 événements lus, 25 à moins de 50 km
-  Bibliothèque municipale de Nantes: 64 événements lus, 64 à moins de 50 km
+  Musée d'arts de Nantes: 26 événements lus, 26 à moins de 50 km
+  Bibliothèque municipale de Nantes: 66 événements lus, 66 à moins de 50 km
   Saison Culturelle des Herbiers: 2 événements lus, 2 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
   Agenda du Patrimoine: 3 événements lus, 1 à moins de 50 km
-  Agence C'est à Dire: 38 événements lus, 3 à moins de 50 km
-  RNCAP: 128 événements lus, 6 à moins de 50 km
+  Agence C'est à Dire: 40 événements lus, 5 à moins de 50 km
+  RNCAP: 126 événements lus, 8 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 2 événements lus, 0 à moins de 50 km
-  Musée de la Loire - Cosne-Cours-sur-Loire: 4 événements lus, 0 à moins de 50 km
-DATAtourisme: écart de dates mesuré sur les événements communs → {"0":9}
-Doublons DATAtourisme retirés : 9
+  Musée de la Loire - Cosne-Cours-sur-Loire: 5 événements lus, 0 à moins de 50 km
+DATAtourisme: écart de dates mesuré sur les événements communs → {"0":6}
+Doublons DATAtourisme retirés : 6
 Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 404)
 Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
 Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
@@ -32,6 +31,6 @@ Affiche Atelier cyanotype enfants → aucune image trouvée sur https://www.geti
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
 Images des sources manuelles : 18 sur 72 sorties (26 pages lues)
 Affiches de films : 17 sur 17
-Terminé : 1826 événements écrits dans public/auto.js (2026-10-24 → 2026-11-24).
-Par catégorie : {"expo":249,"marche":184,"sport":259,"concert":244,"famille":481,"spectacle":360,"cinema":49}
-Avec photo : 1137 sur 1826
+Terminé : 1821 événements écrits dans public/auto.js (2026-10-25 → 2026-11-25).
+Par catégorie : {"expo":238,"marche":184,"sport":263,"concert":255,"famille":476,"spectacle":359,"cinema":46}
+Avec photo : 1117 sur 1821
