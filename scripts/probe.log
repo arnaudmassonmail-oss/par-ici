@@ -1,75 +1,25 @@
-HTTP 200 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet 2640686 octets
-Archive:  /tmp/cnc.xlsx
-  Length      Date    Time    Name
----------  ---------- -----   ----
-     5128  1980-01-01 00:00   [Content_Types].xml
-      735  1980-01-01 00:00   _rels/.rels
-     6459  1980-01-01 00:00   xl/workbook.xml
-     4272  1980-01-01 00:00   xl/_rels/workbook.xml.rels
-   812120  1980-01-01 00:00   xl/worksheets/sheet3.xml
-   814459  1980-01-01 00:00   xl/worksheets/sheet4.xml
-   816928  1980-01-01 00:00   xl/worksheets/sheet5.xml
-   860193  1980-01-01 00:00   xl/worksheets/sheet6.xml
-   912903  1980-01-01 00:00   xl/worksheets/sheet7.xml
-   811235  1980-01-01 00:00   xl/worksheets/sheet8.xml
-   809336  1980-01-01 00:00   xl/worksheets/sheet9.xml
-   811725  1980-01-01 00:00   xl/worksheets/sheet10.xml
-   807125  1980-01-01 00:00   xl/worksheets/sheet11.xml
-   803877  1980-01-01 00:00   xl/worksheets/sheet12.xml
-   798615  1980-01-01 00:00   xl/worksheets/sheet13.xml
-   801369  1980-01-01 00:00   xl/worksheets/sheet14.xml
-   804393  1980-01-01 00:00   xl/worksheets/sheet15.xml
-   804088  1980-01-01 00:00   xl/worksheets/sheet16.xml
-   809726  1980-01-01 00:00   xl/worksheets/sheet17.xml
-   818051  1980-01-01 00:00   xl/worksheets/sheet18.xml
-   737083  1980-01-01 00:00   xl/worksheets/sheet19.xml
-   731648  1980-01-01 00:00   xl/worksheets/sheet20.xml
-   734891  1980-01-01 00:00   xl/worksheets/sheet21.xml
-   739911  1980-01-01 00:00   xl/worksheets/sheet22.xml
-   747526  1980-01-01 00:00   xl/worksheets/sheet23.xml
-   757759  1980-01-01 00:00   xl/worksheets/sheet24.xml
-      958  1980-01-01 00:00   xl/worksheets/sheet25.xml
-     7127  1980-01-01 00:00   xl/theme/theme1.xml
-    10137  1980-01-01 00:00   xl/styles.xml
-   158831  1980-01-01 00:00   xl/sharedStrings.xml
-     1719  1980-01-01 00:00   xl/drawings/drawing1.xml
-     5586  1980-01-01 00:00   xl/media/image1.png
-     2167  1980-01-01 00:00   xl/drawings/drawing2.xml
-     7196  1980-01-01 00:00   xl/worksheets/sheet1.xml
-   814853  1980-01-01 00:00   xl/worksheets/sheet2.xml
-      464  1980-01-01 00:00   xl/worksheets/_rels/sheet1.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet5.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet6.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet7.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet8.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet16.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet17.xml.rels
-      322  1980-01-01 00:00   xl/worksheets/_rels/sheet24.xml.rels
-      299  1980-01-01 00:00   xl/worksheets/_rels/sheet25.xml.rels
-      292  1980-01-01 00:00   xl/drawings/_rels/drawing1.xml.rels
-     1236  1980-01-01 00:00   xl/printerSettings/printerSettings3.bin
-     9168  1980-01-01 00:00   xl/printerSettings/printerSettings4.bin
-     9168  1980-01-01 00:00   xl/printerSettings/printerSettings5.bin
-     9756  1980-01-01 00:00   xl/printerSettings/printerSettings6.bin
-     9756  1980-01-01 00:00   xl/printerSettings/printerSettings7.bin
-     9756  1980-01-01 00:00   xl/printerSettings/printerSettings8.bin
-     1680  1980-01-01 00:00   xl/printerSettings/printerSettings1.bin
-      627  1980-01-01 00:00   docProps/core.xml
-     1375  1980-01-01 00:00   docProps/app.xml
-     2107  1980-01-01 00:00   xl/externalLinks/externalLink1.xml
-      365  1980-01-01 00:00   xl/externalLinks/_rels/externalLink1.xml.rels
-     2676  1980-01-01 00:00   xl/printerSettings/printerSettings2.bin
-      397  1980-01-01 00:00   docProps/custom.xml
----------                     -------
- 18631505                     58 files
+## https://overpass-api.de/api/interpreter erreur Unexpected token '<', "<html>
+<h"... is not valid JSON
+## https://overpass.kumi.systems/api/interpreter erreur Unexpected token '<', "<?xml vers"... is not valid JSON
 
-chaînes 5933 : N°AUTO | NOM ETABLISSEMENT | ECRANS | FAUTEUILS | CODE COMMUNE | COMMUNE | ART ET ESSAI | 80001 | Abbeville | D | 78005 | Achères | C | LE FOYER | 35001 | Acigné | E | 34003 | Agde | CENTRE CULTUREL LEDRU ROLLIN | 47001 | Agen | NON | CINEMA DE L'ESPACE | 50003 | Agon-Coutainville | CINEMA MARCEL PAGNOL | 30003 | Aigues-Mortes | 47004 | Aiguillon | CINEMA MODERNE | 36001 | Aigurande | 73006 | 40001 | Aire-sur-l'Adour | 62014 | Aire-sur-la-Lys | 13001 | Aix-en-Provence | ARMAND LUNEL | 73008 | Aix-les-Bains | SALLE JEANNE D ARC | 85003 | Aizenay | Ajaccio | EMPIRE | AUDITORIUM PASCAL PAOLI | ESPACE DIAMANT | 2A004 | LE FORUM | 80016 | Albert | ROYAL | 73011 | Albertville | LE DOME | 81004
-lignes 26
-A=LISTE DES ETABLISSEMENTS ACTIFS
-A=Mis à jour le 11 mai 2026
-A=undefined
-B=2025
-B=2024
-B=2023
-B=2022
-B=2021
+## ville Nantes HTTP 200 396 ms : villes Nantes 44000 ; salles (7) P0052 Katorza 44000 Nantes | P0088 Le Concorde 44100 Nantes | P0095 Bonne Garde 44200 Nantes | P0196 Pathé Nantes Centre ville 44000 Nantes | P0666 UGC Ciné Cité Atlantis - Nantes 44800 Saint-Herblain | P0667 Pathé Atlantis Nantes - Saint-Herblain - IMAX 44800 Saint-Herblain | P1199 Le Cinematographe 44000 Nantes
+
+## ville Paris HTTP 200 316 ms : villes Paris 75000, Parisot 82160, Paris 1er arrondissement 75001, Paris 2e arrondissement 75002, Paris 3e arrondissement 75003, Paris 4e arrondissement 75004, Paris 5e arrondissement 75005, Paris 6e arrondissement 75006, Paris 7e arrondissement 75007, Paris 8e arrondissement 75008 ; salles (10) C0003 MK2 Quai de Seine 75019 Paris 19e arrondissement | C0004 Le Cinéma des Cinéastes 75017 Paris | C0005 L'Entrepôt 75014 Paris | C0009 Le Balzac 75008 Paris | C0012 Les Cinq Caumartin 75009 Paris 9e arrondissement | C0013 Luminor Hôtel de Ville 75004 Paris | C0014 Institut finlandais 75005 Paris | C0015 Christine Cinéma Club 75006 Paris | C0016 Studio Galande 75005 Paris 5e arrondissement | C0020 Filmothèque du Quartier Latin 75005 Paris
+
+## ville Saint-Brevin-les-Pins HTTP 200 271 ms : villes Saint-Brevin-les-Pins 44250 ; salles (1) W0012 CinéJade 44250 Saint-Brevin-les-Pins
+
+## ville Pornic HTTP 200 297 ms : villes Pornic 44210, Pornichet 44380 ; salles (3) P0716 Ciné Toiles de Retz 44210 Pornic | P2368 Cinéma Saint Joseph 44210 Pornic | P3702 Cinéma La Toile de Mer 44380 Pornichet
+
+## ville Saint-Michel-Chef-Chef HTTP 200 280 ms : villes Saint-Michel-Chef-Chef 44730 ; salles (1) W1146 Saint-Michel 44730 Saint-Michel-Chef-Chef
+
+## ville Montaigu-Vendée HTTP 200 312 ms : villes  ; salles (1) W8560 Montaigu-Vendée 85600 Montaigu-Vendée
+
+## ville Arles HTTP 200 291 ms : villes Arles 13200 ; salles (5) P0441 Cinémas Le Méjan (Actes Sud) 13200 Arles | P0498 Le Femina 13200 Arles | W1318 Théâtre Antique d'Arles - Rencontre avec les étoil 13200 Arles | W1320 De Film en Aiguille 13200 Arles | W1324 Passage du Méjan 13200 Arles
+
+## https://www.allocine.fr/_/showtimes/theater-P0671/d-2026-10-27/p-2/ HTTP 200 367 ms pagination {"page":"2","totalPages":2,"itemsPerPage":15,"totalItems":26} films La Maison de nos rêves · Resident Evil · Fausse note · Si tu penses bien · Primetime · Heart Of The Beast · Raison et sentiments · Digger · L'Odyssée · Spider-Man: Brand New Day · Verity
+
+## https://www.allocine.fr/_/showtimes/theater-P0671/d-2026-10-27/?page=2 HTTP 200 236 ms pagination {"page":"2","totalPages":2,"itemsPerPage":15,"totalItems":26} films La Maison de nos rêves · Resident Evil · Fausse note · Si tu penses bien · Primetime · Heart Of The Beast · Raison et sentiments · Digger · L'Odyssée · Spider-Man: Brand New Day · Verity
+
+## https://www.allocine.fr/_/showtimes/theater-P0377/d-2026-10-27/ HTTP 200 211 ms pagination {"page":1,"totalPages":1,"itemsPerPage":15,"totalItems":4} films Congo Boy · Karma · Garance · Charlie et les kangourous
+
+## https://www.allocine.fr/seance/salle_gen_csalle=P0377.html HTTP 200 185 ms <!DOCTYPE html> <html lang="fr"> <head> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <meta charset="UTF
