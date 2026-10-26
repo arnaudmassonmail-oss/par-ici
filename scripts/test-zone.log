@@ -1,6 +1,59 @@
-data.geopf.fr essai 1 : 200 en 1365 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
-data.geopf.fr essai 2 : 200 en 150 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
-data.geopf.fr essai 3 : 200 en 138 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 1 : 200 en 1271 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 2 : 200 en 134 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 3 : 200 en 136 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+## Lyon — 218 sorties, 66 avec photo, 16 s ; recherches de départ : Lyon | Rhône
+  DATAtourisme: 581 événements à moins de 50 km (0 fiches sans date, 9 pages)
+  OpenAgenda: recherches → Lyon | Rhône | Décines-Charpieu | Lyon 5e Arrondissement | Lyon 3e Arrondissement | Saint-Étienne | Lyon 8e Arrondissement | Bourgoin-J
+  OpenAgenda: 40 agendas candidats
+    French Tech Saint-Etienne Lyon: 2 événements lus, 2 à moins de 50 km
+    Villeurbanne - Agenda culturel: 38 événements lus, 38 à moins de 50 km
+    Saison Cabaret: 79 événements lus, 5 à moins de 50 km
+    Chambres d'agriculture Auvergne-Rhône-Alpes: 13 événements lus, 3 à moins de 50 km
+    Bicentenaire de la Photographie - 2026-2027: 300 événements lus, 4 à moins de 50 km
+    Dahu téméraire: 3 événements lus, 3 à moins de 50 km
+    Laissez-vous conter: 7 événements lus, 3 à moins de 50 km
+    Anissa Karat: 3 événements lus, 3 à moins de 50 km
+    Contes autour du Monde: 7 événements lus, 3 à moins de 50 km
+  Doublons DATAtourisme retirés : 1
+  exemples : 2026-09-02 Exposition "La céramique qui enchante votre quotidien" - Obstinnée · 2026-09-19 Biennale d'Art Contemporain de Lyon · 2026-09-19 Exposition annuelle « Quasi » · 2026-10-01 Exposition "Thoissey dans l'objectif" · 2026-10-02 Marché de Fonsala
+## Rennes — 1023 sorties, 556 avec photo, 14 s ; recherches de départ : Rennes | Rennes Métropole | Ille-et-Vilaine
+  DATAtourisme: 441 événements à moins de 50 km (0 fiches sans date, 7 pages)
+  OpenAgenda: recherches → Rennes | Rennes Métropole | Ille-et-Vilaine | Dinan | Tréhorenteuc | Paimpont | Vitré | Fougères | Lanvallay | Augan | Montfort-sur-Meu
+  OpenAgenda: 40 agendas candidats
+    Rennes Maurepas: 2 événements lus, 2 à moins de 50 km
+    ISTIC - Université de Rennes: 3 événements lus, 2 à moins de 50 km
+    Rennes La Bellangerais: 22 événements lus, 22 à moins de 50 km
+    Université de Rennes: 36 événements lus, 26 à moins de 50 km
+    Bibliothèques de Rennes: 103 événements lus, 103 à moins de 50 km
+    Rennes Métropole: 300 événements lus, 300 à moins de 50 km
+    Les sorties nature LPO dans la Métropole de Rennes: 5 événements lus, 5 à moins de 50 km
+    Rennes Quartiers Nord-Est: 21 événements lus, 21 à moins de 50 km
+    Rennes quartiers Ouest: 28 événements lus, 28 à moins de 50 km
+    Collège doctoral de Bretagne: 6 événements lus, 2 à moins de 50 km
+    Service Culturel - Université de Rennes: 9 événements lus, 9 à moins de 50 km
+    CMI Rennes: 7 événements lus, 6 à moins de 50 km
+    OSERen - Observatoire des sciences de l'environnement de Rennes: 8 événements lus, 7 à moins de 50 km
+    3 Regards Léo Lagrange: 11 événements lus, 11 à moins de 50 km
+  Doublons DATAtourisme retirés : 0
+  exemples : 2026-09-14 Promenons-nous dans les Vallons · 2026-09-18 Exposition "Peindre la beauté humaine" - Gwladys Dauly · 2026-09-19 Exposition : Entre corbeau et loup, du mythe aux contes · 2026-09-29 Apaiser sa charge mentale - atelier sophrologie · 2026-10-01 Collecte Octobre Rose
+## Gap — 22 sorties, 12 avec photo, 7 s ; recherches de départ : Gap | Gap-Tallard-Durance | Hautes-Alpes
+  DATAtourisme: 48 événements à moins de 50 km (0 fiches sans date, 1 pages)
+  OpenAgenda: recherches → Gap | Gap-Tallard-Durance | Hautes-Alpes | Monestier-du-Percy | Mens | Châtillon-en-Diois | Lus-la-Croix-Haute | Saint-Geniez | La Mott
+  OpenAgenda: 40 agendas candidats
+    Compagnie Conte: 7 événements lus, 7 à moins de 50 km
+    RNCAP: 137 événements lus, 7 à moins de 50 km
+  Doublons DATAtourisme retirés : 0
+  exemples : 2026-10-27 Allumer le Super Écran · 2026-10-29 Spectacle - Souvenirs du monde d'après · 2026-10-30 Concert - Kiosquela Trio · 2026-10-30 Complet - Visite de l'observatoire NOEMA · 2026-10-30 Stage de fabrication de N'goni
+## Clisson — 744 sorties, 28 avec photo, 9 s ; recherches de départ : Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique
+  DATAtourisme: 573 événements à moins de 50 km (0 fiches sans date, 10 pages)
+  OpenAgenda: recherches → Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique | Cholet | Sainte-Pazanne | Ancenis-Saint-Géréon | Mauges-sur-Loire | Montrev
+  OpenAgenda: 40 agendas candidats
+    Quinzaine de la transmission: 39 événements lus, 2 à moins de 50 km
+    Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
+    Sortez chez vous - Agenda des acteurs culturels en Sèvre et Loire: 3 événements lus, 3 à moins de 50 km
+    Jour de Fête: 2 événements lus, 1 à moins de 50 km
+  Doublons DATAtourisme retirés : 0
+  exemples : 2026-09-02 EXPOSITION FANTASY · 2026-09-19 Exposition "Opaque" - LE MAT · 2026-09-25 La Joséphine au Poiré-sur-Vie · 2026-10-01 Exposition photo - Ancenis Défile · 2026-10-01 Exposition Frédéric Gautier - Atelier de l'Abat-Carre
 ## Arles — 712 sorties, 645 avec photo, 20 s ; recherches de départ : Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône
   DATAtourisme: 602 événements à moins de 50 km (0 fiches sans date, 10 pages)
   OpenAgenda: recherches → Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône | Istres | Nîmes | Salon-de-Provence | Martigues | Saint-Rémy-de-Provence | 
@@ -11,16 +64,46 @@ data.geopf.fr essai 3 : 200 en 138 ms {"type":"FeatureCollection","features":[{"
     Mois de l'architecture/Journées nationales de l’architecture 2026 : Provence-Alpes-Côte d’Azur: 4 événements lus, 1 à moins de 50 km
     Eiffage Énergie Systèmes: 1 événements lus, 1 à moins de 50 km
     Aix-Marseille-Provence Métropole: 300 événements lus, 88 à moins de 50 km
-    Action mutualiste MSA: 42 événements lus, 1 à moins de 50 km
     Mois de l'architecture/Journées nationales de l’architecture 2026 : Occitanie: 29 événements lus, 5 à moins de 50 km
+    Action mutualiste MSA: 42 événements lus, 1 à moins de 50 km
     Mes événements France Travail: 300 événements lus, 7 à moins de 50 km
   Doublons DATAtourisme retirés : 59
   exemples : 2026-09-03 Exposition : Martigues, Venise Provençale · 2026-09-12 Des Robots et des Rêves - Exposition · 2026-09-16 Marché du soir des producteurs à Pernes-les-Fontaines · 2026-09-19 Spectacle : Zize Du Panier · 2026-09-19 Concert : Les Victoires de la chanson
 
 ## Serveur
 Par Ici sur http://localhost:3000
-45.8,4.8 (Saint-Didier-au-Mont-d'Or) : 216 sorties en 15 s, mémoire max 120 Mo
-47.1,-1.3 (Gorges) : 777 sorties en 9 s, mémoire max 138 Mo
-43.7,4.6 (Fourques) : 706 sorties en 19 s, mémoire max 150 Mo
-43.3,5.4 (Marseille) : 1116 sorties en 16 s, mémoire max 152 Mo
-Marseille : 200 en 15.517673 s
+Cinémas : 15 avec AlloCiné (0 sans réponse), 0 sans, 93 films
+47.2,-2.1 (?) : 1318 sorties et 93 films en 18 s, mémoire max 146 Mo
+Cinémas : 15 avec AlloCiné (0 sans réponse), 2 sans, 120 films
+47.1,-1.3 (Gorges) : 777 sorties et 120 films en 10 s, mémoire max 153 Mo
+AlloCiné Châteaurenard - Le Rex → AlloCiné HTTP 429
+AlloCiné Le Relais Culturel → AlloCiné HTTP 429
+AlloCiné Cinéma L'Eden Noves → AlloCiné HTTP 429
+AlloCiné Pathé Cap Sud → AlloCiné HTTP 429
+AlloCiné Utopia-Republique → AlloCiné HTTP 429
+AlloCiné Vox → AlloCiné HTTP 429
+AlloCiné Kinepolis Nîmes Multiplexe - IMAX → AlloCiné HTTP 429
+AlloCiné CGR Nîmes → AlloCiné HTTP 429
+AlloCiné Le Sémaphore → AlloCiné HTTP 429
+Cinémas : 15 avec AlloCiné (9 sans réponse), 0 sans, 37 films
+43.7,4.6 (Fourques) : 706 sorties et 37 films en 20 s, mémoire max 168 Mo
+AlloCiné Ecully Cinéma → AlloCiné HTTP 429
+AlloCiné L'aqueduc → AlloCiné HTTP 429
+AlloCiné UGC Astoria → AlloCiné HTTP 429
+AlloCiné Le Cinéma Opéra → AlloCiné HTTP 429
+AlloCiné Cinéma Lumière Terreaux  → AlloCiné HTTP 429
+AlloCiné Le Méliès → AlloCiné HTTP 429
+AlloCiné Alpha → AlloCiné HTTP 429
+AlloCiné Le Lem → AlloCiné HTTP 429
+AlloCiné UGC Ciné Cité Lyon Part-Dieu → AlloCiné HTTP 429
+AlloCiné Cinéma Lumière Bellecour → AlloCiné HTTP 429
+AlloCiné Le Zola → AlloCiné HTTP 429
+AlloCiné Ciné Mourguet → AlloCiné HTTP 429
+AlloCiné Iris → AlloCiné HTTP 429
+AlloCiné Ciné-Rillieux → AlloCiné HTTP 429
+AlloCiné Cin'eole → AlloCiné HTTP 429
+Cinémas : 15 avec AlloCiné (15 sans réponse), 10 sans, 0 films
+45.8,4.8 (Saint-Didier-au-Mont-d'Or) : 216 sorties et 0 films en 16 s, mémoire max 167 Mo
+ille Saint-Sébastien-sur-Loire, Cinema Jacques Demy, Saint-Paul, Bonne Garde, Le Cinematographe, Pathé Nantes Centre ville, Katorza, Le Concorde, Le Beaulieu, ESPACE BORIS VIAN, Cinéma Jeanne d'Arc ; films Karma {"acP0377":"2026-10-26","acW8560":"2026-10-26","acP5385":"2026-10-26","acP4024":"2026-10-26","acP0196":"2026-10-27"} · Garance {"acP0377":"2026-10-26","acP0088":"2026-10-26","acW8560":"2026-10-27","acP4024":"2026-10-26","acP0052":"2026-10-26","acP0196":"2026-10-27"} · Le Fantôme de l'Opéra {"acP0377":"2026-10-28","acW8560":"2026-10-26","acP5385":"2026-10-26","acP4024":"2026-10-26","acP0196":"2026-10-28"} · Low Expectations {"acP0377":"2026-10-28"} · Joyeuse Jungle ! {"acP0377":"2026-10-28","acP0403":"2026-10-29"} · Minotaure {"acP0377":"2026-10-28","acP0052":"2026-10-26","acP0196":"2026-10-27"} · Malfaisante {"acP0377":"2026-10-28","acP5385":"2026-10-26"} · Une femme aujourd’hui {"acP0377":"2026-10-28","acW8560":"2026-10-28","acP0052":"2026-10-26"} · Congo Boy {"acP0377":"2026-10-27"} · Charlie et les kangourous {"acP0377":"2026-10-27"} · L'Affaire Marie-Claire {"acP0377":"2026-10-29","acP5385":"2026-10-29","acP4024":"2026-10-29"} · Autour de minuit {"acP0377":"2026-10-29"}
+Arles : 706 sorties ; cinémas Eden, Cinémas Le Méjan (Actes Sud), Le Femina, Le Rex, Le Galet, Ciné-Palace, Kinepolis Nîmes Multiplexe - IMAX, CGR Nîmes, Le Sémaphore, Châteaurenard - Le Rex, Le Relais Culturel, Cinéma L'Eden Noves, Pathé Cap Sud, Utopia-Republique, Vox ; films Fausse note {"acP1755":"2026-10-30"} · La Maison de nos rêves {"acP1755":"2026-10-28","acP0498":"2026-10-27","acP0802":"2026-10-27","acP2206":"2026-10-26"} · Ni vue, ni connue {"acP1755":"2026-10-28","acP0441":"2026-10-26","acP0819":"2026-10-27"} · Tad l'explorateur et la lampe magique {"acP1755":"2026-10-27"} · Ducobu et le fantôme de Saint-Potache {"acP1755":"2026-10-27","acP0498":"2026-10-27","acP0802":"2026-10-27","acP0819":"2026-10-27"} · Les Contrebandiers {"acP1755":"2026-10-27"} · Shaun le Mouton : La Bêêête d'Halloween {"acP0441":"2026-10-26"} · Wicker {"acP0441":"2026-10-26"} · La Gradiva {"acP0441":"2026-10-26"} · Minotaure {"acP0441":"2026-10-26"} · Le Corset {"acP0441":"2026-10-26","acP0819":"2026-10-28"} · Notre salut {"acP0441":"2026-10-26","acP2206":"2026-10-27"}
+Lyon : 216 sorties ; cinémas Ecully Cinéma, L'aqueduc, UGC Astoria, Le Cinéma Opéra, Cinéma Lumière Terreaux , Le Méliès, Alpha, Le Lem, UGC Ciné Cité Lyon Part-Dieu, Cinéma Lumière Bellecour, Le Zola, Ciné Mourguet, Iris, Ciné-Rillieux, Cin'eole, CinéDuchère, Pathé Vaise, LE LYON D'OR, CIFA Saint-Denis, Lumière Fourmi, Pathé Bellecour, COMOEDIA, LE CINEMA, UGC, Bellecombe ; films 
