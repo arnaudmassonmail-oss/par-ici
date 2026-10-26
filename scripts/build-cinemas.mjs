@@ -109,36 +109,51 @@ async function allocineIn(insee, city) {
     : norm(t.location?.city) === norm(city) && String(t.location?.zip || '').slice(0, 2) === (insee.startsWith('2A') || insee.startsWith('2B') ? '20' : insee.slice(0, 2)));
 }
 
+// Ids found by earlier runs, kept when AlloCiné does not answer this time.
+const before = new Map();
+try { for (const c of JSON.parse(fs.readFileSync(path.join(ROOT, 'lib/cinemas.json'), 'utf8')).list) if (c[4]) before.set(c[1] + '|' + c[0], c[4]); } catch {}
 const cnc = await cncCinemas();
 const osm = await osmCinemas();
 const towns = [...new Map(cnc.map(c => [c.insee, c])).values()];
 log(`${towns.length} communes à interroger`);
-let acFound = 0, osmFound = 0, failed = 0;
+// AlloCiné slows down callers that ask too fast: one commune at a time, then a second pass for those that failed.
+const acOf = new Map(), errors = {};
+for (const pass of [1, 2]) {
+  const todo = towns.filter(t => !acOf.has(t.insee));
+  if (pass === 2) { log(`Deuxième passage AlloCiné : ${todo.length} communes`); await sleep(60000); }
+  await pool(todo, 2, async town => {
+    try { acOf.set(town.insee, await allocineIn(town.insee, town.city)); } catch (e) { errors[e.message] = (errors[e.message] || 0) + 1; }
+    await sleep(pass === 1 ? 400 : 1000);
+  });
+}
+log('Erreurs AlloCiné :', JSON.stringify(errors));
+let acFound = 0, osmFound = 0, kept = 0;
+const failed = towns.filter(t => !acOf.has(t.insee)).length;
 const out = [];
 await pool(towns, 4, async town => {
   const here = cnc.filter(c => c.insee === town.insee);
   const centre = await communeCentre(town.insee, town.city);
-  let ac = [];
-  try { ac = await allocineIn(town.insee, town.city); } catch (e) { failed++; }
-  await sleep(150);
+  const ac = acOf.get(town.insee) || [];
   const nearOsm = centre ? osm.filter(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 12) : [];
   const toAc = pair(here, ac, c => c.name, t => t.name);
   const toOsm = pair(here, nearOsm.filter(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 6), c => c.name, o => o.name);
   // OSM names often follow AlloCiné's better than the CNC's capitals: try those too.
   for (const c of here) if (!toOsm.has(c) && toAc.get(c)) {
-    const o = nearOsm.find(o => likeness(toAc.get(c).name, o.name) >= 0.5 && ![...toOsm.values()].includes(o));
+    const o = nearOsm.find(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 6 && likeness(toAc.get(c).name, o.name) >= 0.5 && ![...toOsm.values()].includes(o));
     if (o) toOsm.set(c, o);
   }
   for (const c of here) {
     const a = toAc.get(c), o = toOsm.get(c);
     if (!o && !centre) continue;
-    if (a) acFound++;
+    const name = a?.name || o?.name || c.name;
+    const id = a?.internalId || (!acOf.has(town.insee) && before.get(c.city + '|' + name)) || '';
+    if (a) acFound++; else if (id) kept++;
     if (o) osmFound++;
-    out.push([a?.name || o?.name || c.name, c.city, +(o?.lat ?? centre.lat).toFixed(5), +(o?.lon ?? centre.lon).toFixed(5), a?.internalId || '', o?.web || '']);
+    out.push([name, c.city, +(o?.lat ?? centre.lat).toFixed(5), +(o?.lon ?? centre.lon).toFixed(5), id, o?.web || '']);
   }
 });
 out.sort((x, y) => x[1].localeCompare(y[1]) || x[0].localeCompare(y[0]));
-log(`Écrits : ${out.length} cinémas ; avec AlloCiné ${acFound}, avec position OpenStreetMap ${osmFound} ; communes AlloCiné en erreur ${failed}`);
+log(`Écrits : ${out.length} cinémas ; avec AlloCiné ${acFound} (+ ${kept} gardés du mois précédent), avec position OpenStreetMap ${osmFound} ; communes AlloCiné en erreur ${failed}`);
 for (const c of out.filter(c => /Clisson|Montaigu|Pornic|Saint-Michel-Chef|Arles$/.test(c[1]))) log('  exemple :', JSON.stringify(c));
 if (out.length < 1000) { log('Trop peu de cinémas : lib/cinemas.json n\'est pas remplacé.'); process.exitCode = 1; }
 else fs.writeFileSync(path.join(ROOT, 'lib/cinemas.json'), JSON.stringify({ updated: new Date().toISOString().slice(0, 10), cols: ['nom', 'commune', 'lat', 'lon', 'allocine', 'site'], list: out }) + '\n');
