@@ -33,7 +33,7 @@ async function eventsAround(lat, lon) {
     let commune, searches, events;
     // Films come from another source: they are looked up meanwhile, and never hold up or break the outings.
     const films = filmsAround({ lat: clat, lon: clon, radiusKm: RADIUS_KM, log: console.log })
-      .catch(e => { console.error('Films :', e.message); return { C: {}, CINEMAS: {}, FILMS: [] }; });
+      .catch(e => { console.error('Films :', e.message); return { C: {}, CINEMAS: {}, FILMS: [], failed: 1 }; });
     try {
       ({ commune, searches } = await searchTermsAround(clat, clon));
       events = await collectAround({
@@ -44,7 +44,8 @@ async function eventsAround(lat, lon) {
     const cards = toCards(events), cine = await films;
     const data = { updated: window(DAYS).today, place: commune, ...cards, C: { ...cine.C, ...cards.C }, CINEMAS: cine.CINEMAS, FILMS: cine.FILMS };
     console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties et ${data.FILMS.length} films en ${Math.round((Date.now() - t0) / 1000)} s, mémoire max ${Math.round(peak / 1e6)} Mo`);
-    cache.set(key, { at: Date.now(), data });
+    // When some cinemas did not answer, the zone is asked again sooner.
+    cache.set(key, { at: Date.now() - (cine.failed ? TTL_MS - 20 * 60e3 : 0), data });
     return data;
   })();
   cache.set(key, { pending });

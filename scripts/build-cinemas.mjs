@@ -137,9 +137,10 @@ await pool(towns, 4, async town => {
   const nearOsm = centre ? osm.filter(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 12) : [];
   const toAc = pair(here, ac, c => c.name, t => t.name);
   const toOsm = pair(here, nearOsm.filter(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 6), c => c.name, o => o.name);
-  // OSM names often follow AlloCiné's better than the CNC's capitals: try those too.
-  for (const c of here) if (!toOsm.has(c) && toAc.get(c)) {
-    const o = nearOsm.find(o => distKmBetween(centre.lat, centre.lon, o.lat, o.lon) < 6 && likeness(toAc.get(c).name, o.name) >= 0.5 && ![...toOsm.values()].includes(o));
+  // A matching name is found further out too (a large commune's centre can be far from its town),
+  // with AlloCiné's name as well, which OSM names often follow better than the CNC's capitals.
+  for (const c of here) if (!toOsm.has(c)) {
+    const o = nearOsm.find(o => ![...toOsm.values()].includes(o) && Math.max(likeness(c.name, o.name), toAc.get(c) ? likeness(toAc.get(c).name, o.name) : 0) >= 0.5);
     if (o) toOsm.set(c, o);
   }
   for (const c of here) {
