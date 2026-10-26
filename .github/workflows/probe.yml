@@ -1,0 +1,27 @@
+name: Exploration d'une source
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Interroger
+        run: node scripts/probe.mjs | tee scripts/probe.log
+      - name: Publier le compte rendu
+        run: |
+          git config user.name "par-ici-bot"
+          git config user.email "par-ici-bot@users.noreply.github.com"
+          git add scripts/probe.log
+          git diff --cached --quiet && exit 0
+          git commit -m "Exploration d'une source"
+          git pull --rebase -q origin main
+          git push
