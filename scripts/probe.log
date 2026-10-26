@@ -1,25 +1,43 @@
-## https://overpass-api.de/api/interpreter erreur Unexpected token '<', "<html>
-<h"... is not valid JSON
-## https://overpass.kumi.systems/api/interpreter erreur Unexpected token '<', "<?xml vers"... is not valid JSON
-
-## ville Nantes HTTP 200 396 ms : villes Nantes 44000 ; salles (7) P0052 Katorza 44000 Nantes | P0088 Le Concorde 44100 Nantes | P0095 Bonne Garde 44200 Nantes | P0196 Pathé Nantes Centre ville 44000 Nantes | P0666 UGC Ciné Cité Atlantis - Nantes 44800 Saint-Herblain | P0667 Pathé Atlantis Nantes - Saint-Herblain - IMAX 44800 Saint-Herblain | P1199 Le Cinematographe 44000 Nantes
-
-## ville Paris HTTP 200 316 ms : villes Paris 75000, Parisot 82160, Paris 1er arrondissement 75001, Paris 2e arrondissement 75002, Paris 3e arrondissement 75003, Paris 4e arrondissement 75004, Paris 5e arrondissement 75005, Paris 6e arrondissement 75006, Paris 7e arrondissement 75007, Paris 8e arrondissement 75008 ; salles (10) C0003 MK2 Quai de Seine 75019 Paris 19e arrondissement | C0004 Le Cinéma des Cinéastes 75017 Paris | C0005 L'Entrepôt 75014 Paris | C0009 Le Balzac 75008 Paris | C0012 Les Cinq Caumartin 75009 Paris 9e arrondissement | C0013 Luminor Hôtel de Ville 75004 Paris | C0014 Institut finlandais 75005 Paris | C0015 Christine Cinéma Club 75006 Paris | C0016 Studio Galande 75005 Paris 5e arrondissement | C0020 Filmothèque du Quartier Latin 75005 Paris
-
-## ville Saint-Brevin-les-Pins HTTP 200 271 ms : villes Saint-Brevin-les-Pins 44250 ; salles (1) W0012 CinéJade 44250 Saint-Brevin-les-Pins
-
-## ville Pornic HTTP 200 297 ms : villes Pornic 44210, Pornichet 44380 ; salles (3) P0716 Ciné Toiles de Retz 44210 Pornic | P2368 Cinéma Saint Joseph 44210 Pornic | P3702 Cinéma La Toile de Mer 44380 Pornichet
-
-## ville Saint-Michel-Chef-Chef HTTP 200 280 ms : villes Saint-Michel-Chef-Chef 44730 ; salles (1) W1146 Saint-Michel 44730 Saint-Michel-Chef-Chef
-
-## ville Montaigu-Vendée HTTP 200 312 ms : villes  ; salles (1) W8560 Montaigu-Vendée 85600 Montaigu-Vendée
-
-## ville Arles HTTP 200 291 ms : villes Arles 13200 ; salles (5) P0441 Cinémas Le Méjan (Actes Sud) 13200 Arles | P0498 Le Femina 13200 Arles | W1318 Théâtre Antique d'Arles - Rencontre avec les étoil 13200 Arles | W1320 De Film en Aiguille 13200 Arles | W1324 Passage du Méjan 13200 Arles
-
-## https://www.allocine.fr/_/showtimes/theater-P0671/d-2026-10-27/p-2/ HTTP 200 367 ms pagination {"page":"2","totalPages":2,"itemsPerPage":15,"totalItems":26} films La Maison de nos rêves · Resident Evil · Fausse note · Si tu penses bien · Primetime · Heart Of The Beast · Raison et sentiments · Digger · L'Odyssée · Spider-Man: Brand New Day · Verity
-
-## https://www.allocine.fr/_/showtimes/theater-P0671/d-2026-10-27/?page=2 HTTP 200 236 ms pagination {"page":"2","totalPages":2,"itemsPerPage":15,"totalItems":26} films La Maison de nos rêves · Resident Evil · Fausse note · Si tu penses bien · Primetime · Heart Of The Beast · Raison et sentiments · Digger · L'Odyssée · Spider-Man: Brand New Day · Verity
-
-## https://www.allocine.fr/_/showtimes/theater-P0377/d-2026-10-27/ HTTP 200 211 ms pagination {"page":1,"totalPages":1,"itemsPerPage":15,"totalItems":4} films Congo Boy · Karma · Garance · Charlie et les kangourous
-
-## https://www.allocine.fr/seance/salle_gen_csalle=P0377.html HTTP 200 185 ms <!DOCTYPE html> <html lang="fr"> <head> <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <meta charset="UTF
+## https://overpass-api.de/api/interpreter HTTP 200 en 86281 ms : 2136 cinémas, website 1280, addr:city 631
+## https://overpass.private.coffee/api/interpreter HTTP 504 en 109922 ms : <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8" lang="en"/> <title>OSM3S Response</title> </head> <body> <p>The data included in this document is fr
+## https://maps.mail.ru/osm/tools/overpass/api/interpreter HTTP 200 en 80671 ms : 2136 cinémas, website 1280, addr:city 631
+<sheet name="Sommaire" sheetId="14" r:id="rId1"/>
+<sheet name="2025" sheetId="29" r:id="rId2"/>
+<sheet name="2024" sheetId="28" r:id="rId3"/>
+<sheet name="2023" sheetId="26" r:id="rId4"/>
+<sheet name="2022" sheetId="25" r:id="rId5"/>
+<sheet name="2021" sheetId="24" r:id="rId6"/>
+<sheet name="2020" sheetId="23" r:id="rId7"/>
+<sheet name="2019" sheetId="22" r:id="rId8"/>
+<sheet name="2018" sheetId="21" r:id="rId9"/>
+<sheet name="2017" sheetId="20" r:id="rId10"/>
+<sheet name="2016" sheetId="19" r:id="rId11"/>
+<sheet name="2015" sheetId="17" r:id="rId12"/>
+<sheet name="2014" sheetId="16" r:id="rId13"/>
+<sheet name="2013" sheetId="15" r:id="rId14"/>
+<sheet name="2012" sheetId="13" r:id="rId15"/>
+<sheet name="2011" sheetId="1" r:id="rId16"/>
+<sheet name="2010" sheetId="2" r:id="rId17"/>
+<sheet name="2009" sheetId="3" r:id="rId18"/>
+<sheet name="2008" sheetId="4" r:id="rId19"/>
+<sheet name="2007" sheetId="5" r:id="rId20"/>
+<sheet name="2006" sheetId="6" r:id="rId21"/>
+<sheet name="2005" sheetId="7" r:id="rId22"/>
+<sheet name="2004" sheetId="8" r:id="rId23"/>
+<sheet name="2003" sheetId="9" r:id="rId24"/>
+<sheet name="ESRI_MAPINFO_SHEET" sheetId="18" state="veryHidden" r:id="rId25"/>
+sheet2 lignes 2062
+{"A":"Retour au menu \"Liste des établissements actifs\""}
+{"A":"NAutoC","B":"NomEtab","C":"Ecrans","D":"fauteuils","E":"DEPCOM","F":"COMMUNE","G":"genre","H":"AE","I":"3D"}
+{"A":"35","B":"BALZAC","C":"3","D":"589","E":"75108","F":"Paris 8e Arrondissement","G":"FIXE","H":"OUI","I":"OUI"}
+{"A":"55","B":"ELYSEES LINCOLN","C":"3","D":"448","E":"75108","F":"Paris 8e Arrondissement","G":"FIXE","H":"OUI","I":"NON"}
+{"A":"204","B":" UGC OPERA","C":"4","D":"722","E":"75109","F":"Paris 9e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
+{"A":"301","B":"MAX LINDER","C":"1","D":"591","E":"75109","F":"Paris 9e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
+{"A":"311","B":"GRAND REX","C":"7","D":"3678","E":"75102","F":"Paris 2e Arrondissement","G":"FIXE","H":"NON","I":"OUI"}
+{"A":"321","B":"PATHE BNP OPERA","C":"6","D":"502","E":"75102","F":"Paris 2e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
+{"A":"115334","B":"LE CONNETABLE","C":"2","D":"432","E":"44043","F":"Clisson","G":"FIXE","H":"OUI","I":"OUI"}
+{"A":"321132","B":"CINE TOILES DE RETZ","C":"3","D":"479","E":"44131","F":"Pornic","G":"FIXE","H":"OUI","I":"OUI"}
+{"A":"321135","B":"ST JOSEPH","C":"1","D":"185","E":"44131","F":"Pornic","G":"FIXE","H":"OUI","I":"OUI"}
+{"A":"321146","B":"LA TOILE DE MER","C":"1","D":"174","E":"44132","F":"Pornichet","G":"FIXE","H":"OUI","I":"NON"}
+{"A":"406352","B":"SALLE ST MICHEL","C":"1","D":"95","E":"44182","F":"Saint-Michel-Chef-Chef","G":"FIXE","H":"OUI","I":"OUI"}
+{"A":"268124","B":"GRAND ECRAN MONTAIGU-VENDEE","C":"6","D":"871","E":"85146","F":"Montaigu-Vendée","G":"FIXE","H":"NON","I":"NON"}
