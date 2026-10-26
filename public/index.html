@@ -327,6 +327,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   };
   // Hand-made events as written in data.js; each merge starts again from a fresh copy.
   const MANUAL = EV.map(e => ({ ...e }));
+  const MANUAL_FILMS = FILMS.map(f => ({ ...f })), MANUAL_CINEMAS = { ...CINEMAS };
   const AUTO_COL = typeof AUTO !== 'undefined' ? AUTO : null;
   // Merge collections (the nightly auto.js and the server's answer for the current position) into the hand-made data.
   // A collected event that repeats one already kept (same day, similar title, same place) is dropped.
@@ -365,6 +366,30 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
       }
     }
     prepareDates();
+    prepareFilms(cols.filter(col => col && col.CINEMAS && Object.keys(col.CINEMAS).length));
+  }
+  // Films: the server's (AlloCiné, cinemas around the position) replace the hand-made ones of data.js.
+  function prepareFilms(cols) {
+    FILMS.length = 0;
+    for (const k of Object.keys(CINEMAS)) delete CINEMAS[k];
+    if (!cols.length) { MANUAL_FILMS.forEach(f => FILMS.push({ ...f })); Object.assign(CINEMAS, MANUAL_CINEMAS); }
+    for (const col of cols) {
+      for (const [cid, cin] of Object.entries(col.CINEMAS)) {
+        // The cinema's town joins the commune of the same name already shown nearby, if any.
+        const t = col.C[cin.c];
+        const k = Object.keys(C).find(k => C[k].n === t.n && Math.hypot(C[k].lat - t.lat, C[k].lon - t.lon) < 0.06) || `${cin.c}@${t.lat.toFixed(2)},${t.lon.toFixed(2)}`;
+        C[k] ||= t;
+        CINEMAS[cid] = { ...cin, c: k };
+      }
+      col.FILMS.forEach(f => FILMS.push({ ...f }));
+    }
+    // A cinema without films here (no programme online, or the source not answering) still shows, with its programme link.
+    const shown = new Set(FILMS.flatMap(f => Object.keys(f.s)));
+    for (const [cid, cin] of Object.entries(CINEMAS)) if (!shown.has(cid)) {
+      FILMS.push({ id: 'cin-' + cid, t: cin.n, g: 'Cinéma', prog: true, s: { [cid]: '' },
+        desc: 'Les films de ce cinéma ne sont pas disponibles ici pour le moment. Son programme est sur ' + (cin.url ? 'le lien ci-dessous.' : 'son site ou à l\'accueil.') });
+    }
+    FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, v ? offOf(v) : 0])); });
   }
 
   // Dates
@@ -393,7 +418,6 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     }
   }
   applyCollections([AUTO_COL]);
-  FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, offOf(v)])); });
   const fmtDay = off => {
     if (off === 0) return 'Aujourd\'hui';
     if (off === 1) return 'Demain';
@@ -535,11 +559,12 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   function showRows(f) {
     return filmShows(f).map(cid => {
       const cin = CINEMAS[cid], com = C[cin.c], from = f.from[cid];
-      return `<div class="show"><div class="where">${esc(cin.n)} <small>· ${esc(com.n)} · ${km(kmOf(cin.c))}</small></div><div class="times"><span class="time">${from > 0 ? 'Dès le ' + fmtShort(from) : 'À l\'affiche'}</span><a class="time link" href="${cin.url}" target="_blank" rel="noopener">Programme du cinéma</a></div></div>`;
+      const when = f.prog ? '' : `<span class="time">${from > 0 ? 'Dès le ' + fmtShort(from) : 'À l\'affiche'}</span>`;
+      return `<div class="show"><div class="where">${esc(cin.n)} <small>· ${esc(com.n)} · ${km(kmOf(cin.c))}</small></div><div class="times">${when}${cin.url ? `<a class="time link" href="${esc(cin.url)}" target="_blank" rel="noopener">Programme du cinéma</a>` : ''}</div></div>`;
     }).join('');
   }
-  // Poster as shown on the cinema's own site (read each night).
-  const filmPoster = f => (typeof AUTO !== 'undefined' && AUTO.FILMIMG && AUTO.FILMIMG[f.id]) || null;
+  // Poster from the film's source (AlloCiné), or as shown on the cinema's own site (read each night).
+  const filmPoster = f => f.poster || (typeof AUTO !== 'undefined' && AUTO.FILMIMG && AUTO.FILMIMG[f.id]) || null;
   function filmCard(f) {
     return `<div class="card film">
       <button type="button" class="badge-ic${filmPoster(f) ? '' : ' illu'}" ${filmPoster(f) ? '' : `style="${illuStyle(f)}"`} data-film="${f.id}" aria-label="Voir ${esc(f.t)}">${I.cinema}${filmPoster(f) ? `<img src="${esc(filmPoster(f)[0])}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</button>
@@ -672,7 +697,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
       <div class="sheet-body film">
         <p>${esc(f.desc)}</p>
         <div class="shows">${showRows(f)}</div>
-        <p class="src">Source : programmes des cinémas (Le Connétable, cinéma de Montaigu-Vendée).${poster ? ' Affiche : ' + esc(poster[1]) + '.' : ''}</p>
+        <p class="src">Source : ${f.src ? 'programme des cinémas sur ' + esc(f.src) : f.prog ? 'annuaire des cinémas (CNC, OpenStreetMap)' : 'programmes des cinémas (Le Connétable, cinéma de Montaigu-Vendée)'}.${poster ? ' Affiche : ' + esc(poster[1]) + '.' : ''}</p>
         <div class="sheet-actions"><button type="button" class="btn primary" data-fav-sheet="f-${f.id}">${S.favs.has('f-' + f.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button><button type="button" class="btn ghost" data-close>Fermer</button></div>
       </div>`;
     sheet.showModal();

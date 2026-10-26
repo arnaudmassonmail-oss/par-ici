@@ -1,11 +1,12 @@
 // Par Ici server: serves the app (public/) and finds outings around any point in France.
-//   GET /api/events?lat=47.06&lon=-1.25  →  { updated, place, C, SRC, EV } (same shape as public/auto.js)
+//   GET /api/events?lat=47.06&lon=-1.25  →  { updated, place, C, SRC, EV, CINEMAS, FILMS } (shapes of public/auto.js and data.js)
 // Keys come from the environment (OPENAGENDA_KEY, DATATOURISME_KEY) and never reach the browser.
 // Run: node server/index.mjs   (Node 18+, no dependencies)
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { collectAround, toCards, window, searchTermsAround } from '../lib/collect.mjs';
+import { filmsAround } from '../lib/films.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const PUBLIC = path.join(ROOT, 'public');
@@ -30,6 +31,9 @@ async function eventsAround(lat, lon) {
     let peak = 0;
     const watch = setInterval(() => { peak = Math.max(peak, process.memoryUsage().rss); }, 200);
     let commune, searches, events;
+    // Films come from another source: they are looked up meanwhile, and never hold up or break the outings.
+    const films = filmsAround({ lat: clat, lon: clon, radiusKm: RADIUS_KM, log: console.log })
+      .catch(e => { console.error('Films :', e.message); return { C: {}, CINEMAS: {}, FILMS: [] }; });
     try {
       ({ commune, searches } = await searchTermsAround(clat, clon));
       events = await collectAround({
@@ -37,8 +41,9 @@ async function eventsAround(lat, lon) {
         oa: { searches, addTowns: 8, maxAgendas: 40, maxPages: 3 }, dt: { maxPages: 15 }
       });
     } finally { clearInterval(watch); }
-    const data = { updated: window(DAYS).today, place: commune, ...toCards(events) };
-    console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s, mémoire max ${Math.round(peak / 1e6)} Mo`);
+    const cards = toCards(events), cine = await films;
+    const data = { updated: window(DAYS).today, place: commune, ...cards, C: { ...cine.C, ...cards.C }, CINEMAS: cine.CINEMAS, FILMS: cine.FILMS };
+    console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties et ${data.FILMS.length} films en ${Math.round((Date.now() - t0) / 1000)} s, mémoire max ${Math.round(peak / 1e6)} Mo`);
     cache.set(key, { at: Date.now(), data });
     return data;
   })();

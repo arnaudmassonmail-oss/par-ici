@@ -156,26 +156,9 @@ const CINEMAS = {
   montaigu: { n: 'Cinéma Montaigu-Vendée', c: 'montaigu', url: 'https://www.ticketingcine.com/cine/P6AJ45EB.html',
     pages: ['https://www.ticketingcine.com/cine/P6AJ45EB.html'] }
 };
-// Films announced by each cinema. from = first screening announced there.
-const FILMS = [
-  { id: 'shaun', t: 'Shaun le Mouton : La Bêêête d\'Halloween', g: 'Animation', dur: '1h31', age: 'En famille', kids: true, s: { connetable: '2026-10-21' }, desc: 'Le troisième long métrage des studios Aardman avec Shaun et le troupeau, spécial Halloween.' },
-  { id: 'mochy', t: 'Mochy', g: 'Animation', age: 'En famille', kids: true, s: { montaigu: '2026-10-14' }, desc: 'Film d\'animation belge sorti le 14 octobre.' },
-  { id: 'marius', t: 'Marius et le Royaume des mers', g: 'Film', s: { connetable: '2026-10-18' }, desc: 'À l\'affiche au Connétable.' },
-  { id: 'miserables', t: 'Les Misérables', g: 'Drame', s: { connetable: '2026-10-18', montaigu: '2026-10-14' }, desc: 'Nouvelle adaptation du roman de Victor Hugo, réalisée par Fred Cavayé.' },
-  { id: 'karma', t: 'Karma', g: 'Thriller', s: { connetable: '2026-10-21' }, desc: 'Thriller de Guillaume Canet avec Marion Cotillard, dans le nord de l\'Espagne.' },
-  { id: 'englouti', t: 'Englouti', g: 'Thriller', s: { montaigu: '2026-10-14' }, desc: 'Thriller américain sorti le 14 octobre.' },
-  { id: 'ducobu', t: 'Ducobu et le fantôme de Saint-Potache', g: 'Comédie', age: 'En famille', kids: true, s: { montaigu: '2026-10-19', connetable: '2026-10-21' }, desc: 'Nouvelle aventure du cancre préféré des enfants, à l\'affiche pour les vacances.' },
-  { id: 'residentevil', t: 'Resident Evil', g: 'Horreur', s: { montaigu: '2026-10-19' }, desc: 'À l\'affiche au cinéma de Montaigu-Vendée.' },
-  { id: 'beauxjours', t: 'Les Beaux Jours', g: 'Film', s: { connetable: '2026-10-21' }, desc: 'À l\'affiche au Connétable.' },
-  { id: 'femme', t: 'Une femme aujourd\'hui', g: 'Drame', s: { connetable: '2026-10-28' }, desc: 'Le nouveau film de Robert Guédiguian, annoncé au Connétable à partir du 28 octobre.' },
-  { id: 'congoboy', t: 'Congo Boy', g: 'Film', s: { connetable: '2026-10-27' }, desc: 'Annoncé au Connétable à partir du 27 octobre.' },
-  { id: 'moulin', t: 'Moulin', g: 'Drame historique', dur: '2h10', s: { connetable: '2026-10-28' }, desc: 'László Nemes raconte l\'arrestation de Jean Moulin en 1943 et son interrogatoire par Klaus Barbie. Avec Gilles Lellouche et Lars Eidinger. En compétition à Cannes 2026.' },
-  { id: 'nivue', t: 'Ni vue, ni connue', g: 'Film', s: { connetable: '2026-10-18' }, desc: 'À l\'affiche au Connétable.' },
-  { id: 'salut', t: 'Notre salut', g: 'Film', s: { connetable: '2026-10-23' }, desc: 'Annoncé au Connétable à partir du 23 octobre.' },
-  { id: 'garance', t: 'Garance', g: 'Film', s: { connetable: '2026-10-25', montaigu: '2026-10-19' }, desc: 'Annoncé au Connétable à partir du 25 octobre, déjà à l\'affiche à Montaigu-Vendée.' },
-  { id: 'minotaure', t: 'Minotaure', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' },
-  { id: 'fantome', t: 'Le Fantôme de l\'Opéra', g: 'Film', s: { connetable: '2026-10-28' }, desc: 'Annoncé au Connétable à partir du 28 octobre.' }
-];
+// Films now come from the server (AlloCiné, cinemas around the chosen position). Hand-made films are only
+// shown when the server does not answer; left empty, the cinemas above then show with their programme link.
+const FILMS = [];
 
 // Official posters for events whose source gives no photo. `page` is the organiser's or venue's
 // own page for the event; the nightly collection reads the preview image that page declares.

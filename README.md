@@ -6,8 +6,8 @@ Site statique, sans dépendance ni étape de build.
 
 ## Fonctionnement
 
-- **Partout en France** : `server/index.mjs` sert l'appli et répond à `/api/events?lat=…&lon=…`. Il interroge DATAtourisme puis OpenAgenda (agendas cherchés avec la commune, le département et les communes où DATAtourisme trouve des sorties) dans un rayon de 50 km, et garde la réponse 6 h par zone d'environ 10 km. La collecte elle-même est dans `lib/collect.mjs`.
-- **Autour de Cugand**, en plus : `public/data.js` (partie manuelle : cinéma, Clisson, Gétigné…) et `public/auto.js` (collecte de nuit et images des sorties manuelles), mis à jour par la tâche GitHub « Collecte automatique des sorties ».
+- **Partout en France** : `server/index.mjs` sert l'appli et répond à `/api/events?lat=…&lon=…`. Il interroge DATAtourisme puis OpenAgenda (agendas cherchés avec la commune, le département et les communes où DATAtourisme trouve des sorties) dans un rayon de 50 km, et garde la réponse 6 h par zone d'environ 10 km. La collecte elle-même est dans `lib/collect.mjs`. Il ajoute les films des 15 cinémas les plus proches (`lib/films.mjs`, programmes AlloCiné sur 7 jours), à partir de l'annuaire `lib/cinemas.json` (CNC, OpenStreetMap, AlloCiné) que la tâche « Annuaire des cinémas » refait chaque mois.
+- **Autour de Cugand**, en plus : `public/data.js` (partie manuelle : Clisson, Gétigné…) et `public/auto.js` (collecte de nuit et images des sorties manuelles), mis à jour par la tâche GitHub « Collecte automatique des sorties ».
 - La page fusionne tout et masque les doublons. Sans serveur (copie statique), elle garde `auto.js`.
 - Recherche de commune ou de code postal et nom de la commune après géolocalisation : Géoplateforme IGN (`data.geopf.fr`, gratuit, sans clé).
 
@@ -42,6 +42,6 @@ puis ouvrir http://localhost:8000. La géolocalisation fonctionne sur `localhost
 
 ## Collecte automatique gratuite
 
-Chaque nuit, la tâche GitHub « Collecte automatique des sorties » lance `scripts/auto-update.mjs`, qui interroge OpenAgenda et DATAtourisme (clés gratuites dans les secrets `OPENAGENDA_KEY` et `DATATOURISME_KEY`) et écrit `public/auto.js`. La page fusionne ce fichier avec `public/data.js`, la partie manuelle (cinéma, Clisson, Gétigné, Gorges…). Le compte rendu de la dernière collecte est dans `scripts/last-run.log`.
+Chaque nuit, la tâche GitHub « Collecte automatique des sorties » lance `scripts/auto-update.mjs`, qui interroge OpenAgenda et DATAtourisme (clés gratuites dans les secrets `OPENAGENDA_KEY` et `DATATOURISME_KEY`) et écrit `public/auto.js`. La page fusionne ce fichier avec `public/data.js`, la partie manuelle (Clisson, Gétigné, Gorges…). Le compte rendu de la dernière collecte est dans `scripts/last-run.log`.
 
 Pour relancer la collecte à la main : onglet Actions → « Collecte automatique des sorties » → Run workflow.
