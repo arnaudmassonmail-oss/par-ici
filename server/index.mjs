@@ -1,6 +1,6 @@
 // Par Ici server: serves the app (public/) and finds outings around any point in France.
 //   GET /api/events?lat=47.06&lon=-1.25  →  { updated, place, C, SRC, EV, CINEMAS, FILMS } (shapes of public/auto.js and data.js)
-// Keys come from the environment (OPENAGENDA_KEY, DATATOURISME_KEY) and never reach the browser.
+// Keys come from the environment (OPENAGENDA_KEY, DATATOURISME_KEY, TMDB_KEY) and never reach the browser.
 // Run: node server/index.mjs   (Node 18+, no dependencies)
 import http from 'node:http';
 import fs from 'node:fs';
@@ -13,6 +13,9 @@ const PUBLIC = path.join(ROOT, 'public');
 const PORT = Number(process.env.PORT) || 3000;
 const OA_KEY = process.env.OPENAGENDA_KEY || '';
 const DT_KEY = process.env.DATATOURISME_KEY || '';
+const TMDB_KEY = process.env.TMDB_KEY || '';
+// Where films come from: AlloCiné (with TMDB as plan B), or TMDB only when set to "tmdb".
+const FILMS_SOURCE = process.env.FILMS_SOURCE || 'allocine';
 const RADIUS_KM = 50;
 const DAYS = 31;
 const TTL_MS = 6 * 3600e3;
@@ -32,7 +35,7 @@ async function eventsAround(lat, lon) {
     const watch = setInterval(() => { peak = Math.max(peak, process.memoryUsage().rss); }, 200);
     let commune, searches, events;
     // Films come from another source: they are looked up meanwhile, and never hold up or break the outings.
-    const films = filmsAround({ lat: clat, lon: clon, radiusKm: RADIUS_KM, log: console.log })
+    const films = filmsAround({ lat: clat, lon: clon, radiusKm: RADIUS_KM, source: FILMS_SOURCE, tmdbKey: TMDB_KEY, log: console.log })
       .catch(e => { console.error('Films :', e.message); return { C: {}, CINEMAS: {}, FILMS: [], failed: 1 }; });
     try {
       ({ commune, searches } = await searchTermsAround(clat, clon));

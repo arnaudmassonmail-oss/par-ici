@@ -23,11 +23,20 @@ jobs:
         env:
           OPENAGENDA_KEY: ${{ secrets.OPENAGENDA_KEY }}
           DATATOURISME_KEY: ${{ secrets.DATATOURISME_KEY }}
+          TMDB_KEY: ${{ secrets.TMDB_KEY }}
         run: |
           (/usr/bin/time -v node server/index.mjs > server.out 2>&1; echo "fin du serveur, code $?" >> server.out) &
           sleep 2
           for p in "Saint-Michel-Chef-Chef 47.181 -2.149" "Cugand 47.0603 -1.2525" "Arles 43.677 4.628" "Lyon 45.758 4.835"; do set -- $p; curl -s -m 120 -o "$1.json" "http://localhost:3000/api/events?lat=$2&lon=$3"; node -e 'const j=require("./"+process.argv[1]+".json");console.log(process.argv[1]+" : "+j.EV.length+" sorties ; cinémas "+Object.values(j.CINEMAS||{}).map(c=>c.n).join(", ")+" ; films "+(j.FILMS||[]).slice(0,12).map(f=>f.t+" "+JSON.stringify(f.s)).join(" · "))' "$1" >> server.out 2>&1; done
           pkill -f "node server/index.mjs"; sleep 2
+          # Plan B alone (TMDB), on another port.
+          if [ -n "$TMDB_KEY" ]; then
+            (FILMS_SOURCE=tmdb PORT=3001 node server/index.mjs >> server.out 2>&1 &)
+            sleep 2
+            curl -s -m 120 -o planb.json "http://localhost:3001/api/events?lat=47.181&lon=-2.149"
+            node -e 'const j=require("./planb.json");console.log("Plan B Saint-Michel-Chef-Chef : cinémas "+Object.keys(j.CINEMAS).length+" ; films "+j.FILMS.filter(f=>f.nat).slice(0,15).map(f=>f.t+" ("+f.nat+(f.poster?", affiche":"")+")").join(" · "))' >> server.out 2>&1
+            pkill -f "node server/index.mjs"; sleep 1
+          else echo "Plan B : pas de secret TMDB_KEY, non testé" >> server.out; fi
           { echo; echo '## Serveur'; grep -v -E '^\s+(Page|Volunt|Invol|Swaps|File sys|Socket|Signals|Average|Exit status|Minor|Major|Percent|System time|User time)' server.out; } >> scripts/test-zone.log
       - name: Publier le compte rendu
         run: |

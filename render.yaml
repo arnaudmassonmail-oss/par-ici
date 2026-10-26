@@ -11,3 +11,5 @@ services:
         sync: false
       - key: DATATOURISME_KEY
         sync: false
+      - key: TMDB_KEY
+        sync: false

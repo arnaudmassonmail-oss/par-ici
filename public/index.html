@@ -389,7 +389,10 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
       FILMS.push({ id: 'cin-' + cid, t: cin.n, g: 'Cinéma', prog: true, s: { [cid]: '' },
         desc: 'Les films de ce cinéma ne sont pas disponibles ici pour le moment. Son programme est sur ' + (cin.url ? 'le lien ci-dessous.' : 'son site ou à l\'accueil.') });
     }
-    FILMS.forEach(f => { f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, v ? offOf(v) : 0])); });
+    FILMS.forEach(f => {
+      f.from = Object.fromEntries(Object.entries(f.s).map(([k, v]) => [k, v ? offOf(v) : 0]));
+      if (f.nat) f.relOff = offOf(f.nat);
+    });
   }
 
   // Dates
@@ -512,7 +515,9 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
   // Filtering
   const inPeriod = e => { const [a, b] = ranges[S.period]; return e.from <= b && e.until >= a; };
   const baseEvents = () => EV.filter(e => inPeriod(e) && kmOf(e.c) <= S.dist && (!S.kids || e.kids));
-  const filmShows = f => Object.keys(f.s).filter(cid => kmOf(CINEMAS[cid].c) <= S.dist && f.from[cid] <= ranges[S.period][1])
+  // A film known only nationally (plan B, TMDB) shows when a cinema is near, with those cinemas' programme links.
+  const filmShows = f => (f.nat ? (f.relOff <= ranges[S.period][1] ? Object.keys(CINEMAS) : []) : Object.keys(f.s))
+    .filter(cid => kmOf(CINEMAS[cid].c) <= S.dist && (f.nat || f.from[cid] <= ranges[S.period][1]))
     .sort((x, y) => kmOf(CINEMAS[x].c) - kmOf(CINEMAS[y].c));
   const baseFilms = () => FILMS.filter(f => (!S.kids || f.kids) && filmShows(f).length);
   const counts = () => {
@@ -556,7 +561,15 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const on = S.favs.has(id);
     return `<button type="button" class="fav" data-fav="${id}" aria-pressed="${on}" aria-label="${on ? 'Retirer des favoris' : 'Ajouter aux favoris'} : ${esc(t)}">${I.heart}</button>`;
   }
-  function showRows(f) {
+  function showRows(f, full) {
+    if (f.nat) {
+      const head = `<div class="show"><div class="where">Au cinéma en France</div><div class="times"><span class="time">${f.relOff > 0 ? 'Sortie le ' + fmtShort(f.relOff) : 'À l\'affiche'}</span></div></div>`;
+      if (!full) return head;
+      return head + '<p class="src">Pour savoir où et quand il passe, voyez le programme des cinémas proches :</p>' + filmShows(f).slice(0, 6).map(cid => {
+        const cin = CINEMAS[cid];
+        return `<div class="show"><div class="where">${esc(cin.n)} <small>· ${esc(C[cin.c].n)} · ${km(kmOf(cin.c))}</small></div><div class="times">${cin.url ? `<a class="time link" href="${esc(cin.url)}" target="_blank" rel="noopener">Programme du cinéma</a>` : ''}</div></div>`;
+      }).join('');
+    }
     return filmShows(f).map(cid => {
       const cin = CINEMAS[cid], com = C[cin.c], from = f.from[cid];
       const when = f.prog ? '' : `<span class="time">${from > 0 ? 'Dès le ' + fmtShort(from) : 'À l\'affiche'}</span>`;
@@ -619,7 +632,7 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     const r = k => Math.sqrt(Math.min(k, 50) / 50) * R;
     const per = {};
     events.forEach(e => { per[e.c] = (per[e.c] || 0) + 1; });
-    films.forEach(f => filmShows(f).forEach(cid => { const c = CINEMAS[cid].c; per[c] = (per[c] || 0) + 1; }));
+    films.filter(f => !f.nat).forEach(f => filmShows(f).forEach(cid => { const c = CINEMAS[cid].c; per[c] = (per[c] || 0) + 1; }));
     const rings = [5, 10, 20, 50].map(k => `<circle cx="${cx}" cy="${cy}" r="${r(k)}" fill="${k === S.dist ? 'color-mix(in srgb, var(--accent) 10%, transparent)' : 'none'}" stroke="${k === S.dist ? 'var(--accent)' : 'var(--line)'}" stroke-width="${k === S.dist ? 2.5 : 1.5}" ${k === S.dist ? '' : 'stroke-dasharray="4 5"'}/>
       <text x="${cx}" y="${cy - r(k) + 13}" text-anchor="middle" font-size="11" font-weight="800" fill="${k === S.dist ? 'var(--accent)' : 'var(--muted)'}">${k} km</text>`).join('');
     const shown = Object.entries(C).filter(([id]) => per[id] || EV.some(e => e.c === id) || Object.values(CINEMAS).some(c => c.c === id));
@@ -696,8 +709,8 @@ dialog::backdrop { background: rgb(20 22 50 / .45); }
     sheet.innerHTML = `${poster ? `<img class="sheet-img poster" src="${esc(poster[0])}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div class="sheet-head" style="--c:var(--c-cinema)"><div class="badge-ic">${I.cinema}</div><div><span class="kicker">${esc(f.g)}${f.dur ? ' · ' + f.dur : ''}</span><h3 id="sheetTitle">${esc(f.t)}</h3></div></div>
       <div class="sheet-body film">
         <p>${esc(f.desc)}</p>
-        <div class="shows">${showRows(f)}</div>
-        <p class="src">Source : ${f.src ? 'programme des cinémas sur ' + esc(f.src) : f.prog ? 'annuaire des cinémas (CNC, OpenStreetMap)' : 'programmes des cinémas (Le Connétable, cinéma de Montaigu-Vendée)'}.${poster ? ' Affiche : ' + esc(poster[1]) + '.' : ''}</p>
+        <div class="shows">${showRows(f, true)}</div>
+        <p class="src">Source : ${f.src === 'TMDB' ? 'TMDB, films au cinéma en France (sans le détail par cinéma). Ce produit utilise l\'API TMDB mais n\'est ni approuvé ni certifié par TMDB' : f.src ? 'programme des cinémas sur ' + esc(f.src) : f.prog ? 'annuaire des cinémas (CNC, OpenStreetMap)' : 'programmes des cinémas (Le Connétable, cinéma de Montaigu-Vendée)'}.${poster ? ' Affiche : ' + esc(poster[1]) + '.' : ''}</p>
         <div class="sheet-actions"><button type="button" class="btn primary" data-fav-sheet="f-${f.id}">${S.favs.has('f-' + f.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}</button><button type="button" class="btn ghost" data-close>Fermer</button></div>
       </div>`;
     sheet.showModal();
