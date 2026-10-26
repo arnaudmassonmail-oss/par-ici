@@ -21,7 +21,7 @@ jobs:
           {
             echo "Service : $U ($(date -u +%FT%TZ))"
             echo "Page d'accueil : $(curl -s -m 120 -o /dev/null -w '%{http_code} en %{time_total} s' "$U/")"
-            for p in "Lyon 45.758 4.835" "Cugand 47.0603 -1.2525"; do
+            for p in "Lyon 45.758 4.835" "Cugand 47.0603 -1.2525" "Arles 43.677 4.628"; do
               set -- $p
               r=$(curl -s -m 120 -w '\n%{http_code} %{time_total}' "$U/api/events?lat=$2&lon=$3")
               code=$(echo "$r" | tail -1)
