@@ -26,7 +26,7 @@ jobs:
         run: |
           (/usr/bin/time -v node server/index.mjs > server.out 2>&1; echo "fin du serveur, code $?" >> server.out) &
           sleep 2
-          for p in "Arles 43.677 4.628"; do set -- $p; echo "$1 : $(curl -s -m 120 -o /dev/null -w '%{http_code} en %{time_total} s' "http://localhost:3000/api/events?lat=$2&lon=$3")" >> server.out; done
+          for p in "Lyon 45.758 4.835" "Cugand 47.0603 -1.2525" "Arles 43.677 4.628" "Marseille 43.296 5.37"; do set -- $p; echo "$1 : $(curl -s -m 120 -o /dev/null -w '%{http_code} en %{time_total} s' "http://localhost:3000/api/events?lat=$2&lon=$3")" >> server.out; done
           pkill -f "node server/index.mjs"; sleep 2
           { echo; echo '## Serveur'; grep -v -E '^\s+(Page|Volunt|Invol|Swaps|File sys|Socket|Signals|Average|Exit status|Minor|Major|Percent|System time|User time)' server.out; } >> scripts/test-zone.log
       - name: Publier le compte rendu

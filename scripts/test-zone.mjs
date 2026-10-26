@@ -5,7 +5,7 @@ import path from 'node:path';
 import { collectAround, toCards, searchTermsAround } from '../lib/collect.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const PLACES = [['Lyon', 45.758, 4.835], ['Rennes', 48.111, -1.68], ['Gap', 44.559, 6.079], ['Clisson', 47.087, -1.282], ['Arles', 43.6766, 4.6278]];
+const PLACES = [['Arles', 43.6766, 4.6278]];
 const out = [];
 // What the geography service answers from here (it sometimes refuses servers).
 for (let i = 0; i < 3; i++) {

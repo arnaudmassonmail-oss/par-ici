@@ -27,19 +27,28 @@ async function eventsAround(lat, lon) {
   const [clat, clon] = key.split(',').map(Number);
   const pending = (async () => {
     const t0 = Date.now();
-    const { commune, searches } = await searchTermsAround(clat, clon);
-    const events = await collectAround({
-      lat: clat, lon: clon, radiusKm: RADIUS_KM, days: DAYS, oaKey: OA_KEY, dtKey: DT_KEY,
-      oa: { searches, addTowns: 8, maxAgendas: 40, maxPages: 3 }, dt: { maxPages: 15 }
-    });
+    let peak = 0;
+    const watch = setInterval(() => { peak = Math.max(peak, process.memoryUsage().rss); }, 200);
+    let commune, searches, events;
+    try {
+      ({ commune, searches } = await searchTermsAround(clat, clon));
+      events = await collectAround({
+        lat: clat, lon: clon, radiusKm: RADIUS_KM, days: DAYS, oaKey: OA_KEY, dtKey: DT_KEY,
+        oa: { searches, addTowns: 8, maxAgendas: 40, maxPages: 3 }, dt: { maxPages: 15 }
+      });
+    } finally { clearInterval(watch); }
     const data = { updated: window(DAYS).today, place: commune, ...toCards(events) };
-    console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s`);
+    console.log(`${key} (${commune || '?'}) : ${data.EV.length} sorties en ${Math.round((Date.now() - t0) / 1000)} s, mémoire max ${Math.round(peak / 1e6)} Mo`);
     cache.set(key, { at: Date.now(), data });
     return data;
   })();
   cache.set(key, { pending });
   try { return await pending; } catch (e) { cache.delete(key); throw e; }
 }
+
+// A stray error in one collection must not take the whole service down.
+process.on('unhandledRejection', e => console.error('Erreur non rattrapée :', e));
+process.on('uncaughtException', e => console.error('Exception non rattrapée :', e));
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.webmanifest': 'application/manifest+json', '.json': 'application/json' };
 
