@@ -1,15 +1,16 @@
-DATAtourisme: 557 événements à moins de 50 km (0 fiches sans date, 10 pages)
+DATAtourisme: 541 événements à moins de 50 km (0 fiches sans date, 10 pages)
 OpenAgenda: 61 agendas candidats
+  Maison de la TERRE - Lantic (22): 1 événements lus, 0 à moins de 50 km
   Terres de Montaigu: 55 événements lus, 54 à moins de 50 km
-  Emmaus Terre - La Bricole Solidaire: 37 événements lus, 0 à moins de 50 km
-  Quinzaine de la transmission: 55 événements lus, 2 à moins de 50 km
-  Nantes Nord: 33 événements lus, 33 à moins de 50 km
+  Emmaus Terre - La Bricole Solidaire: 36 événements lus, 0 à moins de 50 km
+  Quinzaine de la transmission: 58 événements lus, 2 à moins de 50 km
   Conservatoire de Nantes: 24 événements lus, 24 à moins de 50 km
+  Nantes Nord: 32 événements lus, 32 à moins de 50 km
+  Bibliothèque municipale de Nantes: 66 événements lus, 66 à moins de 50 km
   Nantes Sud: 48 événements lus, 48 à moins de 50 km
-  Bibliothèque municipale de Nantes: 67 événements lus, 67 à moins de 50 km
-  Nantes Erdre: 41 événements lus, 41 à moins de 50 km
-  Île de Nantes: 154 événements lus, 154 à moins de 50 km
-  Nantes Métropole: 1154 événements lus, 1152 à moins de 50 km
+  Nantes Erdre: 42 événements lus, 42 à moins de 50 km
+  Île de Nantes: 150 événements lus, 150 à moins de 50 km
+  Nantes Métropole: 1140 événements lus, 1138 à moins de 50 km
   Jour de Fête: 2 événements lus, 1 à moins de 50 km
   Muséum de la métropole de Nantes: 5 événements lus, 5 à moins de 50 km
   Nantes Centre-ville: 43 événements lus, 43 à moins de 50 km
@@ -17,11 +18,10 @@ OpenAgenda: 61 agendas candidats
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
   Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
-  Agence C'est à Dire: 47 événements lus, 5 à moins de 50 km
+  Agence C'est à Dire: 48 événements lus, 5 à moins de 50 km
   RNCAP: 142 événements lus, 8 à moins de 50 km
   RandoDate — apéros et randonnées entre célibataires: 1281 événements lus, 16 à moins de 50 km
   Healthcare Loire Valley: 1 événements lus, 0 à moins de 50 km
-  Musée de la Loire - Cosne-Cours-sur-Loire: 4 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"0":8}
 Doublons DATAtourisme retirés : 8
 Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 404)
@@ -33,6 +33,6 @@ Affiche Atelier cyanotype enfants → aucune image trouvée sur https://www.geti
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
 Images des sources manuelles : 20 sur 72 sorties (26 pages lues)
 Affiches de films : 0 sur 0
-Terminé : 2189 événements écrits dans public/auto.js (2026-10-29 → 2026-11-29).
-Par catégorie : {"expo":223,"marche":204,"sport":274,"concert":529,"famille":510,"spectacle":395,"cinema":54}
-Avec photo : 1491 sur 2189
+Terminé : 2179 événements écrits dans public/auto.js (2026-10-30 → 2026-11-30).
+Par catégorie : {"expo":239,"marche":199,"sport":263,"concert":536,"famille":501,"spectacle":391,"cinema":50}
+Avec photo : 1500 sur 2179
