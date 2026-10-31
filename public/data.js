@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-10-21';
+const UPDATED = '2026-10-31';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -57,61 +57,53 @@ const SRC = {
   choletBasket: ['Billetterie Cholet Basket', 'https://www.biletwise.com/fr/cholet-basket-tickets'],
   jardinVerre: ['Jardin de Verre, Cholet', 'https://www.cholet.fr/agenda/agenda_cat_12_8_10_jardin+verre.html'],
   valletMkt: ['Alentoor, Vallet', 'https://www.alentoor.fr/vallet/agenda'],
-  bravoh: ['Bravoh!, saison culturelle de Clisson Sèvre et Maine', 'https://bravoh.fr/2026/06/02/par-ici-la-saison-26-27/']
+  bravoh: ['Bravoh!, saison culturelle de Clisson Sèvre et Maine', 'https://bravoh.fr/2026/06/02/par-ici-la-saison-26-27/'],
+  vgTaChambre: ['Vide-greniers.org, Vide ta chambre à Clisson', 'https://vide-greniers.org/evenement/1025853'],
+  vgLutins: ['Vide-greniers.org, vide-greniers des Lutins', 'https://vide-greniers.org/evenement/1007961'],
+  vgTwirling: ['Vide-greniers.org, vide-grenier du Twirling de Gétigné', 'https://vide-greniers.org/evenement/1034818'],
+  orelsan: ['Fnac Spectacles, tournée d\'Orelsan', 'https://www.fnacspectacles.com/magazine/concerts/orelsan-en-tournee-2026'],
+  capeo: ['Fnac Spectacles, Claudio Capéo en concert', 'https://www.fnacspectacles.com/magazine/concerts/claudio-capeo-concert']
 };
 
-// Real events collected on 19 October 2026. d = date, to = last day of a multi-day event.
+// Real events collected on 31 October 2026. d = date, to = last day of a multi-day event.
 const EV = [
   // Cugand-la-Bernardière
-  { cat: 'marche', t: 'Vide Bibliothèques #5', c: 'cugand', d: '2026-10-25', h: '9h00 – 17h00', p: 'Entrée libre', kids: true, place: 'Espace culturel du Doué', desc: 'Grand déstockage de livres organisé par les bénévoles de la médiathèque de Cugand.', s: 'cub' },
-  { cat: 'famille', t: 'Soirée frisson : lectures et dessins', c: 'cugand', d: '2026-10-30', h: 'Horaire à confirmer', p: 'Gratuit', kids: true, place: 'Médiathèque de Cugand', desc: 'Lectures qui font frissonner pour les 3-8 ans et dessins pour les 8-11 ans, juste avant Halloween.', s: 'tm' },
-  { cat: 'famille', t: 'Soirée des 14-17 ans', c: 'cugand', d: '2026-10-30', h: 'En soirée', p: 'À confirmer', place: 'Espace culturel du Doué', desc: 'Soirée réservée aux ados, organisée par La Bringuerie de Cugand-la-Bernardière.', s: 'cub' },
   { cat: 'spectacle', t: 'Lecture musicale : La Forêt millénaire', c: 'bernardiere', d: '2026-11-06', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque de La Bernardière', desc: 'La compagnie Waï Waï met en musique le manga de Jirō Taniguchi.', s: 'tm' },
   // Gétigné, Gorges, Clisson
-  { cat: 'famille', t: 'Atelier de fabrication de cartes', c: 'getigne', d: '2026-10-16', to: '2026-10-25', h: 'Voir l\'agenda de la commune', p: 'À confirmer', kids: true, place: 'Gétigné', desc: 'Atelier créatif de fabrication de cartes pendant la première semaine des vacances.', s: 'getigne' },
   { cat: 'expo', t: 'Hors des sentiers battus', c: 'getigne', d: '2026-10-07', to: '2026-10-31', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', place: 'Bibliothèque des Changes', desc: 'Exposition photographique de la bibliothèque.', s: 'getigne' },
   { cat: 'expo', t: 'À la découverte de carnets de voyage', c: 'getigne', d: '2026-10-02', to: '2026-10-31', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', place: 'Bibliothèque des Changes', desc: 'Une sélection de carnets de voyage à découvrir à la bibliothèque.', s: 'getigne' },
   { cat: 'famille', t: 'Prix des Bébés Lecteurs', c: 'getigne', d: '2026-10-03', to: '2027-05-15', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Prix littéraire pour les tout-petits proposé par la bibliothèque des Changes : on lit les livres en lice et on vote.', s: 'getigne' },
-  { cat: 'spectacle', t: 'Un chapeau de paille d\'Italie', c: 'getigne', d: '2026-10-16', to: '2026-10-25', h: 'Plusieurs représentations, horaires à confirmer', p: 'À confirmer', place: 'Espace Bellevue', desc: 'Le nouveau spectacle de la SVVC (Spectacle Vivant de la Vallée de Clisson), d\'après la comédie d\'Eugène Labiche.', s: 'getigne' },
-  { cat: 'famille', t: 'Atelier cyanotype enfants', c: 'getigne', d: '2026-10-21', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Atelier de la bibliothèque pour les 6-11 ans : impressions de plantes au cyanotype, la photo révélée au soleil.', s: 'getigne' },
   { cat: 'famille', t: 'Soirée jeux de société', c: 'getigne', d: '2026-11-06', h: 'En soirée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Animation de la bibliothèque : venez profiter d\'une soirée jeux.', s: 'getigne' },
   { cat: 'spectacle', t: 'Petits rendez-vous contes', c: 'getigne', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Lectures de contes pour les enfants à la bibliothèque.', s: 'getigne' },
   { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-10-17', to: '2026-11-01', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot. Reprise du 7 au 29 novembre.', s: 'garenne' },
   { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-11-07', to: '2026-11-29', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot.', s: 'garenne' },
   { cat: 'expo', t: 'Le rêve italien de François Frédéric Lemot', c: 'getigne', d: '2026-10-20', to: '2026-12-31', h: 'Aux heures d\'ouverture du domaine', p: 'À confirmer', place: 'Maison du Jardinier, Domaine de la Garenne Lemot', desc: 'Exposition permanente de la Maison du Jardinier, ouverte de février à décembre. Le parc est en accès libre et gratuit.', s: 'garenne' },
-  { cat: 'famille', t: 'Atelier scrapbooking', c: 'gorges', d: '2026-10-28', h: 'Horaire à confirmer', p: 'Complet', place: 'Médiathèque Au fil des mots', desc: 'Atelier créatif de la médiathèque. Annoncé complet.', s: 'gorgesMed' },
-  { cat: 'famille', t: 'Atelier Bookface', c: 'gorges', d: '2026-10-29', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Se prendre en photo en prolongeant une couverture de livre : un atelier photo ludique.', s: 'gorgesMed' },
   { cat: 'spectacle', t: 'Raconte-moi une histoire', c: 'gorges', d: '2026-11-04', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Lecture d\'histoires pour les enfants.', s: 'gorgesMed' },
   { cat: 'concert', t: 'Soirée celtique et bal folk (Celtomania)', c: 'gorges', d: '2026-11-10', h: 'En soirée, horaire à confirmer', p: 'Voir la billetterie', place: 'Gorges', desc: 'Soirée cabaret irlandais et bal folk dans le cadre du festival Celtomania.', s: 'gorges' },
   { cat: 'spectacle', t: 'Histoires pour petites oreilles', c: 'gorges', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Histoires et comptines pour les moins de 3 ans.', s: 'gorgesMed' },
   { cat: 'spectacle', t: 'Scène ouverte slam et poésie', c: 'gorges', d: '2026-11-20', h: 'En soirée, horaire à confirmer', p: 'À confirmer', place: 'Médiathèque Au fil des mots', desc: 'Soirée scène ouverte : venez dire vos textes ou simplement écouter.', s: 'gorgesMed' },
-  { cat: 'expo', t: 'Exposition de champignons', c: 'boussay', d: '2026-10-24', to: '2026-10-25', h: 'Sam. 14h – 19h, dim. 10h – 13h et 14h – 18h', p: 'Gratuit', kids: true, place: 'Centre régional d\'accueil, 9 rue du Val-de-Sèvre', desc: 'Exposition de champignons de la région par la section de Boussay de l\'Association mycologique de l\'Ouest.', s: 'boussayChamp' },
-  { cat: 'sport', t: 'Basket : Cholet contre Spartak Subotica', c: 'cholet', d: '2026-10-28', h: '20h00', p: 'Voir la billetterie', kids: true, place: 'La Meilleraie', desc: 'Basketball Champions League.', s: 'choletBasket' },
   { cat: 'concert', t: 'Florent Pagny : La Suite du Retour', c: 'saintherblain', d: '2026-11-06', h: '20h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de la tournée 65 Tour. Une date est aussi annoncée le 5 novembre selon certaines billetteries.', s: 'zenith' },
   { cat: 'concert', t: 'Patrick Bruel', c: 'saintherblain', d: '2026-11-07', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
   { cat: 'concert', t: 'Christophe Maé', c: 'saintherblain', d: '2026-11-08', h: '18h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'zenith' },
   { cat: 'concert', t: 'Ben Mazué', c: 'saintherblain', d: '2026-11-12', h: '20h00', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Tournée des Zénith 2026.', s: 'zenith' },
+  { cat: 'concert', t: 'Orelsan', c: 'saintherblain', d: '2026-11-23', to: '2026-11-24', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Deux concerts de sa tournée 2026, les 23 et 24 novembre.', s: 'orelsan' },
+  { cat: 'concert', t: 'Claudio Capéo', c: 'saintherblain', d: '2026-11-26', h: '20h00 (à confirmer)', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de sa tournée 2026.', s: 'capeo' },
   { cat: 'spectacle', t: 'Je-ne-sais-quoi', c: 'clisson', d: '2026-11-05', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Danse : nouvelle création du chorégraphe Laurent Cèbe, pour trois danseurs. Saison Bravoh!.', s: 'bravoh' },
   { cat: 'concert', t: 'Multitude', c: 'monnieres', d: '2026-11-14', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Monnières', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!, aussi le 15 novembre à Boussay.', s: 'bravoh' },
   { cat: 'concert', t: 'Multitude', c: 'boussay', d: '2026-11-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Boussay', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!.', s: 'bravoh' },
   { cat: 'spectacle', t: 'Titre définitif (titre provisoire)', c: 'clisson', d: '2026-11-20', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Concert de mentalisme de la compagnie Raoul Lambert. Saison Bravoh!.', s: 'bravoh' },
-  { cat: 'famille', t: 'Soirée pyjama à la médiathèque', c: 'gorges', d: '2026-10-27', h: 'En soirée', p: 'Gratuit', kids: true, place: 'Médiathèque de Gorges', desc: 'Histoires du soir pour les enfants, en pyjama et doudou sous le bras.', s: 'gorges' },
   { cat: 'expo', t: 'Château de Clisson : visite pour les familles', c: 'clisson', d: '2026-10-17', to: '2026-10-31', h: '16h00, sauf le mardi', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée de la forteresse pensée pour les enfants pendant les vacances de la Toussaint. Réservation au 02 40 54 02 22.', s: 'chateau' },
+  { cat: 'marche', t: 'Vide ta chambre', c: 'clisson', d: '2026-11-08', h: '9h00 – 17h00', p: 'Entrée libre', kids: true, place: 'Gymnase Saint-Jean-Baptiste de la Salle, rue des Hauts de Gervaux', desc: 'Vide-greniers organisé par l\'APEL du collège Immaculée Conception, avec une centaine d\'exposants.', s: 'vgTaChambre' },
+  { cat: 'marche', t: 'Vide-grenier du Twirling', c: 'getigne', d: '2026-11-15', h: '9h00 – 17h30', p: 'Entrée libre', kids: true, place: 'Rue de la Goisloterie, Le Gatz', desc: 'Vide-greniers en intérieur organisé par le Twirling de Gétigné, environ 90 exposants.', s: 'vgTwirling' },
+  { cat: 'marche', t: 'Vide-grenier des Lutins', c: 'clisson', d: '2026-11-22', h: '8h00 – 18h00', p: 'Entrée libre', kids: true, place: 'Gymnase Cacault', desc: 'Vide-greniers d\'environ 80 exposants.', s: 'vgLutins' },
   { cat: 'expo', t: 'Château de Clisson : Au cœur de la forteresse', c: 'clisson', d: '2026-11-07', to: '2026-11-29', h: 'Sam. et dim. 14h30 et 16h00', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée d\'une heure de la forteresse médiévale. Château ouvert du mercredi au dimanche, 14h – 17h30.', s: 'chateau' },
   // Montaigu-Vendée et alentours
-  { cat: 'famille', t: 'Après-midi jeux de société', c: 'montaigu', d: '2026-10-21', h: 'L\'après-midi', p: 'Gratuit', kids: true, place: 'Montaigu-Vendée', desc: 'Jeux de société pour petits et grands.', s: 'tm' },
-  { cat: 'famille', t: 'Atelier créatif : coloriages animés', c: 'montaigu', d: '2026-10-21', h: 'Horaire à confirmer', p: 'Gratuit', kids: true, place: 'Médiathèque, Terres de Montaigu', desc: 'Les coloriages des enfants prennent vie grâce à une application.', s: 'tm' },
-  { cat: 'concert', t: 'Ô Fest\', 3e édition', c: 'guyonniere', d: '2026-10-24', h: '19h00 – 2h00', p: '10 € · gratuit moins de 12 ans', place: 'Espace Agapé', desc: 'Festival de DJ sets et de concerts live. Bar et restauration sur place.', s: 'ofest' },
-  { cat: 'marche', t: 'Bourse aux jouets, livres et puériculture', c: 'montaigu', d: '2026-10-24', h: 'Horaire à confirmer', p: 'Entrée libre', kids: true, place: 'Montaigu-Vendée', desc: 'Jouets, livres et matériel de puériculture d\'occasion.', s: 'jdsM' },
-  { cat: 'spectacle', t: 'Contes à frémir', c: 'montaigu', d: '2026-10-25', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Montaigu-Vendée', desc: 'Contes d\'Halloween pour les enfants.', s: 'jdsM' },
   { cat: 'spectacle', t: 'Carmen', c: 'montaigu', d: '2026-11-04', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre de Thalie', desc: 'Spectacle de danse.', s: 'thalie' },
   { cat: 'spectacle', t: 'La disparition de Josef Mengele', c: 'montaigu', d: '2026-11-06', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre de Thalie', desc: 'Théâtre, d\'après le roman d\'Olivier Guez.', s: 'thalie' },
   { cat: 'marche', t: 'Bourse aux jouets', c: 'montaigu', d: '2026-11-07', h: 'Horaire à confirmer', p: 'Entrée libre', kids: true, place: 'Montaigu-Vendée', desc: 'Jouets d\'occasion avant les fêtes de fin d\'année.', s: 'jdsM' },
   { cat: 'spectacle', t: '4211 km', c: 'montaigu', d: '2026-11-10', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre de Thalie', desc: 'Théâtre.', s: 'thalie' },
   { cat: 'expo', t: 'Exposition Raphaël Toussaint', c: 'chabotterie', d: '2026-10-19', to: '2026-11-15', h: 'Aux heures d\'ouverture', p: 'À confirmer', place: 'Logis de la Chabotterie', desc: 'Peintures du Vendéen Raphaël Toussaint, connu pour ses scènes de la vie rurale.', s: 'jdsM' },
   // Choletais et Haut-Bocage
-  { cat: 'spectacle', t: 'Peregrinale', c: 'cholet', d: '2026-10-22', to: '2026-10-25', h: 'En soirée', p: 'Voir la billetterie', place: 'Balcon Café Théâtre', desc: 'Spectacle au café-théâtre de Cholet.', s: 'cholet' },
-  { cat: 'expo', t: 'Salon Maison & Déco', c: 'cholet', d: '2026-10-23', to: '2026-10-25', h: 'En journée', p: 'À confirmer', place: 'Parc des expositions de la Meilleraie', desc: 'Salon de l\'habitat, de l\'aménagement et de la décoration.', s: 'cholet' },
   { cat: 'spectacle', t: 'La FIV du samedi soir', c: 'cholet', d: '2026-11-06', to: '2026-11-07', h: 'En soirée', p: '21 €', place: 'Balcon Café Théâtre', desc: 'Comédie.', s: 'cholet' },
   { cat: 'spectacle', t: 'ADN', c: 'cholet', d: '2026-11-12', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Théâtre.', s: 'stlouis' },
   { cat: 'spectacle', t: 'La Noce d\'Alphonse', c: 'cholet', d: '2026-11-17', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Théâtre.', s: 'stlouis' },
@@ -129,15 +121,10 @@ const EV = [
   { cat: 'sport', t: 'Trail du druide landais', c: 'landes', d: '2026-11-15', h: 'Le matin', p: 'Inscription', place: 'Les Landes-Genusson', desc: 'Trail nature dans le bocage vendéen.', s: 'trail' },
   // Vers Nantes
   { cat: 'famille', t: 'Halloween au zoo', c: 'boissiere', d: '2026-10-29', to: '2026-10-31', h: 'Aux heures d\'ouverture', p: 'Billet du zoo', kids: true, place: 'Zoo de la Boissière-du-Doré', desc: 'Animations spéciales Halloween pour les familles.', s: 'kidi' },
-  { cat: 'sport', t: 'Handball : HBC Nantes contre Chambéry', c: 'nantes', d: '2026-10-24', h: '19h00', p: 'Voir la billetterie', kids: true, place: 'Nantes', desc: 'Match de Liqui Moly Starligue.', s: 'san' },
-  { cat: 'concert', t: 'Soirée Collectif Frénésie', c: 'nantes', d: '2026-10-24', h: '22h00 – 1h30', p: 'Gratuit', place: 'Le Lieu Unique', desc: 'Soirée musicale gratuite.', s: 'san' },
-  { cat: 'spectacle', t: 'La chèvre de Monsieur Seguin', c: 'nantes', d: '2026-10-25', h: '15h00', p: 'Voir la billetterie', kids: true, place: 'Théâtre de Jeanne', desc: 'Le conte d\'Alphonse Daudet sur scène, dès 4 ans.', s: 'san' },
-  { cat: 'famille', t: 'Tap Tap Boom Boom', c: 'nantes', d: '2026-10-25', h: '15h00', p: '5 €', kids: true, place: 'Aérofab', desc: 'Après-midi festive et musicale pensée pour les enfants.', s: 'san' },
   { cat: 'spectacle', t: 'L\'Été indien aux Nefs', c: 'nantes', d: '2026-10-19', to: '2026-10-31', h: 'Voir le programme', p: 'Gratuit', kids: true, place: 'Les Nefs, île de Nantes', desc: 'Spectacle gratuit en plein air sous les Nefs.', s: 'san' },
   { cat: 'expo', t: 'Les Machines de l\'île', c: 'nantes', d: '2026-10-17', to: '2026-11-02', h: '10h00 – 19h00', p: '12 € · 8 € de 4 à 12 ans', kids: true, place: 'Parc des Chantiers', desc: 'Galerie des Machines et Carrousel des Mondes marins, ouverts tous les jours pendant les vacances.', s: 'imn' },
   { cat: 'famille', t: 'Tout feu tout flamme (4-6 ans)', c: 'nantes', d: '2026-10-10', to: '2026-11-18', h: 'Voir les horaires', p: 'Voir la billetterie', kids: true, place: 'Château des ducs de Bretagne', desc: 'Animation pour les 4-6 ans au château.', s: 'cdb' },
   { cat: 'famille', t: 'Visite nocturne spéciale Halloween (11-13 ans)', c: 'nantes', d: '2026-10-27', to: '2026-10-31', h: '18h15', p: 'Voir la billetterie', kids: true, place: 'Château des ducs de Bretagne', desc: 'Visite du château à la tombée de la nuit, sur le thème d\'Halloween.', s: 'cdb' },
-  { cat: 'sport', t: 'Football : FC Nantes contre Clermont', c: 'nantes', d: '2026-10-30', h: '20h00 (à confirmer)', p: 'Voir la billetterie', kids: true, place: 'Stade de la Beaujoire', desc: 'Match de Ligue 2.', s: 'fcn' },
   { cat: 'famille', t: 'Parade d\'Halloween sous les Nefs', c: 'nantes', d: '2026-10-31', h: 'Portes 19h00, défilé 20h00', p: 'Gratuit', kids: true, place: 'Les Nefs, île de Nantes', desc: 'Grande parade gratuite. Déguisement fortement conseillé.', s: 'imn' }
 ];
 
@@ -164,11 +151,8 @@ const FILMS = [];
 // own page for the event; the nightly collection reads the preview image that page declares.
 // With `find`, `page` is a listing (a town agenda) and the image is the one shown next to that title.
 const POSTERS = [
-  { t: 'Kanine Parjure', d: '2026-10-24', c: 'montaigu', page: 'https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/', credit: 'Affiche : Le Zinor' },
   { t: 'Hors des sentiers battus', d: '2026-10-07', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Hors des sentiers battus', credit: 'Image : mairie de Gétigné' },
   { t: 'À la découverte de carnets de voyage', d: '2026-10-02', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'À la découverte de carnets de voyage', credit: 'Image : mairie de Gétigné' },
   { t: 'Prix des Bébés Lecteurs', d: '2026-10-03', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Prix des Bébés Lecteurs', credit: 'Image : mairie de Gétigné' },
-  { t: 'Un chapeau de paille d\'Italie', d: '2026-10-16', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Un chapeau de paille d\'Italie', credit: 'Image : mairie de Gétigné' },
-  { t: 'Atelier cyanotype enfants', d: '2026-10-21', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Atelier cyanotype enfants', credit: 'Image : mairie de Gétigné' },
   { t: 'Soirée jeux de société', d: '2026-11-06', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Soirée jeux de société', credit: 'Image : mairie de Gétigné' }
 ];
