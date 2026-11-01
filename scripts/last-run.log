@@ -1,39 +1,37 @@
-DATAtourisme: 536 événements à moins de 50 km (0 fiches sans date, 10 pages)
+DATAtourisme: 483 événements à moins de 50 km (0 fiches sans date, 10 pages)
 OpenAgenda: 61 agendas candidats
   Maison de la TERRE - Lantic (22): 1 événements lus, 0 à moins de 50 km
-  Terres de Montaigu: 51 événements lus, 51 à moins de 50 km
-  Emmaus Terre - La Bricole Solidaire: 37 événements lus, 0 à moins de 50 km
+  Terres de Montaigu: 50 événements lus, 50 à moins de 50 km
+  Emmaus Terre - La Bricole Solidaire: 38 événements lus, 0 à moins de 50 km
   Quinzaine de la transmission: 61 événements lus, 2 à moins de 50 km
-  Nantes Nord: 31 événements lus, 31 à moins de 50 km
-  Bibliothèque municipale de Nantes: 70 événements lus, 70 à moins de 50 km
-  Nantes Erdre: 41 événements lus, 41 à moins de 50 km
-  Nantes Sud: 46 événements lus, 46 à moins de 50 km
+  Nantes Nord: 32 événements lus, 32 à moins de 50 km
   Conservatoire de Nantes: 22 événements lus, 22 à moins de 50 km
   Musée d'arts de Nantes: 24 événements lus, 24 à moins de 50 km
-  Île de Nantes: 145 événements lus, 145 à moins de 50 km
-  Nantes Métropole: 1130 événements lus, 1127 à moins de 50 km
+  Nantes Sud: 46 événements lus, 46 à moins de 50 km
+  Bibliothèque municipale de Nantes: 75 événements lus, 75 à moins de 50 km
+  Nantes Erdre: 40 événements lus, 40 à moins de 50 km
+  Île de Nantes: 144 événements lus, 144 à moins de 50 km
+  Nantes Métropole: 1104 événements lus, 1101 à moins de 50 km
   Jour de Fête: 2 événements lus, 1 à moins de 50 km
   Muséum de la métropole de Nantes: 5 événements lus, 5 à moins de 50 km
   Nantes Centre-ville: 43 événements lus, 43 à moins de 50 km
-  Saison Culturelle des Herbiers: 3 événements lus, 3 à moins de 50 km
+  Saison Culturelle des Herbiers: 4 événements lus, 4 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
+  Expositions Mode - BU de Cholet: 34 événements lus, 0 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
   Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
-  Agence C'est à Dire: 51 événements lus, 5 à moins de 50 km
-  RNCAP: 139 événements lus, 7 à moins de 50 km
+  Agence C'est à Dire: 51 événements lus, 6 à moins de 50 km
+  RNCAP: 137 événements lus, 8 à moins de 50 km
   RandoDate — apéros et randonnées entre célibataires: 1281 événements lus, 16 à moins de 50 km
   Healthcare Loire Valley: 1 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"0":9}
 Doublons DATAtourisme retirés : 9
-Affiche Kanine Parjure → aucune image trouvée sur https://zinor.fr/a-faire/kanine-parjure-montaigu-amarok/ (HTTP 404)
-Affiche Hors des sentiers battus → https://www.getigne.fr/media/2000-*-9999/bib-expo-agenda.png
-Affiche À la découverte de carnets de voyage → https://www.getigne.fr/media/2000-*-9999/bib-carnet-de-voyage-agenda.png
+Affiche Hors des sentiers battus → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
+Affiche À la découverte de carnets de voyage → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
 Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
-Affiche Un chapeau de paille d'Italie → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
-Affiche Atelier cyanotype enfants → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
-Images des sources manuelles : 18 sur 72 sorties (26 pages lues)
+Images des sources manuelles : 20 sur 54 sorties (26 pages lues)
 Affiches de films : 0 sur 0
-Terminé : 2151 événements écrits dans public/auto.js (2026-10-31 → 2026-12-01).
-Par catégorie : {"expo":231,"marche":203,"sport":262,"concert":536,"famille":490,"spectacle":382,"cinema":47}
-Avec photo : 1471 sur 2151
+Terminé : 2059 événements écrits dans public/auto.js (2026-11-01 → 2026-12-02).
+Par catégorie : {"expo":197,"sport":240,"concert":525,"famille":481,"marche":203,"spectacle":368,"cinema":45}
+Avec photo : 1415 sur 2059
