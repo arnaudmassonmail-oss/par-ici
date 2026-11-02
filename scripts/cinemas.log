@@ -1,11 +1,11 @@
 CNC (2025) : 2060 cinémas actifs
 OpenStreetMap : 2136 cinémas
 1712 communes à interroger
-Deuxième passage AlloCiné : 443 communes
-Erreurs AlloCiné : {"HTTP 429":527}
-Écrits : 2060 cinémas ; avec AlloCiné 1661 (+ 17 gardés du mois précédent), avec position OpenStreetMap 1778 ; communes AlloCiné en erreur 84
+Deuxième passage AlloCiné : 424 communes
+Erreurs AlloCiné : {"HTTP 429":524}
+Écrits : 2060 cinémas ; avec AlloCiné 1656 (+ 41 gardés du mois précédent), avec position OpenStreetMap 1803 ; communes AlloCiné en erreur 100
   exemple : ["Cinémas Le Méjan (Actes Sud)","Arles",43.59672,4.64509,"P0441",""]
-  exemple : ["Le Femina","Arles",43.59672,4.64509,"P0498",""]
+  exemple : ["Le Femina","Arles",43.67301,4.62781,"P0498",""]
   exemple : ["Le Connetable","Clisson",47.08337,-1.28431,"P0377","https://www.cinema-leconnetable.fr/"]
   exemple : ["Montaigu-Vendée","Montaigu-Vendée",46.98035,-1.31685,"W8560","https://www.grandecran.fr/le-cinema/w8560-grand-ecran-montaigu-vendee/"]
   exemple : ["Ciné Toiles de Retz","Pornic",47.11217,-2.07534,"P0716","https://www.cinemapornic.fr"]
