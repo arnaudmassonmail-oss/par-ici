@@ -1,8 +1,8 @@
-DATAtourisme: 477 événements à moins de 50 km (0 fiches sans date, 9 pages)
+DATAtourisme: 478 événements à moins de 50 km (0 fiches sans date, 9 pages)
 OpenAgenda: 59 agendas candidats
   Maison de la TERRE - Lantic (22): 1 événements lus, 0 à moins de 50 km
+  Communauté de Communes des Terres du Val de Loire: 18 événements lus, 0 à moins de 50 km
   Terres de Montaigu: 52 événements lus, 52 à moins de 50 km
-  Emmaus Terre - La Bricole Solidaire: 38 événements lus, 0 à moins de 50 km
   Conservatoire de Nantes: 23 événements lus, 23 à moins de 50 km
   Quinzaine de la transmission: 63 événements lus, 2 à moins de 50 km
   Île de Nantes: 143 événements lus, 143 à moins de 50 km
@@ -11,18 +11,19 @@ OpenAgenda: 59 agendas candidats
   Nantes Centre-ville: 43 événements lus, 43 à moins de 50 km
   Musée d'arts de Nantes: 27 événements lus, 27 à moins de 50 km
   Nantes Erdre: 35 événements lus, 35 à moins de 50 km
-  Nantes Sud: 46 événements lus, 46 à moins de 50 km
+  Nantes Sud: 49 événements lus, 49 à moins de 50 km
   Bibliothèque municipale de Nantes: 76 événements lus, 76 à moins de 50 km
-  Nantes Métropole: 1122 événements lus, 1119 à moins de 50 km
+  Nantes Métropole: 1135 événements lus, 1132 à moins de 50 km
   Jour de Fête: 2 événements lus, 1 à moins de 50 km
   Expositions Mode - BU de Cholet: 28 événements lus, 0 à moins de 50 km
   Saison Culturelle des Herbiers: 4 événements lus, 4 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
-  Agence C'est à Dire: 52 événements lus, 6 à moins de 50 km
-  RNCAP: 145 événements lus, 8 à moins de 50 km
+  Agence C'est à Dire: 49 événements lus, 6 à moins de 50 km
+  RNCAP: 143 événements lus, 8 à moins de 50 km
   Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
   RandoDate — apéros et randonnées entre célibataires: 1281 événements lus, 16 à moins de 50 km
+  Médiation Numérique Loire: 19 événements lus, 0 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"0":9}
 Doublons DATAtourisme retirés : 9
 Affiche Hors des sentiers battus → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
@@ -31,6 +32,6 @@ Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/b
 Affiche Soirée jeux de société → https://www.getigne.fr/media/2000-*-9999/bib-jeux-agenda.png
 Images des sources manuelles : 20 sur 54 sorties (26 pages lues)
 Affiches de films : 0 sur 0
-Terminé : 2095 événements écrits dans public/auto.js (2026-11-02 → 2026-12-03).
-Par catégorie : {"expo":202,"sport":238,"famille":498,"concert":525,"spectacle":380,"cinema":45,"marche":207}
-Avec photo : 1449 sur 2095
+Terminé : 2113 événements écrits dans public/auto.js (2026-11-02 → 2026-12-03).
+Par catégorie : {"expo":202,"sport":238,"famille":507,"concert":525,"spectacle":381,"cinema":45,"marche":215}
+Avec photo : 1466 sur 2113
