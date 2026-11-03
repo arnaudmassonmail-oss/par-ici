@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-10-31';
+const UPDATED = '2026-11-03';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -62,20 +62,18 @@ const SRC = {
   vgLutins: ['Vide-greniers.org, vide-greniers des Lutins', 'https://vide-greniers.org/evenement/1007961'],
   vgTwirling: ['Vide-greniers.org, vide-grenier du Twirling de Gétigné', 'https://vide-greniers.org/evenement/1034818'],
   orelsan: ['Fnac Spectacles, tournée d\'Orelsan', 'https://www.fnacspectacles.com/magazine/concerts/orelsan-en-tournee-2026'],
-  capeo: ['Fnac Spectacles, Claudio Capéo en concert', 'https://www.fnacspectacles.com/magazine/concerts/claudio-capeo-concert']
+  capeo: ['Fnac Spectacles, Claudio Capéo en concert', 'https://www.fnacspectacles.com/magazine/concerts/claudio-capeo-concert'],
+  choletSalons: ['AllEvents, salons à Cholet', 'https://allevents.in/cholet/exhibitions']
 };
 
-// Real events collected on 31 October 2026. d = date, to = last day of a multi-day event.
+// Real events collected on 3 November 2026. d = date, to = last day of a multi-day event.
 const EV = [
   // Cugand-la-Bernardière
   { cat: 'spectacle', t: 'Lecture musicale : La Forêt millénaire', c: 'bernardiere', d: '2026-11-06', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque de La Bernardière', desc: 'La compagnie Waï Waï met en musique le manga de Jirō Taniguchi.', s: 'tm' },
   // Gétigné, Gorges, Clisson
-  { cat: 'expo', t: 'Hors des sentiers battus', c: 'getigne', d: '2026-10-07', to: '2026-10-31', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', place: 'Bibliothèque des Changes', desc: 'Exposition photographique de la bibliothèque.', s: 'getigne' },
-  { cat: 'expo', t: 'À la découverte de carnets de voyage', c: 'getigne', d: '2026-10-02', to: '2026-10-31', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', place: 'Bibliothèque des Changes', desc: 'Une sélection de carnets de voyage à découvrir à la bibliothèque.', s: 'getigne' },
   { cat: 'famille', t: 'Prix des Bébés Lecteurs', c: 'getigne', d: '2026-10-03', to: '2027-05-15', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Prix littéraire pour les tout-petits proposé par la bibliothèque des Changes : on lit les livres en lice et on vote.', s: 'getigne' },
   { cat: 'famille', t: 'Soirée jeux de société', c: 'getigne', d: '2026-11-06', h: 'En soirée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Animation de la bibliothèque : venez profiter d\'une soirée jeux.', s: 'getigne' },
   { cat: 'spectacle', t: 'Petits rendez-vous contes', c: 'getigne', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Lectures de contes pour les enfants à la bibliothèque.', s: 'getigne' },
-  { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-10-17', to: '2026-11-01', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot. Reprise du 7 au 29 novembre.', s: 'garenne' },
   { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-11-07', to: '2026-11-29', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot.', s: 'garenne' },
   { cat: 'expo', t: 'Le rêve italien de François Frédéric Lemot', c: 'getigne', d: '2026-10-20', to: '2026-12-31', h: 'Aux heures d\'ouverture du domaine', p: 'À confirmer', place: 'Maison du Jardinier, Domaine de la Garenne Lemot', desc: 'Exposition permanente de la Maison du Jardinier, ouverte de février à décembre. Le parc est en accès libre et gratuit.', s: 'garenne' },
   { cat: 'spectacle', t: 'Raconte-moi une histoire', c: 'gorges', d: '2026-11-04', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Lecture d\'histoires pour les enfants.', s: 'gorgesMed' },
@@ -92,7 +90,6 @@ const EV = [
   { cat: 'concert', t: 'Multitude', c: 'monnieres', d: '2026-11-14', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Monnières', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!, aussi le 15 novembre à Boussay.', s: 'bravoh' },
   { cat: 'concert', t: 'Multitude', c: 'boussay', d: '2026-11-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', kids: true, place: 'Boussay', desc: 'Voyage musical de Thierry Combe et Damien Félix. Saison Bravoh!.', s: 'bravoh' },
   { cat: 'spectacle', t: 'Titre définitif (titre provisoire)', c: 'clisson', d: '2026-11-20', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Concert de mentalisme de la compagnie Raoul Lambert. Saison Bravoh!.', s: 'bravoh' },
-  { cat: 'expo', t: 'Château de Clisson : visite pour les familles', c: 'clisson', d: '2026-10-17', to: '2026-10-31', h: '16h00, sauf le mardi', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée de la forteresse pensée pour les enfants pendant les vacances de la Toussaint. Réservation au 02 40 54 02 22.', s: 'chateau' },
   { cat: 'marche', t: 'Vide ta chambre', c: 'clisson', d: '2026-11-08', h: '9h00 – 17h00', p: 'Entrée libre', kids: true, place: 'Gymnase Saint-Jean-Baptiste de la Salle, rue des Hauts de Gervaux', desc: 'Vide-greniers organisé par l\'APEL du collège Immaculée Conception, avec une centaine d\'exposants.', s: 'vgTaChambre' },
   { cat: 'marche', t: 'Vide-grenier du Twirling', c: 'getigne', d: '2026-11-15', h: '9h00 – 17h30', p: 'Entrée libre', kids: true, place: 'Rue de la Goisloterie, Le Gatz', desc: 'Vide-greniers en intérieur organisé par le Twirling de Gétigné, environ 90 exposants.', s: 'vgTwirling' },
   { cat: 'marche', t: 'Vide-grenier des Lutins', c: 'clisson', d: '2026-11-22', h: '8h00 – 18h00', p: 'Entrée libre', kids: true, place: 'Gymnase Cacault', desc: 'Vide-greniers d\'environ 80 exposants.', s: 'vgLutins' },
@@ -110,22 +107,17 @@ const EV = [
   { cat: 'spectacle', t: 'Rond-Rond', c: 'cholet', d: '2026-11-18', h: '10h00 et 16h30', p: 'Voir la billetterie', kids: true, place: 'Théâtre Saint-Louis, salle Gene Kelly', desc: 'Spectacle tout-petits de la compagnie Piment, Langue d\'Oiseau, pour les 1-5 ans.', s: 'stlouis' },
   { cat: 'spectacle', t: 'Mesdemoiselles', c: 'cholet', d: '2026-11-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Jardin de Verre', desc: 'Spectacle de la saison du Jardin de Verre.', s: 'jardinVerre' },
   { cat: 'concert', t: 'Plateau partagé : Coline Linder', c: 'cholet', d: '2026-11-19', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Jardin de Verre', desc: 'Soirée plateau partagé avec Coline Linder.', s: 'jardinVerre' },
+  { cat: 'marche', t: 'Salon du Mariage et de la Fête', c: 'cholet', d: '2026-11-21', to: '2026-11-22', h: 'De 10h00 le samedi à 18h30 le dimanche', p: 'À confirmer', place: 'Parc des expositions de la Meilleraie', desc: 'Salon des prestataires du mariage et des fêtes de famille.', s: 'choletSalons' },
   { cat: 'concert', t: 'Daoud', c: 'herbiers', d: '2026-11-05', h: '20h30', p: 'Voir la billetterie', place: 'Saison culturelle des Herbiers', desc: 'Concert de la saison culturelle.', s: 'herbiers' },
   { cat: 'famille', t: 'Fête de la fressure', c: 'herbiers', d: '2026-11-07', h: 'Horaire à confirmer', p: 'À confirmer', place: 'Salle Ferchault', desc: 'Fête traditionnelle autour de la fressure, plat vendéen de saison.', s: 'alentoorH' },
   { cat: 'concert', t: 'Thanda Choir', c: 'herbiers', d: '2026-11-10', h: '20h30', p: 'Complet', place: 'Saison culturelle des Herbiers', desc: 'Concert de chœur. Annoncé complet.', s: 'herbiers' },
   { cat: 'spectacle', t: 'ADN', c: 'herbiers', d: '2026-11-13', h: '20h30', p: 'Complet', place: 'Saison culturelle des Herbiers', desc: 'Théâtre. Annoncé complet.', s: 'herbiers' },
   { cat: 'expo', t: 'Quand l\'art s\'envisage', c: 'stlaurent', d: '2026-10-19', to: '2026-11-14', h: 'Aux heures d\'ouverture', p: 'À confirmer', place: 'Saint-Laurent-sur-Sèvre', desc: 'Exposition consacrée au portrait.', s: 'alentoorH' },
-  { cat: 'marche', t: 'Brocante', c: 'mortagne', d: '2026-11-01', h: 'En journée', p: 'Entrée libre', kids: true, place: 'Mortagne-sur-Sèvre', desc: 'Brocante et vide-greniers.', s: 'mortagne' },
   { cat: 'sport', t: 'Montfor\'trail', c: 'stlaurent', d: '2026-11-08', h: 'Le matin', p: 'Inscription', place: 'Saint-Laurent-sur-Sèvre', desc: 'Trail de 5 km, 14 km et semi-marathon.', s: 'trail' },
   { cat: 'sport', t: 'Trail de Maulévrier', c: 'maulevrier', d: '2026-11-08', h: 'Le matin', p: 'Inscription', place: 'Maulévrier', desc: 'Course nature autour du parc oriental.', s: 'trail' },
   { cat: 'sport', t: 'Trail du druide landais', c: 'landes', d: '2026-11-15', h: 'Le matin', p: 'Inscription', place: 'Les Landes-Genusson', desc: 'Trail nature dans le bocage vendéen.', s: 'trail' },
   // Vers Nantes
-  { cat: 'famille', t: 'Halloween au zoo', c: 'boissiere', d: '2026-10-29', to: '2026-10-31', h: 'Aux heures d\'ouverture', p: 'Billet du zoo', kids: true, place: 'Zoo de la Boissière-du-Doré', desc: 'Animations spéciales Halloween pour les familles.', s: 'kidi' },
-  { cat: 'spectacle', t: 'L\'Été indien aux Nefs', c: 'nantes', d: '2026-10-19', to: '2026-10-31', h: 'Voir le programme', p: 'Gratuit', kids: true, place: 'Les Nefs, île de Nantes', desc: 'Spectacle gratuit en plein air sous les Nefs.', s: 'san' },
-  { cat: 'expo', t: 'Les Machines de l\'île', c: 'nantes', d: '2026-10-17', to: '2026-11-02', h: '10h00 – 19h00', p: '12 € · 8 € de 4 à 12 ans', kids: true, place: 'Parc des Chantiers', desc: 'Galerie des Machines et Carrousel des Mondes marins, ouverts tous les jours pendant les vacances.', s: 'imn' },
   { cat: 'famille', t: 'Tout feu tout flamme (4-6 ans)', c: 'nantes', d: '2026-10-10', to: '2026-11-18', h: 'Voir les horaires', p: 'Voir la billetterie', kids: true, place: 'Château des ducs de Bretagne', desc: 'Animation pour les 4-6 ans au château.', s: 'cdb' },
-  { cat: 'famille', t: 'Visite nocturne spéciale Halloween (11-13 ans)', c: 'nantes', d: '2026-10-27', to: '2026-10-31', h: '18h15', p: 'Voir la billetterie', kids: true, place: 'Château des ducs de Bretagne', desc: 'Visite du château à la tombée de la nuit, sur le thème d\'Halloween.', s: 'cdb' },
-  { cat: 'famille', t: 'Parade d\'Halloween sous les Nefs', c: 'nantes', d: '2026-10-31', h: 'Portes 19h00, défilé 20h00', p: 'Gratuit', kids: true, place: 'Les Nefs, île de Nantes', desc: 'Grande parade gratuite. Déguisement fortement conseillé.', s: 'imn' }
 ];
 
 // Weekly markets, expanded into dated occurrences below. wd: 0 = Sunday … 6 = Saturday.
@@ -151,8 +143,6 @@ const FILMS = [];
 // own page for the event; the nightly collection reads the preview image that page declares.
 // With `find`, `page` is a listing (a town agenda) and the image is the one shown next to that title.
 const POSTERS = [
-  { t: 'Hors des sentiers battus', d: '2026-10-07', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Hors des sentiers battus', credit: 'Image : mairie de Gétigné' },
-  { t: 'À la découverte de carnets de voyage', d: '2026-10-02', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'À la découverte de carnets de voyage', credit: 'Image : mairie de Gétigné' },
   { t: 'Prix des Bébés Lecteurs', d: '2026-10-03', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Prix des Bébés Lecteurs', credit: 'Image : mairie de Gétigné' },
   { t: 'Soirée jeux de société', d: '2026-11-06', c: 'getigne', page: 'https://www.getigne.fr/sortir/agenda/', find: 'Soirée jeux de société', credit: 'Image : mairie de Gétigné' }
 ];
