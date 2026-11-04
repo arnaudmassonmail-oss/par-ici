@@ -1,93 +1,95 @@
-data.geopf.fr essai 1 : 200 en 743 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
-data.geopf.fr essai 2 : 200 en 142 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
-data.geopf.fr essai 3 : 200 en 141 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
-## Lyon — 247 sorties, 84 avec photo, 9 s ; recherches de départ : Lyon | Rhône
-  DATAtourisme: 580 événements à moins de 50 km (0 fiches sans date, 9 pages)
-  OpenAgenda: recherches → Lyon | Rhône | Montmerle-sur-Saône | Lyon 5e Arrondissement | Lyon 3e Arrondissement | Décines-Charpieu | Bourgoin-Jallieu | Saint-Étie
+data.geopf.fr essai 1 : 200 en 1220 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 2 : 200 en 105 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+data.geopf.fr essai 3 : 200 en 108 ms {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-1.281957,47.087032]
+## Lyon — 255 sorties, 84 avec photo, 8 s ; recherches de départ : Lyon | Rhône
+  DATAtourisme: 587 événements à moins de 50 km (0 fiches sans date, 9 pages)
+  OpenAgenda: recherches → Lyon | Rhône | Montmerle-sur-Saône | Lyon 5e Arrondissement | Saint-Étienne | Lyon 3e Arrondissement | Décines-Charpieu | Bourgoin-Jall
   OpenAgenda: 40 agendas candidats
     French Tech Saint-Etienne Lyon: 3 événements lus, 3 à moins de 50 km
-    Médiation Numérique Loire: 19 événements lus, 8 à moins de 50 km
-    Villeurbanne - Agenda culturel: 42 événements lus, 42 à moins de 50 km
-    Saison Cabaret: 78 événements lus, 5 à moins de 50 km
+    Médiation Numérique Loire: 19 événements lus, 9 à moins de 50 km
+    Villeurbanne - Agenda culturel: 43 événements lus, 43 à moins de 50 km
+    Saison Cabaret: 74 événements lus, 5 à moins de 50 km
     Evénements RDI, l'allié des entrepreneurs engagés: 3 événements lus, 3 à moins de 50 km
-    Agenda de l'Europe en Auvergne-Rhône-Alpes: 4 événements lus, 2 à moins de 50 km
-    Chambres d'agriculture Auvergne-Rhône-Alpes: 27 événements lus, 6 à moins de 50 km
-    Laissez-vous conter: 5 événements lus, 3 à moins de 50 km
-    Dahu téméraire: 3 événements lus, 3 à moins de 50 km
-    Anissa Karat: 3 événements lus, 3 à moins de 50 km
+    Agenda de l'Europe en Auvergne-Rhône-Alpes: 5 événements lus, 2 à moins de 50 km
+    Chambres d'agriculture Auvergne-Rhône-Alpes: 31 événements lus, 7 à moins de 50 km
   Doublons DATAtourisme retirés : 1
   exemples : 2026-09-19 Biennale d'Art Contemporain de Lyon · 2026-10-02 Marché de Fonsala · 2026-10-02 Marché de Montplaisir · 2026-10-02 Marché de Chavanelle · 2026-10-02 Marché square Renoir
-## Rennes — 897 sorties, 599 avec photo, 13 s ; recherches de départ : Rennes | Rennes Métropole | Ille-et-Vilaine
-  DATAtourisme: 295 événements à moins de 50 km (0 fiches sans date, 6 pages)
-  OpenAgenda: recherches → Rennes | Rennes Métropole | Ille-et-Vilaine | Dinan | Montfort-sur-Meu | Vitré | Fougères | Broons | Augan | Saint-Gonlay | Tréhorenteu
+## Rennes — 956 sorties, 635 avec photo, 12 s ; recherches de départ : Rennes | Rennes Métropole | Ille-et-Vilaine
+  DATAtourisme: 315 événements à moins de 50 km (0 fiches sans date, 6 pages)
+  OpenAgenda: recherches → Rennes | Rennes Métropole | Ille-et-Vilaine | Dinan | Montfort-sur-Meu | Fougères | Vitré | Broons | Augan | Tréhorenteuc | Saint-Gonla
   OpenAgenda: 40 agendas candidats
     Lillico, Rennes: 1 événements lus, 1 à moins de 50 km
-    Rennes Maurepas: 1 événements lus, 1 à moins de 50 km
+    ISTIC - Université de Rennes: 4 événements lus, 2 à moins de 50 km
     CMI Rennes: 10 événements lus, 8 à moins de 50 km
-    Rennes Quartiers Nord-Est: 25 événements lus, 25 à moins de 50 km
-    Rennes La Bellangerais: 26 événements lus, 26 à moins de 50 km
-    Université de Rennes: 58 événements lus, 45 à moins de 50 km
-    Bibliothèques de Rennes: 105 événements lus, 105 à moins de 50 km
+    Rennes Maurepas: 43 événements lus, 43 à moins de 50 km
+    Rennes La Bellangerais: 66 événements lus, 66 à moins de 50 km
+    Université de Rennes: 67 événements lus, 55 à moins de 50 km
+    Bibliothèques de Rennes: 109 événements lus, 109 à moins de 50 km
     Rennes Métropole: 300 événements lus, 300 à moins de 50 km
     Les sorties nature LPO dans la Métropole de Rennes: 5 événements lus, 5 à moins de 50 km
-    Rennes quartiers Ouest: 33 événements lus, 33 à moins de 50 km
-    Saint-Sulpice-la-Forêt: 6 événements lus, 6 à moins de 50 km
-    3 Regards Léo Lagrange: 10 événements lus, 10 à moins de 50 km
-    Agenda économique de Brocéliande: 1 événements lus, 1 à moins de 50 km
+    Rennes quartiers Ouest: 38 événements lus, 38 à moins de 50 km
+    Rennes Quartiers Nord-Est: 65 événements lus, 65 à moins de 50 km
+    Saint-Sulpice-la-Forêt: 5 événements lus, 5 à moins de 50 km
+    3 Regards Léo Lagrange: 11 événements lus, 11 à moins de 50 km
+    Agenda économique de Brocéliande: 3 événements lus, 3 à moins de 50 km
     Le Volume: 2 événements lus, 2 à moins de 50 km
-    Bretagne en Scène: 7 événements lus, 7 à moins de 50 km
+    Bretagne en Scène: 8 événements lus, 8 à moins de 50 km
   Doublons DATAtourisme retirés : 0
-  exemples : 2026-09-19 Exposition : Entre corbeau et loup, du mythe aux contes · 2026-09-29 Apaiser sa charge mentale - atelier sophrologie · 2026-10-03 Exposition "PINAFFO & PLUVINAGE" - Fanion Locomotion au centre d'art Les 3 CHA · 2026-10-16 La saga Hunger Games est de retour ! · 2026-10-17 Planning vacances de la Toussaint des écuries de la ville morin.
-## Gap — 27 sorties, 21 avec photo, 8 s ; recherches de départ : Gap | Gap-Tallard-Durance | Hautes-Alpes
-  DATAtourisme: 39 événements à moins de 50 km (0 fiches sans date, 1 pages)
+  exemples : 2026-09-19 Exposition : Entre corbeau et loup, du mythe aux contes · 2026-09-29 Apaiser sa charge mentale - atelier sophrologie · 2026-10-03 Exposition "PINAFFO & PLUVINAGE" - Fanion Locomotion au centre d'art Les 3 CHA · 2026-10-16 La saga Hunger Games est de retour ! · 2026-10-17 Dans l'imaginaire de La Villéon - Exposition
+## Gap — 31 sorties, 22 avec photo, 6 s ; recherches de départ : Gap | Gap-Tallard-Durance | Hautes-Alpes
+  DATAtourisme: 42 événements à moins de 50 km (0 fiches sans date, 1 pages)
   OpenAgenda: recherches → Gap | Gap-Tallard-Durance | Hautes-Alpes | Monestier-du-Percy | Mens | Lus-la-Croix-Haute | Saint-Geniez | La Motte-du-Caire | Luc-en-D
   OpenAgenda: 40 agendas candidats
-    Chambres d'agriculture Provence-Alpes-Côte-d'Azur: 14 événements lus, 4 à moins de 50 km
     Compagnie Conte: 7 événements lus, 7 à moins de 50 km
-    RNCAP: 143 événements lus, 7 à moins de 50 km
+    RNCAP: 162 événements lus, 7 à moins de 50 km
+    Chambres d'agriculture Provence-Alpes-Côte-d'Azur: 13 événements lus, 4 à moins de 50 km
   Doublons DATAtourisme retirés : 0
-  exemples : 2026-11-03 Allumer le Super Écran · 2026-11-05 Les Phonographes - création radiophonique · 2026-11-06 04 - Visite d'un chantier forestier à Méolans-Revel le 6 novembre · 2026-11-06 Cercle de la Parole Conteuse · 2026-11-06 Spectacle - théâtre B
-## Clisson — 719 sorties, 44 avec photo, 10 s ; recherches de départ : Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique
-  DATAtourisme: 498 événements à moins de 50 km (0 fiches sans date, 9 pages)
-  OpenAgenda: recherches → Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique | Cholet | Sainte-Pazanne | Ancenis-Saint-Géréon | Sucé-sur-Erdre | Mauges-su
+  exemples : 2026-11-04 Allumer le Super Écran · 2026-11-05 Les Phonographes - création radiophonique · 2026-11-06 Cercle de la Parole Conteuse · 2026-11-06 04 - Visite d'un chantier forestier à Méolans-Revel le 6 novembre · 2026-11-06 Spectacle - théâtre B
+## Clisson — 764 sorties, 26 avec photo, 8 s ; recherches de départ : Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique
+  DATAtourisme: 551 événements à moins de 50 km (0 fiches sans date, 10 pages)
+  OpenAgenda: recherches → Clisson | Clisson Sèvre et Maine Agglo | Loire-Atlantique | Cholet | Ancenis-Saint-Géréon | Sainte-Pazanne | Mauges-sur-Loire | Montaig
   OpenAgenda: 40 agendas candidats
-    Quinzaine de la transmission: 63 événements lus, 2 à moins de 50 km
+    Quinzaine de la transmission: 67 événements lus, 2 à moins de 50 km
     Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
+    Sortez chez vous - Agenda des acteurs culturels en Sèvre et Loire: 4 événements lus, 4 à moins de 50 km
     Jour de Fête: 2 événements lus, 1 à moins de 50 km
-    Ville de Saint-Herblain: 23 événements lus, 23 à moins de 50 km
   Doublons DATAtourisme retirés : 0
-  exemples : 2026-09-02 EXPOSITION FANTASY · 2026-09-19 Exposition "Opaque" - LE MAT · 2026-10-01 Exposition Frédéric Gautier - Atelier de l'Abat-Carre · 2026-10-02 Exposition de Benoît Batard : Reg'art sur la santé mentale - Biblio'fil · 2026-10-06 ATELIER TRICO'THÉ
-## Arles — 621 sorties, 569 avec photo, 18 s ; recherches de départ : Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône
-  DATAtourisme: 542 événements à moins de 50 km (0 fiches sans date, 10 pages)
-  OpenAgenda: recherches → Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône | Istres | Martigues | Nîmes | Saint-Rémy-de-Provence | Châteaurenard | Salo
+  exemples : 2026-09-02 EXPOSITION FANTASY · 2026-09-19 Exposition "Opaque" - LE MAT · 2026-10-01 Exposition Frédéric Gautier - Atelier de l'Abat-Carre · 2026-10-06 ATELIER TRICO'THÉ · 2026-10-07 Exposition « Objectif...» : Axelle de Russé, attractions polaires
+## Arles — 692 sorties, 632 avec photo, 14 s ; recherches de départ : Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône
+  DATAtourisme: 622 événements à moins de 50 km (0 fiches sans date, 10 pages)
+  OpenAgenda: recherches → Arles | Arles-Crau-Camargue-Montagnette | Bouches-du-Rhône | Istres | Martigues | Saint-Rémy-de-Provence | Nîmes | Salon-de-Provence | 
   OpenAgenda: 40 agendas candidats
     La Verrerie, tiers-lieu culturel et citoyen à Arles: 1 événements lus, 1 à moins de 50 km
-    Arles agenda: 111 événements lus, 105 à moins de 50 km
-    Bicentenaire de la Photographie - 2026-2027: 300 événements lus, 9 à moins de 50 km
+    Arles agenda: 113 événements lus, 107 à moins de 50 km
+    Bicentenaire de la Photographie - 2026-2027: 300 événements lus, 7 à moins de 50 km
     Halle de Martigues: 1 événements lus, 1 à moins de 50 km
-    Aix-Marseille-Provence Métropole: 300 événements lus, 81 à moins de 50 km
-    CIAS Pays de Martigues: 1 événements lus, 1 à moins de 50 km
+    Aix-Marseille-Provence Métropole: 300 événements lus, 87 à moins de 50 km
     Eiffage Énergie Systèmes: 1 événements lus, 1 à moins de 50 km
-    Agenda Marseille et alentours: 9 événements lus, 2 à moins de 50 km
-    Martigues la sportive: 5 événements lus, 5 à moins de 50 km
+    CIAS Pays de Martigues: 1 événements lus, 1 à moins de 50 km
+    Agenda Marseille et alentours: 10 événements lus, 2 à moins de 50 km
+    Martigues la sportive: 7 événements lus, 7 à moins de 50 km
+    Théâtre les Salins (Martigues): 10 événements lus, 10 à moins de 50 km
     Martigues : art, histoire, archéologie: 3 événements lus, 3 à moins de 50 km
     Martigues Tourisme: 3 événements lus, 3 à moins de 50 km
-    Médiathèque Louis Aragon de Martigues: 15 événements lus, 15 à moins de 50 km
-  Doublons DATAtourisme retirés : 47
+  Doublons DATAtourisme retirés : 57
   exemples : 2026-09-03 Exposition : Martigues, Venise Provençale · 2026-09-19 Spectacle : Zize Du Panier · 2026-09-19 Concert : Les Victoires de la chanson · 2026-09-20 Le Train de Camargue - Terminus : Les Saintes-Maries-de-la-Mer · 2026-09-26 Exposition Musée Estrine : Les couleurs d'André Marchand
 
 ## Serveur
 Par Ici sur http://localhost:3000
-Cinémas : 12 avec AlloCiné (0 sans réponse), 0 sans, 37 films
-47.2,-2.1 (?) : 1113 sorties et 37 films en 15 s, mémoire max 141 Mo
-Cinémas : 12 avec AlloCiné (0 sans réponse), 2 sans, 55 films
-47.1,-1.3 (Gorges) : 709 sorties et 55 films en 10 s, mémoire max 146 Mo
-Cinémas : 12 avec AlloCiné (0 sans réponse), 0 sans, 51 films
-43.7,4.6 (Fourques) : 608 sorties et 51 films en 18 s, mémoire max 156 Mo
-Cinémas : 12 avec AlloCiné (0 sans réponse), 10 sans, 52 films
-45.8,4.8 (Saint-Didier-au-Mont-d'Or) : 247 sorties et 52 films en 9 s, mémoire max 156 Mo
-026-11-02"} · Karma {"acW0012":"2026-11-02","acP0716":"2026-11-02","acP0968":"2026-11-02"} · Les Misérables {"acW0012":"2026-11-02","acP2368":"2026-11-04","acP0716":"2026-11-02","acW4477":"2026-11-04","acP0968":"2026-11-02"} · Le Corset {"acW0012":"2026-11-02","acP0716":"2026-11-02"} · Mochy {"acW0012":"2026-11-02","acP0716":"2026-11-04","acP0968":"2026-11-04"} · Coup de coeur surprise 1 AFCAE Novembre 2026 {"acW0012":"2026-11-02","acP6667":"2026-11-02"} · L'Affaire Marie-Claire {"acW0012":"2026-11-04","acP0716":"2026-11-04","acP0968":"2026-11-04"} · Un bon patron {"acW0012":"2026-11-04","acP0968":"2026-11-04"} · Un amour d’épouvantail {"acW0012":"2026-11-04"} · Shaun le Mouton : La Bêêête d'Halloween {"acW0012":"2026-11-04","acP0836":"2026-11-04","acP0968":"2026-11-04"} · Coup de coeur surprise Jeune Public -3- AFCAE Novembre 2026 {"acP2368":"2026-11-04"}
-Cugand : 709 sorties ; cinémas Le Connetable, Le Cep, Montaigu-Vendée, Ciné Vaillant, Ciné-Loroux, Ciné Pôle Sud, Cinéville Saint-Sébastien-sur-Loire, Saint-Paul, Bonne Garde, Le Cinematographe, Pathé Nantes Centre ville, Katorza, ESPACE BORIS VIAN, Cinéma Jacques Demy ; films L'Affaire Marie-Claire {"acP0377":"2026-11-04","acW8560":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04","acP0196":"2026-11-04"} · Moulin {"acP0377":"2026-11-04","acP0052":"2026-11-02","acP4024":"2026-11-02","acP0196":"2026-11-04"} · Le Corset {"acP0377":"2026-11-04","acP0052":"2026-11-02","acP0196":"2026-11-04"} · L'Espèce explosive {"acP0079":"2026-11-02"} · Karma {"acP0079":"2026-11-04","acW8560":"2026-11-02","acP1200":"2026-11-04","acP5385":"2026-11-02","acP4024":"2026-11-02","acP0196":"2026-11-04"} · Le Fantôme de l'Opéra {"acW8560":"2026-11-02","acP5385":"2026-11-02","acP4024":"2026-11-02","acP0196":"2026-11-04"} · Fini de rire ! L'humour politique au garde-à-vous ? {"acW8560":"2026-11-02"} · La Frappe {"acW8560":"2026-11-02"} · Les Misérables {"acW8560":"2026-11-02","acP5385":"2026-11-02","acP4024":"2026-11-02","acP0196":"2026-11-04"} · Heart Of The Beast {"acW8560":"2026-11-02","acP5385":"2026-11-02","acP4024":"2026-11-02"} · Une femme aujourd’hui {"acW8560":"2026-11-02","acP0052":"2026-11-02"} · La Maison de nos rêves {"acW8560":"2026-11-02","acP5385":"2026-11-02","acP4024":"2026-11-02"}
-Arles : 608 sorties ; cinémas Le Femina, Eden, Cinémas Le Méjan (Actes Sud), Le Rex, Le Galet, Ciné-Palace, Kinepolis Nîmes Multiplexe - IMAX, CGR Nîmes, Le Sémaphore, Châteaurenard - Le Rex, Le Relais Culturel, Cinéma L'Eden Noves ; films L'Affaire Marie-Claire {"acP0498":"2026-11-04","acP3000":"2026-11-04"} · Un bon patron {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04","acP3000":"2026-11-04"} · L'île des souvenirs {"acP0498":"2026-11-04","acP2206":"2026-11-04","acP0448":"2026-11-02","acP0923":"2026-11-04","acP3000":"2026-11-04"} · Mochy {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP0923":"2026-11-04","acP3000":"2026-11-04"} · Le Fantôme de l'Opéra {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP0923":"2026-11-02","acP3000":"2026-11-02"} · Karma {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP0819":"2026-11-04","acP0448":"2026-11-02","acP0923":"2026-11-02","acP3000":"2026-11-02"} · Le Roi du Game {"acP0498":"2026-11-04"} · Les Misérables {"acP1755":"2026-11-04","acP2206":"2026-11-04","acP0448":"2026-11-02","acP0923":"2026-11-02","acP3000":"2026-11-04"} · Wild Horse Nine {"acP0441":"2026-11-04","acP0923":"2026-11-04","acP0137":"2026-11-04"} · Club Kid {"acP0441":"2026-11-04","acP0137":"2026-11-04"} · Shaun le Mouton : La Bêêête d'Halloween {"acP0441":"2026-11-04","acP0819":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04","acP0137":"2026-11-02"} · Wicker {"acP0441":"2026-11-02"}
-Lyon : 247 sorties ; cinémas Ecully Cinéma, L'aqueduc, UGC Astoria, Le Cinéma Opéra, Cinéma Lumière Terreaux , Le Méliès, Alpha, Le Lem, UGC Ciné Cité Lyon Part-Dieu, Cinéma Lumière Bellecour, Le Zola, Ciné Mourguet, CinéDuchère, Pathé Vaise, LE LYON D'OR, CIFA Saint-Denis, Lumière Fourmi, Pathé Bellecour, COMOEDIA, LE CINEMA, UGC, Bellecombe ; films Minotaure {"acP9410":"2026-11-04","acP0017":"2026-11-02","acP0725":"2026-11-04"} · Quelques mots d'amour {"acP0005":"2026-11-02","acP0015":"2026-11-02","acP0037":"2026-11-04","acP0036":"2026-11-02"} · Moulin {"acP0005":"2026-11-02","acP0017":"2026-11-02","acP0037":"2026-11-04","acP0036":"2026-11-02"} · Le Corset {"acP0005":"2026-11-02","acP0017":"2026-11-02","acP0015":"2026-11-04","acP0036":"2026-11-02"} · Une femme aujourd’hui {"acP0005":"2026-11-02","acP0222":"2026-11-04","acP0725":"2026-11-04","acP0039":"2026-11-04","acP0015":"2026-11-02"} · Karma {"acP0005":"2026-11-02","acP0039":"2026-11-04","acP0037":"2026-11-04","acP0036":"2026-11-02"} · Les Misérables {"acP0005":"2026-11-02","acP0222":"2026-11-02","acP0014":"2026-11-04","acP0036":"2026-11-02"} · Notre salut {"acP0005":"2026-11-02","acP0017":"2026-11-02","acP0015":"2026-11-04"} · Wild Horse Nine {"acP0005":"2026-11-04","acP0017":"2026-11-02","acP0036":"2026-11-04"} · Ma toute petite école {"acP0005":"2026-11-04"} · Les Roches Rouges {"acP0006":"2026-11-02"} · Les Éléphants dans la brume {"acP0006":"2026-11-02"}
-Plan B : pas de secret TMDB_KEY, non testé
+Cinémas : 12 avec AlloCiné (0 sans réponse), 0 sans, 34 films
+47.2,-2.1 (?) : 1135 sorties et 34 films en 11 s, mémoire max 133 Mo
+Cinémas : 12 avec AlloCiné (0 sans réponse), 2 sans, 48 films
+47.1,-1.3 (Gorges) : 778 sorties et 48 films en 8 s, mémoire max 147 Mo
+Cinémas : 12 avec AlloCiné (0 sans réponse), 0 sans, 48 films
+43.7,4.6 (Fourques) : 695 sorties et 48 films en 16 s, mémoire max 166 Mo
+Cinémas : 12 avec AlloCiné (0 sans réponse), 10 sans, 42 films
+45.8,4.8 (Saint-Didier-au-Mont-d'Or) : 259 sorties et 42 films en 7 s, mémoire max 160 Mo
+26-11-04","acP3702":"2026-11-11","acP0968":"2026-11-04"} · Un bon patron {"acW0012":"2026-11-04","acP0968":"2026-11-04"} · Moulin {"acW0012":"2026-11-04","acP0716":"2026-11-04","acP0836":"2026-11-11","acP3702":"2026-11-04","acP0968":"2026-11-04"} · Un amour d’épouvantail {"acW0012":"2026-11-04"} · Le Fantôme de l'Opéra {"acW0012":"2026-11-04","acP0968":"2026-11-04"} · Shaun le Mouton : La Bêêête d'Halloween {"acW0012":"2026-11-04","acP0968":"2026-11-04"} · Karma {"acW0012":"2026-11-04","acP2368":"2026-11-11","acP0716":"2026-11-04","acP0968":"2026-11-04"} · Le Corset {"acW0012":"2026-11-04","acP3702":"2026-11-11"} · Les Misérables {"acW0012":"2026-11-04","acP0716":"2026-11-04","acW4477":"2026-11-04","acP6667":"2026-11-11","acP0968":"2026-11-04"} · La Bataille de Gaulle - partie 1 : L'Âge de Fer {"acP2368":"2026-11-04"} · Ducobu et le fantôme de Saint-Potache {"acP2368":"2026-11-11","acP0716":"2026-11-04","acP0968":"2026-11-04"}
+Cugand : 778 sorties ; cinémas Le Connetable, Le Cep, Montaigu-Vendée, Ciné Vaillant, Ciné-Loroux, Ciné Pôle Sud, Cinéville Saint-Sébastien-sur-Loire, Saint-Paul, Bonne Garde, Le Cinematographe, Pathé Nantes Centre ville, Katorza, ESPACE BORIS VIAN, Cinéma Jacques Demy ; films Il faut brûler Maman {"acP0377":"2026-11-11"} · Ce qui nous mène à toi {"acP0377":"2026-11-11"} · La Gradiva {"acP0377":"2026-11-11","acP0196":"2026-11-04","acP0052":"2026-11-04"} · Petite Casbah {"acP0377":"2026-11-11"} · L'Affaire Marie-Claire {"acP0377":"2026-11-04","acW8560":"2026-11-04","acP0196":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04"} · Moulin {"acP0377":"2026-11-04","acP0079":"2026-11-11","acP1200":"2026-11-11","acP0196":"2026-11-04","acP0052":"2026-11-04","acP4024":"2026-11-04"} · Mochy {"acP0079":"2026-11-11","acW8560":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04"} · Un bon patron {"acW8560":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04"} · Hunger Games: la Ballade du serpent et de l'oiseau chanteur {"acW8560":"2026-11-04"} · L'île des souvenirs {"acW8560":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04"} · Ducobu et le fantôme de Saint-Potache {"acW8560":"2026-11-04","acP5385":"2026-11-04","acP4024":"2026-11-04"} · Chats par-ci, Chats par-là {"acW8560":"2026-11-04"}
+Arles : 695 sorties ; cinémas Le Femina, Eden, Cinémas Le Méjan (Actes Sud), Le Rex, Le Galet, Ciné-Palace, Kinepolis Nîmes Multiplexe - IMAX, CGR Nîmes, Le Sémaphore, Châteaurenard - Le Rex, Le Relais Culturel, Cinéma L'Eden Noves ; films L'Affaire Marie-Claire {"acP0498":"2026-11-04","acP0819":"2026-11-11","acP0923":"2026-11-04"} · Un bon patron {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP3000":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04"} · Le Fantôme de l'Opéra {"acP0498":"2026-11-04","acP0802":"2026-11-04","acP0448":"2026-11-11","acP0923":"2026-11-04"} · Les Misérables {"acP1755":"2026-11-04","acP2206":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04"} · Moulin {"acP1755":"2026-11-11","acP0441":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04","acP0137":"2026-11-04"} · Wild Horse Nine {"acP0441":"2026-11-04","acP0923":"2026-11-04","acP0137":"2026-11-04"} · Club Kid {"acP0441":"2026-11-04","acP0137":"2026-11-04"} · Shaun le Mouton : La Bêêête d'Halloween {"acP0441":"2026-11-04","acP0448":"2026-11-04","acP0923":"2026-11-04","acP0137":"2026-11-04"} · Wicker {"acP0441":"2026-11-04"} · Le Corset {"acP0441":"2026-11-04","acP0137":"2026-11-04"} · La Gradiva {"acP0441":"2026-11-04","acP0137":"2026-11-04"} · Quelques mots d'amour {"acP0441":"2026-11-04","acP0448":"2026-11-11","acP0137":"2026-11-04"}
+Lyon : 259 sorties ; cinémas Ecully Cinéma, L'aqueduc, UGC Astoria, Le Cinéma Opéra, Cinéma Lumière Terreaux , Le Méliès, Alpha, Le Lem, UGC Ciné Cité Lyon Part-Dieu, Cinéma Lumière Bellecour, Le Zola, Ciné Mourguet, CinéDuchère, Pathé Vaise, LE LYON D'OR, CIFA Saint-Denis, Lumière Fourmi, Pathé Bellecour, COMOEDIA, LE CINEMA, UGC, Bellecombe ; films Minotaure {"acP9410":"2026-11-04"} · Karma {"acP9410":"2026-11-11","acP0005":"2026-11-04","acP0725":"2026-11-11","acP0039":"2026-11-04","acP0036":"2026-11-04"} · Wild Horse Nine {"acP0005":"2026-11-04","acP0017":"2026-11-04","acP0036":"2026-11-04"} · Ma toute petite école {"acP0005":"2026-11-04"} · Les Misérables {"acP0005":"2026-11-04","acP0036":"2026-11-04"} · Moulin {"acP0005":"2026-11-04","acP0017":"2026-11-04","acP0725":"2026-11-11","acP0036":"2026-11-04","acP0037":"2026-11-11"} · Quelques mots d'amour {"acP0005":"2026-11-04","acP0039":"2026-11-11","acP0015":"2026-11-04","acP0036":"2026-11-04","acP0037":"2026-11-04"} · Le Corset {"acP0005":"2026-11-04","acP0725":"2026-11-11","acP0015":"2026-11-04","acP0036":"2026-11-04"} · Une femme aujourd’hui {"acP0005":"2026-11-04","acP0222":"2026-11-04","acP0725":"2026-11-04"} · Notre salut {"acP0005":"2026-11-04","acP0015":"2026-11-04"} · Club Kid {"acP0017":"2026-11-04","acP0036":"2026-11-04"} · Hope {"acP0017":"2026-11-04","acP0036":"2026-11-04"}
+Par Ici sur http://localhost:3001
+Cinémas : 0 avec AlloCiné (0 sans réponse), 12 sans, 0 films
+TMDB : 53 films au cinéma en France
+47.2,-2.1 (?) : 1135 sorties et 53 films en 11 s, mémoire max 152 Mo
+Plan B Saint-Michel-Chef-Chef : cinémas 12 ; films Hope (2026-10-28, affiche) · Verity (2026-09-30, affiche) · Clayface (2026-10-21, affiche) · Primetime (2026-09-23, affiche) · L'île des souvenirs (2026-10-21, affiche) · Raison et Sentiments (2026-09-23, affiche) · Malfaisante (2026-10-14, affiche) · Street Fighter (2026-10-13, affiche) · Heart of the Beast (2026-09-23, affiche) · Wicker (2026-10-21, affiche) · Godzilla Minus Zero (2026-11-04, affiche) · Digger (2026-09-28, affiche) · Englouti (2026-10-14, affiche) · Your Mother Your Mother Your Mother (2026-10-17, affiche) · Ghost in the Cell (2026-10-31, affiche)
