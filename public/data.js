@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-11-03';
+const UPDATED = '2026-11-04';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -66,7 +66,7 @@ const SRC = {
   choletSalons: ['AllEvents, salons à Cholet', 'https://allevents.in/cholet/exhibitions']
 };
 
-// Real events collected on 3 November 2026. d = date, to = last day of a multi-day event.
+// Real events collected on 4 November 2026. d = date, to = last day of a multi-day event.
 const EV = [
   // Cugand-la-Bernardière
   { cat: 'spectacle', t: 'Lecture musicale : La Forêt millénaire', c: 'bernardiere', d: '2026-11-06', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque de La Bernardière', desc: 'La compagnie Waï Waï met en musique le manga de Jirō Taniguchi.', s: 'tm' },
