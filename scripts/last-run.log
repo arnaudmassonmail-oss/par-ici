@@ -1,37 +1,37 @@
-DATAtourisme: 504 événements à moins de 50 km (0 fiches sans date, 9 pages)
+DATAtourisme: 523 événements à moins de 50 km (0 fiches sans date, 9 pages)
 OpenAgenda: 60 agendas candidats
   Communauté de Communes des Terres du Val de Loire: 28 événements lus, 0 à moins de 50 km
-  Terres de Montaigu: 61 événements lus, 61 à moins de 50 km
+  Terres de Montaigu: 64 événements lus, 64 à moins de 50 km
   Emmaus Terre - La Bricole Solidaire: 38 événements lus, 0 à moins de 50 km
-  Maison de la TERRE - Lantic (22): 1 événements lus, 0 à moins de 50 km
-  Conservatoire de Nantes: 30 événements lus, 30 à moins de 50 km
-  Quinzaine de la transmission: 89 événements lus, 3 à moins de 50 km
-  Île de Nantes: 156 événements lus, 156 à moins de 50 km
+  Maison de la TERRE - Lantic (22): 2 événements lus, 0 à moins de 50 km
+  Conservatoire de Nantes: 32 événements lus, 32 à moins de 50 km
+  Quinzaine de la transmission: 86 événements lus, 3 à moins de 50 km
+  Île de Nantes: 162 événements lus, 162 à moins de 50 km
+  Nantes Nord: 39 événements lus, 39 à moins de 50 km
   Sports à Nantes: 3 événements lus, 3 à moins de 50 km
-  Nantes Nord: 38 événements lus, 38 à moins de 50 km
+  Muséum de la métropole de Nantes: 5 événements lus, 5 à moins de 50 km
   Musée d'arts de Nantes: 26 événements lus, 26 à moins de 50 km
-  Nantes Erdre: 39 événements lus, 39 à moins de 50 km
-  Nantes Centre-ville: 50 événements lus, 50 à moins de 50 km
-  Nantes Sud: 54 événements lus, 54 à moins de 50 km
-  Bibliothèque municipale de Nantes: 75 événements lus, 75 à moins de 50 km
-  Nantes Métropole: 1196 événements lus, 1193 à moins de 50 km
-  Jour de Fête: 1 événements lus, 1 à moins de 50 km
-  Expositions Mode - BU de Cholet: 26 événements lus, 0 à moins de 50 km
+  Nantes Erdre: 41 événements lus, 41 à moins de 50 km
+  Nantes Sud: 53 événements lus, 53 à moins de 50 km
+  Bibliothèque municipale de Nantes: 78 événements lus, 78 à moins de 50 km
+  Nantes Métropole: 1228 événements lus, 1226 à moins de 50 km
+  Jour de Fête: 2 événements lus, 1 à moins de 50 km
+  Expositions Mode - BU de Cholet: 31 événements lus, 0 à moins de 50 km
   Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Saison Culturelle des Herbiers: 4 événements lus, 4 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
-  RNCAP: 166 événements lus, 8 à moins de 50 km
+  RNCAP: 168 événements lus, 8 à moins de 50 km
   Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
-  Agence C'est à Dire: 67 événements lus, 6 à moins de 50 km
-  RandoDate — apéros et randonnées entre célibataires: 1726 événements lus, 18 à moins de 50 km
+  Sortez chez vous - Agenda des acteurs culturels en Sèvre et Loire: 4 événements lus, 4 à moins de 50 km
+  Agence C'est à Dire: 69 événements lus, 6 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 1 événements lus, 0 à moins de 50 km
   Mauves-sur-Loire: 2 événements lus, 2 à moins de 50 km
-DATAtourisme: écart de dates mesuré sur les événements communs → {"0":11,"-2":1}
-Doublons DATAtourisme retirés : 11
+DATAtourisme: écart de dates mesuré sur les événements communs → {"0":12,"-2":1}
+Doublons DATAtourisme retirés : 12
 Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/bib-prix-bebe-agenda.png
 Affiche Soirée jeux de société → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
-Images des sources manuelles : 14 sur 42 sorties (24 pages lues)
+Images des sources manuelles : 12 sur 42 sorties (24 pages lues)
 Affiches de films : 0 sur 0
-Terminé : 2219 événements écrits dans public/auto.js (2026-11-10 → 2026-12-11).
-Par catégorie : {"expo":219,"sport":227,"concert":530,"marche":245,"spectacle":395,"famille":544,"cinema":59}
-Avec photo : 1569 sur 2219
+Terminé : 2265 événements écrits dans public/auto.js (2026-11-11 → 2026-12-12).
+Par catégorie : {"expo":210,"sport":216,"concert":537,"marche":263,"famille":563,"cinema":56,"spectacle":420}
+Avec photo : 1596 sur 2265
