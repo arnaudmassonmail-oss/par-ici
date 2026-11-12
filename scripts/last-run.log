@@ -1,29 +1,28 @@
-DATAtourisme: 523 événements à moins de 50 km (0 fiches sans date, 9 pages)
+DATAtourisme: 575 événements à moins de 50 km (0 fiches sans date, 9 pages)
 OpenAgenda: 60 agendas candidats
-  Communauté de Communes des Terres du Val de Loire: 28 événements lus, 0 à moins de 50 km
-  Terres de Montaigu: 64 événements lus, 64 à moins de 50 km
-  Emmaus Terre - La Bricole Solidaire: 38 événements lus, 0 à moins de 50 km
   Maison de la TERRE - Lantic (22): 2 événements lus, 0 à moins de 50 km
-  Conservatoire de Nantes: 32 événements lus, 32 à moins de 50 km
+  Terres de Montaigu: 61 événements lus, 61 à moins de 50 km
+  Conservatoire de Nantes: 33 événements lus, 33 à moins de 50 km
   Quinzaine de la transmission: 86 événements lus, 3 à moins de 50 km
-  Île de Nantes: 162 événements lus, 162 à moins de 50 km
-  Nantes Nord: 39 événements lus, 39 à moins de 50 km
+  Emmaus Terre - La Bricole Solidaire: 39 événements lus, 0 à moins de 50 km
+  Île de Nantes: 173 événements lus, 173 à moins de 50 km
+  Nantes Nord: 46 événements lus, 46 à moins de 50 km
   Sports à Nantes: 3 événements lus, 3 à moins de 50 km
   Muséum de la métropole de Nantes: 5 événements lus, 5 à moins de 50 km
-  Musée d'arts de Nantes: 26 événements lus, 26 à moins de 50 km
-  Nantes Erdre: 41 événements lus, 41 à moins de 50 km
-  Nantes Sud: 53 événements lus, 53 à moins de 50 km
+  Nantes Sud: 56 événements lus, 56 à moins de 50 km
+  Nantes Centre-ville: 51 événements lus, 51 à moins de 50 km
+  Nantes Erdre: 42 événements lus, 42 à moins de 50 km
   Bibliothèque municipale de Nantes: 78 événements lus, 78 à moins de 50 km
-  Nantes Métropole: 1228 événements lus, 1226 à moins de 50 km
+  Nantes Métropole: 1246 événements lus, 1244 à moins de 50 km
   Jour de Fête: 2 événements lus, 1 à moins de 50 km
-  Expositions Mode - BU de Cholet: 31 événements lus, 0 à moins de 50 km
-  Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
+  Expositions Mode - BU de Cholet: 33 événements lus, 0 à moins de 50 km
   Saison Culturelle des Herbiers: 4 événements lus, 4 à moins de 50 km
+  Journées nationales de l’architecture 2026 : Pays de la Loire: 1 événements lus, 1 à moins de 50 km
   Archives départementales de la Vendée: 1 événements lus, 1 à moins de 50 km
   RNCAP: 168 événements lus, 8 à moins de 50 km
   Association des Radioamateurs de Loire Atlantique: 1 événements lus, 1 à moins de 50 km
   Sortez chez vous - Agenda des acteurs culturels en Sèvre et Loire: 4 événements lus, 4 à moins de 50 km
-  Agence C'est à Dire: 69 événements lus, 6 à moins de 50 km
+  Agence C'est à Dire: 68 événements lus, 6 à moins de 50 km
   Conservatoire botanique national Sud-Atlantique: 1 événements lus, 0 à moins de 50 km
   Mauves-sur-Loire: 2 événements lus, 2 à moins de 50 km
 DATAtourisme: écart de dates mesuré sur les événements communs → {"0":12,"-2":1}
@@ -32,6 +31,6 @@ Affiche Prix des Bébés Lecteurs → https://www.getigne.fr/media/2000-*-9999/b
 Affiche Soirée jeux de société → aucune image trouvée sur https://www.getigne.fr/sortir/agenda/ (HTTP 200)
 Images des sources manuelles : 12 sur 42 sorties (24 pages lues)
 Affiches de films : 0 sur 0
-Terminé : 2265 événements écrits dans public/auto.js (2026-11-11 → 2026-12-12).
-Par catégorie : {"expo":210,"sport":216,"concert":537,"marche":263,"famille":563,"cinema":56,"spectacle":420}
-Avec photo : 1596 sur 2265
+Terminé : 2369 événements écrits dans public/auto.js (2026-11-12 → 2026-12-13).
+Par catégorie : {"expo":220,"sport":245,"concert":546,"marche":293,"famille":578,"spectacle":427,"cinema":60}
+Avec photo : 1623 sur 2369
