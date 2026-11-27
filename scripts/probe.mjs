@@ -1,30 +1,37 @@
 // Scratch probe of an outside source, run by the "Exploration d'une source" workflow; prints to scripts/probe.log.
 const UA = { 'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36', 'accept-language': 'fr-FR,fr' };
-const SITES = {
-  Clisson: ['https://www.mairie-clisson.fr/', 'https://www.mairie-clisson.fr/agenda'],
-  Gorges: ['https://www.gorges44.fr/', 'https://www.gorges44.fr/agenda/'],
-  Boussay: ['https://www.boussay.fr/', 'https://www.boussay.fr/agenda/'],
-  Cugand: ['https://www.cugandlabernardiere.fr/', 'https://www.cugandlabernardiere.fr/agenda/'],
-  'La Bruffière': ['https://www.labruffiere.fr/', 'https://www.labruffiere.fr/agenda/'],
-  Montaigu: ['https://www.montaigu-vendee.com/', 'https://www.montaigu-vendee.com/agenda/'],
-  'Terres de Montaigu': ['https://www.terresdemontaigu.fr/agenda/']
-};
-const DATE = /\b(\d{1,2})(?:er)?\s+(janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|septembre|octobre|novembre|décembre|decembre)\s+(2026|2027)\b|\b\d{2}\/\d{2}\/(2026|2027)\b/gi;
-const text = h => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
-for (const [town, urls] of Object.entries(SITES)) {
-  console.log(`\n######## ${town}`);
-  for (const url of urls) {
-    try {
-      const r = await fetch(url, { headers: UA, redirect: 'follow', signal: AbortSignal.timeout(20000) });
-      const h = await r.text();
-      const t = text(h);
-      const dates = t.match(DATE) || [];
-      console.log(`## ${url} → ${r.url} HTTP ${r.status} ${h.length} car., ${dates.length} dates`);
-      console.log('liens agenda :', [...new Set([...h.matchAll(/href="([^"#]+)"/gi)].map(m => { try { return new URL(m[1], r.url).href; } catch { return ''; } })
-        .filter(u => /agenda|evenement|événement|event|manifestation|sortir/i.test(u)))].slice(0, 15).join(' '));
-      const gen = h.match(/<meta name="generator" content="([^"]+)"/i);
-      console.log('générateur :', gen ? gen[1] : '-', '| JSON-LD Event :', (h.match(/"@type"\s*:\s*"Event"/g) || []).length, '| openagenda :', /openagenda/i.test(h), '| iframe :', (h.match(/<iframe[^>]+src="([^"]+)"/i) || [])[1] || '-');
-      if (dates.length) { const i = t.search(DATE); console.log('extrait :', t.slice(Math.max(0, i - 300), i + 900)); }
-    } catch (e) { console.log(`## ${url} erreur ${e.message}`); }
-  }
+const get = async url => { const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(20000) }); return { status: r.status, type: r.headers.get('content-type'), h: await r.text(), url: r.url }; };
+const flat = s => s.replace(/\s+/g, ' ');
+const around = (h, re, before = 600, after = 1500) => { const i = h.search(re); return i < 0 ? '(absent)' : flat(h.slice(Math.max(0, i - before), i + after)); };
+async function show(label, url, fn) {
+  try { const r = await get(url); console.log(`\n######## ${label} ${url} HTTP ${r.status} ${r.type} ${r.h.length}`); fn(r); } catch (e) { console.log(`\n######## ${label} ${url} erreur ${e.message}`); }
 }
+// Terres de Montaigu family: REST API and one list item and one detail page.
+await show('TdM types', 'https://www.terresdemontaigu.fr/wp-json/wp/v2/types', r => console.log(r.h.slice(0, 1500)));
+await show('TdM evenement API', 'https://www.terresdemontaigu.fr/wp-json/wp/v2/evenement?per_page=2', r => console.log(r.h.slice(0, 3000)));
+await show('TdM liste', 'https://www.terresdemontaigu.fr/agenda/', r => console.log(around(r.h, /Rando-philo/, 1500, 1500)));
+await show('TdM liste p2', 'https://www.terresdemontaigu.fr/agenda/page/2/', r => console.log(r.status, flat(r.h).match(/Le \d{2} \w+ 2026/g)?.slice(0, 5)));
+await show('TdM détail', 'https://www.terresdemontaigu.fr/evenement/les-pieds-au-plancher/', r => {
+  console.log('og:image', (r.h.match(/property="og:image"[^>]+content="([^"]+)"/) || [])[1]);
+  console.log('ld+json', (r.h.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/) || [])[1]?.slice(0, 1500));
+  console.log(around(r.h, /<h1/, 100, 5000));
+});
+// Boussay (WordPress).
+await show('Boussay types', 'https://www.boussay.fr/wp-json/wp/v2/types', r => console.log(r.h.slice(0, 1500)));
+await show('Boussay liste', 'https://www.boussay.fr/agenda/', r => console.log(around(r.h, /Marché de Noël/, 1500, 2000)));
+await show('Boussay détail', 'https://www.boussay.fr/agenda/marche-de-noel-2026/', r => {
+  console.log('og:image', (r.h.match(/property="og:image"[^>]+content="([^"]+)"/) || [])[1]);
+  console.log(around(r.h, /<h1/, 100, 4000));
+});
+// Gorges (TYPO3 news).
+await show('Gorges agenda', 'https://www.gorges44.fr/ville-de-gorges/agenda', r => console.log(around(r.h, /Nuit de No/, 1500, 1500)));
+await show('Gorges détail', 'https://www.gorges44.fr/ville-de-gorges/agenda/vue-detaillee/news/spectacle-nuit-de-noel', r => {
+  console.log('og:image', (r.h.match(/property="og:image"[^>]+content="([^"]+)"/) || [])[1]);
+  console.log(around(r.h, /<h1/, 100, 3000));
+});
+// Clisson (TYPO3): where the agenda items are.
+await show('Clisson agenda', 'https://www.mairie-clisson.fr/agenda', r => {
+  console.log('2026 :', (r.h.match(/.{0,120}2026.{0,120}/g) || []).slice(0, 8).map(flat).join('\n'));
+  console.log('fetch/ajax :', [...new Set(r.h.match(/(https?:)?\/\/[^"' ]*(api|ajax|json|feed|ics|rss)[^"' ]*/gi) || [])].slice(0, 15).join(' '));
+  console.log(around(r.h, /class="[^"]*(event|agenda)[^"]*"/i, 200, 2500));
+});
