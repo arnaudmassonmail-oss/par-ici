@@ -1,43 +1,20 @@
-## https://overpass-api.de/api/interpreter HTTP 200 en 86281 ms : 2136 cinémas, website 1280, addr:city 631
-## https://overpass.private.coffee/api/interpreter HTTP 504 en 109922 ms : <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <head> <meta http-equiv="content-type" content="text/html; charset=utf-8" lang="en"/> <title>OSM3S Response</title> </head> <body> <p>The data included in this document is fr
-## https://maps.mail.ru/osm/tools/overpass/api/interpreter HTTP 200 en 80671 ms : 2136 cinémas, website 1280, addr:city 631
-<sheet name="Sommaire" sheetId="14" r:id="rId1"/>
-<sheet name="2025" sheetId="29" r:id="rId2"/>
-<sheet name="2024" sheetId="28" r:id="rId3"/>
-<sheet name="2023" sheetId="26" r:id="rId4"/>
-<sheet name="2022" sheetId="25" r:id="rId5"/>
-<sheet name="2021" sheetId="24" r:id="rId6"/>
-<sheet name="2020" sheetId="23" r:id="rId7"/>
-<sheet name="2019" sheetId="22" r:id="rId8"/>
-<sheet name="2018" sheetId="21" r:id="rId9"/>
-<sheet name="2017" sheetId="20" r:id="rId10"/>
-<sheet name="2016" sheetId="19" r:id="rId11"/>
-<sheet name="2015" sheetId="17" r:id="rId12"/>
-<sheet name="2014" sheetId="16" r:id="rId13"/>
-<sheet name="2013" sheetId="15" r:id="rId14"/>
-<sheet name="2012" sheetId="13" r:id="rId15"/>
-<sheet name="2011" sheetId="1" r:id="rId16"/>
-<sheet name="2010" sheetId="2" r:id="rId17"/>
-<sheet name="2009" sheetId="3" r:id="rId18"/>
-<sheet name="2008" sheetId="4" r:id="rId19"/>
-<sheet name="2007" sheetId="5" r:id="rId20"/>
-<sheet name="2006" sheetId="6" r:id="rId21"/>
-<sheet name="2005" sheetId="7" r:id="rId22"/>
-<sheet name="2004" sheetId="8" r:id="rId23"/>
-<sheet name="2003" sheetId="9" r:id="rId24"/>
-<sheet name="ESRI_MAPINFO_SHEET" sheetId="18" state="veryHidden" r:id="rId25"/>
-sheet2 lignes 2062
-{"A":"Retour au menu \"Liste des établissements actifs\""}
-{"A":"NAutoC","B":"NomEtab","C":"Ecrans","D":"fauteuils","E":"DEPCOM","F":"COMMUNE","G":"genre","H":"AE","I":"3D"}
-{"A":"35","B":"BALZAC","C":"3","D":"589","E":"75108","F":"Paris 8e Arrondissement","G":"FIXE","H":"OUI","I":"OUI"}
-{"A":"55","B":"ELYSEES LINCOLN","C":"3","D":"448","E":"75108","F":"Paris 8e Arrondissement","G":"FIXE","H":"OUI","I":"NON"}
-{"A":"204","B":" UGC OPERA","C":"4","D":"722","E":"75109","F":"Paris 9e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
-{"A":"301","B":"MAX LINDER","C":"1","D":"591","E":"75109","F":"Paris 9e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
-{"A":"311","B":"GRAND REX","C":"7","D":"3678","E":"75102","F":"Paris 2e Arrondissement","G":"FIXE","H":"NON","I":"OUI"}
-{"A":"321","B":"PATHE BNP OPERA","C":"6","D":"502","E":"75102","F":"Paris 2e Arrondissement","G":"FIXE","H":"NON","I":"NON"}
-{"A":"115334","B":"LE CONNETABLE","C":"2","D":"432","E":"44043","F":"Clisson","G":"FIXE","H":"OUI","I":"OUI"}
-{"A":"321132","B":"CINE TOILES DE RETZ","C":"3","D":"479","E":"44131","F":"Pornic","G":"FIXE","H":"OUI","I":"OUI"}
-{"A":"321135","B":"ST JOSEPH","C":"1","D":"185","E":"44131","F":"Pornic","G":"FIXE","H":"OUI","I":"OUI"}
-{"A":"321146","B":"LA TOILE DE MER","C":"1","D":"174","E":"44132","F":"Pornichet","G":"FIXE","H":"OUI","I":"NON"}
-{"A":"406352","B":"SALLE ST MICHEL","C":"1","D":"95","E":"44182","F":"Saint-Michel-Chef-Chef","G":"FIXE","H":"OUI","I":"OUI"}
-{"A":"268124","B":"GRAND ECRAN MONTAIGU-VENDEE","C":"6","D":"871","E":"85146","F":"Montaigu-Vendée","G":"FIXE","H":"NON","I":"NON"}
+
+### https://www.getigne.fr/sortir/agenda/ HTTP 200 71959 car.
+… nnement tourisme jeunesse spectacle Santé Filtrer du samedi 3 octobre 2026 au samedi 15 mai 2027 Prix des Bébés Lecteurs Prix littéraire proposé par la bibliothèque des Changes En savoir plus > dimanche 29 novembre 2026 Concert de chants de noël organisé par la Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro
+… risme jeunesse spectacle Santé Filtrer du samedi 3 octobre 2026 au samedi 15 mai 2027 Prix des Bébés Lecteurs Prix littéraire proposé par la bibliothèque des Changes En savoir plus > dimanche 29 novembre 2026 Concert de chants de noël organisé par la Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et
+… esse spectacle Santé Filtrer du samedi 3 octobre 2026 au samedi 15 mai 2027 Prix des Bébés Lecteurs Prix littéraire proposé par la bibliothèque des Changes En savoir plus > dimanche 29 novembre 2026 Concert de chants de noël organisé par la Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et marché de
+… Filtrer du samedi 3 octobre 2026 au samedi 15 mai 2027 Prix des Bébés Lecteurs Prix littéraire proposé par la bibliothèque des Changes En savoir plus > dimanche 29 novembre 2026 Concert de chants de noël organisé par la Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et marché de Noël vous sont propo
+… ganisé par la Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et marché de Noël vous sont proposé par la municipalité et L4UCIA (l'Union des commerçants, industriels et artisans) En savoir plus > dimanche 6 décembre 2026 Super loto annuel Le Twirling Bâton Toutes Joies organise son loto annuel avec d
+…  Chorale du Val de Sèvre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et marché de Noël vous sont proposé par la municipalité et L4UCIA (l'Union des commerçants, industriels et artisans) En savoir plus > dimanche 6 décembre 2026 Super loto annuel Le Twirling Bâton Toutes Joies organise son loto annuel avec de nombreux lo
+… vre de Gétigné En savoir plus > mercredi 2 décembre 2026 Atelier "empreinte végétale" Atelier créatif En savoir plus > du samedi 5 décembre 2026 au dimanche 6 décembre 2026 Gétigné fête Noël ! Apéro-concert et marché de Noël vous sont proposé par la municipalité et L4UCIA (l'Union des commerçants, industriels et artisans) En savoir plus > dimanche 6 décembre 2026 Super loto annuel Le Twirling Bâton Toutes Joies organise son loto annuel avec de nombreux lots à gagner. En savoi
+… mbreux lots à gagner. En savoir plus > mercredi 9 décembre 2026 Rendez-vous contes Petits et grands sont invités à se retrouver pour le plaisir d’écouter des histoires En savoir plus > mercredi 9 décembre 2026 Marché de Noël des 3 clochers La résidence organise son deuxième marché de noël En savoir plus > vendredi 11 décembre 2026 Don du sang Le prochain rendez-vous de l'EFS ( Établissement Français du Sang) En savoir plus > 1 2 Contactez-nous Facebook Je m'inscris à la newsl
+… endez-vous contes Petits et grands sont invités à se retrouver pour le plaisir d’écouter des histoires En savoir plus > mercredi 9 décembre 2026 Marché de Noël des 3 clochers La résidence organise son deuxième marché de noël En savoir plus > vendredi 11 décembre 2026 Don du sang Le prochain rendez-vous de l'EFS ( Établissement Français du Sang) En savoir plus > 1 2 Contactez-nous Facebook Je m'inscris à la newsletter Recherche Newsletter Restez au courant des derni&egrave;res
+liens : https://www.getigne.fr/sortir/agenda/page-2.html
+https://www.getigne.fr/sortir/agenda/
+https://www.getigne.fr/vivre/sante-prevention/
+https://www.getigne.fr/vivre/sante-prevention/numeros-durgence/
+https://www.getigne.fr/vivre/sante-prevention/professionnels-de-sante/
+https://www.getigne.fr/vivre/sante-prevention/prevention-des-risques/
+
+### https://www.getigne.fr/sortir/agenda/page/2/ HTTP 404 2469 car.
+liens : 
