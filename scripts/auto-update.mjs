@@ -6,7 +6,8 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import path from 'node:path';
-import { collectAround, toCards, window, words, previewImage, imageNear, SKIP_IMG } from '../lib/collect.mjs';
+import { collectAround, toCards, toEvent, similar, dayGap, window, words, previewImage, imageNear, SKIP_IMG } from '../lib/collect.mjs';
+import { townHallEvents } from '../lib/townhalls.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const HOME = { lat: 47.0603, lon: -1.2525 }; // Cugand
@@ -108,6 +109,17 @@ const events = await collectAround({
   oaKey: process.env.OPENAGENDA_KEY || '', dtKey: process.env.DATATOURISME_KEY || '',
   oa: { searches: OA_SEARCHES, pinned: OA_PINNED, maxAgendas: 80 }
 });
+// Town-hall agendas (Terres de Montaigu, Boussay, Gorges, Gétigné). An event OpenAgenda or DATAtourisme
+// already gives is kept once, and takes the town's picture when it had none.
+const local = (await townHallEvents({ ...HOME, radiusKm: RADIUS_KM, today, horizon, log })).map(toEvent);
+let added = 0;
+for (const e of local) {
+  const twin = events.find(o => dayGap(o, e) === 0 && similar(o, e));
+  if (twin) { if (!twin.img && e.img) Object.assign(twin, { img: e.img, imgL: e.imgL }); continue; }
+  events.push(e);
+  added++;
+}
+log(`Mairies : ${added} événements ajoutés, ${local.length - added} déjà connus par OpenAgenda ou DATAtourisme`);
 const { C, SRC, EV } = toCards(events, base.C);
 const AUTO = {
   updated: today, C, SRC, EV,
@@ -115,7 +127,7 @@ const AUTO = {
   SRCIMG: await sourceImages(base),
   FILMIMG: await filmPosters(base)
 };
-fs.writeFileSync(path.join(ROOT, 'public/auto.js'), `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme), générée chaque nuit par scripts/auto-update.mjs.
+fs.writeFileSync(path.join(ROOT, 'public/auto.js'), `// Collecte automatique de Par Ici (OpenAgenda + DATAtourisme + agendas des mairies), générée chaque nuit par scripts/auto-update.mjs.
 // Ne pas modifier à la main : la page la fusionne avec data.js, qui reste la partie manuelle.
 const AUTO = ${JSON.stringify(AUTO)};
 `);
