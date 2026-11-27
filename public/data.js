@@ -1,5 +1,5 @@
 // Données de Par Ici. Ce fichier est le seul à modifier pour mettre à jour les sorties.
-const UPDATED = '2026-11-17';
+const UPDATED = '2026-11-27';
 
 // Communes with GPS coordinates. Distances are computed from the viewer's position.
 const C = {
@@ -67,36 +67,33 @@ const SRC = {
   noelNantes: ['Le Bonbon Nantes, marché de Noël 2026', 'https://lebonbon.fr/nantes/news/plus-grand-marche-noel-l-ouest-est-retour-2026-plus-150-chalets/'],
   adams: ['Stereoboard, Bryan Adams à Nantes', 'https://www.stereoboard.com/bryan-adams-tickets/nantes/2026-12-01'],
   chatterton: ['Songkick, Feu! Chatterton au Zénith de Nantes', 'https://tickets.songkick.com/concerts/42777107-feu-chatterton-at-zenith-de-nantes-metropole'],
-  superbus: ['Songkick, Superbus au Zénith de Nantes', 'https://songkick.com/fr/concerts/42846655-superbus-at-zenith-de-nantes-metropole']
+  superbus: ['Songkick, Superbus au Zénith de Nantes', 'https://songkick.com/fr/concerts/42846655-superbus-at-zenith-de-nantes-metropole'],
+  noelClisson: ['Ville de Clisson, marché de Noël 2026', 'https://www.mairie-clisson.fr/ville-de-clisson/evenements-organises-par-la-ville/marche-de-noel'],
+  noelVallet: ['Ville de Vallet, animations', 'https://www.vallet.fr/les-animations-de-la-ville/'],
+  noelVignoble: ['Le Vignoble de Nantes Tourisme, marchés de Noël', 'https://www.visitnantesvineyard.com/what-to-do/agenda/major-events-and-highlights/christmas-markets-in-the-vignoble-nantais/']
 };
 
-// Real events collected on 17 November 2026. d = date, to = last day of a multi-day event.
+// Real events collected on 27 November 2026. d = date, to = last day of a multi-day event.
 const EV = [
   // Cugand-la-Bernardière
   // Gétigné, Gorges, Clisson
   { cat: 'famille', t: 'Prix des Bébés Lecteurs', c: 'getigne', d: '2026-10-03', to: '2027-05-15', h: 'Aux heures d\'ouverture de la bibliothèque', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Prix littéraire pour les tout-petits proposé par la bibliothèque des Changes : on lit les livres en lice et on vote.', s: 'getigne' },
-  { cat: 'spectacle', t: 'Petits rendez-vous contes', c: 'getigne', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Bibliothèque des Changes', desc: 'Lectures de contes pour les enfants à la bibliothèque.', s: 'getigne' },
   { cat: 'expo', t: 'Garenne Lemot : Histoire d\'un jardin pittoresque', c: 'getigne', d: '2026-11-07', to: '2026-11-29', h: 'Visite guidée, horaire à confirmer', p: 'À confirmer', kids: true, place: 'Domaine de la Garenne Lemot', desc: 'Visite guidée du parc à l\'italienne créé par le sculpteur François Frédéric Lemot.', s: 'garenne' },
   { cat: 'expo', t: 'Le rêve italien de François Frédéric Lemot', c: 'getigne', d: '2026-10-20', to: '2026-12-31', h: 'Aux heures d\'ouverture du domaine', p: 'À confirmer', place: 'Maison du Jardinier, Domaine de la Garenne Lemot', desc: 'Exposition permanente de la Maison du Jardinier, ouverte de février à décembre. Le parc est en accès libre et gratuit.', s: 'garenne' },
-  { cat: 'spectacle', t: 'Histoires pour petites oreilles', c: 'gorges', d: '2026-11-18', h: 'Horaire à confirmer', p: 'À confirmer', kids: true, place: 'Médiathèque Au fil des mots', desc: 'Histoires et comptines pour les moins de 3 ans.', s: 'gorgesMed' },
-  { cat: 'spectacle', t: 'Scène ouverte slam et poésie', c: 'gorges', d: '2026-11-20', h: 'En soirée, horaire à confirmer', p: 'À confirmer', place: 'Médiathèque Au fil des mots', desc: 'Soirée scène ouverte : venez dire vos textes ou simplement écouter.', s: 'gorgesMed' },
   { cat: 'concert', t: 'Bryan Adams', c: 'saintherblain', d: '2026-12-01', h: 'En soirée, horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de la tournée Roll With The Punches.', s: 'adams' },
   { cat: 'concert', t: 'Feu! Chatterton', c: 'saintherblain', d: '2026-12-15', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de la tournée des Zénith. Certaines billetteries annoncent le 16 décembre : à vérifier avant d\'acheter.', s: 'chatterton' },
   { cat: 'concert', t: 'Superbus', c: 'saintherblain', d: '2026-12-16', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert au Zénith.', s: 'superbus' },
-  { cat: 'concert', t: 'Orelsan', c: 'saintherblain', d: '2026-11-23', to: '2026-11-24', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Deux concerts de sa tournée 2026, les 23 et 24 novembre.', s: 'orelsan' },
-  { cat: 'concert', t: 'Claudio Capéo', c: 'saintherblain', d: '2026-11-26', h: '20h00 (à confirmer)', p: 'Voir la billetterie', place: 'Zénith Nantes Métropole', desc: 'Concert de sa tournée 2026.', s: 'capeo' },
-  { cat: 'spectacle', t: 'Titre définitif (titre provisoire)', c: 'clisson', d: '2026-11-20', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Lieu à confirmer, agglo de Clisson', desc: 'Concert de mentalisme de la compagnie Raoul Lambert. Saison Bravoh!.', s: 'bravoh' },
-  { cat: 'marche', t: 'Vide-grenier des Lutins', c: 'clisson', d: '2026-11-22', h: '8h00 – 18h00', p: 'Entrée libre', kids: true, place: 'Gymnase Cacault', desc: 'Vide-greniers d\'environ 80 exposants.', s: 'vgLutins' },
+  { cat: 'marche', t: 'Marché de Noël de Clisson', c: 'clisson', d: '2026-12-12', to: '2026-12-13', h: 'Sam. 10h – 20h, dim. 10h – 19h', p: 'Entrée libre', kids: true, place: 'Halles, place du Minage et square Mathurin-Crucy', desc: 'Marché de Noël de la Ville sous les Halles médiévales, au pied du château. Second week-end les 19 et 20 décembre.', s: 'noelClisson' },
+  { cat: 'marche', t: 'Marché de Noël de Clisson', c: 'clisson', d: '2026-12-19', to: '2026-12-20', h: 'Sam. 10h – 20h, dim. 10h – 19h', p: 'Entrée libre', kids: true, place: 'Halles, place du Minage et square Mathurin-Crucy', desc: 'Marché de Noël de la Ville sous les Halles médiévales, au pied du château.', s: 'noelClisson' },
+  { cat: 'marche', t: 'Marché de Noël de Gétigné', c: 'getigne', d: '2026-12-05', to: '2026-12-06', h: 'Horaire à confirmer', p: 'Entrée libre', kids: true, place: 'Place du marché', desc: 'Marché de Noël annoncé par l\'office de tourisme du Vignoble. Un marché de créateurs est aussi signalé le dimanche 6, de 10h à 18h.', s: 'noelVignoble' },
+  { cat: 'marche', t: 'Marché de Noël de Gorges', c: 'gorges', d: '2026-12-19', h: '10h00 – 13h00', p: 'Entrée libre', kids: true, place: 'Place Maurice Renoul', desc: 'Petit marché de Noël du samedi matin.', s: 'noelVignoble' },
+  { cat: 'marche', t: 'Marché de Noël de Vallet', c: 'vallet', d: '2026-12-05', to: '2026-12-06', h: 'Horaire à confirmer', p: 'Entrée libre', kids: true, place: 'Boulevard Pusterle', desc: 'Marché de Noël de la ville de Vallet.', s: 'noelVallet' },
+  { cat: 'marche', t: 'Marché de Noël de l\'école Saint-Joseph', c: 'pallet', d: '2026-12-05', h: 'Horaire à confirmer', p: 'Entrée libre', kids: true, place: 'Salle polyvalente du Pallet', desc: 'Marché de Noël organisé par l\'école Saint-Joseph.', s: 'noelVignoble' },
   { cat: 'expo', t: 'Château de Clisson : Au cœur de la forteresse', c: 'clisson', d: '2026-11-07', to: '2026-11-29', h: 'Sam. et dim. 14h30 et 16h00', p: '8 € · réduit 5 €', kids: true, place: 'Château de Clisson', desc: 'Visite guidée d\'une heure de la forteresse médiévale. Château ouvert du mercredi au dimanche, 14h – 17h30.', s: 'chateau' },
   // Montaigu-Vendée et alentours
   // Choletais et Haut-Bocage
-  { cat: 'spectacle', t: 'La Noce d\'Alphonse', c: 'cholet', d: '2026-11-17', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Théâtre Saint-Louis', desc: 'Théâtre.', s: 'stlouis' },
-  { cat: 'spectacle', t: 'Rond-Rond', c: 'cholet', d: '2026-11-18', h: '10h00 et 16h30', p: 'Voir la billetterie', kids: true, place: 'Théâtre Saint-Louis, salle Gene Kelly', desc: 'Spectacle tout-petits de la compagnie Piment, Langue d\'Oiseau, pour les 1-5 ans.', s: 'stlouis' },
-  { cat: 'concert', t: 'Plateau partagé : Coline Linder', c: 'cholet', d: '2026-11-19', h: 'Horaire à confirmer', p: 'Voir la billetterie', place: 'Jardin de Verre', desc: 'Soirée plateau partagé avec Coline Linder.', s: 'jardinVerre' },
-  { cat: 'marche', t: 'Salon du Mariage et de la Fête', c: 'cholet', d: '2026-11-21', to: '2026-11-22', h: 'De 10h00 le samedi à 18h30 le dimanche', p: 'À confirmer', place: 'Parc des expositions de la Meilleraie', desc: 'Salon des prestataires du mariage et des fêtes de famille.', s: 'choletSalons' },
   // Vers Nantes
   { cat: 'marche', t: 'Marché de Noël de Nantes', c: 'nantes', d: '2026-11-19', to: '2026-12-27', h: 'Tous les jours, horaires à confirmer', p: 'Entrée libre', kids: true, place: 'Places Royale et du Commerce', desc: 'Le grand marché de Noël nantais, avec plus de 150 chalets.', s: 'noelNantes' },
-  { cat: 'famille', t: 'Tout feu tout flamme (4-6 ans)', c: 'nantes', d: '2026-10-10', to: '2026-11-18', h: 'Voir les horaires', p: 'Voir la billetterie', kids: true, place: 'Château des ducs de Bretagne', desc: 'Animation pour les 4-6 ans au château.', s: 'cdb' },
 ];
 
 // Weekly markets, expanded into dated occurrences below. wd: 0 = Sunday … 6 = Saturday.
