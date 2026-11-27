@@ -42,6 +42,6 @@ puis ouvrir http://localhost:8000. La géolocalisation fonctionne sur `localhost
 
 ## Collecte automatique gratuite
 
-Chaque nuit, la tâche GitHub « Collecte automatique des sorties » lance `scripts/auto-update.mjs`, qui interroge OpenAgenda et DATAtourisme (clés gratuites dans les secrets `OPENAGENDA_KEY` et `DATATOURISME_KEY`) et écrit `public/auto.js`. La page fusionne ce fichier avec `public/data.js`, la partie manuelle (Clisson, Gétigné, Gorges…). Le compte rendu de la dernière collecte est dans `scripts/last-run.log`.
+Chaque nuit, la tâche GitHub « Collecte automatique des sorties » lance `scripts/auto-update.mjs`, qui interroge OpenAgenda et DATAtourisme (clés gratuites dans les secrets `OPENAGENDA_KEY` et `DATATOURISME_KEY`) lit aussi les agendas des mairies voisines (`lib/townhalls.mjs` : Terres de Montaigu, Boussay, Gorges, Gétigné) et écrit `public/auto.js`. La page fusionne ce fichier avec `public/data.js`, la partie manuelle (Clisson, Gétigné, Gorges…). Le compte rendu de la dernière collecte est dans `scripts/last-run.log`.
 
 Pour relancer la collecte à la main : onglet Actions → « Collecte automatique des sorties » → Run workflow.
